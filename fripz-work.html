@@ -232,116 +232,127 @@
   .pw-strength-fill { height: 100%; border-radius: 4px; width: 0%; transition: all 0.3s; }
   .pw-strength-label { font-size: 0.926rem; font-weight: 700; }
 
-  /* ── HERO ── */
-  .hero {
-    background: #f7f9f9;
-    padding: 0 2.5rem;
-    overflow: hidden;
-  }
-  .hero-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 3rem;
-    min-height: 380px;
-  }
-  .hero-left { padding: 3rem 0; }
-  .hero-title {
-    font-size: 3.042rem; font-weight: 800;
-    line-height: 1.2; color: var(--text);
-    margin-bottom: 1rem;
-  }
-  .hero-sub {
-    font-size: 1.217rem; color: var(--text-mid);
-    line-height: 1.7; margin-bottom: 1.75rem;
-    max-width: 360px;
-  }
-  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--teal); color: #fff;
-    border: none; border-radius: 8px;
-    padding: 0.72rem 1.5rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.217rem; font-weight: 700;
-    cursor: pointer; transition: background 0.2s;
-  }
-  .btn-primary:hover { background: var(--teal-dark); }
-  .btn-secondary {
-    background: transparent; color: var(--text);
-    border: 1.5px solid var(--border); border-radius: 8px;
-    padding: 0.72rem 1.5rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.217rem; font-weight: 700;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
-
-  /* Phone mockup */
-  .hero-right {
-    display: flex; align-items: flex-end; justify-content: center;
-    padding-bottom: 0;
-  }
-  .phone-wrap {
-    position: relative; width: 260px; height: 340px;
-    border-radius: 32px; overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.15);
-    background: #fff;
-    border: 6px solid #222;
-  }
-  .phone-notch {
-    position: absolute; top: 10px; left: 50%;
-    transform: translateX(-50%);
-    width: 60px; height: 10px;
-    background: #222; border-radius: 10px; z-index: 10;
-  }
-  .phone-screen {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #2bbfa4 0%, #2bbfa4 45%, #c4918a 45%, #c4918a 100%);
-    display: flex; flex-direction: column;
-    padding: 20px 8px 8px;
-  }
-  .phone-topbar {
-    background: rgba(255,255,255,0.95); border-radius: 6px;
-    padding: 4px 8px; display: flex; align-items: center;
-    gap: 6px; margin-bottom: 8px;
-  }
-  .phone-topbar-logo { width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #2bbfa4, #a78bfa); }
-  .phone-topbar-text { font-size: 0.727rem; font-weight: 700; color: var(--text); flex:1; }
-  .phone-topbar-search { width: 14px; height: 14px; background: #eee; border-radius: 50%; }
-  .phone-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 5px; flex: 1;
-  }
-  .phone-card {
-    border-radius: 8px; overflow: hidden;
-    background: rgba(255,255,255,0.18);
-    display: flex; flex-direction: column;
-  }
-  .phone-card-img {
-    flex: 1; display: flex; align-items: center;
-    justify-content: center; font-size: 2.909rem;
-    background: rgba(255,255,255,0.25);
-  }
-  .phone-card-info {
-    background: rgba(255,255,255,0.9);
-    padding: 3px 5px;
-  }
-  .phone-card-name { font-size: 0.661rem; font-weight: 700; color: #333; }
-  .phone-card-price { font-size: 0.635rem; color: var(--teal); font-weight: 700; }
-  .phone-bottombar {
-    background: rgba(255,255,255,0.95); border-radius: 8px;
-    padding: 6px; display: flex; justify-content: space-around;
-    margin-top: 6px;
-  }
-  .phone-bottombar span { font-size: 1.322rem; }
-
-  /* BG behind phone — teal + orange split */
-  .hero-bg-split {
-    position: absolute; top: 0; right: 0; bottom: 0;
-    width: 50%; z-index: 0; pointer-events: none;
-    background: linear-gradient(160deg, #2bbfa4 50%, #c4918a 50%);
-    border-radius: 20px 0 0 20px;
-    opacity: 0.12;
-  }
+/* ── HERO ── */
+.hero {
+  background: #f4f6f3;
+  padding: 0 2.5rem;
+  overflow: hidden;
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  align-items: center; gap: 2rem;
+  min-height: 460px; padding: 3rem 0;
+}
+.hero-left { padding: 1rem 0; }
+.hero-title {
+  font-size: 2.8rem; font-weight: 800;
+  line-height: 1.2; color: var(--text);
+  margin-bottom: 1rem;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--text-mid);
+  line-height: 1.7; margin-bottom: 1.5rem;
+  max-width: 340px;
+}
+.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.hero-badge {
+  font-size: 0.85rem; color: var(--text-mid);
+  font-weight: 600; display: flex; align-items: center; gap: 0.3rem;
+  white-space: nowrap;
+}
+.hero-center {
+  display: flex; align-items: center; justify-content: center;
+}
+.phone-wrap {
+  position: relative; width: 240px; height: 420px;
+  border-radius: 36px; overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  background: #fff; border: 6px solid #1a1a1a;
+}
+.phone-notch {
+  position: absolute; top: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 50px; height: 8px;
+  background: #1a1a1a; border-radius: 10px; z-index: 10;
+}
+.phone-screen {
+  width: 100%; height: 100%;
+  background: #fff;
+  display: flex; flex-direction: column;
+  padding: 22px 8px 8px; overflow: hidden;
+}
+.phone-topbar {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 6px; padding: 0 2px;
+}
+.phone-topbar-logo { width: 12px; height: 12px; border-radius: 50%; background: var(--teal); }
+.phone-topbar-text { font-size: 0.8rem; font-weight: 800; color: var(--text); flex:1; }
+.phone-search-bar {
+  background: #f5f5f5; border-radius: 8px;
+  padding: 4px 8px; font-size: 0.65rem; color: #999;
+  margin-bottom: 8px;
+}
+.phone-section-title {
+  font-size: 0.65rem; font-weight: 800; color: var(--text);
+  margin-bottom: 5px; display: flex; justify-content: space-between;
+}
+.phone-section-title span { color: var(--teal); }
+.phone-cats {
+  display: flex; gap: 6px; margin-bottom: 8px;
+}
+.phone-cat {
+  flex: 1; background: #f5f5f5; border-radius: 8px;
+  padding: 5px 2px; text-align: center;
+  font-size: 0.9rem; line-height: 1.3;
+}
+.phone-cat small { font-size: 0.5rem; color: #555; display: block; }
+.phone-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px; flex: 1;
+}
+.phone-card {
+  border-radius: 6px; overflow: hidden;
+  background: #f9f9f9; border: 1px solid #eee;
+}
+.phone-card-img {
+  height: 36px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.2rem;
+  background: #f0f0f0;
+}
+.phone-card-info { padding: 2px 3px; }
+.phone-card-name { font-size: 0.45rem; font-weight: 700; color: #333; }
+.phone-card-price { font-size: 0.5rem; color: var(--teal); font-weight: 700; }
+.phone-bottombar {
+  background: #fff; border-top: 1px solid #eee;
+  padding: 5px; display: flex; justify-content: space-around;
+  margin-top: 4px; font-size: 0.9rem;
+}
+.hero-right {
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-photos {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; width: 100%;
+}
+.hero-photo {
+  border-radius: 16px; background: #e8e8e8;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; aspect-ratio: 1;
+}
+.hp1 { background: #d8ede8; }
+.hp2 { background: #e8f0e8; }
+.hp3 { background: #e8e0d8; }
+.hp4 { background: #d8e8d8; }
+.hp5 { background: #e8d8d0; }
+.hp6 { background: #d8e0e8; }
+@media(max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-center, .hero-right { display: none; }
+}
 
   /* ── CATEGORIES ── */
   .section { padding: 2.5rem 2.5rem; }
@@ -1014,9 +1025,10 @@
 </nav>
 
 <!-- HERO -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <!-- LEFT -->
+    <!-- GAUCHE -->
     <div class="hero-left">
       <h1 class="hero-title">Achetez et vendez<br>vos articles<br>facilement</h1>
       <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main</p>
@@ -1024,40 +1036,57 @@
         <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">Commencer à acheter</button>
         <button class="btn-secondary" onclick="openSellModal()">Vendre mes articles</button>
       </div>
+      <div class="hero-badges">
+        <div class="hero-badge">🔒 Paiement sécurisé</div>
+        <div class="hero-badge">🌿 Mode écoresponsable</div>
+        <div class="hero-badge">🤝 Communauté de confiance</div>
+        <div class="hero-badge">✅ Articles vérifiés</div>
+      </div>
     </div>
 
-    <!-- RIGHT — Phone mockup -->
-    <div class="hero-right">
+    <!-- CENTRE : phone mockup -->
+    <div class="hero-center">
       <div class="phone-wrap">
         <div class="phone-notch"></div>
         <div class="phone-screen">
           <div class="phone-topbar">
             <div class="phone-topbar-logo"></div>
-            <div class="phone-topbar-text">Fripz</div>
-            <div class="phone-topbar-search"></div>
+            <span class="phone-topbar-text">Frip.</span>
+            <div class="phone-topbar-search">🔔</div>
           </div>
+          <div class="phone-search-bar">🔍 Rechercher un article...</div>
+          <div class="phone-section-title">Catégories populaires <span>Voir tout</span></div>
+          <div class="phone-cats">
+            <div class="phone-cat">👗<br><small>Vêtements</small></div>
+            <div class="phone-cat">🛋️<br><small>Maison</small></div>
+            <div class="phone-cat">📱<br><small>Électronique</small></div>
+            <div class="phone-cat">📚<br><small>Loisirs</small></div>
+          </div>
+          <div class="phone-section-title">Articles recommandés</div>
           <div class="phone-grid">
-            <div class="phone-card" style="background:rgba(255,255,255,0.2)">
-              <div class="phone-card-img" style="background:rgba(252,228,236,0.7)">👗</div>
-              <div class="phone-card-info"><div class="phone-card-name">Robe d'été</div><div class="phone-card-price">28 €</div></div>
-            </div>
-            <div class="phone-card" style="background:rgba(255,255,255,0.2)">
-              <div class="phone-card-img" style="background:rgba(227,242,253,0.7)">🧥</div>
-              <div class="phone-card-info"><div class="phone-card-name">Pull vert</div><div class="phone-card-price">35 €</div></div>
-            </div>
-            <div class="phone-card" style="background:rgba(255,255,255,0.2)">
-              <div class="phone-card-img" style="background:rgba(255,243,224,0.7)">👠</div>
-              <div class="phone-card-info"><div class="phone-card-name">Escarpins</div><div class="phone-card-price">45 €</div></div>
-            </div>
-            <div class="phone-card" style="background:rgba(255,255,255,0.2)">
-              <div class="phone-card-img" style="background:rgba(232,245,233,0.7)">👜</div>
-              <div class="phone-card-info"><div class="phone-card-name">Sac cuir</div><div class="phone-card-price">72 €</div></div>
-            </div>
+            <div class="phone-card"><div class="phone-card-img">🧥</div><div class="phone-card-info"><div class="phone-card-name">Veste en jean</div><div class="phone-card-price">25 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">⌚</div><div class="phone-card-info"><div class="phone-card-name">Montre classique</div><div class="phone-card-price">40 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">🪑</div><div class="phone-card-info"><div class="phone-card-name">Chaise vintage</div><div class="phone-card-price">60 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">🎒</div><div class="phone-card-info"><div class="phone-card-name">Sac à dos</div><div class="phone-card-price">30 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">🎮</div><div class="phone-card-info"><div class="phone-card-name">Manette PS5</div><div class="phone-card-price">45 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">📖</div><div class="phone-card-info"><div class="phone-card-name">Livre déco</div><div class="phone-card-price">10 €</div></div></div>
           </div>
           <div class="phone-bottombar">
-            <span>🏠</span><span>🔍</span><span>❤️</span><span>👤</span>
+            <span>🏠</span><span>🔍</span><span>➕</span><span>❤️</span><span>👤</span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- DROITE : grille photos -->
+    <div class="hero-right">
+      <div class="hero-photos">
+        <div class="hero-photo hp1">👟</div>
+        <div class="hero-photo hp2">👕</div>
+        <div class="hero-photo hp3">📷</div>
+        <div class="hero-photo hp4">🌿</div>
+        <div class="hero-photo hp5">🏀</div>
+        <div class="hero-photo hp6">🧢</div>
       </div>
     </div>
   </div>
