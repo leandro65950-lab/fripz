@@ -239,77 +239,112 @@
   overflow: hidden;
 }
 .hero-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  align-items: center; gap: 2rem;
-  min-height: 460px; padding: 3rem 0;
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.05fr 1.25fr;
+  align-items: center; gap: 2.5rem;
+  min-height: 520px; padding: 3rem 0;
 }
 .hero-left { padding: 1rem 0; }
 .hero-title {
-  font-size: 2.8rem; font-weight: 800;
-  line-height: 1.2; color: var(--text);
-  margin-bottom: 1rem;
+  font-size: 3rem; font-weight: 800;
+  line-height: 1.15; color: var(--text);
+  margin-bottom: 1.1rem;
 }
 .hero-sub {
-  font-size: 1.1rem; color: var(--text-mid);
-  line-height: 1.7; margin-bottom: 1.5rem;
-  max-width: 340px;
+  font-size: 1.15rem; color: var(--text-mid);
+  line-height: 1.7; margin-bottom: 1.6rem;
+  max-width: 360px;
 }
-.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
 .hero-badges {
-  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.7rem 1.2rem; max-width: 420px;
 }
 .hero-badge {
-  font-size: 0.85rem; color: var(--text-mid);
-  font-weight: 600; display: flex; align-items: center; gap: 0.3rem;
-  white-space: nowrap;
+  font-size: 0.92rem; color: var(--text-mid);
+  font-weight: 600; display: flex; align-items: center; gap: 0.45rem;
 }
-.hero-center {
+.hero-badge .hb-ic {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #fff; border: 1px solid #e3e7e3;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+
+/* ── HERO COLLAGE ── */
+.hero-collage {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 14px;
+  align-items: center;
+}
+.hero-tile {
+  border-radius: 22px; overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+.hero-tile img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.tile-green  { background: #e3efe6; }
+.tile-blue   { background: #dde7ef; }
+.tile-beige  { background: #efe7dc; }
+.tile-orange { background: #efe0d6; }
+/* phone occupies the center column across both rows */
+.hero-phone-cell {
+  grid-column: 2; grid-row: 1 / span 2;
   display: flex; align-items: center; justify-content: center;
 }
+.tile-a { grid-column: 1; grid-row: 1; }
+.tile-b { grid-column: 1; grid-row: 2; }
+.tile-c { grid-column: 3; grid-row: 1; }
+.tile-d { grid-column: 3; grid-row: 2; }
+
 .phone-wrap {
-  position: relative; width: 240px; height: 420px;
-  border-radius: 36px; overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-  background: #fff; border: 6px solid #1a1a1a;
+  position: relative; width: 215px; height: 440px;
+  border-radius: 38px; overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.22);
+  background: #fff; border: 7px solid #1a1a1a;
+  z-index: 5;
 }
 .phone-notch {
-  position: absolute; top: 10px; left: 50%;
+  position: absolute; top: 11px; left: 50%;
   transform: translateX(-50%);
-  width: 50px; height: 8px;
+  width: 46px; height: 7px;
   background: #1a1a1a; border-radius: 10px; z-index: 10;
 }
 .phone-screen {
   width: 100%; height: 100%;
   background: #fff;
   display: flex; flex-direction: column;
-  padding: 22px 8px 8px; overflow: hidden;
+  padding: 24px 8px 6px; overflow: hidden;
 }
 .phone-topbar {
   display: flex; align-items: center; gap: 6px;
-  margin-bottom: 6px; padding: 0 2px;
+  margin-bottom: 7px; padding: 0 3px;
 }
 .phone-topbar-logo { width: 12px; height: 12px; border-radius: 50%; background: var(--teal); }
-.phone-topbar-text { font-size: 0.8rem; font-weight: 800; color: var(--text); flex:1; }
+.phone-topbar-text { font-size: 0.82rem; font-weight: 800; color: var(--text); flex:1; }
 .phone-search-bar {
-  background: #f5f5f5; border-radius: 8px;
-  padding: 4px 8px; font-size: 0.65rem; color: #999;
-  margin-bottom: 8px;
+  background: #f3f3f3; border-radius: 8px;
+  padding: 5px 8px; font-size: 0.6rem; color: #999;
+  margin-bottom: 9px;
 }
 .phone-section-title {
-  font-size: 0.65rem; font-weight: 800; color: var(--text);
+  font-size: 0.6rem; font-weight: 800; color: var(--text);
   margin-bottom: 5px; display: flex; justify-content: space-between;
 }
 .phone-section-title span { color: var(--teal); }
 .phone-cats {
-  display: flex; gap: 6px; margin-bottom: 8px;
+  display: flex; gap: 5px; margin-bottom: 9px;
 }
 .phone-cat {
-  flex: 1; background: #f5f5f5; border-radius: 8px;
-  padding: 5px 2px; text-align: center;
-  font-size: 0.9rem; line-height: 1.3;
+  flex: 1; background: #f3f3f3; border-radius: 8px;
+  padding: 5px 1px; text-align: center;
+  font-size: 0.8rem; line-height: 1.25;
 }
-.phone-cat small { font-size: 0.5rem; color: #555; display: block; }
+.phone-cat small { font-size: 0.42rem; color: #555; display: block; }
 .phone-grid {
   display: grid; grid-template-columns: 1fr 1fr 1fr;
   gap: 4px; flex: 1;
@@ -319,39 +354,22 @@
   background: #f9f9f9; border: 1px solid #eee;
 }
 .phone-card-img {
-  height: 36px; display: flex; align-items: center;
-  justify-content: center; font-size: 1.2rem;
+  height: 34px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem;
   background: #f0f0f0;
 }
 .phone-card-info { padding: 2px 3px; }
-.phone-card-name { font-size: 0.45rem; font-weight: 700; color: #333; }
-.phone-card-price { font-size: 0.5rem; color: var(--teal); font-weight: 700; }
+.phone-card-name { font-size: 0.42rem; font-weight: 700; color: #333; }
+.phone-card-price { font-size: 0.48rem; color: var(--teal); font-weight: 700; }
 .phone-bottombar {
   background: #fff; border-top: 1px solid #eee;
   padding: 5px; display: flex; justify-content: space-around;
-  margin-top: 4px; font-size: 0.9rem;
+  margin-top: 4px; font-size: 0.85rem;
 }
-.hero-right {
-  display: flex; align-items: center; justify-content: center;
-}
-.hero-photos {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; width: 100%;
-}
-.hero-photo {
-  border-radius: 16px; background: #e8e8e8;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.5rem; aspect-ratio: 1;
-}
-.hp1 { background: #d8ede8; }
-.hp2 { background: #e8f0e8; }
-.hp3 { background: #e8e0d8; }
-.hp4 { background: #d8e8d8; }
-.hp5 { background: #e8d8d0; }
-.hp6 { background: #d8e0e8; }
 @media(max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-center, .hero-right { display: none; }
+  .hero-badges { max-width: 100%; }
+  .hero-collage { max-width: 420px; margin: 0 auto; }
 }
 
   /* ── CATEGORIES ── */
@@ -1025,10 +1043,9 @@
 </nav>
 
 <!-- HERO -->
-<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <!-- GAUCHE -->
+    <!-- GAUCHE : texte -->
     <div class="hero-left">
       <h1 class="hero-title">Achetez et vendez<br>vos articles<br>facilement</h1>
       <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main</p>
@@ -1037,56 +1054,60 @@
         <button class="btn-secondary" onclick="openSellModal()">Vendre mes articles</button>
       </div>
       <div class="hero-badges">
-        <div class="hero-badge">🔒 Paiement sécurisé</div>
-        <div class="hero-badge">🌿 Mode écoresponsable</div>
-        <div class="hero-badge">🤝 Communauté de confiance</div>
-        <div class="hero-badge">✅ Articles vérifiés</div>
+        <div class="hero-badge"><span class="hb-ic">🔒</span> Paiement sécurisé</div>
+        <div class="hero-badge"><span class="hb-ic">🌿</span> Mode écoresponsable</div>
+        <div class="hero-badge"><span class="hb-ic">🤝</span> Communauté de confiance</div>
+        <div class="hero-badge"><span class="hb-ic">✅</span> Articles vérifiés</div>
       </div>
     </div>
 
-    <!-- CENTRE : phone mockup -->
-    <div class="hero-center">
-      <div class="phone-wrap">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="phone-topbar">
-            <div class="phone-topbar-logo"></div>
-            <span class="phone-topbar-text">Frip.</span>
-            <div class="phone-topbar-search">🔔</div>
-          </div>
-          <div class="phone-search-bar">🔍 Rechercher un article...</div>
-          <div class="phone-section-title">Catégories populaires <span>Voir tout</span></div>
-          <div class="phone-cats">
-            <div class="phone-cat">👗<br><small>Vêtements</small></div>
-            <div class="phone-cat">🛋️<br><small>Maison</small></div>
-            <div class="phone-cat">📱<br><small>Électronique</small></div>
-            <div class="phone-cat">📚<br><small>Loisirs</small></div>
-          </div>
-          <div class="phone-section-title">Articles recommandés</div>
-          <div class="phone-grid">
-            <div class="phone-card"><div class="phone-card-img">🧥</div><div class="phone-card-info"><div class="phone-card-name">Veste en jean</div><div class="phone-card-price">25 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">⌚</div><div class="phone-card-info"><div class="phone-card-name">Montre classique</div><div class="phone-card-price">40 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">🪑</div><div class="phone-card-info"><div class="phone-card-name">Chaise vintage</div><div class="phone-card-price">60 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">🎒</div><div class="phone-card-info"><div class="phone-card-name">Sac à dos</div><div class="phone-card-price">30 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">🎮</div><div class="phone-card-info"><div class="phone-card-name">Manette PS5</div><div class="phone-card-price">45 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">📖</div><div class="phone-card-info"><div class="phone-card-name">Livre déco</div><div class="phone-card-price">10 €</div></div></div>
-          </div>
-          <div class="phone-bottombar">
-            <span>🏠</span><span>🔍</span><span>➕</span><span>❤️</span><span>👤</span>
+    <!-- DROITE : collage avec téléphone au centre -->
+    <div class="hero-collage">
+      <div class="hero-tile tile-a tile-green">
+        <img src="https://images.unsplash.com/photo-1705096953495-8ea06879b986?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Baskets">
+      </div>
+      <div class="hero-tile tile-b tile-blue">
+        <img src="https://images.unsplash.com/photo-1495121553079-4c61bcce1894?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Appareil photo">
+      </div>
+
+      <div class="hero-phone-cell">
+        <div class="phone-wrap">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-topbar">
+              <div class="phone-topbar-logo"></div>
+              <span class="phone-topbar-text">Fripz</span>
+              <span style="font-size:0.7rem">🔔</span>
+            </div>
+            <div class="phone-search-bar">🔍 Rechercher un article...</div>
+            <div class="phone-section-title">Catégories populaires <span>Voir tout</span></div>
+            <div class="phone-cats">
+              <div class="phone-cat">👗<small>Femmes</small></div>
+              <div class="phone-cat">🛋️<small>Maison</small></div>
+              <div class="phone-cat">📱<small>Tech</small></div>
+              <div class="phone-cat">📚<small>Loisirs</small></div>
+            </div>
+            <div class="phone-section-title">Articles recommandés</div>
+            <div class="phone-grid">
+              <div class="phone-card"><div class="phone-card-img">🧥</div><div class="phone-card-info"><div class="phone-card-name">Veste jean</div><div class="phone-card-price">25 €</div></div></div>
+              <div class="phone-card"><div class="phone-card-img">⌚</div><div class="phone-card-info"><div class="phone-card-name">Montre</div><div class="phone-card-price">40 €</div></div></div>
+              <div class="phone-card"><div class="phone-card-img">🪑</div><div class="phone-card-info"><div class="phone-card-name">Chaise</div><div class="phone-card-price">60 €</div></div></div>
+              <div class="phone-card"><div class="phone-card-img">🎒</div><div class="phone-card-info"><div class="phone-card-name">Sac à dos</div><div class="phone-card-price">30 €</div></div></div>
+              <div class="phone-card"><div class="phone-card-img">🎮</div><div class="phone-card-info"><div class="phone-card-name">Manette</div><div class="phone-card-price">45 €</div></div></div>
+              <div class="phone-card"><div class="phone-card-img">📖</div><div class="phone-card-info"><div class="phone-card-name">Livre</div><div class="phone-card-price">10 €</div></div></div>
+            </div>
+            <div class="phone-bottombar">
+              <span>🏠</span><span>🔍</span><span>➕</span><span>❤️</span><span>👤</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- DROITE : grille photos -->
-    <div class="hero-right">
-      <div class="hero-photos">
-        <div class="hero-photo hp1">👟</div>
-        <div class="hero-photo hp2">👕</div>
-        <div class="hero-photo hp3">📷</div>
-        <div class="hero-photo hp4">🌿</div>
-        <div class="hero-photo hp5">🏀</div>
-        <div class="hero-photo hp6">🧢</div>
+      <div class="hero-tile tile-c tile-green">
+        <img src="https://images.unsplash.com/photo-1557939658-7621a3ff190c?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Plante">
+      </div>
+      <div class="hero-tile tile-d tile-orange">
+        <img src="https://images.unsplash.com/photo-1526086754506-a57f69b4700a?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Ballon de basket">
       </div>
     </div>
   </div>
