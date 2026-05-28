@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fripz — Achetez et vendez facilement</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -22,7 +22,7 @@
   }
 
   body {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -30,57 +30,87 @@
 
   /* ── NAVBAR ── */
   nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2.5rem;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #eef0ee;
+    padding: 0 2rem;
     position: sticky; top: 0; z-index: 100;
   }
   .nav-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: flex; align-items: center; gap: 2rem;
-    height: 60px;
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 72px;
   }
   .nav-logo {
-    display: flex; align-items: center; gap: 0.5rem;
-    text-decoration: none;
+    display: flex; align-items: center; gap: 0.55rem;
+    text-decoration: none; flex-shrink: 0;
   }
   .nav-logo-icon {
-    width: 34px; height: 34px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal), #a78bfa);
+    width: 38px; height: 38px; border-radius: 11px;
+    background: var(--teal);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.322rem;
+    color: #fff; font-size: 1.25rem; font-weight: 800;
+  }
+  .nav-logo-text { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+  .nav-search {
+    flex: 1; max-width: 440px; position: relative;
+    display: flex; align-items: center;
+  }
+  .nav-search .ns-ic { position: absolute; left: 14px; color: #9aa39c; display: flex; }
+  .nav-search input {
+    width: 100%; border: none; background: #f3f5f3;
+    border-radius: 12px; padding: 0.7rem 2.6rem 0.7rem 2.5rem;
+    font-family: inherit; font-size: 0.95rem; color: var(--text);
+    outline: none; transition: box-shadow 0.2s, background 0.2s;
+  }
+  .nav-search input:focus { background: #fff; box-shadow: 0 0 0 2px var(--teal); }
+  .nav-search .ns-btn {
+    position: absolute; right: 8px; width: 30px; height: 30px;
+    border: none; background: transparent; color: #6b746d;
+    border-radius: 8px; cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
   }
   .nav-links {
-    display: flex; gap: 1.75rem; list-style: none;
+    display: flex; gap: 1.5rem; list-style: none; align-items: center;
+    flex-shrink: 0;
   }
   .nav-links a {
     text-decoration: none; color: var(--text-mid);
-    font-size: 1.164rem; font-weight: 600;
-    transition: color 0.2s;
+    font-size: 0.95rem; font-weight: 600;
+    transition: color 0.2s; display: flex; align-items: center; gap: 0.2rem;
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--text); }
-  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
-  .nav-profile {
-    font-size: 1.164rem; font-weight: 600;
-    color: var(--text-mid); cursor: pointer;
-    text-decoration: none;
+  .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+  .nav-right { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
+  .nav-icon-btn {
+    position: relative; width: 40px; height: 40px; border-radius: 11px;
+    border: none; background: transparent; color: #4a534c;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .nav-icon-btn:hover { background: #f0f2f0; }
+  .nav-badge {
+    position: absolute; top: 4px; right: 4px;
+    min-width: 16px; height: 16px; padding: 0 4px;
+    background: #f0763a; color: #fff; border-radius: 9px;
+    font-size: 0.62rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, #cfe9e2, #a7d8cd);
+    object-fit: cover; cursor: pointer; border: 1.5px solid #fff;
+    box-shadow: 0 0 0 1px #e3e7e3;
   }
   .btn-sell-nav {
     background: var(--teal); color: #fff;
-    border: none; border-radius: 8px;
-    padding: 0.55rem 1.25rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.164rem; font-weight: 700;
-    cursor: pointer; transition: background 0.2s;
+    border: none; border-radius: 11px;
+    padding: 0.62rem 1.25rem;
+    font-family: inherit; font-size: 0.92rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s; white-space: nowrap;
   }
   .btn-sell-nav:hover { background: var(--teal-dark); }
-  .btn-register {
-    padding: 0.55rem 1.1rem; border: 1.5px solid var(--teal);
-    background: transparent; border-radius: 8px;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.164rem; font-weight: 700;
-    color: var(--teal); cursor: pointer; transition: all 0.2s;
-  }
-  .btn-register:hover { background: var(--teal-light); }
+  @media(max-width: 1080px){ .nav-search { display:none; } }
+  @media(max-width: 820px){ .nav-links { display:none; } }
 
   /* ── AUTH MODAL ── */
   .auth-overlay {
@@ -107,7 +137,7 @@
     padding: 1.5rem 1.75rem 0;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .auth-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.851rem; font-weight: 900; color: var(--teal); }
+  .auth-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.851rem; font-weight: 900; color: var(--teal); }
   .auth-close {
     width: 32px; height: 32px; border-radius: 50%;
     border: 1.5px solid var(--border); background: transparent;
@@ -144,7 +174,7 @@
     display: flex; align-items: center; justify-content: center; gap: 0.65rem;
     border: 1.5px solid var(--border); border-radius: 12px;
     background: var(--white); cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.164rem; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.164rem; font-weight: 700;
     color: var(--text); transition: all 0.2s;
   }
   .social-btn:hover { border-color: var(--text-mid); background: #fafafa; }
@@ -177,7 +207,7 @@
   .auth-input-wrap input {
     width: 100%; padding: 0.7rem 0.9rem 0.7rem 2.5rem;
     border: 1.5px solid var(--border); border-radius: 12px;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.164rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.164rem;
     color: var(--text); background: var(--white); outline: none;
     transition: border-color 0.2s;
   }
@@ -210,7 +240,7 @@
   .auth-submit {
     width: 100%; padding: 0.85rem;
     background: var(--teal); color: #fff; border: none;
-    border-radius: 12px; font-family: 'Cormorant Garamond', serif;
+    border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.256rem; font-weight: 800; cursor: pointer;
     transition: background 0.2s; margin-bottom: 1rem;
   }
@@ -234,194 +264,229 @@
 
 /* ── HERO ── */
 .hero {
-  background: #f4f6f3;
-  padding: 0 2.5rem;
+  background:
+    radial-gradient(900px 500px at 88% 12%, rgba(43,191,164,0.07), transparent 60%),
+    radial-gradient(700px 500px at 95% 80%, rgba(167,139,250,0.06), transparent 60%),
+    #fbfcfb;
+  padding: 0 2rem;
   overflow: hidden;
 }
 .hero-inner {
-  max-width: 1180px; margin: 0 auto;
-  display: grid; grid-template-columns: 1.05fr 1.25fr;
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.15fr;
   align-items: center; gap: 2.5rem;
-  min-height: 520px; padding: 3rem 0;
+  min-height: 660px; padding: 3.5rem 0 4rem;
 }
-.hero-left { padding: 1rem 0; }
+.hero-left { padding: 0; }
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #eef7f4; color: var(--teal-dark);
+  border: 1px solid #d6ede6;
+  padding: 0.4rem 0.85rem; border-radius: 100px;
+  font-size: 0.82rem; font-weight: 700; margin-bottom: 1.5rem;
+}
+.hero-pill svg { width: 15px; height: 15px; }
 .hero-title {
-  font-size: 3rem; font-weight: 800;
-  line-height: 1.15; color: var(--text);
-  margin-bottom: 1.1rem;
+  font-size: 3.6rem; font-weight: 800;
+  line-height: 1.05; color: var(--text);
+  letter-spacing: -0.03em; margin-bottom: 1.25rem;
 }
+.hero-title .dot { color: var(--teal); }
 .hero-sub {
-  font-size: 1.15rem; color: var(--text-mid);
-  line-height: 1.7; margin-bottom: 1.6rem;
-  max-width: 360px;
+  font-size: 1.12rem; color: var(--text-mid);
+  line-height: 1.6; margin-bottom: 2rem;
+  max-width: 440px;
 }
-.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
-.hero-badges {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0.7rem 1.2rem; max-width: 420px;
+.hero-cta { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.btn-primary {
+  background: var(--teal); color: #fff;
+  border: none; border-radius: 13px;
+  padding: 0.95rem 1.6rem;
+  font-family: inherit; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  box-shadow: 0 10px 24px rgba(43,191,164,0.28);
 }
-.hero-badge {
-  font-size: 0.92rem; color: var(--text-mid);
-  font-weight: 600; display: flex; align-items: center; gap: 0.45rem;
+.btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+.btn-primary svg { width: 18px; height: 18px; }
+.btn-secondary {
+  background: #fff; color: var(--text);
+  border: 1.5px solid #e2e6e2; border-radius: 13px;
+  padding: 0.95rem 1.5rem;
+  font-family: inherit; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
 }
-.hero-badge .hb-ic {
-  width: 30px; height: 30px; border-radius: 50%;
-  background: #fff; border: 1px solid #e3e7e3;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; color: var(--teal);
-}
-.hero-badge .hb-ic svg { width: 15px; height: 15px; }
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+.btn-secondary svg { width: 18px; height: 18px; }
 
-/* ── HERO COLLAGE ── */
-.hero-collage {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 14px;
-  align-items: center;
+/* stats */
+.hero-stats { display: flex; gap: 2.2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.hero-stat { display: flex; align-items: center; gap: 0.7rem; }
+.hero-stat-ic {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: #eef7f4; color: var(--teal);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.hero-tile {
-  border-radius: 22px; overflow: hidden;
-  aspect-ratio: 1 / 1;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-}
-.hero-tile img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.tile-green  { background: #e3efe6; }
-.tile-blue   { background: #dde7ef; }
-.tile-beige  { background: #efe7dc; }
-.tile-orange { background: #efe0d6; }
-/* phone occupies the center column across both rows */
-.hero-phone-cell {
-  grid-column: 2; grid-row: 1 / span 2;
-  display: flex; align-items: center; justify-content: center;
-}
-.tile-a { grid-column: 1; grid-row: 1; }
-.tile-b { grid-column: 1; grid-row: 2; }
-.tile-c { grid-column: 3; grid-row: 1; }
-.tile-d { grid-column: 3; grid-row: 2; }
+.hero-stat-ic svg { width: 20px; height: 20px; }
+.hero-stat-num { font-size: 1.3rem; font-weight: 800; color: var(--text); line-height: 1; }
+.hero-stat-lbl { font-size: 0.82rem; color: var(--text-light); margin-top: 2px; }
 
+/* trust row */
+.hero-trust {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem; border-top: 1px solid #ebeeeb; padding-top: 1.5rem;
+}
+.hero-trust-item { display: flex; gap: 0.6rem; }
+.hero-trust-ic { color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+.hero-trust-ic svg { width: 19px; height: 19px; }
+.hero-trust-title { font-size: 0.86rem; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+.hero-trust-desc { font-size: 0.72rem; color: var(--text-light); line-height: 1.35; }
+
+/* ── HERO VISUAL ── */
+.hero-visual { position: relative; height: 660px; }
 .phone-wrap {
-  position: relative; width: 215px; height: 440px;
-  border-radius: 38px; overflow: hidden;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.22);
-  background: #fff; border: 7px solid #1a1a1a;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px; height: 560px;
+  border-radius: 44px; padding: 9px;
+  background: #15171a;
+  box-shadow: 0 40px 90px rgba(20,30,28,0.30);
   z-index: 5;
 }
 .phone-notch {
-  position: absolute; top: 11px; left: 50%;
+  position: absolute; top: 20px; left: 50%;
   transform: translateX(-50%);
-  width: 46px; height: 7px;
-  background: #1a1a1a; border-radius: 10px; z-index: 10;
+  width: 90px; height: 22px;
+  background: #15171a; border-radius: 20px; z-index: 10;
 }
 .phone-screen {
   width: 100%; height: 100%;
-  background: #fff;
+  background: #fff; border-radius: 36px;
   display: flex; flex-direction: column;
-  padding: 24px 8px 6px; overflow: hidden;
+  padding: 30px 13px 12px; overflow: hidden;
 }
-.phone-topbar {
-  display: flex; align-items: center; gap: 6px;
-  margin-bottom: 7px; padding: 0 3px;
-}
-.phone-topbar-logo { width: 12px; height: 12px; border-radius: 50%; background: var(--teal); }
-.phone-topbar-text { font-size: 0.82rem; font-weight: 800; color: var(--text); flex:1; }
+.phone-topbar { display: flex; align-items: center; gap: 7px; margin-bottom: 11px; padding: 0 3px; }
+.phone-topbar-logo { width: 15px; height: 15px; border-radius: 50%; background: var(--teal); }
+.phone-topbar-text { font-size: 1rem; font-weight: 800; color: var(--text); flex:1; letter-spacing:-0.02em; }
+.phone-bell { color: #c9cdc9; }
 .phone-search-bar {
-  background: #f3f3f3; border-radius: 8px;
-  padding: 5px 8px; font-size: 0.6rem; color: #999;
-  margin-bottom: 9px;
+  background: #f3f5f3; border-radius: 11px;
+  padding: 8px 11px; font-size: 0.72rem; color: #aab0aa;
+  margin-bottom: 13px; display: flex; align-items: center; gap: 6px;
 }
 .phone-section-title {
-  font-size: 0.6rem; font-weight: 800; color: var(--text);
-  margin-bottom: 5px; display: flex; justify-content: space-between;
+  font-size: 0.78rem; font-weight: 800; color: var(--text);
+  margin-bottom: 8px; display: flex; justify-content: space-between; align-items:center;
 }
-.phone-section-title span { color: var(--teal); }
-.phone-cats {
-  display: flex; gap: 5px; margin-bottom: 9px;
-}
+.phone-section-title span { color: var(--teal); font-size: 0.66rem; }
+.phone-cats { display: flex; gap: 7px; margin-bottom: 13px; }
 .phone-cat {
-  flex: 1; background: #f3f3f3; border-radius: 8px;
-  padding: 5px 1px; text-align: center;
-  font-size: 0.8rem; line-height: 1.25;
+  flex: 1; text-align: center; font-size: 0.55rem; color: #555; font-weight:600;
 }
-.phone-cat small { font-size: 0.42rem; color: #555; display: block; }
-.phone-grid {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 4px; flex: 1;
+.phone-cat .pc-ic {
+  height: 40px; border-radius: 12px; margin-bottom: 3px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
 }
-.phone-card {
-  border-radius: 6px; overflow: hidden;
-  background: #f9f9f9; border: 1px solid #eee;
+.phone-cat:nth-child(1) .pc-ic { background: #eaf6f2; }
+.phone-cat:nth-child(2) .pc-ic { background: #fdeee4; }
+.phone-cat:nth-child(3) .pc-ic { background: #eef0fb; }
+.phone-cat:nth-child(4) .pc-ic { background: #f3eefb; }
+.phone-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; flex: 1; }
+.phone-card { border-radius: 9px; overflow: hidden; background: #fff; border: 1px solid #f0f0f0; }
+.phone-card-img { height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #f6f7f6; }
+.phone-card-info { padding: 3px 4px 5px; }
+.phone-card-name { font-size: 0.52rem; font-weight: 700; color: #333; }
+.phone-card-price { font-size: 0.6rem; color: var(--teal); font-weight: 800; margin-top:1px; }
+.phone-bottombar { background: #fff; border-top: 1px solid #f0f0f0; padding: 8px 4px 2px; display: flex; justify-content: space-around; margin-top: 6px; color:#c0c5c0; }
+.phone-bottombar .pb-active { color: var(--teal); }
+
+/* floating product cards */
+.float-card {
+  position: absolute; background: #fff; border-radius: 20px;
+  padding: 10px; box-shadow: 0 18px 40px rgba(20,30,28,0.12);
+  width: 160px; z-index: 6;
 }
-.phone-card-img {
-  height: 34px; display: flex; align-items: center;
-  justify-content: center; font-size: 1.1rem;
-  background: #f0f0f0;
+.float-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 13px; display:block; }
+.float-tag {
+  position: absolute; top: 16px; left: 16px;
+  font-size: 0.66rem; font-weight: 800; color: #fff;
+  padding: 3px 9px; border-radius: 100px; z-index: 2;
 }
-.phone-card-info { padding: 2px 3px; }
-.phone-card-name { font-size: 0.42rem; font-weight: 700; color: #333; }
-.phone-card-price { font-size: 0.48rem; color: var(--teal); font-weight: 700; }
-.phone-bottombar {
-  background: #fff; border-top: 1px solid #eee;
-  padding: 5px; display: flex; justify-content: space-around;
-  margin-top: 4px; font-size: 0.85rem;
+.float-heart {
+  position: absolute; top: 16px; right: 16px;
+  width: 26px; height: 26px; border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  color: #cfd4cf; box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
-@media(max-width: 900px) {
+.float-heart svg { width: 13px; height: 13px; }
+.fc-1 { top: 70px; left: -8px; }
+.fc-1 .float-tag { background: #2bbfa4; }
+.fc-2 { bottom: 90px; left: 8px; }
+.fc-2 .float-tag { background: #f0763a; }
+.fc-3 { top: 50px; right: -8px; }
+.fc-3 .float-tag { background: #e0556b; }
+.fc-3 .fc-price { font-size:0.78rem;font-weight:800;color:var(--text);margin-top:6px;padding:0 2px; }
+.fc-3 .fc-price s { color:#bcc1bc;font-weight:600;font-size:0.66rem;margin-left:4px; }
+.fc-4 { bottom: 80px; right: 2px; }
+.fc-4 .float-tag { background: #e0a020; }
+@media(max-width: 980px) {
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-badges { max-width: 100%; }
-  .hero-collage { max-width: 420px; margin: 0 auto; }
+  .hero-visual { height: 600px; margin-top: 1rem; }
+  .hero-trust { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 560px){
+  .hero-title { font-size: 2.6rem; }
+  .float-card { width: 130px; }
+  .float-card img { height: 95px; }
 }
 
   /* ── CATEGORIES ── */
-  .section { padding: 2.5rem 2.5rem; }
-  .section-inner { max-width: 1100px; margin: 0 auto; }
-  .section-title {
-    text-align: center; font-size: 1.52rem;
-    font-weight: 800; color: var(--text);
+  .section { padding: 3.5rem 2rem; background:#fff; }
+  .section-inner { max-width: 1280px; margin: 0 auto; }
+  .tendances-header {
+    display:flex; align-items:center; justify-content:space-between;
     margin-bottom: 1.75rem;
   }
+  .section-title {
+    text-align: left; font-size: 1.7rem;
+    font-weight: 800; color: var(--text); letter-spacing:-0.02em;
+    margin: 0;
+  }
+  .see-all-cats {
+    color: var(--teal); font-weight:700; font-size:0.92rem;
+    text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem;
+  }
+  .see-all-cats:hover { color: var(--teal-dark); }
+  .see-all-cats svg { width:15px; height:15px; }
   .cats-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     gap: 1rem;
   }
-  @media(max-width: 900px) { .cats-row { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width: 1100px){ .cats-row { grid-template-columns: repeat(4, 1fr); } }
+  @media(max-width: 620px){ .cats-row { grid-template-columns: repeat(2, 1fr); } }
   .cat-card {
     background: var(--white);
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 0.75rem 0.6rem;
-    text-align: center; cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
+    border: 1px solid #eef0ee;
+    border-radius: 16px;
+    padding: 0; overflow: hidden;
+    text-align: left; cursor: pointer;
+    transition: all 0.22s; position: relative;
   }
   .cat-card:hover {
-    border-color: var(--teal);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(43,191,164,0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(20,30,28,0.10);
+    border-color: #e2e6e2;
   }
-  .cat-card.active {
-    border-color: var(--teal);
-    background: var(--teal-light);
-  }
-  .cat-card .chevron {
-    font-size: 0.82rem; color: var(--text-light);
-    margin-top: 0.2rem; transition: transform 0.2s;
-    display: block;
-  }
-  .cat-card.active .chevron { transform: rotate(180deg); color: var(--teal); }
-  .cat-icon-wrap {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: var(--teal-light);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 0.5rem; font-size: 1.455rem;
-  }
-  .cat-card:nth-child(2) .cat-icon-wrap { background: #e8eeff; }
-  .cat-card:nth-child(3) .cat-icon-wrap { background: #fef3e8; }
-  .cat-card:nth-child(4) .cat-icon-wrap { background: #fce8f3; }
-  .cat-name { font-size: 1.032rem; font-weight: 700; color: var(--text); font-style: italic; }
-  .cat-count { font-size: 0.899rem; color: var(--text-light); margin-top: 1px; }
+  .cat-card.active { border-color: var(--teal); box-shadow:0 0 0 2px var(--teal); }
+  .cat-img-wrap { width:100%; aspect-ratio: 1/1; overflow:hidden; background:#f4f6f4; }
+  .cat-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s; }
+  .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
+  .cat-body { padding: 0.7rem 0.8rem 0.85rem; }
+  .cat-name { font-size: 0.92rem; font-weight: 800; color: var(--text); }
+  .cat-count { font-size: 0.78rem; color: var(--teal); margin-top: 2px; font-weight:600; }
+  .chevron { display:none; }
 
   /* ── SUBCATEGORY PANEL ── */
   .subcat-panel {
@@ -503,7 +568,7 @@
   .subcat-back-btn {
     background: none; border: 1.5px solid var(--border);
     border-radius: 8px; padding: 0.3rem 0.7rem;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.032rem; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.032rem; font-weight: 700;
     color: var(--text-mid); cursor: pointer; transition: all 0.2s;
   }
   .subcat-back-btn:hover { border-color: var(--teal); color: var(--teal); }
@@ -622,7 +687,7 @@
   .modal-btn-buy {
     width: 100%; padding: 0.8rem;
     background: var(--teal); color: #fff; border: none;
-    border-radius: 10px; font-family: 'Cormorant Garamond', serif;
+    border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.256rem; font-weight: 700; cursor: pointer;
     transition: background 0.2s; margin-top: auto;
   }
@@ -630,7 +695,7 @@
   .modal-btn-msg {
     width: 100%; padding: 0.8rem;
     background: #fff; color: var(--text); border: 1.5px solid var(--border);
-    border-radius: 10px; font-family: 'Cormorant Garamond', serif;
+    border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.256rem; font-weight: 700; cursor: pointer;
     transition: all 0.2s;
   }
@@ -714,7 +779,7 @@
   .fdrop-search-input {
     width: 100%; padding: 0.4rem 0.7rem;
     border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.058rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.058rem;
     color: var(--text); outline: none; transition: border-color 0.2s;
     background: var(--cream);
   }
@@ -761,7 +826,7 @@
   .filter-apply-btn {
     padding: 0.45rem 1.1rem; background: var(--teal); color: #fff;
     border: none; border-radius: 50px;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.084rem; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.084rem; font-weight: 700;
     cursor: pointer; transition: background 0.2s;
   }
   .filter-apply-btn:hover { background: var(--teal-dark); }
@@ -833,7 +898,7 @@
     width: 100%; padding: 0.7rem 2.5rem 0.7rem 0.9rem;
     border: 1.5px solid var(--border); border-radius: 12px;
     background: var(--white); cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.164rem; font-weight: 600;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.164rem; font-weight: 600;
     text-align: left; display: flex; align-items: center; gap: 0.5rem;
     transition: border-color 0.2s;
   }
@@ -849,7 +914,7 @@
   .custom-select-dropdown.open { display: block; animation: fadeIn 0.15s; }
   .custom-select-option {
     padding: 0.6rem 0.9rem; cursor: pointer; font-size: 1.164rem;
-    font-family: 'Cormorant Garamond', serif; display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; gap: 0.5rem;
     transition: background 0.1s;
   }
   .custom-select-option:hover { background: var(--teal-light); }
@@ -903,7 +968,7 @@
   .form-row input, .form-row select, .form-row textarea {
     width: 100%; padding: 0.65rem 0.9rem;
     border: 1.5px solid var(--border); border-radius: 10px;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.164rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.164rem;
     color: var(--text); background: var(--white);
     outline: none; transition: border-color 0.2s;
   }
@@ -1004,7 +1069,7 @@
   .sell-btn-back {
     padding: 0.65rem 1.25rem; border: 1.5px solid var(--border);
     border-radius: 10px; background: transparent;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.19rem; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.19rem; font-weight: 700;
     color: var(--text-mid); cursor: pointer; transition: all 0.2s;
   }
   .sell-btn-back:hover { border-color: var(--text); color: var(--text); }
@@ -1012,7 +1077,7 @@
   .sell-btn-next {
     padding: 0.65rem 1.75rem; border: none;
     border-radius: 10px; background: var(--teal); color: #fff;
-    font-family: 'Cormorant Garamond', serif; font-size: 1.19rem; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.19rem; font-weight: 700;
     cursor: pointer; transition: background 0.2s; margin-left: auto;
   }
   .sell-btn-next:hover { background: var(--teal-dark); }
@@ -1026,19 +1091,25 @@
 <!-- NAVBAR -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">
-      <div class="nav-logo-icon">🏷️</div>
+    <a class="nav-logo" href="fripz-home.html">
+      <div class="nav-logo-icon">F</div>
+      <span class="nav-logo-text">Fripz</span>
     </a>
+    <div class="nav-search">
+      <span class="ns-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+      <input type="text" placeholder="Rechercher un article, une marque...">
+      <button class="ns-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+    </div>
     <ul class="nav-links">
-      <li><a href="fripz-home.html" class="active">Accueil</a></li>
-      <li><a href="#">Parcourir</a></li>
-      <li><a href="fripz-checkout.html">Panier 🛒</a></li>
-      <li><a href="fripz-messages.html">Messages 💬</a></li>
+      <li><a href="#" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">Catégories <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a></li>
+      <li><a href="#" onclick="openSellModal()">Vendre</a></li>
+      <li><a href="#">À propos</a></li>
     </ul>
     <div class="nav-right">
-      <a href="#" class="nav-profile" onclick="openAuthModal('login')">Se connecter</a>
-      <button class="btn-register" onclick="openAuthModal('register')">S'inscrire</button>
-      <button class="btn-sell-nav" onclick="openSellModal()">Vendre maintenant</button>
+      <button class="nav-icon-btn" title="Favoris"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+      <button class="nav-icon-btn" title="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="nav-badge">2</span></button>
+      <div class="nav-avatar" onclick="openAuthModal('login')"></div>
+      <button class="btn-sell-nav" onclick="openAuthModal('login')">Se connecter</button>
     </div>
   </div>
 </nav>
@@ -1046,69 +1117,123 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <!-- GAUCHE : texte -->
+    <!-- GAUCHE -->
     <div class="hero-left">
-      <h1 class="hero-title">Achetez et vendez<br>vos articles<br>facilement</h1>
-      <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">Commencer à acheter</button>
-        <button class="btn-secondary" onclick="openSellModal()">Vendre mes articles</button>
+      <div class="hero-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        La marketplace de confiance
       </div>
-      <div class="hero-badges">
-        <div class="hero-badge"><span class="hb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span> Paiement sécurisé</div>
-        <div class="hero-badge"><span class="hb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span> Mode écoresponsable</div>
-        <div class="hero-badge"><span class="hb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Communauté de confiance</div>
-        <div class="hero-badge"><span class="hb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l1.9 1.4 2.3-.4.9 2.2 2.2.9-.4 2.3L22 12l-1.4 1.9.4 2.3-2.2.9-.9 2.2-2.3-.4L12 21l-1.9-1.4-2.3.4-.9-2.2-2.2-.9.4-2.3L3 12l1.4-1.9-.4-2.3 2.2-.9.9-2.2 2.3.4z"/></svg></span> Articles vérifiés</div>
+      <h1 class="hero-title">Achetez, vendez,<br>recommencez<span class="dot">.</span></h1>
+      <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">
+          Commencer à acheter
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary" onclick="openSellModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          Vendre mes articles
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="hero-stat-num">250K+</div><div class="hero-stat-lbl">Membres actifs</div></div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
+          <div><div class="hero-stat-num">1M+</div><div class="hero-stat-lbl">Articles disponibles</div></div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/></svg></div>
+          <div><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">Transactions sécurisées</div></div>
+        </div>
+      </div>
+
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <div><div class="hero-trust-title">Paiement sécurisé</div><div class="hero-trust-desc">Vos paiements sont 100% protégés</div></div>
+        </div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
+          <div><div class="hero-trust-title">Mode écoresponsable</div><div class="hero-trust-desc">Donnez une seconde vie aux objets</div></div>
+        </div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <div><div class="hero-trust-title">Communauté de confiance</div><div class="hero-trust-desc">Des milliers d'avis positifs chaque jour</div></div>
+        </div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 1.4 2.3-.4.9 2.2 2.2.9-.4 2.3L22 12l-1.4 1.9.4 2.3-2.2.9-.9 2.2-2.3-.4L12 21l-1.9-1.4-2.3.4-.9-2.2-2.2-.9.4-2.3L3 12l1.4-1.9-.4-2.3 2.2-.9.9-2.2 2.3.4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div><div class="hero-trust-title">Articles vérifiés</div><div class="hero-trust-desc">Contrôle qualité avant chaque envoi</div></div>
+        </div>
       </div>
     </div>
 
-    <!-- DROITE : collage avec téléphone au centre -->
-    <div class="hero-collage">
-      <div class="hero-tile tile-a tile-green">
-        <img src="https://images.unsplash.com/photo-1705096953495-8ea06879b986?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Baskets">
+    <!-- DROITE : téléphone + cartes flottantes -->
+    <div class="hero-visual">
+      <!-- carte baskets -->
+      <div class="float-card fc-1">
+        <span class="float-tag">Nouveau</span>
+        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
+        <img src="https://images.unsplash.com/photo-1705096953495-8ea06879b986?fm=jpg&q=70&w=400&auto=format&fit=crop" alt="Baskets">
       </div>
-      <div class="hero-tile tile-b tile-blue">
-        <img src="https://images.unsplash.com/photo-1495121553079-4c61bcce1894?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Appareil photo">
+      <!-- carte appareil photo -->
+      <div class="float-card fc-2">
+        <span class="float-tag">Vintage</span>
+        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
+        <img src="https://images.unsplash.com/photo-1495121553079-4c61bcce1894?fm=jpg&q=70&w=400&auto=format&fit=crop" alt="Appareil photo">
       </div>
 
-      <div class="hero-phone-cell">
-        <div class="phone-wrap">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="phone-topbar">
-              <div class="phone-topbar-logo"></div>
-              <span class="phone-topbar-text">Fripz</span>
-              <span style="font-size:0.7rem">🔔</span>
-            </div>
-            <div class="phone-search-bar">🔍 Rechercher un article...</div>
-            <div class="phone-section-title">Catégories populaires <span>Voir tout</span></div>
-            <div class="phone-cats">
-              <div class="phone-cat">👗<small>Femmes</small></div>
-              <div class="phone-cat">🛋️<small>Maison</small></div>
-              <div class="phone-cat">📱<small>Tech</small></div>
-              <div class="phone-cat">📚<small>Loisirs</small></div>
-            </div>
-            <div class="phone-section-title">Articles recommandés</div>
-            <div class="phone-grid">
-              <div class="phone-card"><div class="phone-card-img">🧥</div><div class="phone-card-info"><div class="phone-card-name">Veste jean</div><div class="phone-card-price">25 €</div></div></div>
-              <div class="phone-card"><div class="phone-card-img">⌚</div><div class="phone-card-info"><div class="phone-card-name">Montre</div><div class="phone-card-price">40 €</div></div></div>
-              <div class="phone-card"><div class="phone-card-img">🪑</div><div class="phone-card-info"><div class="phone-card-name">Chaise</div><div class="phone-card-price">60 €</div></div></div>
-              <div class="phone-card"><div class="phone-card-img">🎒</div><div class="phone-card-info"><div class="phone-card-name">Sac à dos</div><div class="phone-card-price">30 €</div></div></div>
-              <div class="phone-card"><div class="phone-card-img">🎮</div><div class="phone-card-info"><div class="phone-card-name">Manette</div><div class="phone-card-price">45 €</div></div></div>
-              <div class="phone-card"><div class="phone-card-img">📖</div><div class="phone-card-info"><div class="phone-card-name">Livre</div><div class="phone-card-price">10 €</div></div></div>
-            </div>
-            <div class="phone-bottombar">
-              <span>🏠</span><span>🔍</span><span>➕</span><span>❤️</span><span>👤</span>
-            </div>
+      <!-- téléphone -->
+      <div class="phone-wrap">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-topbar">
+            <div class="phone-topbar-logo"></div>
+            <span class="phone-topbar-text">Fripz</span>
+            <span class="phone-bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+          </div>
+          <div class="phone-search-bar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Rechercher un article...</div>
+          <div class="phone-section-title">Catégories <span>Voir tout</span></div>
+          <div class="phone-cats">
+            <div class="phone-cat"><div class="pc-ic">👗</div>Femmes</div>
+            <div class="phone-cat"><div class="pc-ic">🛋️</div>Maison</div>
+            <div class="phone-cat"><div class="pc-ic">📱</div>Tech</div>
+            <div class="phone-cat"><div class="pc-ic">🎮</div>Loisirs</div>
+          </div>
+          <div class="phone-section-title">Articles recommandés</div>
+          <div class="phone-grid">
+            <div class="phone-card"><div class="phone-card-img">🧥</div><div class="phone-card-info"><div class="phone-card-name">Veste en jean</div><div class="phone-card-price">25 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">⌚</div><div class="phone-card-info"><div class="phone-card-name">Montre</div><div class="phone-card-price">40 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">🪑</div><div class="phone-card-info"><div class="phone-card-name">Chaise design</div><div class="phone-card-price">60 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">🎒</div><div class="phone-card-info"><div class="phone-card-name">Sac à dos</div><div class="phone-card-price">30 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">🎮</div><div class="phone-card-info"><div class="phone-card-name">Manette Xbox</div><div class="phone-card-price">45 €</div></div></div>
+            <div class="phone-card"><div class="phone-card-img">📖</div><div class="phone-card-info"><div class="phone-card-name">Livre</div><div class="phone-card-price">10 €</div></div></div>
+          </div>
+          <div class="phone-bottombar">
+            <span class="pb-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg></span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
           </div>
         </div>
       </div>
 
-      <div class="hero-tile tile-c tile-green">
-        <img src="https://images.unsplash.com/photo-1557939658-7621a3ff190c?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Plante">
+      <!-- carte fauteuil -->
+      <div class="float-card fc-3">
+        <span class="float-tag">-40%</span>
+        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114347.png" alt="Fauteuil">
+        <div class="fc-price">120 € <s>200 €</s></div>
       </div>
-      <div class="hero-tile tile-d tile-beige">
-        <img src="https://images.unsplash.com/photo-1635274605638-d44babc08a4f?fm=jpg&q=70&w=500&auto=format&fit=crop" alt="Vêtements pliés">
+      <!-- carte sport -->
+      <div class="float-card fc-4">
+        <span class="float-tag">Populaire</span>
+        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
+        <img src="https://images.unsplash.com/photo-1526086754506-a57f69b4700a?fm=jpg&q=70&w=400&auto=format&fit=crop" alt="Sport">
       </div>
     </div>
   </div>
@@ -1117,82 +1242,68 @@
 <!-- CATEGORIES -->
 <section class="section">
   <div class="section-inner">
-    <div class="section-title">Parcourir par catégorie</div>
+    <div class="tendances-header">
+      <div class="section-title">Tendances du moment</div>
+      <a class="see-all-cats" href="#">Voir toutes les catégories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
     <div class="cats-row">
-
-  <div class="cat-card" onclick="toggleCat(this,'femme')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114433.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('enfant', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20145610.png" alt="Mode enfants"></div>
+    <div class="cat-body">
+      <div class="cat-name">Mode enfants</div>
+      <div class="cat-count">12 540 articles</div>
     </div>
-    <div class="cat-name">Femmes</div>
-    <div class="cat-count">4 890 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'homme')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114425.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('maison', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114347.png" alt="Maison & Déco"></div>
+    <div class="cat-body">
+      <div class="cat-name">Maison & Déco</div>
+      <div class="cat-count">8 210 articles</div>
     </div>
-    <div class="cat-name">Hommes</div>
-    <div class="cat-count">3 412 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'enfants')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20145610.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('loisirs', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20115114.png" alt="Loisirs"></div>
+    <div class="cat-body">
+      <div class="cat-name">Loisirs</div>
+      <div class="cat-count">6 430 articles</div>
     </div>
-    <div class="cat-name">Enfants</div>
-    <div class="cat-count">2 234 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'sport')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114330.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('electronique', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114355.png" alt="Tech"></div>
+    <div class="cat-body">
+      <div class="cat-name">Tech</div>
+      <div class="cat-count">15 320 articles</div>
     </div>
-    <div class="cat-name">Sport</div>
-    <div class="cat-count">1 243 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'maison')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114347.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('divertissement', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20150352.png" alt="Divertissement"></div>
+    <div class="cat-body">
+      <div class="cat-name">Divertissement</div>
+      <div class="cat-count">7 890 articles</div>
     </div>
-    <div class="cat-name">Maison</div>
-    <div class="cat-count">987 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'tech')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114355.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('femme', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114433.png" alt="Mode femme"></div>
+    <div class="cat-body">
+      <div class="cat-name">Mode femme</div>
+      <div class="cat-count">18 760 articles</div>
     </div>
-    <div class="cat-name">Électroniques</div>
-    <div class="cat-count">2 105 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'loisirs')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20115114.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('homme', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114425.png" alt="Mode homme"></div>
+    <div class="cat-body">
+      <div class="cat-name">Mode homme</div>
+      <div class="cat-count">14 230 articles</div>
     </div>
-    <div class="cat-name">Loisirs</div>
-    <div class="cat-count">1 678 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-  <div class="cat-card" onclick="toggleCat(this,'jeux')">
-    <div class="cat-icon-wrap" style="width:70px;height:70px;overflow:hidden;background:none;">
-      <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20150352.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+  <div class="cat-card" onclick="toggleSubcat('sport', this)">
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-26%20114330.png" alt="Sport"></div>
+    <div class="cat-body">
+      <div class="cat-name">Sport</div>
+      <div class="cat-count">5 980 articles</div>
     </div>
-    <div class="cat-name">Divertissement</div>
-    <div class="cat-count">891 articles</div>
-    <span class="chevron">▾</span>
   </div>
-
-</div>
+    </div>
     <!-- SUBCATEGORY PANEL -->
     <div class="subcat-panel" id="subcatPanel">
       <div class="subcat-panel-title" id="subcatTitle"></div>
@@ -2373,10 +2484,10 @@ function renderSellPage() {
       </div>
       <div style="display:flex;gap:0.5rem;align-items:center">
         <input type="text" id="isbnInput" maxlength="17" placeholder="Ex : 9782290391174"
-          style="flex:1;padding:0.65rem 0.9rem;border:1.5px solid var(--teal);border-radius:10px;font-family:'Cormorant Garamond',serif;font-size: 1.164rem;outline:none"
+          style="flex:1;padding:0.65rem 0.9rem;border:1.5px solid var(--teal);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size: 1.164rem;outline:none"
           onkeydown="if(event.key==='Enter')doISBNLookup()">
         <button onclick="doISBNLookup()"
-          style="background:var(--teal);color:#fff;border:none;border-radius:10px;padding:0.65rem 1rem;font-family:'Cormorant Garamond',serif;font-size: 1.124rem;font-weight:800;cursor:pointer;white-space:nowrap">
+          style="background:var(--teal);color:#fff;border:none;border-radius:10px;padding:0.65rem 1rem;font-family:'Plus Jakarta Sans',sans-serif;font-size: 1.124rem;font-weight:800;cursor:pointer;white-space:nowrap">
           🔍 Récupérer
         </button>
       </div>
@@ -2896,7 +3007,7 @@ function autoSuggestCat(titre) {
           ${resolved.cat} › <strong>${resolved.sub}</strong>${brandBadge}
         </div>
         <button onclick="applySuggestion('${det.cat.replace(/'/g,"\'")}','${det.sub.replace(/'/g,"\'")}','${(det.brand||'').replace(/'/g,"\'")}')"
-          style="padding:0.35rem 0.85rem;background:var(--teal);color:#fff;border:none;border-radius:8px;font-family:'Cormorant Garamond',serif;font-size: 1.032rem;font-weight:700;cursor:pointer">
+          style="padding:0.35rem 0.85rem;background:var(--teal);color:#fff;border:none;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size: 1.032rem;font-weight:700;cursor:pointer">
           Appliquer ✓
         </button>
       </div>`;
@@ -3034,7 +3145,7 @@ function openISBNScanner() {
   const overlay = document.createElement('div');
   overlay.id = 'isbnOverlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';
-  overlay.innerHTML = `<div style="color:#fff;font-size: 1.389rem;font-weight:800;margin-bottom:14px;text-align:center">📷 Scanner le code-barres<div style="font-size: 1.005rem;font-weight:500;opacity:0.6;margin-top:3px">Pointez la caméra vers l'ISBN au dos du livre</div></div><div style="position:relative;width:min(320px,90vw);height:200px;border:3px solid #2bbfa4;border-radius:14px;overflow:hidden;background:#000"><video id="isbnVideo" style="width:100%;height:100%;object-fit:cover" autoplay muted playsinline></video><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:85%;height:70px;border:2px solid #2bbfa4;border-radius:6px;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#2bbfa4,transparent);animation:scanAnim 1.5s linear infinite"></div></div></div><div id="isbnCamMsg" style="position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size: 0.952rem;color:rgba(255,255,255,0.7)">Chargement...</div></div><style>@keyframes scanAnim{0%{top:0}50%{top:calc(100% - 2px)}100%{top:0}}</style><div style="margin-top:14px;display:flex;gap:8px;width:min(320px,90vw)"><input id="isbnManual" inputmode="numeric" placeholder="Ou saisissez l'ISBN manuellement" style="flex:1;padding:0.65rem 1rem;border-radius:10px;border:2px solid #2bbfa4;background:#1a1a2e;color:#fff;font-size: 1.124rem;font-family:'Cormorant Garamond',serif;outline:none" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,13)" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupISBN(this.value)}"><button onclick="lookupISBN(document.getElementById('isbnManual').value)" style="padding:0.65rem 1rem;background:#2bbfa4;color:#fff;border:none;border-radius:10px;font-size: 1.124rem;font-weight:800;cursor:pointer;font-family:'Cormorant Garamond',serif">OK</button></div><div id="isbnScanResult" style="margin-top:10px;width:min(320px,90vw);font-size: 1.084rem;min-height:24px"></div><button onclick="closeISBNScanner()" style="margin-top:14px;padding:0.55rem 2rem;background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:10px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size: 1.124rem">✕ Fermer</button>`;
+  overlay.innerHTML = `<div style="color:#fff;font-size: 1.389rem;font-weight:800;margin-bottom:14px;text-align:center">📷 Scanner le code-barres<div style="font-size: 1.005rem;font-weight:500;opacity:0.6;margin-top:3px">Pointez la caméra vers l'ISBN au dos du livre</div></div><div style="position:relative;width:min(320px,90vw);height:200px;border:3px solid #2bbfa4;border-radius:14px;overflow:hidden;background:#000"><video id="isbnVideo" style="width:100%;height:100%;object-fit:cover" autoplay muted playsinline></video><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:85%;height:70px;border:2px solid #2bbfa4;border-radius:6px;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#2bbfa4,transparent);animation:scanAnim 1.5s linear infinite"></div></div></div><div id="isbnCamMsg" style="position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size: 0.952rem;color:rgba(255,255,255,0.7)">Chargement...</div></div><style>@keyframes scanAnim{0%{top:0}50%{top:calc(100% - 2px)}100%{top:0}}</style><div style="margin-top:14px;display:flex;gap:8px;width:min(320px,90vw)"><input id="isbnManual" inputmode="numeric" placeholder="Ou saisissez l'ISBN manuellement" style="flex:1;padding:0.65rem 1rem;border-radius:10px;border:2px solid #2bbfa4;background:#1a1a2e;color:#fff;font-size: 1.124rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,13)" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupISBN(this.value)}"><button onclick="lookupISBN(document.getElementById('isbnManual').value)" style="padding:0.65rem 1rem;background:#2bbfa4;color:#fff;border:none;border-radius:10px;font-size: 1.124rem;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">OK</button></div><div id="isbnScanResult" style="margin-top:10px;width:min(320px,90vw);font-size: 1.084rem;min-height:24px"></div><button onclick="closeISBNScanner()" style="margin-top:14px;padding:0.55rem 2rem;background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size: 1.124rem">✕ Fermer</button>`;
   document.body.appendChild(overlay);
   if (navigator.mediaDevices?.getUserMedia) {
     navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(stream => {
