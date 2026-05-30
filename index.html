@@ -265,193 +265,143 @@
 /* ── HERO ── */
 .hero {
   background:
-    radial-gradient(900px 500px at 88% 12%, rgba(43,191,164,0.07), transparent 60%),
-    radial-gradient(700px 500px at 95% 80%, rgba(167,139,250,0.06), transparent 60%),
+    radial-gradient(800px 480px at 80% 8%, rgba(91,138,114,0.06), transparent 60%),
     #fbfcfb;
-  padding: 0 2rem;
+  padding: 2rem 2rem 0;
   overflow: hidden;
 }
 .hero-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1.15fr;
-  align-items: center; gap: 2.5rem;
-  min-height: 660px; padding: 3.5rem 0 4rem;
+  max-width: 1320px; margin: 0 auto;
+  display: grid; grid-template-columns: 240px 1fr 1.15fr;
+  align-items: start; gap: 2rem;
+  padding: 1rem 0 2.5rem;
 }
-.hero-left { padding: 0; }
-.hero-pill {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: #eef7f4; color: var(--teal-dark);
-  border: 1px solid #d6ede6;
-  padding: 0.4rem 0.85rem; border-radius: 100px;
-  font-size: 0.82rem; font-weight: 700; margin-bottom: 1.5rem;
+
+/* menu catégories vertical */
+.hero-catmenu {
+  background: #fff; border: 1px solid #eef0ee;
+  border-radius: 18px; padding: 0.6rem;
+  box-shadow: 0 8px 24px rgba(20,30,28,0.05);
 }
-.hero-pill svg { width: 15px; height: 15px; }
+.hero-catmenu-item {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.72rem 0.85rem; border-radius: 12px;
+  cursor: pointer; transition: background 0.18s; color: var(--text);
+  font-size: 0.96rem; font-weight: 600;
+}
+.hero-catmenu-item:hover { background: var(--teal-light); color: var(--teal-dark); }
+.hero-catmenu-item .hc-ic { color: var(--teal); display: inline-flex; flex-shrink: 0; }
+.hero-catmenu-item .hc-ic svg { width: 22px; height: 22px; }
+.hero-catmenu-sep { height: 1px; background: #eef0ee; margin: 0.4rem 0.5rem; }
+.hero-catmenu-all {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 0.85rem; color: var(--teal);
+  font-weight: 700; font-size: 0.9rem; cursor: pointer;
+}
+.hero-catmenu-all svg { width: 15px; height: 15px; }
+
+/* colonne texte */
+.hero-left { padding: 0.5rem 0; }
 .hero-title {
-  font-size: 3.6rem; font-weight: 800;
-  line-height: 1.05; color: var(--text);
-  letter-spacing: -0.03em; margin-bottom: 1.25rem;
+  font-size: 2.9rem; font-weight: 800;
+  line-height: 1.08; color: var(--text);
+  letter-spacing: -0.02em; margin-bottom: 1.1rem;
 }
 .hero-title .dot { color: var(--teal); }
 .hero-sub {
-  font-size: 1.12rem; color: var(--text-mid);
-  line-height: 1.6; margin-bottom: 2rem;
-  max-width: 440px;
+  font-size: 1.08rem; color: var(--text-mid);
+  line-height: 1.6; margin-bottom: 1.8rem;
+  max-width: 400px;
 }
-.hero-cta { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.hero-cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
 .btn-primary {
   background: var(--teal); color: #fff;
-  border: none; border-radius: 13px;
-  padding: 0.95rem 1.6rem;
-  font-family: inherit; font-size: 1rem; font-weight: 700;
+  border: none; border-radius: 12px;
+  padding: 0.85rem 1.4rem;
+  font-family: inherit; font-size: 0.98rem; font-weight: 700;
   cursor: pointer; transition: all 0.2s;
   display: inline-flex; align-items: center; gap: 0.5rem;
-  box-shadow: 0 10px 24px rgba(43,191,164,0.28);
+  box-shadow: 0 8px 20px rgba(91,138,114,0.25);
 }
 .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
-.btn-primary svg { width: 18px; height: 18px; }
+.btn-primary svg { width: 17px; height: 17px; }
 .btn-secondary {
   background: #fff; color: var(--text);
-  border: 1.5px solid #e2e6e2; border-radius: 13px;
-  padding: 0.95rem 1.5rem;
-  font-family: inherit; font-size: 1rem; font-weight: 700;
+  border: 1.5px solid #e2e6e2; border-radius: 12px;
+  padding: 0.85rem 1.3rem;
+  font-family: inherit; font-size: 0.98rem; font-weight: 700;
   cursor: pointer; transition: all 0.2s;
   display: inline-flex; align-items: center; gap: 0.5rem;
 }
 .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
-.btn-secondary svg { width: 18px; height: 18px; }
+.btn-secondary svg { width: 17px; height: 17px; }
 
-/* stats */
-.hero-stats { display: flex; gap: 2.2rem; margin-bottom: 2rem; flex-wrap: wrap; }
-.hero-stat { display: flex; align-items: center; gap: 0.7rem; }
-.hero-stat-ic {
-  width: 42px; height: 42px; border-radius: 12px;
-  background: #eef7f4; color: var(--teal);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+/* membres */
+.hero-members { display: flex; align-items: center; gap: 0.8rem; }
+.hero-avatars { display: flex; }
+.hero-avatars span {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 2.5px solid #fff; margin-left: -12px;
+  background: linear-gradient(135deg, #cfe0d6, #a7c6b4);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--teal-dark); font-weight: 800; font-size: 0.9rem;
 }
-.hero-stat-ic svg { width: 20px; height: 20px; }
-.hero-stat-num { font-size: 1.3rem; font-weight: 800; color: var(--text); line-height: 1; }
-.hero-stat-lbl { font-size: 0.82rem; color: var(--text-light); margin-top: 2px; }
+.hero-avatars span:first-child { margin-left: 0; }
+.hero-members-txt { font-size: 0.9rem; color: var(--text-mid); line-height: 1.35; }
+.hero-members-txt b { color: var(--text); font-weight: 800; }
 
-/* trust row */
-.hero-trust {
+/* mosaïque photos */
+.hero-mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1fr;
+  grid-template-rows: 200px 200px;
+  gap: 14px;
+}
+.mosaic-tile {
+  position: relative; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 12px 30px rgba(20,30,28,0.10);
+  background: #eef0ee;
+}
+.mosaic-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mosaic-tile .m-tag {
+  position: absolute; top: 12px; left: 12px;
+  background: #fff; color: var(--teal-dark);
+  font-size: 0.74rem; font-weight: 800;
+  padding: 4px 11px; border-radius: 100px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.mt-maison { grid-column: 2; grid-row: 1; }
+.mt-mode   { grid-column: 1; grid-row: 1; }
+.mt-vintage{ grid-column: 3; grid-row: 1; }
+.mt-loisirs{ grid-column: 1; grid-row: 2; }
+.mt-divert { grid-column: 2; grid-row: 2; }
+.mt-tech   { grid-column: 3; grid-row: 2; }
+
+/* barre de confiance */
+.hero-trustbar {
+  max-width: 1320px; margin: 0 auto;
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem; border-top: 1px solid #ebeeeb; padding-top: 1.5rem;
+  gap: 1.5rem; background: #f6f7f5;
+  border-radius: 18px; padding: 1.5rem 2rem;
+  margin-top: 0.5rem;
 }
-.hero-trust-item { display: flex; gap: 0.6rem; }
-.hero-trust-ic { color: var(--teal); flex-shrink: 0; margin-top: 2px; }
-.hero-trust-ic svg { width: 19px; height: 19px; }
-.hero-trust-title { font-size: 0.86rem; font-weight: 800; color: var(--text); margin-bottom: 2px; }
-.hero-trust-desc { font-size: 0.72rem; color: var(--text-light); line-height: 1.35; }
+.trustbar-item { display: flex; gap: 0.85rem; align-items: flex-start; }
+.trustbar-ic {
+  color: var(--teal); flex-shrink: 0; margin-top: 2px;
+}
+.trustbar-ic svg { width: 26px; height: 26px; }
+.trustbar-title { font-size: 0.96rem; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.trustbar-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.4; }
 
-/* ── HERO VISUAL ── */
-.hero-visual { position: relative; height: 660px; }
-/* décor de fond */
-.hero-deco { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible; }
-.deco-blob { position:absolute; border-radius:50%; }
-.deco-cream-lg { width:340px; height:340px; background:#f3ede1; top:90px; left:90px; }
-.deco-green-lg { width:300px; height:300px; background:#dde8e0; bottom:40px; right:30px; }
-.deco-cream-sm { width:150px; height:150px; background:#f6f0e6; bottom:120px; left:40px; }
-.deco-dots { position:absolute; top:120px; right:30px; width:90px; height:60px;
-  background-image: radial-gradient(circle, #cdd6cf 2px, transparent 2px);
-  background-size: 16px 16px; opacity:0.6; }
-.deco-line { position:absolute; stroke:var(--teal); stroke-width:2.5; fill:none; opacity:0.55; stroke-linecap:round; }
-.deco-line-1 { bottom:150px; left:8px; width:46px; height:46px; }
-.deco-line-2 { top:30px; right:120px; width:40px; height:40px; }
-.hero-visual > .float-card, .hero-visual > .hero-phone-cell { position:relative; z-index:2; }
-.phone-wrap {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 270px; height: 560px;
-  border-radius: 44px; padding: 9px;
-  background: #15171a;
-  box-shadow: 0 40px 90px rgba(20,30,28,0.30);
-  z-index: 5;
-}
-.phone-notch {
-  position: absolute; top: 20px; left: 50%;
-  transform: translateX(-50%);
-  width: 90px; height: 22px;
-  background: #15171a; border-radius: 20px; z-index: 10;
-}
-.phone-screen {
-  width: 100%; height: 100%;
-  background: #fff; border-radius: 36px;
-  display: flex; flex-direction: column;
-  padding: 30px 13px 12px; overflow: hidden;
-}
-.phone-topbar { display: flex; align-items: center; gap: 7px; margin-bottom: 11px; padding: 0 3px; }
-.phone-topbar-logo { width: 15px; height: 15px; border-radius: 50%; background: var(--teal); }
-.phone-topbar-text { font-size: 1rem; font-weight: 800; color: var(--text); flex:1; letter-spacing:-0.02em; }
-.phone-bell { color: #c9cdc9; }
-.phone-search-bar {
-  background: #f3f5f3; border-radius: 11px;
-  padding: 8px 11px; font-size: 0.72rem; color: #aab0aa;
-  margin-bottom: 13px; display: flex; align-items: center; gap: 6px;
-}
-.phone-section-title {
-  font-size: 0.78rem; font-weight: 800; color: var(--text);
-  margin-bottom: 8px; display: flex; justify-content: space-between; align-items:center;
-}
-.phone-section-title span { color: var(--teal); font-size: 0.66rem; }
-.phone-cats { display: flex; gap: 7px; margin-bottom: 13px; }
-.phone-cat {
-  flex: 1; text-align: center; font-size: 0.55rem; color: #555; font-weight:600;
-}
-.phone-cat .pc-ic {
-  height: 40px; border-radius: 12px; margin-bottom: 3px;
-  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-}
-.phone-cat:nth-child(1) .pc-ic { background: #eaf6f2; }
-.phone-cat:nth-child(2) .pc-ic { background: #fdeee4; }
-.phone-cat:nth-child(3) .pc-ic { background: #eef0fb; }
-.phone-cat:nth-child(4) .pc-ic { background: #f3eefb; }
-.phone-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; flex: 1; }
-.phone-card { border-radius: 9px; overflow: hidden; background: #fff; border: 1px solid #f0f0f0; }
-.phone-card-img { height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #f6f7f6; }
-.phone-card-info { padding: 3px 4px 5px; }
-.phone-card-name { font-size: 0.52rem; font-weight: 700; color: #333; }
-.phone-card-price { font-size: 0.6rem; color: var(--teal); font-weight: 800; margin-top:1px; }
-.phone-bottombar { background: #fff; border-top: 1px solid #f0f0f0; padding: 8px 4px 2px; display: flex; justify-content: space-around; margin-top: 6px; color:#c0c5c0; }
-.phone-bottombar .pb-active { color: var(--teal); }
-
-/* floating product cards */
-.float-card {
-  position: absolute; background: #fff; border-radius: 20px;
-  padding: 10px; box-shadow: 0 18px 40px rgba(20,30,28,0.12);
-  width: 160px; z-index: 6;
-}
-.float-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 13px; display:block; }
-.float-tag {
-  position: absolute; top: 16px; left: 16px;
-  font-size: 0.66rem; font-weight: 800; color: #fff;
-  padding: 3px 9px; border-radius: 100px; z-index: 2;
-}
-.float-heart {
-  position: absolute; top: 16px; right: 16px;
-  width: 26px; height: 26px; border-radius: 50%; background: #fff;
-  display: flex; align-items: center; justify-content: center;
-  color: #cfd4cf; box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.float-heart svg { width: 13px; height: 13px; }
-.fc-1 { top: 70px; left: -8px; }
-.fc-1 .float-tag { background: #5b8a72; }
-.fc-2 { bottom: 90px; left: 8px; }
-.fc-2 .float-tag { background: #f0763a; }
-.fc-3 { top: 50px; right: -8px; }
-.fc-3 .float-tag { background: #e0556b; }
-.fc-3 .fc-price { font-size:0.78rem;font-weight:800;color:var(--text);margin-top:6px;padding:0 2px; }
-.fc-3 .fc-price s { color:#bcc1bc;font-weight:600;font-size:0.66rem;margin-left:4px; }
-.fc-4 { bottom: 80px; right: 2px; }
-.fc-4 .float-tag { background: #e0a020; }
-@media(max-width: 980px) {
+@media(max-width: 1040px) {
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-visual { height: 600px; margin-top: 1rem; }
-  .hero-trust { grid-template-columns: 1fr 1fr; }
+  .hero-catmenu { display: none; }
+  .hero-trustbar { grid-template-columns: 1fr 1fr; }
 }
-@media(max-width: 560px){
-  .hero-title { font-size: 2.6rem; }
-  .float-card { width: 130px; }
-  .float-card img { height: 95px; }
+@media(max-width: 600px) {
+  .hero-title { font-size: 2.3rem; }
+  .hero-mosaic { grid-template-rows: 150px 150px; }
+  .hero-trustbar { grid-template-columns: 1fr; }
 }
 
   /* ── CATEGORIES ── */
@@ -472,13 +422,37 @@
   }
   .see-all-cats:hover { color: var(--teal-dark); }
   .see-all-cats svg { width:15px; height:15px; }
+  .cats-wrap {
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 1rem;
+    align-items: stretch;
+  }
   .cats-row {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
   }
-  @media(max-width: 1100px){ .cats-row { grid-template-columns: repeat(4, 1fr); } }
+  @media(max-width: 1100px){ .cats-wrap { grid-template-columns: 1fr; } .cats-row { grid-template-columns: repeat(4, 1fr); } }
   @media(max-width: 620px){ .cats-row { grid-template-columns: repeat(2, 1fr); } }
+  .sell-cta-card {
+    background: var(--teal); color: #fff;
+    border-radius: 16px; padding: 1.4rem;
+    display: flex; flex-direction: column;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: background 0.2s;
+  }
+  .sell-cta-card:hover { background: var(--teal-dark); }
+  .sell-cta-title { font-size: 1.15rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
+  .sell-cta-desc { font-size: 0.85rem; opacity: 0.9; line-height: 1.45; margin-bottom: 1rem; }
+  .sell-cta-btn {
+    background: #fff; color: var(--teal-dark);
+    border: none; border-radius: 10px;
+    padding: 0.6rem 1rem; font-family: inherit;
+    font-size: 0.85rem; font-weight: 700; cursor: pointer;
+    align-self: flex-start; margin-bottom: 0.5rem;
+  }
+  .sell-cta-ill { width: 100px; height: 75px; color: rgba(255,255,255,0.55); margin-top: auto; align-self: flex-end; }
   .cat-card {
     background: var(--white);
     border: 1px solid #eef0ee;
@@ -493,8 +467,8 @@
     border-color: #e2e6e2;
   }
   .cat-card.active { border-color: var(--teal); box-shadow:0 0 0 2px var(--teal); }
-  .cat-img-wrap { width:100%; aspect-ratio: 1/1; overflow:hidden; background:#eef0ee; display:flex; align-items:center; justify-content:center; padding:4px; }
-  .cat-img-wrap img { width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; transition:transform 0.3s; }
+  .cat-img-wrap { width:100%; aspect-ratio: 1/1; overflow:hidden; background:#eef0ee; }
+  .cat-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s; }
   .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
   .cat-body { padding: 0.7rem 0.8rem 0.85rem; }
   .cat-name { font-size: 0.92rem; font-weight: 800; color: var(--text); }
@@ -1131,12 +1105,41 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <!-- GAUCHE -->
-    <div class="hero-left">
-      <div class="hero-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-        La marketplace de confiance
+    <!-- MENU CATEGORIES VERTICAL -->
+    <div class="hero-catmenu">
+      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 3 3 3-2 2 1 8H6l1-8-2-2 3-3-1-3z"/></svg></span>
+        Femmes
       </div>
+      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3m-16 0a2 2 0 0 0-2 2v3h20v-3a2 2 0 0 0-2-2m-16 0h16M5 17v2m14-2v2"/></svg></span>
+        Maison
+      </div>
+      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span>
+        Tech
+      </div>
+      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-7h5l-3 7m-1-9h3"/></svg></span>
+        Loisirs
+      </div>
+      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h.01M16 8h.01M8 16h.01M16 16h.01M12 12h.01"/></svg></span>
+        Divertissement
+      </div>
+      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M8 6c1-2 7-2 8 0"/></svg></span>
+        Mode enfants
+      </div>
+      <div class="hero-catmenu-sep"></div>
+      <div class="hero-catmenu-all" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
+        Voir toutes les catégories
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <!-- TEXTE -->
+    <div class="hero-left">
       <h1 class="hero-title">Achetez, vendez,<br>recommencez<span class="dot">.</span></h1>
       <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main.</p>
       <div class="hero-cta">
@@ -1149,115 +1152,58 @@
           Vendre mes articles
         </button>
       </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div><div class="hero-stat-num">250K+</div><div class="hero-stat-lbl">Membres actifs</div></div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div>
-          <div><div class="hero-stat-num">1M+</div><div class="hero-stat-lbl">Articles disponibles</div></div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/></svg></div>
-          <div><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">Transactions sécurisées</div></div>
-        </div>
-      </div>
-
-      <div class="hero-trust">
-        <div class="hero-trust-item">
-          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-          <div><div class="hero-trust-title">Paiement sécurisé</div><div class="hero-trust-desc">Vos paiements sont 100% protégés</div></div>
-        </div>
-        <div class="hero-trust-item">
-          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
-          <div><div class="hero-trust-title">Mode écoresponsable</div><div class="hero-trust-desc">Donnez une seconde vie aux objets</div></div>
-        </div>
-        <div class="hero-trust-item">
-          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <div><div class="hero-trust-title">Communauté de confiance</div><div class="hero-trust-desc">Des milliers d'avis positifs chaque jour</div></div>
-        </div>
-        <div class="hero-trust-item">
-          <span class="hero-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 1.4 2.3-.4.9 2.2 2.2.9-.4 2.3L22 12l-1.4 1.9.4 2.3-2.2.9-.9 2.2-2.3-.4L12 21l-1.9-1.4-2.3.4-.9-2.2-2.2-.9.4-2.3L3 12l1.4-1.9-.4-2.3 2.2-.9.9-2.2 2.3.4z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <div><div class="hero-trust-title">Articles vérifiés</div><div class="hero-trust-desc">Contrôle qualité avant chaque envoi</div></div>
-        </div>
+      <div class="hero-members">
+        <div class="hero-avatars"><span>A</span><span>M</span><span>L</span></div>
+        <div class="hero-members-txt"><b>+250K membres</b><br>rejoignent la communauté Fripz</div>
       </div>
     </div>
 
-    <!-- DROITE : téléphone + cartes flottantes -->
-    <div class="hero-visual">
-      <!-- décor de fond -->
-      <div class="hero-deco">
-        <div class="deco-blob deco-cream-lg"></div>
-        <div class="deco-blob deco-green-lg"></div>
-        <div class="deco-blob deco-cream-sm"></div>
-        <div class="deco-dots"></div>
-        <svg class="deco-line deco-line-1" viewBox="0 0 24 24"><path d="M4 14 L9 19 L20 6"/></svg>
-        <svg class="deco-line deco-line-2" viewBox="0 0 24 24"><path d="M5 12 H19 M12 5 V19"/></svg>
+    <!-- MOSAIQUE PHOTOS -->
+    <div class="hero-mosaic">
+      <div class="mosaic-tile mt-mode">
+        <span class="m-tag">Mode</span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/01_mode_femme.jpg" alt="Mode">
       </div>
-      <!-- carte baskets -->
-      <div class="float-card fc-1">
-        <span class="float-tag">Nouveau</span>
-        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
-        <img src="https://images.unsplash.com/photo-1705096953495-8ea06879b986?fm=jpg&q=70&w=400&auto=format&fit=crop" alt="Baskets">
+      <div class="mosaic-tile mt-maison">
+        <span class="m-tag">Maison</span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/02_maison_deco.jpg" alt="Maison">
       </div>
-      <!-- carte appareil photo -->
-      <div class="float-card fc-2">
-        <span class="float-tag">Vintage</span>
-        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
-        <img src="https://images.unsplash.com/photo-1495121553079-4c61bcce1894?fm=jpg&q=70&w=400&auto=format&fit=crop" alt="Appareil photo">
+      <div class="mosaic-tile mt-vintage">
+        <span class="m-tag">Vintage</span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/03_vintage.jpg" alt="Vintage">
       </div>
+      <div class="mosaic-tile mt-loisirs">
+        <span class="m-tag">Loisirs</span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/04_loisirs.jpg" alt="Loisirs">
+      </div>
+      <div class="mosaic-tile mt-divert">
+        <span class="m-tag">Divertissement</span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/05_divertissement.jpg" alt="Divertissement">
+      </div>
+      <div class="mosaic-tile mt-tech">
+        <span class="m-tag">Tech</span>
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/06_tech.jpg" alt="Tech">
+      </div>
+    </div>
+  </div>
 
-      <!-- téléphone -->
-      <div class="phone-wrap">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="phone-topbar">
-            <div class="phone-topbar-logo"></div>
-            <span class="phone-topbar-text">Fripz</span>
-            <span class="phone-bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
-          </div>
-          <div class="phone-search-bar"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Rechercher un article...</div>
-          <div class="phone-section-title">Catégories <span>Voir tout</span></div>
-          <div class="phone-cats">
-            <div class="phone-cat"><div class="pc-ic">👗</div>Femmes</div>
-            <div class="phone-cat"><div class="pc-ic">🛋️</div>Maison</div>
-            <div class="phone-cat"><div class="pc-ic">📱</div>Tech</div>
-            <div class="phone-cat"><div class="pc-ic">🎮</div>Loisirs</div>
-          </div>
-          <div class="phone-section-title">Articles recommandés</div>
-          <div class="phone-grid">
-            <div class="phone-card"><div class="phone-card-img">🧥</div><div class="phone-card-info"><div class="phone-card-name">Veste en jean</div><div class="phone-card-price">25 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">⌚</div><div class="phone-card-info"><div class="phone-card-name">Montre</div><div class="phone-card-price">40 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">🪑</div><div class="phone-card-info"><div class="phone-card-name">Chaise design</div><div class="phone-card-price">60 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">🎒</div><div class="phone-card-info"><div class="phone-card-name">Sac à dos</div><div class="phone-card-price">30 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">🎮</div><div class="phone-card-info"><div class="phone-card-name">Manette Xbox</div><div class="phone-card-price">45 €</div></div></div>
-            <div class="phone-card"><div class="phone-card-img">📖</div><div class="phone-card-info"><div class="phone-card-name">Livre</div><div class="phone-card-price">10 €</div></div></div>
-          </div>
-          <div class="phone-bottombar">
-            <span class="pb-active"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg></span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- carte fauteuil -->
-      <div class="float-card fc-3">
-        <span class="float-tag">-40%</span>
-        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20084005.png" alt="Fauteuil">
-        <div class="fc-price">120 € <s>200 €</s></div>
-      </div>
-      <!-- carte sport -->
-      <div class="float-card fc-4">
-        <span class="float-tag">Populaire</span>
-        <span class="float-heart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
-        <img src="https://images.unsplash.com/photo-1526086754506-a57f69b4700a?fm=jpg&q=70&w=400&auto=format&fit=crop" alt="Sport">
-      </div>
+  <!-- BARRE DE CONFIANCE -->
+  <div class="hero-trustbar">
+    <div class="trustbar-item">
+      <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
+      <div><div class="trustbar-title">Éco-responsable</div><div class="trustbar-desc">Donnez une seconde vie aux objets</div></div>
+    </div>
+    <div class="trustbar-item">
+      <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      <div><div class="trustbar-title">Paiement sécurisé</div><div class="trustbar-desc">Vos transactions sont 100% protégées</div></div>
+    </div>
+    <div class="trustbar-item">
+      <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      <div><div class="trustbar-title">Communauté engagée</div><div class="trustbar-desc">Des milliers de membres de confiance</div></div>
+    </div>
+    <div class="trustbar-item">
+      <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.9 6 6.1.5-4.6 4 1.4 6L12 22l-5.8 3.5 1.4-6L3 9.5 9.1 9z"/></svg></span>
+      <div><div class="trustbar-title">Qualité vérifiée</div><div class="trustbar-desc">Des articles contrôlés avant chaque envoi</div></div>
     </div>
   </div>
 </section>
@@ -1266,66 +1212,80 @@
 <section class="section">
   <div class="section-inner">
     <div class="tendances-header">
-      <div class="section-title">Tendances du moment</div>
+      <div class="section-title">Trouvez votre bonheur</div>
       <a class="see-all-cats" href="#">Voir toutes les catégories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
+    <div class="cats-wrap">
     <div class="cats-row">
   <div class="cat-card" onclick="toggleSubcat('enfant', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20083954.png" alt="Mode enfants"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/07_mode_enfant.jpg" alt="Mode enfants"></div>
     <div class="cat-body">
       <div class="cat-name">Mode enfants</div>
       <div class="cat-count">12 540 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('maison', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20084005.png" alt="Maison & Déco"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/08_maison_deco_categorie.jpg" alt="Maison & Déco"></div>
     <div class="cat-body">
       <div class="cat-name">Maison & Déco</div>
       <div class="cat-count">8 210 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('loisirs', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20084013.png" alt="Loisirs"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/09_loisirs_categorie.jpg" alt="Loisirs"></div>
     <div class="cat-body">
       <div class="cat-name">Loisirs</div>
       <div class="cat-count">6 430 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('electronique', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093135.png" alt="Tech"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/10_tech_categorie.jpg" alt="Tech"></div>
     <div class="cat-body">
       <div class="cat-name">Tech</div>
       <div class="cat-count">15 320 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('divertissement', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093140.png" alt="Divertissement"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/11_divertissement_categorie.jpg" alt="Divertissement"></div>
     <div class="cat-body">
       <div class="cat-name">Divertissement</div>
       <div class="cat-count">7 890 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('femme', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093147.png" alt="Mode femme"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/12_mode_femme_categorie.jpg" alt="Mode femme"></div>
     <div class="cat-body">
       <div class="cat-name">Mode femme</div>
       <div class="cat-count">18 760 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('homme', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093152.png" alt="Mode homme"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/13_mode_homme_categorie.jpg" alt="Mode homme"></div>
     <div class="cat-body">
       <div class="cat-name">Mode homme</div>
       <div class="cat-count">14 230 articles</div>
     </div>
   </div>
   <div class="cat-card" onclick="toggleSubcat('sport', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093301.png" alt="Sport"></div>
+    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/14_sport_categorie.jpg" alt="Sport"></div>
     <div class="cat-body">
       <div class="cat-name">Sport</div>
       <div class="cat-count">5 980 articles</div>
     </div>
   </div>
+    </div>
+    <div class="sell-cta-card" onclick="openSellModal()">
+      <div class="sell-cta-title">Vendez vos articles facilement</div>
+      <div class="sell-cta-desc">Faites de la place, gagnez de l'argent et faites plaisir.</div>
+      <button class="sell-cta-btn">Commencer à vendre</button>
+      <svg class="sell-cta-ill" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 40 L60 28 L100 40 L60 52 Z"/>
+        <path d="M20 40 V70 L60 84 V52"/>
+        <path d="M100 40 V70 L60 84"/>
+        <path d="M52 60 q8 -10 16 0" />
+        <circle cx="60" cy="22" r="3"/>
+      </svg>
+    </div>
     </div>
     <!-- SUBCATEGORY PANEL -->
     <div class="subcat-panel" id="subcatPanel">
