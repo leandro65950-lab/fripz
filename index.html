@@ -2482,16 +2482,16 @@ const SELL_CATS = {
 
 // Icônes SVG couleurs Fripz par catégorie
 const CAT_ICONS = {
-  'Femmes': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093147.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Hommes': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093152.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Enfants': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20083954.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Sport': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093301.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Maison': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20084005.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Électronique': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093135.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Loisirs': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20084013.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
-  'Divertissement': '<img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/Capture%20d%27%C3%A9cran%202026-05-29%20093140.png" width="38" height="38" style="flex-shrink:0;vertical-align:middle;border-radius:9px;object-fit:cover">',
+  'Femmes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-1 3 3 3-2 2 1 8H6l1-8-2-2 3-3-1-3z"/></svg>',
+  'Hommes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-2 3 2 2-3 13-3-13 2-2-2-3z"/></svg>',
+  'Enfants': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M8 6c1-2 7-2 8 0"/></svg>',
+  'Sport': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><circle cx="12" cy="12" r="8"/><path d="M12 8l3 2-1 4h-4l-1-4 3-2z"/></svg>',
+  'Maison': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M4 11 12 4l8 7M6 10v9h12v-9"/></svg>',
+  'Électronique': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>',
+  'Loisirs': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M5 4h5v16H5V4zm5 0h5v16h-5M14 4l4 1-3 15-4-1"/></svg>',
+  'Divertissement': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h.01M16 8h.01M8 16h.01M16 16h.01M12 12h.01"/></svg>',
 };
-function getCatIcon(cat) { const ic = CAT_ICONS[cat] || '📦'; return ic.startsWith('<img') ? ic : '<span style="font-size: 37.03px;line-height:1">' + ic + '</span>'; }
+function getCatIcon(cat) { return CAT_ICONS[cat] || '<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.7\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'width:26px;height:26px;flex-shrink:0\'><rect x=\'4\' y=\'6\' width=\'16\' height=\'13\' rx=\'2\'/><path d=\'M4 10h16\'/></svg>'; }
 
 // Obtenir les sous-catégories d'une catégorie
 function getSubcats(cat) {
@@ -2594,11 +2594,11 @@ function renderSellPage() {
           <label>Catégorie <span class="req">*</span></label>
           <div class="custom-select-wrap">
             <button type="button" class="custom-select-btn" onclick="toggleCustomSelect('cat')">
-              ${sellData.categorie ? getCatIcon(sellData.categorie) + ' ' + sellData.categorie : '🗂️ Choisir...'}
+              ${sellData.categorie ? '<span style="display:inline-flex;align-items:center;gap:8px"><span style="display:inline-flex;color:var(--teal)">' + getCatIcon(sellData.categorie) + '</span><span>' + sellData.categorie + '</span></span>' : 'Choisir...'}
             </button>
             <div class="custom-select-dropdown" id="drop-cat">
               <div class="custom-select-option" onclick="pickCat('')">Choisir...</div>
-              ${Object.keys(SELL_CATS).map((c,i) => '<div class="custom-select-option' + (sellData.categorie===c?' selected':'') + '" style="display:flex;align-items:center;gap:8px" onclick="pickCatIdx(' + i + ')">' + getCatIcon(c) + '<span>' + c + '</span></div>').join('')}
+              ${Object.keys(SELL_CATS).map((c,i) => '<div class="custom-select-option' + (sellData.categorie===c?' selected':'') + '" style="display:flex;align-items:center;gap:8px" onclick="pickCatIdx(' + i + ')"><span style="display:inline-flex;color:var(--teal)">' + getCatIcon(c) + '</span><span>' + c + '</span></div>').join('')}
             </div>
           </div>
         </div>
