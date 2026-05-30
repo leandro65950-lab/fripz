@@ -9,9 +9,9 @@
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
-    --teal: #2bbfa4;
-    --teal-dark: #1fa88f;
-    --teal-light: #e8f9f6;
+    --teal: #1a7a52;
+    --teal-dark: #145f40;
+    --teal-light: #e6f2ec;
     --text: #1a1a2e;
     --text-mid: #555;
     --text-light: #999;
@@ -345,6 +345,19 @@
 
 /* ── HERO VISUAL ── */
 .hero-visual { position: relative; height: 660px; }
+/* décor de fond */
+.hero-deco { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible; }
+.deco-blob { position:absolute; border-radius:50%; }
+.deco-cream-lg { width:340px; height:340px; background:#f3ede1; top:90px; left:90px; }
+.deco-green-lg { width:300px; height:300px; background:#e3efe6; bottom:40px; right:30px; }
+.deco-cream-sm { width:150px; height:150px; background:#f6f0e6; bottom:120px; left:40px; }
+.deco-dots { position:absolute; top:120px; right:30px; width:90px; height:60px;
+  background-image: radial-gradient(circle, #cdd6cf 2px, transparent 2px);
+  background-size: 16px 16px; opacity:0.6; }
+.deco-line { position:absolute; stroke:var(--teal); stroke-width:2.5; fill:none; opacity:0.55; stroke-linecap:round; }
+.deco-line-1 { bottom:150px; left:8px; width:46px; height:46px; }
+.deco-line-2 { top:30px; right:120px; width:40px; height:40px; }
+.hero-visual > .float-card, .hero-visual > .hero-phone-cell { position:relative; z-index:2; }
 .phone-wrap {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -421,7 +434,7 @@
 }
 .float-heart svg { width: 13px; height: 13px; }
 .fc-1 { top: 70px; left: -8px; }
-.fc-1 .float-tag { background: #2bbfa4; }
+.fc-1 .float-tag { background: #1a7a52; }
 .fc-2 { bottom: 90px; left: 8px; }
 .fc-2 .float-tag { background: #f0763a; }
 .fc-3 { top: 50px; right: -8px; }
@@ -1174,6 +1187,15 @@
 
     <!-- DROITE : téléphone + cartes flottantes -->
     <div class="hero-visual">
+      <!-- décor de fond -->
+      <div class="hero-deco">
+        <div class="deco-blob deco-cream-lg"></div>
+        <div class="deco-blob deco-green-lg"></div>
+        <div class="deco-blob deco-cream-sm"></div>
+        <div class="deco-dots"></div>
+        <svg class="deco-line deco-line-1" viewBox="0 0 24 24"><path d="M4 14 L9 19 L20 6"/></svg>
+        <svg class="deco-line deco-line-2" viewBox="0 0 24 24"><path d="M5 12 H19 M12 5 V19"/></svg>
+      </div>
       <!-- carte baskets -->
       <div class="float-card fc-1">
         <span class="float-tag">Nouveau</span>
@@ -3207,7 +3229,7 @@ function openISBNScanner() {
   const overlay = document.createElement('div');
   overlay.id = 'isbnOverlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';
-  overlay.innerHTML = `<div style="color:#fff;font-size: 1.389rem;font-weight:800;margin-bottom:14px;text-align:center">📷 Scanner le code-barres<div style="font-size: 1.005rem;font-weight:500;opacity:0.6;margin-top:3px">Pointez la caméra vers l'ISBN au dos du livre</div></div><div style="position:relative;width:min(320px,90vw);height:200px;border:3px solid #2bbfa4;border-radius:14px;overflow:hidden;background:#000"><video id="isbnVideo" style="width:100%;height:100%;object-fit:cover" autoplay muted playsinline></video><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:85%;height:70px;border:2px solid #2bbfa4;border-radius:6px;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#2bbfa4,transparent);animation:scanAnim 1.5s linear infinite"></div></div></div><div id="isbnCamMsg" style="position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size: 0.952rem;color:rgba(255,255,255,0.7)">Chargement...</div></div><style>@keyframes scanAnim{0%{top:0}50%{top:calc(100% - 2px)}100%{top:0}}</style><div style="margin-top:14px;display:flex;gap:8px;width:min(320px,90vw)"><input id="isbnManual" inputmode="numeric" placeholder="Ou saisissez l'ISBN manuellement" style="flex:1;padding:0.65rem 1rem;border-radius:10px;border:2px solid #2bbfa4;background:#1a1a2e;color:#fff;font-size: 1.124rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,13)" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupISBN(this.value)}"><button onclick="lookupISBN(document.getElementById('isbnManual').value)" style="padding:0.65rem 1rem;background:#2bbfa4;color:#fff;border:none;border-radius:10px;font-size: 1.124rem;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">OK</button></div><div id="isbnScanResult" style="margin-top:10px;width:min(320px,90vw);font-size: 1.084rem;min-height:24px"></div><button onclick="closeISBNScanner()" style="margin-top:14px;padding:0.55rem 2rem;background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size: 1.124rem">✕ Fermer</button>`;
+  overlay.innerHTML = `<div style="color:#fff;font-size: 1.389rem;font-weight:800;margin-bottom:14px;text-align:center">📷 Scanner le code-barres<div style="font-size: 1.005rem;font-weight:500;opacity:0.6;margin-top:3px">Pointez la caméra vers l'ISBN au dos du livre</div></div><div style="position:relative;width:min(320px,90vw);height:200px;border:3px solid #1a7a52;border-radius:14px;overflow:hidden;background:#000"><video id="isbnVideo" style="width:100%;height:100%;object-fit:cover" autoplay muted playsinline></video><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none"><div style="width:85%;height:70px;border:2px solid #1a7a52;border-radius:6px;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#1a7a52,transparent);animation:scanAnim 1.5s linear infinite"></div></div></div><div id="isbnCamMsg" style="position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size: 0.952rem;color:rgba(255,255,255,0.7)">Chargement...</div></div><style>@keyframes scanAnim{0%{top:0}50%{top:calc(100% - 2px)}100%{top:0}}</style><div style="margin-top:14px;display:flex;gap:8px;width:min(320px,90vw)"><input id="isbnManual" inputmode="numeric" placeholder="Ou saisissez l'ISBN manuellement" style="flex:1;padding:0.65rem 1rem;border-radius:10px;border:2px solid #1a7a52;background:#1a1a2e;color:#fff;font-size: 1.124rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,13)" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupISBN(this.value)}"><button onclick="lookupISBN(document.getElementById('isbnManual').value)" style="padding:0.65rem 1rem;background:#1a7a52;color:#fff;border:none;border-radius:10px;font-size: 1.124rem;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">OK</button></div><div id="isbnScanResult" style="margin-top:10px;width:min(320px,90vw);font-size: 1.084rem;min-height:24px"></div><button onclick="closeISBNScanner()" style="margin-top:14px;padding:0.55rem 2rem;background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size: 1.124rem">✕ Fermer</button>`;
   document.body.appendChild(overlay);
   if (navigator.mediaDevices?.getUserMedia) {
     navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(stream => {
@@ -3227,7 +3249,7 @@ function openISBNScanner() {
             if (codes.length > 0) {
               scanning = false; clearInterval(loop);
               const raw = codes[0].rawValue.replace(/[^0-9X]/gi,'');
-              if (msg) msg.innerHTML = '<span style="color:#2bbfa4;font-weight:700">✅ ' + raw + '</span>';
+              if (msg) msg.innerHTML = '<span style="color:#1a7a52;font-weight:700">✅ ' + raw + '</span>';
               await lookupISBN(raw);
             }
           } catch(e) {}
