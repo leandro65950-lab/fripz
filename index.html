@@ -478,7 +478,7 @@
     display: grid;
     grid-template-columns: 1fr 185px;
     gap: 0.85rem;
-    align-items: stretch;
+    align-items: start;
   }
   .cats-row {
     display: grid;
@@ -502,7 +502,7 @@
     border-radius: 16px; padding: 1.1rem 1.2rem;
     display: flex; flex-direction: column;
     cursor: pointer; position: relative; overflow: hidden;
-    transition: background 0.2s; height: 100%;
+    transition: background 0.2s;
   }
   .sell-cta-card:hover { background: var(--teal-dark); }
   .sell-cta-title { font-size: 1.02rem; font-weight: 800; line-height: 1.18; margin-bottom: 0.4rem; }
@@ -541,7 +541,7 @@
   .cat-card[data-cat="tech"] .cat-img-wrap img     { object-position: center top; }
   .cat-card[data-cat="divert"] .cat-img-wrap img   { object-position: center 30%; }
   .cat-card[data-cat="femme"] .cat-img-wrap img    { object-position: center 30%; }
-  .cat-card[data-cat="homme"] .cat-img-wrap img    { object-position: 20% center; }
+  .cat-card[data-cat="homme"] .cat-img-wrap img    { object-position: 5% center; }
   .cat-card[data-cat="sport"] .cat-img-wrap img    { object-position: center center; }
   .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
   .cat-body { padding: 0.55rem 0.6rem 0.65rem; }
@@ -1334,7 +1334,7 @@
       </div>
       <div class="mosaic-tile mt-vintage">
         <span class="m-tag">Vintage</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/03_vintage.jpg" alt="Vintage">
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/03_vintage.jpg" alt="Vintage" style="object-position: center 30%;">
       </div>
       <div class="mosaic-tile mt-loisirs">
         <span class="m-tag">Loisirs</span>
