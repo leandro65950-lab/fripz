@@ -141,9 +141,9 @@
   }
   .auth-overlay.open { display: flex; animation: fadeIn 0.2s; }
   .auth-modal {
-    background: var(--white); border-radius: 24px;
-    width: 100%; max-width: 440px;
-    max-height: 82vh;
+    background: var(--white); border-radius: 20px;
+    width: 100%; max-width: 380px;
+    max-height: 88vh;
     overflow-y: auto;
     overflow-x: hidden;
     animation: slideUp 0.25s ease;
@@ -158,7 +158,7 @@
     padding: 1.5rem 1.75rem 0;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .auth-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.851rem; font-weight: 900; color: var(--teal); }
+  .auth-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--teal); }
   .auth-close {
     width: 32px; height: 32px; border-radius: 50%;
     border: 1.5px solid var(--border); background: transparent;
@@ -175,7 +175,7 @@
   }
   .auth-tab {
     flex: 1; padding: 0.65rem 0; text-align: center;
-    font-size: 1.19rem; font-weight: 800; color: var(--text-light);
+    font-size: 0.98rem; font-weight: 800; color: var(--text-light);
     cursor: pointer; border-bottom: 2.5px solid transparent;
     margin-bottom: -2px; transition: all 0.2s;
   }
@@ -185,8 +185,8 @@
   .auth-panel { display: none; padding: 1rem 1.5rem 1.5rem; }
 
   .auth-panel.active { display: block; animation: fadeIn 0.2s; }
-  .auth-title { font-size: 1.322rem; font-weight: 800; color: var(--text); margin-bottom: 0.2rem; }
-  .auth-sub { font-size: 1.032rem; color: var(--text-mid); margin-bottom: 0.9rem; }
+  .auth-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 0.2rem; }
+  .auth-sub { font-size: 0.88rem; color: var(--text-mid); margin-bottom: 0.9rem; }
 
   /* SOCIAL BUTTONS */
   .social-btns { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem; }
@@ -195,11 +195,11 @@
     display: flex; align-items: center; justify-content: center; gap: 0.65rem;
     border: 1.5px solid var(--border); border-radius: 12px;
     background: var(--white); cursor: pointer;
-    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.164rem; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 700;
     color: var(--text); transition: all 0.2s;
   }
   .social-btn:hover { border-color: var(--text-mid); background: #fafafa; }
-  .social-btn .s-icon { font-size: 1.455rem; }
+  .social-btn .s-icon { font-size: 1.15rem; }
 
   /* DIVIDER */
   .auth-divider {
@@ -209,12 +209,12 @@
   .auth-divider::before, .auth-divider::after {
     content: ''; flex: 1; height: 1px; background: var(--border);
   }
-  .auth-divider span { font-size: 0.991rem; color: var(--text-light); font-weight: 600; white-space: nowrap; }
+  .auth-divider span { font-size: 0.82rem; color: var(--text-light); font-weight: 600; white-space: nowrap; }
 
   /* FORM FIELDS */
   .auth-field { margin-bottom: 0.7rem; }
   .auth-field label {
-    display: block; font-size: 1.032rem; font-weight: 800;
+    display: block; font-size: 0.85rem; font-weight: 800;
     color: var(--text); margin-bottom: 0.4rem;
   }
   .auth-field label .req { color: var(--teal); }
@@ -222,7 +222,7 @@
     position: relative; display: flex; align-items: center;
   }
   .auth-input-wrap .field-icon {
-    position: absolute; left: 12px; font-size: 1.256rem;
+    position: absolute; left: 12px; font-size: 1.05rem;
     color: var(--text-light); pointer-events: none;
   }
   .auth-input-wrap input {
@@ -478,7 +478,7 @@
     display: grid;
     grid-template-columns: 1fr 185px;
     gap: 0.85rem;
-    align-items: start;
+    align-items: stretch;
   }
   .cats-row {
     display: grid;
@@ -499,22 +499,24 @@
   }
   .sell-cta-card {
     background: var(--teal); color: #fff;
-    border-radius: 16px; padding: 1.4rem;
+    border-radius: 16px; padding: 1.1rem 1.2rem;
     display: flex; flex-direction: column;
     cursor: pointer; position: relative; overflow: hidden;
-    transition: background 0.2s;
+    transition: background 0.2s; height: 100%;
   }
   .sell-cta-card:hover { background: var(--teal-dark); }
-  .sell-cta-title { font-size: 1.15rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
-  .sell-cta-desc { font-size: 0.85rem; opacity: 0.9; line-height: 1.45; margin-bottom: 1rem; }
+  .sell-cta-title { font-size: 1.02rem; font-weight: 800; line-height: 1.18; margin-bottom: 0.4rem; }
+  .sell-cta-desc { font-size: 0.78rem; opacity: 0.9; line-height: 1.4; margin-bottom: 0.8rem; }
   .sell-cta-btn {
     background: #fff; color: var(--teal-dark);
     border: none; border-radius: 10px;
-    padding: 0.6rem 1rem; font-family: inherit;
-    font-size: 0.85rem; font-weight: 700; cursor: pointer;
-    align-self: flex-start; margin-bottom: 0.5rem;
+    padding: 0.55rem 0.9rem; font-family: inherit;
+    font-size: 0.8rem; font-weight: 700; cursor: pointer;
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 0.4rem;
   }
-  .sell-cta-ill { width: 100px; height: 75px; color: rgba(255,255,255,0.55); margin-top: auto; align-self: flex-end; }
+  .sell-cta-btn svg { width: 14px; height: 14px; }
+  .sell-cta-ill { width: 78px; height: 60px; color: rgba(255,255,255,0.6); margin-top: 0.7rem; align-self: flex-end; }
   .cat-card {
     background: var(--white);
     border: 1px solid #eef0ee;
@@ -522,6 +524,7 @@
     padding: 0; overflow: hidden;
     text-align: left; cursor: pointer;
     transition: all 0.22s; position: relative;
+    align-self: start; height: fit-content;
   }
   .cat-card:hover {
     transform: translateY(-4px);
@@ -1140,26 +1143,72 @@
   .footer { background: #1f2a24; color: #cdd6cf; margin-top: 3rem; }
   .footer-inner {
     max-width: 1320px; margin: 0 auto; padding: 3rem 2rem 2rem;
-    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 2rem;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1.3fr; gap: 1.8rem;
   }
   .footer-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem; }
   .footer-logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--teal); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; }
   .footer-tagline { font-size: 0.88rem; line-height: 1.55; color: #9aa89f; margin-bottom: 1.1rem; max-width: 280px; }
   .footer-socials { display: flex; gap: 0.6rem; }
-  .footer-social { width: 38px; height: 38px; border-radius: 10px; background: #2c3a32; display: inline-flex; align-items: center; justify-content: center; color: #cdd6cf; transition: all 0.2s; }
+  .footer-social { width: 46px; height: 46px; border-radius: 12px; background: #2c3a32; display: inline-flex; align-items: center; justify-content: center; color: #cdd6cf; transition: all 0.2s; }
   .footer-social:hover { background: var(--teal); color: #fff; }
-  .footer-social svg { width: 19px; height: 19px; }
+  .footer-social svg { width: 24px; height: 24px; }
   .footer-col-title { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.9rem; }
-  .footer-col a { display: block; font-size: 0.88rem; color: #9aa89f; text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+  .footer-col a { display: block; font-size: 0.88rem; color: #9aa89f; text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; cursor: pointer; }
   .footer-col a:hover { color: #fff; }
+  .footer-bottom { border-top: 1px solid #2c3a32; padding: 1.2rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; font-size: 0.82rem; color: #7d8b82; }
+  .footer-bottom-links a { color: #7d8b82; text-decoration: none; cursor: pointer; }
+  .footer-bottom-links a:hover { color: #fff; }
+  @media(max-width: 900px){ .footer-inner { grid-template-columns: 1fr 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+  @media(max-width: 540px){ .footer-inner { grid-template-columns: 1fr; } }
+
+  /* PAGE OVERLAY (legal/help pages) */
+  .page-overlay {
+    display: none; position: fixed; inset: 0; z-index: 3000;
+    background: #fff; overflow-y: auto;
+  }
+  .page-overlay.open { display: block; animation: fadeIn 0.2s; }
+  .page-topbar {
+    position: sticky; top: 0; background: #fff; z-index: 5;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 2rem; max-width: 100%;
+  }
+  .page-back {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    background: var(--teal-light); color: var(--teal-dark);
+    border: none; border-radius: 10px; padding: 0.55rem 1rem;
+    font-family: inherit; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .page-back:hover { background: #cfe0d6; }
+  .page-back svg { width: 16px; height: 16px; }
+  .page-topbar-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem; font-weight: 800; color: var(--text); }
+  .page-topbar-logo .footer-logo-mark { width: 28px; height: 28px; }
+  .page-content {
+    max-width: 800px; margin: 0 auto; padding: 2.5rem 2rem 4rem;
+  }
+  .page-content h1 { font-size: 2rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .page-updated { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.5rem; }
+  .page-disclaimer {
+    background: #fff8e6; border: 1px solid #f0d98a; border-radius: 12px;
+    padding: 0.9rem 1.1rem; font-size: 0.85rem; color: #8a6d1a;
+    margin-bottom: 2rem; line-height: 1.5;
+  }
+  .page-content h2 { font-size: 1.2rem; font-weight: 800; color: var(--text); margin: 1.8rem 0 0.6rem; }
+  .page-content p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 0.8rem; }
+  .page-content ul { margin: 0 0 0.8rem 1.2rem; }
+  .page-content li { font-size: 0.95rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 0.35rem; }
+  .page-content a.inline-link { color: var(--teal); cursor: pointer; font-weight: 600; }
+  .help-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
+  @media(max-width:600px){ .help-grid { grid-template-columns: 1fr; } }
+  .help-card { border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; }
+  .help-card h3 { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+  .help-card p { font-size: 0.88rem; }
   .store-badge { display: flex; align-items: center; gap: 0.6rem; background: #2c3a32; border: 1px solid #3a4a40; border-radius: 11px; padding: 0.55rem 0.9rem; margin-bottom: 0.6rem; text-decoration: none; color: #fff; transition: all 0.2s; }
   .store-badge:hover { background: #3a4a40; }
-  .store-badge svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .store-badge svg { width: 27px; height: 27px; flex-shrink: 0; color: #fff; fill: #fff; }
   .store-badge span { display: flex; flex-direction: column; font-size: 0.98rem; font-weight: 700; line-height: 1.15; }
   .store-badge small { font-size: 0.66rem; font-weight: 500; color: #9aa89f; }
-  .footer-bottom { border-top: 1px solid #2c3a32; padding: 1.2rem 2rem; text-align: center; font-size: 0.82rem; color: #7d8b82; }
-  @media(max-width: 900px){ .footer-inner { grid-template-columns: 1fr 1fr; } }
-  @media(max-width: 540px){ .footer-inner { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1383,13 +1432,25 @@
     <div class="sell-cta-card" onclick="openSellModal()">
       <div class="sell-cta-title">Vendez vos articles facilement</div>
       <div class="sell-cta-desc">Faites de la place, gagnez de l'argent et faites plaisir.</div>
-      <button class="sell-cta-btn">Commencer à vendre</button>
-      <svg class="sell-cta-ill" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 40 L60 28 L100 40 L60 52 Z"/>
-        <path d="M20 40 V70 L60 84 V52"/>
-        <path d="M100 40 V70 L60 84"/>
-        <path d="M52 60 q8 -10 16 0" />
-        <circle cx="60" cy="22" r="3"/>
+      <button class="sell-cta-btn">Commencer à vendre
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <svg class="sell-cta-ill" viewBox="0 0 110 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- carton -->
+        <path d="M22 48 L55 38 L88 48 L55 58 Z"/>
+        <path d="M22 48 V74 L55 86 V58"/>
+        <path d="M88 48 V74 L55 86"/>
+        <!-- rabats ouverts -->
+        <path d="M22 48 L14 40 L40 32"/>
+        <path d="M88 48 L96 40 L70 32"/>
+        <!-- coeur sur le carton -->
+        <path d="M50 66 c-2-3-7-1-7 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-5-5-7-2"/>
+        <!-- plante qui dépasse -->
+        <path d="M55 38 V20"/>
+        <path d="M55 28 q-8 -2 -10 -10 q8 0 10 8"/>
+        <path d="M55 24 q8 -2 10 -10 q-8 0 -10 8"/>
+        <!-- petits traits déco -->
+        <path d="M98 22 l5 -4 M100 30 l6 -1"/>
       </svg>
     </div>
     </div>
@@ -1521,16 +1582,25 @@
       </div>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Fripz</div>
-      <a href="#" onclick="return false">À propos</a>
-      <a href="#" onclick="return false">Comment ça marche</a>
-      <a href="#" onclick="return false">Nos engagements</a>
+      <div class="footer-col-title">À propos</div>
+      <a onclick="openPage('apropos')">À propos de Fripz</a>
+      <a onclick="openPage('fonctionnement')">Comment ça marche</a>
+      <a onclick="openPage('engagements')">Nos engagements</a>
+      <a onclick="openPage('carrieres')">Carrières</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Aide</div>
-      <a href="#" onclick="return false">Centre d'aide</a>
-      <a href="#" onclick="return false">Contact</a>
-      <a href="#" onclick="return false">Sécurité</a>
+      <a onclick="openPage('aide')">Centre d'aide</a>
+      <a onclick="openPage('contact')">Nous contacter</a>
+      <a onclick="openPage('securite')">Sécurité &amp; confiance</a>
+      <a onclick="openPage('livraison')">Livraison &amp; retours</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Légal</div>
+      <a onclick="openPage('cgu')">Termes et conditions</a>
+      <a onclick="openPage('confidentialite')">Politique de confidentialité</a>
+      <a onclick="openPage('cookies')">Politique de cookies</a>
+      <a onclick="openPage('mentions')">Mentions légales</a>
     </div>
     <div class="footer-col footer-app">
       <div class="footer-col-title">Téléchargez l'app</div>
@@ -1544,8 +1614,254 @@
       </a>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 Fripz — Tous droits réservés.</div>
+  <div class="footer-bottom">
+    <span>© 2026 Fripz — Tous droits réservés.</span>
+    <span class="footer-bottom-links">
+      <a onclick="openPage('cgu')">Termes</a> ·
+      <a onclick="openPage('confidentialite')">Confidentialité</a> ·
+      <a onclick="openPage('cookies')">Cookies</a> ·
+      <a onclick="openPage('mentions')">Mentions légales</a>
+    </span>
+  </div>
 </footer>
+
+<!-- PAGE OVERLAY (legal & help) -->
+<div class="page-overlay" id="pageOverlay">
+  <div class="page-topbar">
+    <button class="page-back" onclick="closePage()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Retour
+    </button>
+    <div class="page-topbar-logo"><span class="footer-logo-mark">F</span> Fripz</div>
+  </div>
+  <div class="page-content" id="pageContent"></div>
+</div>
+
+<script>
+const PAGES = {
+  cgu: {
+    title: "Termes et conditions d'utilisation",
+    updated: "Dernière mise à jour : 1er janvier 2026",
+    disclaimer: true,
+    html: `
+      <h2>1. Objet</h2>
+      <p>Les présentes conditions générales d'utilisation (CGU) régissent l'accès et l'utilisation de la plateforme Fripz, accessible via le site web et l'application mobile. En créant un compte ou en utilisant Fripz, vous acceptez sans réserve les présentes conditions.</p>
+      <h2>2. Inscription et compte</h2>
+      <p>L'inscription est gratuite et réservée aux personnes âgées d'au moins 18 ans, ou aux mineurs disposant de l'autorisation de leur représentant légal. Vous vous engagez à fournir des informations exactes et à les tenir à jour. Vous êtes responsable de la confidentialité de vos identifiants.</p>
+      <h2>3. Vente d'articles</h2>
+      <p>Fripz est une place de marché permettant aux particuliers de vendre des articles de seconde main ou neufs. En tant que vendeur, vous garantissez être propriétaire des articles, que leur vente est licite, et que la description correspond fidèlement à l'article.</p>
+      <ul>
+        <li>Les articles contrefaits, illégaux ou dangereux sont strictement interdits.</li>
+        <li>Le vendeur s'engage à expédier l'article dans les délais annoncés.</li>
+        <li>Fripz peut retirer toute annonce non conforme.</li>
+      </ul>
+      <h2>4. Achat d'articles</h2>
+      <p>L'acheteur s'engage à régler le prix affiché ainsi que les frais de livraison applicables. Le paiement est sécurisé et les fonds peuvent être conservés jusqu'à confirmation de la bonne réception de l'article.</p>
+      <h2>5. Commissions et frais</h2>
+      <p>Fripz peut prélever une commission sur les transactions et/ou des frais de protection acheteur. Le détail des frais applicables est affiché avant la validation de chaque transaction.</p>
+      <h2>6. Responsabilité</h2>
+      <p>Fripz agit en tant qu'intermédiaire technique. La responsabilité de la conformité des articles incombe aux vendeurs. Fripz ne saurait être tenu responsable des litiges entre membres, sous réserve des dispositions légales applicables.</p>
+      <h2>7. Résiliation</h2>
+      <p>Vous pouvez supprimer votre compte à tout moment. Fripz se réserve le droit de suspendre ou supprimer un compte en cas de manquement aux présentes conditions.</p>
+      <h2>8. Droit applicable</h2>
+      <p>Les présentes conditions sont soumises au droit français. Tout litige sera porté devant les tribunaux compétents, sous réserve des règles de protection du consommateur.</p>
+      <h2>9. Contact</h2>
+      <p>Pour toute question relative aux présentes conditions, contactez-nous via le <a class="inline-link" onclick="openPage('contact')">formulaire de contact</a>.</p>
+    `
+  },
+  confidentialite: {
+    title: "Politique de confidentialité",
+    updated: "Dernière mise à jour : 1er janvier 2026",
+    disclaimer: true,
+    html: `
+      <p>Fripz attache une grande importance à la protection de vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés.</p>
+      <h2>1. Responsable du traitement</h2>
+      <p>Le responsable du traitement des données est Fripz [raison sociale et adresse à compléter]. Pour toute question, vous pouvez contacter notre délégué à la protection des données (DPO) à l'adresse : dpo@fripz.fr [à compléter].</p>
+      <h2>2. Données collectées</h2>
+      <ul>
+        <li>Données d'identification : nom, prénom, email, mot de passe.</li>
+        <li>Données de transaction : historique d'achats et de ventes, coordonnées de livraison.</li>
+        <li>Données de paiement : traitées par notre prestataire de paiement sécurisé.</li>
+        <li>Données de navigation : adresse IP, type d'appareil, cookies.</li>
+      </ul>
+      <h2>3. Finalités</h2>
+      <p>Vos données sont utilisées pour : la création et gestion de votre compte, le traitement des transactions, la sécurité de la plateforme, l'amélioration de nos services et, avec votre consentement, l'envoi de communications marketing.</p>
+      <h2>4. Base légale</h2>
+      <p>Les traitements reposent sur l'exécution du contrat, votre consentement, le respect d'obligations légales et l'intérêt légitime de Fripz.</p>
+      <h2>5. Durée de conservation</h2>
+      <p>Vos données sont conservées pendant la durée de votre inscription, puis archivées conformément aux délais légaux applicables.</p>
+      <h2>6. Vos droits</h2>
+      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Vous pouvez exercer ces droits via votre compte ou en nous contactant. Vous pouvez également introduire une réclamation auprès de la CNIL.</p>
+      <h2>7. Partage des données</h2>
+      <p>Vos données peuvent être partagées avec nos prestataires (paiement, livraison, hébergement) uniquement dans la mesure nécessaire à la fourniture du service.</p>
+    `
+  },
+  cookies: {
+    title: "Politique de cookies",
+    updated: "Dernière mise à jour : 1er janvier 2026",
+    disclaimer: true,
+    html: `
+      <p>Cette politique explique comment Fripz utilise les cookies et technologies similaires lorsque vous visitez notre plateforme.</p>
+      <h2>1. Qu'est-ce qu'un cookie ?</h2>
+      <p>Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site. Il permet de reconnaître votre navigateur et de mémoriser certaines informations.</p>
+      <h2>2. Types de cookies utilisés</h2>
+      <ul>
+        <li><b>Cookies essentiels</b> : nécessaires au fonctionnement du site (connexion, panier). Ils ne peuvent pas être désactivés.</li>
+        <li><b>Cookies de mesure d'audience</b> : pour comprendre l'utilisation du site et l'améliorer.</li>
+        <li><b>Cookies de personnalisation</b> : pour adapter le contenu à vos préférences.</li>
+        <li><b>Cookies publicitaires</b> : déposés avec votre consentement pour proposer des publicités pertinentes.</li>
+      </ul>
+      <h2>3. Gestion des cookies</h2>
+      <p>Lors de votre première visite, un bandeau vous permet d'accepter ou de refuser les cookies non essentiels. Vous pouvez à tout moment modifier vos choix dans les paramètres de votre compte ou de votre navigateur.</p>
+      <h2>4. Durée de conservation</h2>
+      <p>Les cookies sont conservés pour une durée maximale de 13 mois conformément aux recommandations de la CNIL.</p>
+    `
+  },
+  mentions: {
+    title: "Mentions légales",
+    updated: "Dernière mise à jour : 1er janvier 2026",
+    disclaimer: true,
+    html: `
+      <h2>Éditeur du site</h2>
+      <p>Le site et l'application Fripz sont édités par [raison sociale à compléter], [forme juridique], au capital de [montant] €, immatriculée au RCS de [ville] sous le numéro [SIREN], dont le siège social est situé [adresse complète].</p>
+      <p>Numéro de TVA intracommunautaire : [à compléter]<br>Directeur de la publication : [nom à compléter]<br>Email : contact@fripz.fr [à compléter]</p>
+      <h2>Hébergement</h2>
+      <p>Le site est hébergé par [nom de l'hébergeur], [adresse de l'hébergeur].</p>
+      <h2>Propriété intellectuelle</h2>
+      <p>L'ensemble des éléments du site Fripz (marque, logo, textes, graphismes) est protégé par le droit de la propriété intellectuelle. Toute reproduction non autorisée est interdite.</p>
+      <h2>Médiation de la consommation</h2>
+      <p>Conformément à la réglementation, en cas de litige, le consommateur peut recourir gratuitement à un médiateur de la consommation [coordonnées à compléter].</p>
+    `
+  },
+  apropos: {
+    title: "À propos de Fripz",
+    html: `
+      <p>Fripz est une marketplace française dédiée à la seconde main. Notre mission : donner une seconde vie aux objets, rendre la consommation plus responsable et permettre à chacun d'acheter et vendre facilement.</p>
+      <h2>Notre vision</h2>
+      <p>Nous croyons qu'acheter d'occasion ne devrait jamais être un compromis. Fripz réunit une communauté engagée autour du goût des bonnes affaires et du respect de la planète.</p>
+      <h2>Nos valeurs</h2>
+      <ul>
+        <li>L'éco-responsabilité : chaque article revendu, c'est un déchet en moins.</li>
+        <li>La confiance : paiements sécurisés et articles vérifiés.</li>
+        <li>La simplicité : vendre un article prend moins de deux minutes.</li>
+      </ul>
+    `
+  },
+  fonctionnement: {
+    title: "Comment ça marche",
+    html: `
+      <h2>Pour acheter</h2>
+      <ul>
+        <li>Parcourez les catégories ou recherchez un article précis.</li>
+        <li>Ajoutez l'article au panier et payez en toute sécurité.</li>
+        <li>Recevez votre colis et confirmez la bonne réception.</li>
+      </ul>
+      <h2>Pour vendre</h2>
+      <ul>
+        <li>Cliquez sur « Vendre » et ajoutez jusqu'à 8 photos.</li>
+        <li>Décrivez votre article, fixez votre prix et publiez.</li>
+        <li>Une fois vendu, expédiez l'article et recevez votre paiement.</li>
+      </ul>
+    `
+  },
+  engagements: {
+    title: "Nos engagements",
+    html: `
+      <h2>Éco-responsable</h2>
+      <p>En favorisant la seconde main, Fripz contribue à réduire le gaspillage et l'empreinte carbone de la mode et des objets du quotidien.</p>
+      <h2>Paiement sécurisé</h2>
+      <p>Toutes les transactions sont protégées. Les fonds sont sécurisés jusqu'à confirmation de la réception.</p>
+      <h2>Communauté de confiance</h2>
+      <p>Système d'évaluations, vérification des articles et modération active pour une expérience sereine.</p>
+    `
+  },
+  carrieres: {
+    title: "Carrières",
+    html: `
+      <p>Fripz grandit ! Nous recherchons des talents passionnés par la seconde main, la tech et l'expérience utilisateur.</p>
+      <h2>Pourquoi nous rejoindre ?</h2>
+      <ul>
+        <li>Un projet à impact positif sur l'environnement.</li>
+        <li>Une équipe jeune et ambitieuse.</li>
+        <li>Du télétravail et de la flexibilité.</li>
+      </ul>
+      <p>Envoyez votre candidature à : jobs@fripz.fr [à compléter]</p>
+    `
+  },
+  aide: {
+    title: "Centre d'aide",
+    html: `
+      <p>Bienvenue dans le centre d'aide Fripz. Retrouvez les réponses aux questions les plus fréquentes.</p>
+      <div class="help-grid">
+        <div class="help-card"><h3>Achat</h3><p>Comment commander, payer et suivre ma livraison.</p></div>
+        <div class="help-card"><h3>Vente</h3><p>Créer une annonce, fixer un prix, expédier un article.</p></div>
+        <div class="help-card"><h3>Paiement</h3><p>Moyens de paiement, sécurité et remboursements.</p></div>
+        <div class="help-card"><h3>Mon compte</h3><p>Gérer mon profil, mes données et mes préférences.</p></div>
+      </div>
+      <h2>Besoin d'aide supplémentaire ?</h2>
+      <p>Contactez notre équipe via le <a class="inline-link" onclick="openPage('contact')">formulaire de contact</a>.</p>
+    `
+  },
+  contact: {
+    title: "Nous contacter",
+    html: `
+      <p>Une question, un problème ou une suggestion ? Notre équipe est là pour vous aider.</p>
+      <h2>Par email</h2>
+      <p>support@fripz.fr [à compléter] — réponse sous 24 à 48h.</p>
+      <h2>Réseaux sociaux</h2>
+      <p>Retrouvez-nous sur Facebook, Instagram et TikTok pour les actualités et le support.</p>
+      <h2>Courrier</h2>
+      <p>Fripz — Service client — [adresse à compléter].</p>
+    `
+  },
+  securite: {
+    title: "Sécurité & confiance",
+    html: `
+      <h2>Paiements protégés</h2>
+      <p>Vos paiements sont chiffrés et sécurisés. Les fonds sont conservés jusqu'à confirmation de réception.</p>
+      <h2>Conseils anti-arnaque</h2>
+      <ul>
+        <li>Ne réglez jamais en dehors de la plateforme Fripz.</li>
+        <li>Méfiez-vous des prix anormalement bas.</li>
+        <li>Signalez tout comportement suspect.</li>
+      </ul>
+      <h2>Signaler un problème</h2>
+      <p>Utilisez le bouton de signalement sur chaque annonce ou profil, ou contactez le support.</p>
+    `
+  },
+  livraison: {
+    title: "Livraison & retours",
+    html: `
+      <h2>Livraison</h2>
+      <p>Les articles sont expédiés par le vendeur via les transporteurs partenaires. Les délais et frais sont affichés avant l'achat.</p>
+      <h2>Suivi</h2>
+      <p>Un numéro de suivi vous est communiqué dès l'expédition de votre commande.</p>
+      <h2>Retours et remboursements</h2>
+      <p>En cas d'article non conforme à la description, vous pouvez ouvrir un litige. Après vérification, un remboursement pourra être effectué conformément à nos conditions.</p>
+    `
+  }
+};
+
+function openPage(key) {
+  const page = PAGES[key];
+  if (!page) return;
+  const c = document.getElementById('pageContent');
+  let html = '<h1>' + page.title + '</h1>';
+  if (page.updated) html += '<div class="page-updated">' + page.updated + '</div>';
+  if (page.disclaimer) html += '<div class="page-disclaimer">⚠️ Ceci est un modèle fourni à titre indicatif. Avant la mise en ligne réelle de Fripz, ce document doit être complété et validé par un professionnel du droit afin d\'assurer sa conformité.</div>';
+  html += page.html;
+  c.innerHTML = html;
+  document.getElementById('pageOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0,0);
+  document.getElementById('pageOverlay').scrollTop = 0;
+}
+function closePage() {
+  document.getElementById('pageOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -1733,7 +2049,7 @@
     </div>
     <div class="sell-body" id="sellBody"></div>
     <div class="sell-footer">
-      <button class="sell-btn-next" id="sellBtnPublish" onclick="publishArticle()" style="width:100%">Mettre en vente</button>
+      <button class="sell-btn-next" id="sellBtnPublish" onclick="publishArticle()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Mettre en vente</button>
     </div>
   </div>
 </div>
@@ -2762,7 +3078,7 @@ function renderSellPage() {
         if (!types.length) return '';
         return '<div class="form-row"><label>Type précis</label><div class="custom-select-wrap">'
           + '<button type="button" class="custom-select-btn" onclick="toggleCustomSelect(\'type\')">'
-          + (sellData.type_article || '🏷️ Choisir un type...') + '</button>'
+          + (sellData.type_article ? '<span style="display:inline-flex;align-items:center;gap:8px"><span style="display:inline-flex;color:var(--teal)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg></span><span>' + sellData.type_article + '</span></span>' : 'Choisir un type...') + '</button>'
           + '<div class="custom-select-dropdown" id="drop-type">'
           + '<div class="custom-select-option" onclick="pickTypeIdx(-1)">Choisir...</div>'
           + types.map((t,i) => '<div class="custom-select-option' + (sellData.type_article===t?' selected':'') + '" onclick="pickTypeIdx(' + i + ')">' + t + '</div>').join('')
