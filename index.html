@@ -426,7 +426,7 @@
 .mt-loisirs{ grid-column: 1; grid-row: 2; transform: rotate(2deg) scale(1.04); }
 .mt-divert { grid-column: 2; grid-row: 2; transform: rotate(-2deg) scale(1.04); }
 .mt-tech   { grid-column: 3; grid-row: 2; transform: rotate(-2deg) scale(1.04); }
-.mt-tech img { object-position: center; }
+.mt-tech img { object-position: center center; }
 
 
 /* barre de confiance */
@@ -533,7 +533,16 @@
   }
   .cat-card.active { border-color: var(--teal); box-shadow:0 0 0 2px var(--teal); }
   .cat-img-wrap { width:100%; aspect-ratio: 4/3; overflow:hidden; background:#eef0ee; border-radius:14px; }
-  .cat-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform 0.3s; }
+  .cat-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:center center; transition:transform 0.3s; }
+  /* Cadrage personnalisé par catégorie */
+  .cat-card[data-cat="enfant"] .cat-img-wrap img   { object-position: center 40%; }
+  .cat-card[data-cat="maison"] .cat-img-wrap img   { object-position: center center; }
+  .cat-card[data-cat="loisirs"] .cat-img-wrap img  { object-position: center 35%; }
+  .cat-card[data-cat="tech"] .cat-img-wrap img     { object-position: center top; }
+  .cat-card[data-cat="divert"] .cat-img-wrap img   { object-position: center 30%; }
+  .cat-card[data-cat="femme"] .cat-img-wrap img    { object-position: center 30%; }
+  .cat-card[data-cat="homme"] .cat-img-wrap img    { object-position: 20% center; }
+  .cat-card[data-cat="sport"] .cat-img-wrap img    { object-position: center center; }
   .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
   .cat-body { padding: 0.55rem 0.6rem 0.65rem; }
   .cat-name { font-size: 0.82rem; font-weight: 800; color: var(--text); line-height: 1.2; }
@@ -1372,56 +1381,56 @@
     </div>
     <div class="cats-wrap">
     <div class="cats-row">
-  <div class="cat-card" onclick="toggleSubcat('enfant', this)">
+  <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/07_mode_enfant.jpg" alt="Mode enfants"></div>
     <div class="cat-body">
       <div class="cat-name">Mode enfants</div>
       <div class="cat-count">12 540 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('maison', this)">
+  <div class="cat-card" data-cat="maison" onclick="toggleSubcat('maison', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/08_maison_deco_categorie.jpg" alt="Maison & Déco"></div>
     <div class="cat-body">
       <div class="cat-name">Maison & Déco</div>
       <div class="cat-count">8 210 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('loisirs', this)">
+  <div class="cat-card" data-cat="loisirs" onclick="toggleSubcat('loisirs', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/09_loisirs_categorie.jpg" alt="Loisirs"></div>
     <div class="cat-body">
       <div class="cat-name">Loisirs</div>
       <div class="cat-count">6 430 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('electronique', this)">
+  <div class="cat-card" data-cat="tech" onclick="toggleSubcat('electronique', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/10_tech_categorie.jpg" alt="Tech"></div>
     <div class="cat-body">
       <div class="cat-name">Tech</div>
       <div class="cat-count">15 320 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('divertissement', this)">
+  <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/11_divertissement_categorie.jpg" alt="Divertissement"></div>
     <div class="cat-body">
       <div class="cat-name">Divertissement</div>
       <div class="cat-count">7 890 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('femme', this)">
+  <div class="cat-card" data-cat="femme" onclick="toggleSubcat('femme', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/12_mode_femme_categorie.jpg" alt="Mode femme"></div>
     <div class="cat-body">
       <div class="cat-name">Mode femme</div>
       <div class="cat-count">18 760 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('homme', this)">
+  <div class="cat-card" data-cat="homme" onclick="toggleSubcat('homme', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/13_mode_homme_categorie.jpg" alt="Mode homme"></div>
     <div class="cat-body">
       <div class="cat-name">Mode homme</div>
       <div class="cat-count">14 230 articles</div>
     </div>
   </div>
-  <div class="cat-card" onclick="toggleSubcat('sport', this)">
+  <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/14_sport_categorie.jpg" alt="Sport"></div>
     <div class="cat-body">
       <div class="cat-name">Sport</div>
