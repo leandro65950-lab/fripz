@@ -103,12 +103,33 @@
   }
   .btn-sell-nav {
     background: var(--teal); color: #fff;
-    border: none; border-radius: 11px;
-    padding: 0.62rem 1.25rem;
-    font-family: inherit; font-size: 0.92rem; font-weight: 700;
+    border: none; border-radius: 10px;
+    padding: 0.5rem 0.95rem;
+    font-family: inherit; font-size: 0.85rem; font-weight: 700;
     cursor: pointer; transition: background 0.2s; white-space: nowrap;
   }
   .btn-sell-nav:hover { background: var(--teal-dark); }
+  .lang-select {
+    position: relative; display: flex; align-items: center; gap: 0.3rem;
+    padding: 0.4rem 0.6rem; border-radius: 10px; cursor: pointer;
+    transition: background 0.2s; user-select: none;
+  }
+  .lang-select:hover { background: #f0f2f0; }
+  .lang-flag { font-size: 1.05rem; }
+  .lang-code { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+  .lang-menu {
+    position: absolute; top: 115%; right: 0; z-index: 200;
+    background: #fff; border: 1px solid #eef0ee; border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(20,30,28,0.12); padding: 0.35rem;
+    min-width: 160px; display: none;
+  }
+  .lang-menu.open { display: block; }
+  .lang-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.55rem 0.7rem; border-radius: 8px;
+    font-size: 0.9rem; font-weight: 600; color: var(--text); cursor: pointer;
+  }
+  .lang-item:hover { background: var(--teal-light); color: var(--teal-dark); }
   @media(max-width: 1080px){ .nav-search { display:none; } }
   @media(max-width: 820px){ .nav-links { display:none; } }
 
@@ -354,13 +375,13 @@
 .hero-avatars span {
   width: 38px; height: 38px; border-radius: 50%;
   border: 2.5px solid #fff; margin-left: -12px;
-  background: linear-gradient(135deg, #cfe0d6, #a7c6b4);
-  display: inline-flex; align-items: center; justify-content: center;
-  color: var(--teal-dark); font-weight: 800; font-size: 0.9rem;
+  background-size: cover; background-position: center;
+  background-color: #cfe0d6;
 }
 .hero-avatars span:first-child { margin-left: 0; }
 .hero-members-txt { font-size: 0.9rem; color: var(--text-mid); line-height: 1.35; }
 .hero-members-txt b { color: var(--text); font-weight: 800; }
+.hero-heart-doodle { width: 40px; height: 30px; flex-shrink: 0; opacity: 0.8; }
 
 /* mosaïque photos */
 .hero-mosaic {
@@ -455,8 +476,8 @@
   .see-all-cats svg { width:15px; height:15px; }
   .cats-wrap {
     display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 1rem;
+    grid-template-columns: 1fr 185px;
+    gap: 0.85rem;
     align-items: start;
   }
   .cats-row {
@@ -508,8 +529,8 @@
     border-color: #e2e6e2;
   }
   .cat-card.active { border-color: var(--teal); box-shadow:0 0 0 2px var(--teal); }
-  .cat-img-wrap { width:100%; aspect-ratio: 1/1; overflow:hidden; background:#eef0ee; }
-  .cat-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s; }
+  .cat-img-wrap { width:100%; aspect-ratio: 4/3; overflow:hidden; background:#eef0ee; border-radius:14px; }
+  .cat-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:center; transition:transform 0.3s; }
   .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
   .cat-body { padding: 0.55rem 0.6rem 0.65rem; }
   .cat-name { font-size: 0.82rem; font-weight: 800; color: var(--text); line-height: 1.2; }
@@ -879,9 +900,9 @@
   }
   .sell-overlay.open { display: flex; animation: fadeIn 0.2s; }
   .sell-modal {
-    background: var(--white); border-radius: 20px;
-    width: 100%; max-width: 680px;
-    max-height: 92vh; display: flex; flex-direction: column;
+    background: var(--white); border-radius: 18px;
+    width: 100%; max-width: 560px;
+    max-height: 90vh; display: flex; flex-direction: column;
     overflow: hidden; animation: slideUp 0.25s ease;
     box-shadow: 0 24px 64px rgba(0,0,0,0.18);
   }
@@ -949,11 +970,12 @@
   }
   .custom-select-option:hover { background: var(--teal-light); }
   .custom-select-option.selected { color: var(--teal); font-weight: 800; }
-  .sell-section { margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--border); }
+  .sell-section { margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
   .sell-section:last-child { border-bottom: none; }
-  .sell-section-title { font-size: 1.322rem; font-weight: 800; margin-bottom: 0.25rem; }
-  .sell-section-sub { font-size: 1.084rem; color: var(--text-mid); margin-bottom: 1rem; }
-  .sell-step-title { font-size: 1.52rem; font-weight: 800; margin-bottom: 0.3rem; }
+  .sell-section-title { font-size: 1.08rem; font-weight: 800; margin-bottom: 0.2rem; display:flex; align-items:center; gap:0.5rem; }
+  .sell-section-title svg { width: 19px; height: 19px; color: var(--teal); flex-shrink:0; }
+  .sell-section-sub { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 0.85rem; }
+  .sell-step-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.3rem; }
   .sell-step-sub { font-size: 1.124rem; color: var(--text-mid); margin-bottom: 1.5rem; }
 
   /* Photo upload zone */
@@ -1114,6 +1136,30 @@
   .sell-progress {
     font-size: 1.032rem; color: var(--text-light); font-weight: 600;
   }
+  /* FOOTER */
+  .footer { background: #1f2a24; color: #cdd6cf; margin-top: 3rem; }
+  .footer-inner {
+    max-width: 1320px; margin: 0 auto; padding: 3rem 2rem 2rem;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 2rem;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem; }
+  .footer-logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--teal); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .footer-tagline { font-size: 0.88rem; line-height: 1.55; color: #9aa89f; margin-bottom: 1.1rem; max-width: 280px; }
+  .footer-socials { display: flex; gap: 0.6rem; }
+  .footer-social { width: 38px; height: 38px; border-radius: 10px; background: #2c3a32; display: inline-flex; align-items: center; justify-content: center; color: #cdd6cf; transition: all 0.2s; }
+  .footer-social:hover { background: var(--teal); color: #fff; }
+  .footer-social svg { width: 19px; height: 19px; }
+  .footer-col-title { font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.9rem; }
+  .footer-col a { display: block; font-size: 0.88rem; color: #9aa89f; text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .store-badge { display: flex; align-items: center; gap: 0.6rem; background: #2c3a32; border: 1px solid #3a4a40; border-radius: 11px; padding: 0.55rem 0.9rem; margin-bottom: 0.6rem; text-decoration: none; color: #fff; transition: all 0.2s; }
+  .store-badge:hover { background: #3a4a40; }
+  .store-badge svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .store-badge span { display: flex; flex-direction: column; font-size: 0.98rem; font-weight: 700; line-height: 1.15; }
+  .store-badge small { font-size: 0.66rem; font-weight: 500; color: #9aa89f; }
+  .footer-bottom { border-top: 1px solid #2c3a32; padding: 1.2rem 2rem; text-align: center; font-size: 0.82rem; color: #7d8b82; }
+  @media(max-width: 900px){ .footer-inner { grid-template-columns: 1fr 1fr; } }
+  @media(max-width: 540px){ .footer-inner { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -1136,7 +1182,19 @@
       <li><a href="#">À propos</a></li>
     </ul>
     <div class="nav-right">
+      <div class="lang-select" onclick="toggleLangMenu(event)">
+        <span class="lang-flag">🇫🇷</span><span class="lang-code">FR</span>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <div class="lang-menu" id="langMenu">
+          <div class="lang-item" onclick="setLang('FR','🇫🇷',event)"><span>🇫🇷</span> Français</div>
+          <div class="lang-item" onclick="setLang('EN','🇬🇧',event)"><span>🇬🇧</span> English</div>
+          <div class="lang-item" onclick="setLang('ES','🇪🇸',event)"><span>🇪🇸</span> Español</div>
+          <div class="lang-item" onclick="setLang('DE','🇩🇪',event)"><span>🇩🇪</span> Deutsch</div>
+          <div class="lang-item" onclick="setLang('IT','🇮🇹',event)"><span>🇮🇹</span> Italiano</div>
+        </div>
+      </div>
       <button class="nav-icon-btn" title="Favoris"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
+      <button class="nav-icon-btn" title="Messages"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="nav-badge">3</span></button>
       <button class="nav-icon-btn" title="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="nav-badge">2</span></button>
       <div class="nav-avatar" onclick="openAuthModal('login')"></div>
       <button class="btn-sell-nav" onclick="openAuthModal('login')">Se connecter</button>
@@ -1191,13 +1249,18 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
         <button class="btn-secondary" onclick="openSellModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
           Vendre mes articles
         </button>
       </div>
       <div class="hero-members">
-        <div class="hero-avatars"><span>A</span><span>M</span><span>L</span></div>
-        <div class="hero-members-txt"><b>+250K membres</b><br>rejoignent la communauté Fripz</div>
+        <div class="hero-avatars">
+          <span style="background-image:url('https://i.pravatar.cc/80?img=47')"></span>
+          <span style="background-image:url('https://i.pravatar.cc/80?img=12')"></span>
+          <span style="background-image:url('https://i.pravatar.cc/80?img=32')"></span>
+        </div>
+        <div class="hero-members-txt"><b>Sophie, Marc &amp; 1000+ membres</b><br>ont rejoint la communauté Fripz</div>
+        <svg class="hero-heart-doodle" viewBox="0 0 40 30" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q10 8 18 16"/><path d="M22 14c-2-3-6-1-6 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-4-5-6-2"/></svg>
       </div>
     </div>
 
@@ -1445,6 +1508,45 @@
   </div>
 </section>
 
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col footer-brand">
+      <div class="footer-logo"><span class="footer-logo-mark">F</span> Fripz</div>
+      <p class="footer-tagline">La marketplace de confiance pour acheter et vendre en seconde main.</p>
+      <div class="footer-socials">
+        <a class="footer-social" title="Facebook" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
+        <a class="footer-social" title="Instagram" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="footer-social" title="TikTok" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 7.5a5 5 0 0 1-3.7-1.7v7.9a5.7 5.7 0 1 1-5.7-5.7c.3 0 .6 0 .9.1v2.9a2.8 2.8 0 1 0 2 2.7V2h2.8a5 5 0 0 0 3.7 4.4v1.1z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Fripz</div>
+      <a href="#" onclick="return false">À propos</a>
+      <a href="#" onclick="return false">Comment ça marche</a>
+      <a href="#" onclick="return false">Nos engagements</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Aide</div>
+      <a href="#" onclick="return false">Centre d'aide</a>
+      <a href="#" onclick="return false">Contact</a>
+      <a href="#" onclick="return false">Sécurité</a>
+    </div>
+    <div class="footer-col footer-app">
+      <div class="footer-col-title">Téléchargez l'app</div>
+      <a class="store-badge" href="#" onclick="return false">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 1.5c0 1.1-.4 2.1-1.2 2.9-.9.9-2 1.5-3.1 1.4-.1-1.1.4-2.2 1.1-2.9.8-.9 2.1-1.5 3.2-1.4zM20.5 17c-.5 1.2-.8 1.8-1.5 2.9-1 1.5-2.4 3.3-4.1 3.3-1.5 0-1.9-1-4-1-2 0-2.5 1-4 1-1.7 0-3-1.6-4-3.1-2.8-4.2-3.1-9.2-1.4-11.8 1.2-1.9 3.1-3 4.9-3 1.8 0 2.9 1 4.4 1 1.4 0 2.3-1 4.4-1 1.6 0 3.3.9 4.5 2.4-3.9 2.2-3.3 7.8.3 9.3z"/></svg>
+        <span><small>Télécharger sur</small>App Store</span>
+      </a>
+      <a class="store-badge" href="#" onclick="return false">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.6 2.3zM16.8 15.3l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.8 2.1zM13.7 12.2l3.1 3.1L5.6 21.7c-.6.3-1.1.3-1.5 0l9.6-9.5zM4.1 2.3c-.3-.3.9-.3 1.5 0l11.2 6.4-3.1 3.1L4.1 2.3z"/></svg>
+        <span><small>Disponible sur</small>Google Play</span>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Fripz — Tous droits réservés.</div>
+</footer>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
@@ -1626,12 +1728,12 @@
 <div class="sell-overlay" id="sellOverlay" onclick="closeSellModal(event)">
   <div class="sell-modal" id="sellModal">
     <div class="sell-header">
-      <div style="font-weight:800;font-size: 1.322rem;color:var(--text)">🏷️ Vendre un article</div>
+      <div style="font-weight:800;font-size:1.15rem;color:var(--text);display:flex;align-items:center;gap:0.5rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>Vendre un article</div>
       <button class="sell-close" onclick="closeSellModalDirect()">✕</button>
     </div>
     <div class="sell-body" id="sellBody"></div>
     <div class="sell-footer">
-      <button class="sell-btn-next" id="sellBtnPublish" onclick="publishArticle()" style="width:100%">🚀 Mettre en vente</button>
+      <button class="sell-btn-next" id="sellBtnPublish" onclick="publishArticle()" style="width:100%">Mettre en vente</button>
     </div>
   </div>
 </div>
@@ -2300,6 +2402,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+function toggleLangMenu(event) {
+  event.stopPropagation();
+  const m = document.getElementById('langMenu');
+  if (m) m.classList.toggle('open');
+}
+function setLang(code, flag, event) {
+  event.stopPropagation();
+  document.querySelector('.lang-flag').textContent = flag;
+  document.querySelector('.lang-code').textContent = code;
+  document.getElementById('langMenu').classList.remove('open');
+}
+document.addEventListener('click', function() {
+  const m = document.getElementById('langMenu');
+  if (m) m.classList.remove('open');
+});
 function openAuthModal(tab) {
   document.getElementById('authOverlay').classList.add('open');
   setTimeout(() => { const p = document.querySelector('.auth-panel.active'); if(p) p.focus(); }, 100);
@@ -2434,7 +2551,7 @@ let sellStep = 0;
 let sellData = {
   photos: [],
   titre: '', categorie: '', sous_categorie: '', marque: '', etat: '', taille: '', couleur: '', description: '',
-  prix: '', prix_original: '',
+  prix: '', prix_original: '', quantite: 1,
   livraison: 'colissimo',
 };
 
@@ -2530,7 +2647,7 @@ function getTypes(cat, sub) {
 }
 
 function openSellModal() {
-  sellData = { photos:[], titre:'', categorie:'', sous_categorie:'', type_article:'', marque:'', etat:'', taille:'', couleur:'', description:'', prix:'', prix_original:'', livraison:'colissimo' };
+  sellData = { photos:[], titre:'', categorie:'', sous_categorie:'', type_article:'', marque:'', etat:'', taille:'', couleur:'', description:'', prix:'', prix_original:'', livraison:'colissimo', quantite:1 };
   document.getElementById('sellOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderSellPage();
@@ -2565,7 +2682,7 @@ function renderSellPage() {
       <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem">
         <span style="font-size: 2.116rem">📚</span>
         <div>
-          <div style="font-weight:800;font-size: 1.19rem">Recherche par ISBN</div>
+          <div style="font-weight:800;font-size:1rem;display:flex;align-items:center;gap:0.45rem"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h5v16H5V4zm5 0h5v16h-5M14 4l4 1-3 15-4-1"/></svg>Recherche par ISBN</div>
           <div style="font-size: 0.991rem;color:var(--text-mid)">Remplissage automatique depuis internet</div>
         </div>
       </div>
@@ -2604,14 +2721,14 @@ function renderSellPage() {
   body.innerHTML = `
     <!-- PHOTOS -->
     <div class="sell-section">
-      <div class="sell-section-title">📸 Photos</div>
+      <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>Photos</div>
       <div class="sell-section-sub">Ajoutez jusqu'à 8 photos. La première sera la photo principale.</div>
       <div class="photo-grid">${photoSlots}</div>
     </div>
 
     <!-- INFOS -->
     <div class="sell-section">
-      <div class="sell-section-title">📝 Informations</div>
+      <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Informations</div>
       <div class="sell-section-sub">Décrivez votre article en détail.</div>
 
       <div class="form-two">
@@ -2689,7 +2806,7 @@ function renderSellPage() {
 
     <!-- PRIX -->
     <div class="sell-section">
-      <div class="sell-section-title">💰 Prix</div>
+      <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5a2.5 2 0 0 0-2.5-1.5c-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.9 2.5 2-1 2-2.5 2a2.5 2 0 0 1-2.5-1.5M12 6.5v11"/></svg>Prix</div>
       <div class="sell-section-sub">Proposez un prix juste pour vendre rapidement.</div>
       <div class="form-two">
         <div class="form-row">
@@ -2707,6 +2824,15 @@ function renderSellPage() {
           </div>
         </div>
       </div>
+      <div class="form-row" style="margin-top:0.85rem">
+        <label>Quantité disponible <span class="req">*</span> <span style="color:var(--text-light);font-weight:500">(5 maximum par annonce)</span></label>
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-top:0.3rem">
+          <button type="button" onclick="changeQty(-1)" style="width:38px;height:38px;border:1.5px solid var(--border);background:#fff;border-radius:10px;font-size:1.3rem;font-weight:700;color:var(--text);cursor:pointer">−</button>
+          <span id="qtyDisplay" style="min-width:36px;text-align:center;font-size:1.2rem;font-weight:800;color:var(--text)">${sellData.quantite || 1}</span>
+          <button type="button" onclick="changeQty(1)" style="width:38px;height:38px;border:1.5px solid var(--border);background:#fff;border-radius:10px;font-size:1.3rem;font-weight:700;color:var(--text);cursor:pointer">+</button>
+          <span style="font-size:0.85rem;color:var(--text-mid);margin-left:0.3rem">article(s)</span>
+        </div>
+      </div>
       ${prix > 0 ? `<div id="prix-preview" style="background:var(--teal-light);border-radius:12px;padding:1rem;margin-top:0.5rem">
         <div style="display:flex;justify-content:space-between;font-size: 1.124rem;margin-bottom:0.4rem"><span style="color:var(--text-mid)">Prix de vente</span><span style="font-weight:700">${prix.toFixed(2)} €</span></div>
         <div style="display:flex;justify-content:space-between;font-size: 1.124rem;margin-bottom:0.4rem"><span style="color:var(--text-mid)">Commission Fripz</span><span style="font-weight:700;color:#e55">- ${commission} €</span></div>
@@ -2716,7 +2842,7 @@ function renderSellPage() {
 
     <!-- RECAP -->
     <div class="sell-section" style="margin-bottom:0.5rem">
-      <div class="sell-section-title">✅ Récapitulatif</div>
+      <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Récapitulatif</div>
       ${sellData.titre && sellData.prix ? `
       <div style="background:#fafafa;border-radius:14px;padding:1rem;border:1px solid var(--border)">
         <div style="font-weight:800;font-size: 1.256rem;margin-bottom:0.5rem">${sellData.titre}</div>
@@ -2801,6 +2927,14 @@ function updatePrixPreview() {
   }
 }
 
+function changeQty(d) {
+  let q = (sellData.quantite || 1) + d;
+  if (q < 1) q = 1;
+  if (q > 5) q = 5;
+  sellData.quantite = q;
+  const el = document.getElementById('qtyDisplay');
+  if (el) el.textContent = q;
+}
 function publishArticle() {
   if (!sellData.photos.length) { showToast('⚠️ Ajoutez au moins une photo'); return; }
   if (!sellData.titre) { showToast('⚠️ Ajoutez un titre'); return; }
