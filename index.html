@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fripz — Achetez et vendez facilement</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -308,6 +308,18 @@
   letter-spacing: -0.045em; margin-bottom: 1.1rem;
 }
 .hero-title .dot { color: var(--teal); }
+.hero-slogan {
+  font-family: 'Caveat', cursive;
+  font-size: 2.4rem; font-weight: 700;
+  color: var(--teal); line-height: 1.05;
+  margin: -0.3rem 0 1.1rem;
+  display: inline-block; position: relative;
+}
+.hero-slogan::after {
+  content: ""; position: absolute;
+  left: 0; right: 8%; bottom: -4px; height: 3px;
+  background: var(--teal); border-radius: 3px;
+}
 .hero-sub {
   font-size: 1.08rem; color: var(--text-mid);
   line-height: 1.6; margin-bottom: 1.8rem;
@@ -1171,6 +1183,7 @@
     <!-- TEXTE -->
     <div class="hero-left">
       <h1 class="hero-title">Achetez, vendez,<br>recommencez<span class="dot">.</span></h1>
+      <p class="hero-slogan">Bon pour vous,<br>bon pour la planète.</p>
       <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main.</p>
       <div class="hero-cta">
         <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">
@@ -1232,7 +1245,7 @@
       <div><div class="trustbar-title">Communauté engagée</div><div class="trustbar-desc">Des milliers de membres de confiance</div></div>
     </div>
     <div class="trustbar-item">
-      <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.9 6 6.1.5-4.6 4 1.4 6L12 22l-5.8 3.5 1.4-6L3 9.5 9.1 9z"/></svg></span>
+      <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
       <div><div class="trustbar-title">Qualité vérifiée</div><div class="trustbar-desc">Des articles contrôlés avant chaque envoi</div></div>
     </div>
   </div>
