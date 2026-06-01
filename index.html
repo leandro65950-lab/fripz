@@ -474,44 +474,46 @@
   }
   .see-all-cats:hover { color: var(--teal-dark); }
   .see-all-cats svg { width:15px; height:15px; }
-  .cats-articles-bar {
-    display: flex; align-items: center; gap: 1rem;
-    margin-top: 0.85rem;
-    background: var(--teal-light); border-radius: 12px;
-    padding: 0.6rem 1rem;
-  }
-  .cats-articles-bar-count {
-    font-size: 1.1rem; font-weight: 900; color: var(--teal-dark); letter-spacing: -0.5px;
-  }
-  .cats-articles-bar-label {
-    font-size: 0.82rem; color: var(--teal-dark); font-weight: 600; opacity: 0.85;
-  }
+  .cats-articles-bar { display:none; }
   .cats-wrap {
     display: grid;
-    grid-template-columns: 1fr 175px;
-    gap: 0.85rem;
+    grid-template-columns: repeat(4, 1fr) 190px;
+    grid-template-rows: auto auto;
+    gap: 0.75rem;
     align-items: start;
   }
   .sell-cta-col {
-    position: sticky;
-    top: 1rem;
+    grid-column: 5;
+    grid-row: 1 / 3;
   }
-  .cats-row {
+  .cats-row-top {
+    grid-column: 1 / 5;
+    grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+  .cats-row-bottom {
+    grid-column: 1 / 5;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.75rem;
   }
   @media(max-width: 1100px){
-    .cats-wrap { grid-template-columns: 1fr; }
-    .cats-row {
-      display: flex;
-      overflow-x: auto;
-      gap: 0.75rem;
+    .cats-wrap {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .sell-cta-col { grid-column: 1; grid-row: auto; }
+    .cats-row-top, .cats-row-bottom {
+      grid-column: 1; grid-row: auto;
+      display: flex; overflow-x: auto; gap: 0.75rem;
       padding-bottom: 0.5rem;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
     }
-    .cats-row .cat-card { flex: 0 0 150px; }
+    .cats-row-top .cat-card, .cats-row-bottom .cat-card { flex: 0 0 150px; }
   }
   .sell-cta-card {
     background: var(--teal); color: #fff;
@@ -1412,117 +1414,90 @@
       <a class="see-all-cats" href="#">Voir toutes les catégories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
     <div class="cats-wrap">
-    <div>
-    <div class="cats-row">
-  <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2017_00_27.png" alt="Mode enfants"></div>
-    <div class="cat-body">
-      <div class="cat-name">Mode enfants</div>
-      <div class="cat-count">12 540 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="maison" onclick="toggleSubcat('maison', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/08_maison_deco_categorie.jpg" alt="Maison & Déco"></div>
-    <div class="cat-body">
-      <div class="cat-name">Maison & Déco</div>
-      <div class="cat-count">8 210 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="loisirs" onclick="toggleSubcat('loisirs', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/09_loisirs_categorie.jpg" alt="Loisirs"></div>
-    <div class="cat-body">
-      <div class="cat-name">Loisirs</div>
-      <div class="cat-count">6 430 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="tech" onclick="toggleSubcat('electronique', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/10_tech_categorie.jpg" alt="Tech"></div>
-    <div class="cat-body">
-      <div class="cat-name">Tech</div>
-      <div class="cat-count">15 320 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/11_divertissement_categorie.jpg" alt="Divertissement"></div>
-    <div class="cat-body">
-      <div class="cat-name">Divertissement</div>
-      <div class="cat-count">7 890 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="femme" onclick="toggleSubcat('femme', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/12_mode_femme_categorie.jpg" alt="Mode femme"></div>
-    <div class="cat-body">
-      <div class="cat-name">Mode femme</div>
-      <div class="cat-count">18 760 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="homme" onclick="toggleSubcat('homme', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2014_52_00.png" alt="Mode homme"></div>
-    <div class="cat-body">
-      <div class="cat-name">Mode homme</div>
-      <div class="cat-count">14 230 articles</div>
-    </div>
-  </div>
-  <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)">
-    <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/14_sport_categorie.jpg" alt="Sport"></div>
-    <div class="cat-body">
-      <div class="cat-name">Sport</div>
-      <div class="cat-count">5 980 articles</div>
-    </div>
-  </div>
-    </div>
-    <!-- BARRE ARTICLES EN VENTE -->
-    <div class="cats-articles-bar">
-      <span class="cats-articles-bar-count">42 500</span>
-      <span class="cats-articles-bar-label">articles en vente sur Fripz</span>
-      <span class="cats-articles-bar-promo">🎉 Commission ÷2 — Offre limitée ce mois-ci</span>
-    </div>
-    </div>
-    <div class="sell-cta-col">
-    <div class="sell-cta-card" onclick="openSellModal()">
-      <div class="sell-cta-title">Vendez vos articles facilement</div>
-      <div class="sell-cta-desc">Faites de la place, gagnez de l'argent et faites plaisir.</div>
-      <button class="sell-cta-btn">Commencer à vendre
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
-      <div style="margin-top:0.6rem; background:rgba(255,255,255,0.15); border-radius:10px; padding:0.45rem 0.7rem; display:flex; align-items:center; gap:0.5rem;">
-        <span style="font-size:1.1rem; font-weight:900; letter-spacing:-0.5px;">42 500</span>
-        <span style="font-size:0.68rem; opacity:0.9; line-height:1.2;">articles<br>en vente</span>
-      </div>
-      <div style="margin-top:0.4rem; background:rgba(255,255,255,0.2); border-radius:10px; padding:0.4rem 0.7rem; display:flex; align-items:center; gap:0.5rem; border:1px solid rgba(255,255,255,0.35);">
-        <span style="font-size:1.1rem;">🎉</span>
-        <div>
-          <div style="font-size:0.7rem; font-weight:800; line-height:1.2;">Commission ÷2</div>
-          <div style="font-size:0.62rem; opacity:0.85;">Offre limitée ce mois-ci</div>
+      <!-- LIGNE 1 : 4 premières catégories -->
+      <div class="cats-row-top">
+        <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2017_00_27.png" alt="Mode enfants"></div>
+          <div class="cat-body"><div class="cat-name">Mode enfants</div><div class="cat-count">12 540 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="maison" onclick="toggleSubcat('maison', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/08_maison_deco_categorie.jpg" alt="Maison & Déco"></div>
+          <div class="cat-body"><div class="cat-name">Maison & Déco</div><div class="cat-count">8 210 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="loisirs" onclick="toggleSubcat('loisirs', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/09_loisirs_categorie.jpg" alt="Loisirs"></div>
+          <div class="cat-body"><div class="cat-name">Loisirs</div><div class="cat-count">6 430 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="tech" onclick="toggleSubcat('electronique', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/10_tech_categorie.jpg" alt="Tech"></div>
+          <div class="cat-body"><div class="cat-name">Tech</div><div class="cat-count">15 320 articles</div></div>
         </div>
       </div>
-      <div class="sell-features">
-        <div class="sell-feature-item" onclick="event.stopPropagation()">
-          <span class="sell-feature-icon">🛍️</span>
-          <div class="sell-feature-text">
-            <div class="sell-feature-name">Mode Vendeur</div>
-            <div class="sell-feature-desc">Gérez vos ventes & stats</div>
-          </div>
-          <span class="sell-feature-badge">PRO</span>
+      <!-- LIGNE 2 : 4 dernières catégories -->
+      <div class="cats-row-bottom">
+        <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/11_divertissement_categorie.jpg" alt="Divertissement"></div>
+          <div class="cat-body"><div class="cat-name">Divertissement</div><div class="cat-count">7 890 articles</div></div>
         </div>
-        <div class="sell-feature-item" onclick="event.stopPropagation()">
-          <span class="sell-feature-icon">🪟</span>
-          <div class="sell-feature-text">
-            <div class="sell-feature-name">Dressing en Vitrine</div>
-            <div class="sell-feature-desc">Boutique perso · +2× visibilité</div>
-          </div>
+        <div class="cat-card" data-cat="femme" onclick="toggleSubcat('femme', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/12_mode_femme_categorie.jpg" alt="Mode femme"></div>
+          <div class="cat-body"><div class="cat-name">Mode femme</div><div class="cat-count">18 760 articles</div></div>
         </div>
-        <div class="sell-feature-item" onclick="event.stopPropagation()">
-          <span class="sell-feature-icon">🚀</span>
-          <div class="sell-feature-text">
-            <div class="sell-feature-name">Boost</div>
-            <div class="sell-feature-desc">+3× de visibilité</div>
-          </div>
-          <span class="sell-feature-badge">+VENTES</span>
+        <div class="cat-card" data-cat="homme" onclick="toggleSubcat('homme', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2014_52_00.png" alt="Mode homme"></div>
+          <div class="cat-body"><div class="cat-name">Mode homme</div><div class="cat-count">14 230 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/14_sport_categorie.jpg" alt="Sport"></div>
+          <div class="cat-body"><div class="cat-name">Sport</div><div class="cat-count">5 980 articles</div></div>
         </div>
       </div>
-    </div>
-    </div>
+      <!-- CARTE VERTE -->
+      <div class="sell-cta-col">
+        <div class="sell-cta-card" onclick="openSellModal()">
+          <div class="sell-cta-title">Vendez vos articles facilement</div>
+          <div class="sell-cta-desc">Faites de la place, gagnez de l'argent et faites plaisir.</div>
+          <button class="sell-cta-btn">Commencer à vendre
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <div style="margin-top:0.6rem; background:rgba(255,255,255,0.15); border-radius:10px; padding:0.45rem 0.7rem; display:flex; align-items:center; gap:0.5rem;">
+            <span style="font-size:1.1rem; font-weight:900; letter-spacing:-0.5px;">42 500</span>
+            <span style="font-size:0.68rem; opacity:0.9; line-height:1.2;">articles<br>en vente sur Fripz</span>
+          </div>
+          <div style="margin-top:0.4rem; background:rgba(255,255,255,0.2); border-radius:10px; padding:0.4rem 0.7rem; display:flex; align-items:center; gap:0.5rem; border:1px solid rgba(255,255,255,0.35);">
+            <span style="font-size:1rem;">🎉</span>
+            <div>
+              <div style="font-size:0.7rem; font-weight:800; line-height:1.2;">Commission ÷2</div>
+              <div style="font-size:0.62rem; opacity:0.85;">Offre limitée ce mois-ci</div>
+            </div>
+          </div>
+          <div class="sell-features">
+            <div class="sell-feature-item" onclick="event.stopPropagation()">
+              <span class="sell-feature-icon">🛍️</span>
+              <div class="sell-feature-text">
+                <div class="sell-feature-name">Mode Vendeur</div>
+                <div class="sell-feature-desc">Gérez vos ventes & stats</div>
+              </div>
+              <span class="sell-feature-badge">PRO</span>
+            </div>
+            <div class="sell-feature-item" onclick="event.stopPropagation()">
+              <span class="sell-feature-icon">🪟</span>
+              <div class="sell-feature-text">
+                <div class="sell-feature-name">Dressing en Vitrine</div>
+                <div class="sell-feature-desc">Boutique perso · +2× visibilité</div>
+              </div>
+            </div>
+            <div class="sell-feature-item" onclick="event.stopPropagation()">
+              <span class="sell-feature-icon">🚀</span>
+              <div class="sell-feature-text">
+                <div class="sell-feature-name">Boost</div>
+                <div class="sell-feature-desc">+3× de visibilité</div>
+              </div>
+              <span class="sell-feature-badge">+VENTES</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- SUBCATEGORY PANEL -->
     <div class="subcat-panel" id="subcatPanel">
