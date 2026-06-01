@@ -490,15 +490,17 @@
     grid-column: 1 / 5;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 140px));
     gap: 0.75rem;
+    justify-content: start;
   }
   .cats-row-bottom {
     grid-column: 1 / 5;
     grid-row: 2;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 140px));
     gap: 0.75rem;
+    justify-content: start;
   }
   @media(max-width: 1100px){
     .cats-wrap {
