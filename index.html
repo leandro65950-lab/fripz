@@ -477,10 +477,12 @@
   .cats-articles-bar { display:none; }
   .cats-wrap {
     display: grid;
-    grid-template-columns: 1fr 330px;
+    grid-template-columns: 1fr 300px;
     grid-template-rows: auto auto;
-    gap: 1.4rem;
+    gap: 1.25rem;
     align-items: start;
+    max-width: 1150px;
+    margin: 0 auto;
   }
   .sell-cta-col {
     grid-column: 2;
@@ -533,9 +535,9 @@
   /* Compteur live superposé dans l'espace vide de l'image */
   .sell-banner-live {
     position: absolute;
-    top: 41.5%;
+    top: 42%;
     left: 25%;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 900;
     color: var(--teal-dark);
     letter-spacing: -0.5px;
