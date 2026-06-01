@@ -524,6 +524,22 @@
     cursor: pointer; position: relative; overflow: hidden;
     transition: background 0.2s;
   }
+  .sell-banner {
+    position: relative; cursor: pointer;
+    border-radius: 16px; overflow: hidden;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .sell-banner:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(20,30,28,0.15); }
+  .sell-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sell-banner-counter {
+    position: absolute; bottom: 0.7rem; left: 0.7rem; right: 0.7rem;
+    background: rgba(0,0,0,0.45); backdrop-filter: blur(6px);
+    border-radius: 10px; padding: 0.5rem 0.7rem;
+    display: flex; align-items: baseline; gap: 0.4rem; color: #fff;
+  }
+  .sell-banner-count { font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
+  .sell-banner-count-label { font-size: 0.68rem; opacity: 0.9; }
   .sell-cta-card:hover { background: var(--teal-dark); }
   .sell-cta-title { font-size: 1.02rem; font-weight: 800; line-height: 1.18; margin-bottom: 0.4rem; }
   .sell-cta-desc { font-size: 0.78rem; opacity: 0.9; line-height: 1.4; margin-bottom: 0.8rem; }
@@ -1454,49 +1470,13 @@
           <div class="cat-body"><div class="cat-name">Sport</div><div class="cat-count">5 980 articles</div></div>
         </div>
       </div>
-      <!-- CARTE VERTE -->
+      <!-- BANNIÈRE -->
       <div class="sell-cta-col">
-        <div class="sell-cta-card" onclick="openSellModal()">
-          <div class="sell-cta-title">Vendez vos articles facilement</div>
-          <div class="sell-cta-desc">Faites de la place, gagnez de l'argent et faites plaisir.</div>
-          <button class="sell-cta-btn">Commencer à vendre
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-          <div style="margin-top:0.6rem; background:rgba(255,255,255,0.15); border-radius:10px; padding:0.45rem 0.7rem; display:flex; align-items:center; gap:0.5rem;">
-            <span style="font-size:1.1rem; font-weight:900; letter-spacing:-0.5px;">42 500</span>
-            <span style="font-size:0.68rem; opacity:0.9; line-height:1.2;">articles<br>en vente sur Fripz</span>
-          </div>
-          <div style="margin-top:0.4rem; background:rgba(255,255,255,0.2); border-radius:10px; padding:0.4rem 0.7rem; display:flex; align-items:center; gap:0.5rem; border:1px solid rgba(255,255,255,0.35);">
-            <span style="font-size:1rem;">🎉</span>
-            <div>
-              <div style="font-size:0.7rem; font-weight:800; line-height:1.2;">Commission ÷2</div>
-              <div style="font-size:0.62rem; opacity:0.85;">Offre limitée ce mois-ci</div>
-            </div>
-          </div>
-          <div class="sell-features">
-            <div class="sell-feature-item" onclick="event.stopPropagation()">
-              <span class="sell-feature-icon">🛍️</span>
-              <div class="sell-feature-text">
-                <div class="sell-feature-name">Mode Vendeur</div>
-                <div class="sell-feature-desc">Gérez vos ventes & stats</div>
-              </div>
-              <span class="sell-feature-badge">PRO</span>
-            </div>
-            <div class="sell-feature-item" onclick="event.stopPropagation()">
-              <span class="sell-feature-icon">🪟</span>
-              <div class="sell-feature-text">
-                <div class="sell-feature-name">Dressing en Vitrine</div>
-                <div class="sell-feature-desc">Boutique perso · +2× visibilité</div>
-              </div>
-            </div>
-            <div class="sell-feature-item" onclick="event.stopPropagation()">
-              <span class="sell-feature-icon">🚀</span>
-              <div class="sell-feature-text">
-                <div class="sell-feature-name">Boost</div>
-                <div class="sell-feature-desc">+3× de visibilité</div>
-              </div>
-              <span class="sell-feature-badge">+VENTES</span>
-            </div>
+        <div class="sell-banner" onclick="openSellModal()">
+          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%20%C3%A0%2022_14_46.png" alt="Vendez vos articles facilement">
+          <div class="sell-banner-counter">
+            <span class="sell-banner-count" id="liveCounter">42 500</span>
+            <span class="sell-banner-count-label">articles en vente</span>
           </div>
         </div>
       </div>
@@ -3398,6 +3378,8 @@ function publishArticle() {
     desc: sellData.description || 'Bel article en bon état.',
   });
   renderArticles(products);
+  // Incrémenter le compteur live d'articles en vente
+  if (window.incrementLiveCounter) window.incrementLiveCounter(1);
 }
 
 
@@ -3770,6 +3752,43 @@ function closeISBNScanner() {
   if (overlay) overlay.remove();
 }
 
+</script>
+<script>
+// ===== COMPTEUR LIVE D'ARTICLES EN VENTE =====
+(function() {
+  let liveCount = 42500;
+  const el = document.getElementById('liveCounter');
+
+  function render() {
+    if (el) el.textContent = liveCount.toLocaleString('fr-FR');
+  }
+
+  // API publique : appeler quand une annonce est publiée ou supprimée
+  window.incrementLiveCounter = function(n) {
+    liveCount += (n || 1);
+    render();
+    if (el) { el.style.transform = 'scale(1.18)'; el.style.color = '#aef0c8'; setTimeout(() => { el.style.transform = ''; el.style.color = ''; }, 350); }
+  };
+  window.decrementLiveCounter = function(n) {
+    liveCount -= (n || 1);
+    if (liveCount < 0) liveCount = 0;
+    render();
+    if (el) { el.style.transform = 'scale(0.85)'; el.style.color = '#ffd0d0'; setTimeout(() => { el.style.transform = ''; el.style.color = ''; }, 350); }
+  };
+
+  if (el) el.style.transition = 'transform 0.3s, color 0.3s';
+
+  // Effet "live" : petites fluctuations réalistes (d'autres vendeurs sur la marketplace)
+  setInterval(function() {
+    const r = Math.random();
+    if (r < 0.6) liveCount += Math.floor(Math.random() * 4) + 1;   // publications
+    else liveCount -= Math.floor(Math.random() * 3);                // ventes/suppressions
+    if (liveCount < 0) liveCount = 0;
+    render();
+  }, 4000);
+
+  render();
+})();
 </script>
 </body>
 </html>
