@@ -532,14 +532,20 @@
   }
   .sell-banner:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(20,30,28,0.15); }
   .sell-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .sell-banner-counter {
-    position: absolute; bottom: 0.7rem; left: 0.7rem; right: 0.7rem;
-    background: rgba(0,0,0,0.45); backdrop-filter: blur(6px);
-    border-radius: 10px; padding: 0.5rem 0.7rem;
-    display: flex; align-items: baseline; gap: 0.4rem; color: #fff;
+  /* Compteur live superposé dans l'espace vide de l'image */
+  .sell-banner-live {
+    position: absolute;
+    top: 43.5%;
+    left: 26%;
+    font-size: 2vw;
+    font-weight: 900;
+    color: #1a1a2e;
+    letter-spacing: -0.5px;
+    transition: transform 0.3s, color 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
   }
-  .sell-banner-count { font-size: 1.2rem; font-weight: 900; letter-spacing: -0.5px; }
-  .sell-banner-count-label { font-size: 0.68rem; opacity: 0.9; }
   .sell-cta-card:hover { background: var(--teal-dark); }
   .sell-cta-title { font-size: 1.02rem; font-weight: 800; line-height: 1.18; margin-bottom: 0.4rem; }
   .sell-cta-desc { font-size: 0.78rem; opacity: 0.9; line-height: 1.4; margin-bottom: 0.8rem; }
@@ -1473,11 +1479,8 @@
       <!-- BANNIÈRE -->
       <div class="sell-cta-col">
         <div class="sell-banner" onclick="openSellModal()">
-          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%20%C3%A0%2022_14_46.png" alt="Vendez vos articles facilement">
-          <div class="sell-banner-counter">
-            <span class="sell-banner-count" id="liveCounter">42 500</span>
-            <span class="sell-banner-count-label">articles en vente</span>
-          </div>
+          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT_Image_1_juin_2026_%C3%A0_22_54_36.png" alt="Vendez vos articles facilement">
+          <span class="sell-banner-live" id="liveCounter">42 500+</span>
         </div>
       </div>
     </div>
@@ -3760,7 +3763,7 @@ function closeISBNScanner() {
   const el = document.getElementById('liveCounter');
 
   function render() {
-    if (el) el.textContent = liveCount.toLocaleString('fr-FR');
+    if (el) el.textContent = liveCount.toLocaleString('fr-FR') + '+';
   }
 
   // API publique : appeler quand une annonce est publiée ou supprimée
