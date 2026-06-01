@@ -474,6 +474,18 @@
   }
   .see-all-cats:hover { color: var(--teal-dark); }
   .see-all-cats svg { width:15px; height:15px; }
+  .cats-articles-bar {
+    display: flex; align-items: center; gap: 1rem;
+    margin-top: 0.85rem;
+    background: var(--teal-light); border-radius: 12px;
+    padding: 0.6rem 1rem;
+  }
+  .cats-articles-bar-count {
+    font-size: 1.1rem; font-weight: 900; color: var(--teal-dark); letter-spacing: -0.5px;
+  }
+  .cats-articles-bar-label {
+    font-size: 0.82rem; color: var(--teal-dark); font-weight: 600; opacity: 0.85;
+  }
   .cats-wrap {
     display: grid;
     grid-template-columns: 1fr 175px;
@@ -499,8 +511,8 @@
   }
   .sell-cta-card {
     background: var(--teal); color: #fff;
-    border-radius: 16px; padding: 1.1rem 1.2rem;
-    display: flex; flex-direction: column;
+    border-radius: 16px; padding: 1rem 1.1rem;
+    display: flex; flex-direction: column; justify-content: center;
     cursor: pointer; position: relative; overflow: hidden;
     transition: background 0.2s;
   }
@@ -1396,6 +1408,7 @@
       <a class="see-all-cats" href="#">Voir toutes les catégories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
     <div class="cats-wrap">
+    <div>
     <div class="cats-row">
   <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)">
     <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/07_mode_enfant.jpg" alt="Mode enfants"></div>
@@ -1454,18 +1467,23 @@
     </div>
   </div>
     </div>
+    <!-- BARRE ARTICLES EN VENTE -->
+    <div class="cats-articles-bar">
+      <span class="cats-articles-bar-count">42 500</span>
+      <span class="cats-articles-bar-label">articles en vente sur Fripz</span>
+      <span class="cats-articles-bar-promo">🎉 Commission ÷2 — Offre limitée ce mois-ci</span>
+    </div>
+    </div>
     <div class="sell-cta-card" onclick="openSellModal()">
       <div class="sell-cta-title">Vendez vos articles facilement</div>
       <div class="sell-cta-desc">Faites de la place, gagnez de l'argent et faites plaisir.</div>
       <button class="sell-cta-btn">Commencer à vendre
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
-      <!-- COMPTEUR -->
       <div style="margin-top:0.6rem; background:rgba(255,255,255,0.15); border-radius:10px; padding:0.45rem 0.7rem; display:flex; align-items:center; gap:0.5rem;">
         <span style="font-size:1.1rem; font-weight:900; letter-spacing:-0.5px;">42 500</span>
         <span style="font-size:0.68rem; opacity:0.9; line-height:1.2;">articles<br>en vente</span>
       </div>
-      <!-- PROMO COMMISSION -->
       <div style="margin-top:0.4rem; background:rgba(255,255,255,0.2); border-radius:10px; padding:0.4rem 0.7rem; display:flex; align-items:center; gap:0.5rem; border:1px solid rgba(255,255,255,0.35);">
         <span style="font-size:1.1rem;">🎉</span>
         <div>
@@ -1473,7 +1491,6 @@
           <div style="font-size:0.62rem; opacity:0.85;">Offre limitée ce mois-ci</div>
         </div>
       </div>
-      <!-- FEATURES PREMIUM -->
       <div class="sell-features">
         <div class="sell-feature-item" onclick="event.stopPropagation()">
           <span class="sell-feature-icon">🛍️</span>
@@ -1487,9 +1504,8 @@
           <span class="sell-feature-icon">🪟</span>
           <div class="sell-feature-text">
             <div class="sell-feature-name">Dressing en Vitrine</div>
-            <div class="sell-feature-desc">Votre boutique personnelle</div>
+            <div class="sell-feature-desc">Boutique perso · +2× visibilité</div>
           </div>
-          <span class="sell-feature-badge">NOUVEAU</span>
         </div>
         <div class="sell-feature-item" onclick="event.stopPropagation()">
           <span class="sell-feature-icon">🚀</span>
