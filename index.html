@@ -517,6 +517,22 @@
   }
   .sell-cta-btn svg { width: 14px; height: 14px; }
   .sell-cta-ill { width: 78px; height: 60px; color: rgba(255,255,255,0.6); margin-top: 0.7rem; align-self: flex-end; }
+  .sell-features { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.6rem; }
+  .sell-feature-item {
+    background: rgba(255,255,255,0.15); border-radius: 9px;
+    padding: 0.45rem 0.6rem; display: flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+    transition: background 0.2s;
+  }
+  .sell-feature-item:hover { background: rgba(255,255,255,0.25); }
+  .sell-feature-icon { font-size: 1rem; flex-shrink: 0; }
+  .sell-feature-text { flex: 1; }
+  .sell-feature-name { font-size: 0.72rem; font-weight: 800; line-height: 1.2; }
+  .sell-feature-desc { font-size: 0.62rem; opacity: 0.82; line-height: 1.2; }
+  .sell-feature-badge {
+    font-size: 0.58rem; font-weight: 700; background: rgba(255,255,255,0.3);
+    border-radius: 5px; padding: 0.15rem 0.35rem; white-space: nowrap;
+  }
   .cat-card {
     background: var(--white);
     border: 1px solid #eef0ee;
@@ -1444,21 +1460,56 @@
       <button class="sell-cta-btn">Commencer à vendre
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
+      <!-- COMPTEUR -->
+      <div style="margin-top:0.75rem; background:rgba(255,255,255,0.15); border-radius:10px; padding:0.55rem 0.7rem; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.15rem; font-weight:900; letter-spacing:-0.5px;">42 500</span>
+        <span style="font-size:0.72rem; opacity:0.9; line-height:1.2;">articles<br>en vente</span>
+      </div>
+      <!-- PROMO COMMISSION -->
+      <div style="margin-top:0.55rem; background:rgba(255,255,255,0.2); border-radius:10px; padding:0.5rem 0.7rem; display:flex; align-items:center; gap:0.5rem; border:1px solid rgba(255,255,255,0.35);">
+        <span style="font-size:1.3rem;">🎉</span>
+        <div>
+          <div style="font-size:0.72rem; font-weight:800; line-height:1.2;">Commission ÷2</div>
+          <div style="font-size:0.65rem; opacity:0.85;">Offre limitée ce mois-ci</div>
+        </div>
+      </div>
+      <!-- FEATURES PREMIUM -->
+      <div class="sell-features">
+        <div class="sell-feature-item" onclick="event.stopPropagation()">
+          <span class="sell-feature-icon">🛍️</span>
+          <div class="sell-feature-text">
+            <div class="sell-feature-name">Mode Vendeur</div>
+            <div class="sell-feature-desc">Gérez vos ventes & stats</div>
+          </div>
+          <span class="sell-feature-badge">PRO</span>
+        </div>
+        <div class="sell-feature-item" onclick="event.stopPropagation()">
+          <span class="sell-feature-icon">🪟</span>
+          <div class="sell-feature-text">
+            <div class="sell-feature-name">Dressing en Vitrine</div>
+            <div class="sell-feature-desc">Votre boutique personnelle</div>
+          </div>
+          <span class="sell-feature-badge">NOUVEAU</span>
+        </div>
+        <div class="sell-feature-item" onclick="event.stopPropagation()">
+          <span class="sell-feature-icon">🚀</span>
+          <div class="sell-feature-text">
+            <div class="sell-feature-name">Boost</div>
+            <div class="sell-feature-desc">+3× de visibilité sur vos articles</div>
+          </div>
+          <span class="sell-feature-badge">+VENTES</span>
+        </div>
+      </div>
       <svg class="sell-cta-ill" viewBox="0 0 110 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <!-- carton -->
         <path d="M22 48 L55 38 L88 48 L55 58 Z"/>
         <path d="M22 48 V74 L55 86 V58"/>
         <path d="M88 48 V74 L55 86"/>
-        <!-- rabats ouverts -->
         <path d="M22 48 L14 40 L40 32"/>
         <path d="M88 48 L96 40 L70 32"/>
-        <!-- coeur sur le carton -->
         <path d="M50 66 c-2-3-7-1-7 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-5-5-7-2"/>
-        <!-- plante qui dépasse -->
         <path d="M55 38 V20"/>
         <path d="M55 28 q-8 -2 -10 -10 q8 0 10 8"/>
         <path d="M55 24 q8 -2 10 -10 q-8 0 -10 8"/>
-        <!-- petits traits déco -->
         <path d="M98 22 l5 -4 M100 30 l6 -1"/>
       </svg>
     </div>
