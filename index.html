@@ -3084,6 +3084,9 @@ const SELL_COULEURS = [
   { name:'Argenté', hex:'linear-gradient(135deg,#bcc2c9,#eef1f4)' },
   { name:'Multicolore', hex:'linear-gradient(135deg,#d6453d,#f2cf4a,#5b8a72,#3d6fb4)' },
 ];
+
+// Icônes SVG couleurs Fripz par catégorie
+const CAT_ICONS = {
   'Femmes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-1 3 3 3-2 2 1 8H6l1-8-2-2 3-3-1-3z"/></svg>',
   'Hommes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-2 3 2 2-3 13-3-13 2-2-2-3z"/></svg>',
   'Enfants': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M8 6c1-2 7-2 8 0"/></svg>',
@@ -3178,6 +3181,26 @@ function renderSellPage() {
   const commission = prix > 0 ? (prix <= 20 ? 0.70 : parseFloat((prix * 0.05 + 0.70).toFixed(2))) : 0;
   const gain = prix > 0 ? (prix - commission).toFixed(2) : '—';
 
+  // Pré-calcul des affichages de menus déroulants (évite les templates imbriqués)
+  const marqueValTxt = sellData.marque || 'Sélectionner une marque';
+  const tailleValTxt = sellData.taille || 'Sélectionner';
+  const showTaille = needsTaille(sellData.sous_categorie);
+  let couleurValHtml = 'Sélectionner une couleur';
+  if (sellData.couleur) {
+    const cObj = SELL_COULEURS.find(c => c.name === sellData.couleur) || { hex:'#ccc' };
+    couleurValHtml = '<span class="couleur-dot" style="background:' + cObj.hex + '"></span>' + sellData.couleur;
+  }
+  const couleurOptionsHtml = SELL_COULEURS.map(c =>
+    '<div class="couleur-option" onclick="selectCouleur(\'' + c.name + '\',\'' + c.hex + '\')"><span class="couleur-dot" style="background:' + c.hex + '"></span>' + c.name + '</div>'
+  ).join('');
+  const tailleBlockHtml = showTaille
+    ? '<div class="form-row"><label>Taille</label><div class="sell-drop" id="selldrop-taille"><div class="sell-drop-trigger" onclick="toggleSellDrop(\'taille\')"><span class="sell-drop-val" id="selldrop-taille-val">' + tailleValTxt + '</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div><div class="sell-drop-menu" id="selldrop-taille-menu"></div></div></div>'
+    : '';
+  const attributsBlockHtml = !isLivre
+    ? '<div class="form-two"><div class="form-row"><label>Marque</label><div class="sell-drop" id="selldrop-marque"><div class="sell-drop-trigger" onclick="toggleSellDrop(\'marque\')"><span class="sell-drop-val" id="selldrop-marque-val">' + marqueValTxt + '</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div><div class="sell-drop-menu" id="selldrop-marque-menu"><div class="sell-drop-search"><input type="text" id="sellMarqueSearch" placeholder="🔍 Rechercher ou saisir..." oninput="filterSellMarque(this.value)" onclick="event.stopPropagation()"></div><div id="selldrop-marque-items"></div></div></div></div>' + tailleBlockHtml + '</div>'
+      + '<div class="form-row"><label>Couleur</label><div class="sell-drop" id="selldrop-couleur"><div class="sell-drop-trigger" onclick="toggleSellDrop(\'couleur\')"><span class="sell-drop-val" id="selldrop-couleur-val">' + couleurValHtml + '</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div><div class="sell-drop-menu" id="selldrop-couleur-menu"><div class="couleur-grid">' + couleurOptionsHtml + '</div></div></div></div>'
+    : '';
+
   body.innerHTML = `
     <!-- PHOTOS -->
     <div class="sell-section">
@@ -3236,47 +3259,7 @@ function renderSellPage() {
         <div class="char-count" id="cc_titre">${sellData.titre.length}/60</div>
       </div>
 
-      ${!isLivre ? `
-      <div class="form-two">
-        <div class="form-row">
-          <label>Marque</label>
-          <div class="sell-drop" id="selldrop-marque">
-            <div class="sell-drop-trigger" onclick="toggleSellDrop('marque')">
-              <span class="sell-drop-val" id="selldrop-marque-val">${sellData.marque || 'Sélectionner une marque'}</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-            <div class="sell-drop-menu" id="selldrop-marque-menu">
-              <div class="sell-drop-search"><input type="text" id="sellMarqueSearch" placeholder="🔍 Rechercher ou saisir..." oninput="filterSellMarque(this.value)" onclick="event.stopPropagation()"></div>
-              <div id="selldrop-marque-items"></div>
-            </div>
-          </div>
-        </div>
-        ${needsTaille(sellData.sous_categorie) ? `
-        <div class="form-row">
-          <label>Taille</label>
-          <div class="sell-drop" id="selldrop-taille">
-            <div class="sell-drop-trigger" onclick="toggleSellDrop('taille')">
-              <span class="sell-drop-val" id="selldrop-taille-val">${sellData.taille || 'Sélectionner'}</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-            <div class="sell-drop-menu" id="selldrop-taille-menu"></div>
-          </div>
-        </div>` : ''}
-      </div>
-      <div class="form-row">
-        <label>Couleur</label>
-        <div class="sell-drop" id="selldrop-couleur">
-          <div class="sell-drop-trigger" onclick="toggleSellDrop('couleur')">
-            <span class="sell-drop-val" id="selldrop-couleur-val">${sellData.couleur ? `<span class="couleur-dot" style="background:${(SELL_COULEURS.find(c=>c.name===sellData.couleur)||{}).hex||'#ccc'}"></span>${sellData.couleur}` : 'Sélectionner une couleur'}</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-          <div class="sell-drop-menu" id="selldrop-couleur-menu">
-            <div class="couleur-grid">
-              ${SELL_COULEURS.map(c => `<div class="couleur-option" onclick="selectCouleur('${c.name}','${c.hex}')"><span class="couleur-dot" style="background:${c.hex}"></span>${c.name}</div>`).join('')}
-            </div>
-          </div>
-        </div>
-      </div>` : ''}
+      ${attributsBlockHtml}
 
       <div class="form-row">
         <label>État <span class="req">*</span></label>
@@ -3421,6 +3404,11 @@ document.addEventListener('click', function(e) {
     document.querySelectorAll('.sell-drop').forEach(d => d.classList.remove('open'));
   }
 });
+
+function toggleCustomSelect(id) {
+  const drop = document.getElementById('drop-' + id);
+  const btn = drop?.previousElementSibling;
+  const allDrops = document.querySelectorAll('.custom-select-dropdown');
   allDrops.forEach(d => { if (d.id !== 'drop-' + id) { d.classList.remove('open'); d.previousElementSibling?.classList.remove('open'); } });
   drop?.classList.toggle('open');
   btn?.classList.toggle('open');
