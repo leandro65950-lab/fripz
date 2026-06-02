@@ -893,6 +893,57 @@
 
   /* Dropdown menu */
   .fdrop-menu-marque { min-width: 220px; max-width: 260px; }
+  /* ===== MENUS DÉROULANTS MODULE VENTE ===== */
+  .sell-drop { position: relative; }
+  .sell-drop-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #fff; border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 0.7rem 0.85rem;
+    cursor: pointer; transition: border-color 0.18s;
+    font-size: 0.95rem;
+  }
+  .sell-drop-trigger:hover { border-color: var(--teal); }
+  .sell-drop.open .sell-drop-trigger { border-color: var(--teal); }
+  .sell-drop-val { color: var(--text); display: flex; align-items: center; gap: 0.5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sell-drop-trigger svg { width: 17px; height: 17px; color: var(--text-mid); flex-shrink: 0; transition: transform 0.2s; }
+  .sell-drop.open .sell-drop-trigger svg { transform: rotate(180deg); }
+  .sell-drop-menu {
+    display: none; position: absolute; top: calc(100% + 5px); left: 0; right: 0;
+    background: #fff; border: 1.5px solid var(--border);
+    border-radius: 12px; box-shadow: 0 12px 30px rgba(20,30,28,0.14);
+    z-index: 50; max-height: 280px; overflow-y: auto; padding: 0.35rem;
+  }
+  .sell-drop.open .sell-drop-menu { display: block; }
+  .sell-drop-search { padding: 0.3rem; position: sticky; top: 0; background: #fff; }
+  .sell-drop-search input {
+    width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 0.5rem 0.7rem; font-family: inherit; font-size: 0.88rem; outline: none;
+  }
+  .sell-drop-search input:focus { border-color: var(--teal); }
+  .sell-drop-label {
+    font-size: 0.72rem; font-weight: 800; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 0.5rem 0.7rem 0.3rem;
+  }
+  .sell-drop-item {
+    padding: 0.55rem 0.7rem; border-radius: 8px; cursor: pointer;
+    font-size: 0.92rem; color: var(--text); transition: background 0.15s;
+  }
+  .sell-drop-item:hover { background: var(--teal-light); }
+  .sell-drop-item.active { background: var(--teal); color: #fff; }
+  .sell-drop-item-other { color: var(--text-mid); font-style: italic; border-top: 1px solid var(--border); margin-top: 0.2rem; }
+  /* Couleurs avec pastilles */
+  .couleur-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.12); flex-shrink: 0; display: inline-block;
+  }
+  .couleur-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem; }
+  .couleur-option {
+    display: flex; align-items: center; gap: 0.55rem;
+    padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer;
+    font-size: 0.9rem; color: var(--text); transition: background 0.15s;
+  }
+  .couleur-option:hover { background: var(--teal-light); }
   .fdrop-search-wrap {
     padding: 0.5rem 0.6rem;
     border-bottom: 1px solid var(--border);
@@ -2968,8 +3019,71 @@ const SELL_CATS = {
   },
 };
 
-// Icônes SVG couleurs Fripz par catégorie
-const CAT_ICONS = {
+// ===== LOGIQUE INTELLIGENTE DU MODULE DE VENTE =====
+// Marques pertinentes par catégorie (les meilleures en premier)
+const SELL_MARQUES = {
+  'Femmes': ['Zara','H&M','Mango','Sézane','Maje','Sandro','Bash','Levi\'s','Nike','Adidas','Bershka','Pull & Bear','Stradivarius','ASOS','Promod','Comptoir des Cotonniers','The Kooples','Claudie Pierlot','Massimo Dutti','Uniqlo','Lacoste','Tommy Hilfiger','Calvin Klein','Ralph Lauren','Guess'],
+  'Hommes': ['Nike','Adidas','Levi\'s','Zara','H&M','Jack & Jones','Celio','Lacoste','Tommy Hilfiger','Ralph Lauren','Hugo Boss','Calvin Klein','The North Face','Carhartt','Uniqlo','Diesel','Puma','New Balance','Stone Island','Jules','Bershka','Pull & Bear'],
+  'Enfants': ['Petit Bateau','Jacadi','Cyrillus','Orchestra','Zara Kids','H&M Kids','Catimini','Okaïdi','Sergent Major','Du Pareil au Même','Vertbaudet','Kiabi','Nike Kids','Adidas Kids','Disney','Ralph Lauren Kids','Levi\'s Kids'],
+  'Sport': ['Nike','Adidas','Puma','Under Armour','Decathlon','The North Face','Columbia','Salomon','ASICS','Reebok','New Balance','Quiksilver','Billabong','Patagonia','Speedo','Oakley','Le Coq Sportif'],
+  'Maison': ['IKEA','Maisons du Monde','Zara Home','H&M Home','Habitat','Muji','Le Creuset','Staub','Tefal','Moulinex','KitchenAid','Smeg','Krups','Nespresso','De\'Longhi','Philips','Rowenta','Seb','Villeroy & Boch','Bodum'],
+  'Électronique': ['Apple','Samsung','Sony','Xiaomi','Huawei','Google','OnePlus','Bose','JBL','Sennheiser','Beats','Canon','Nikon','Sony','GoPro','DJI','Logitech','Razer','Microsoft','Nintendo','HP','Dell','Asus','Lenovo','Anker'],
+  'Loisirs': ['Lego','Playmobil','Ravensburger','Asmodee','Hasbro','Fender','Gibson','Yamaha','Roland','Clementoni','Nathan','Faber-Castell','Crayola','Moleskine'],
+  'Divertissement': ['Pokémon','Funko','Panini','Magic The Gathering','Yu-Gi-Oh!','One Piece','Dragon Ball','Naruto','Disney','Marvel','DC Comics','Studio Ghibli','Bandai','Warner Bros','Sony Music','Universal Music'],
+};
+
+// Sous-catégories qui ont besoin d'une TAILLE (vêtements, chaussures, lingerie)
+const SOUS_CAT_AVEC_TAILLE = [
+  'Vêtements','Chaussures','Lingerie','Bébé','Fille','Garçon',
+  'Fitness','Running','Cyclisme','Sports','Combat','Glisse','hiver','nautiques','raquette','collectifs'
+];
+// Détermine si l'article a besoin d'une taille selon la sous-catégorie
+function needsTaille(sub) {
+  if (!sub) return false;
+  return SOUS_CAT_AVEC_TAILLE.some(k => sub.toLowerCase().includes(k.toLowerCase()));
+}
+// Type de taille selon la sous-catégorie
+function getTailleOptions(cat, sub) {
+  if (!sub) return null;
+  const s = sub.toLowerCase();
+  if (s.includes('chaussure') || s.includes('basket') || s.includes('sneaker') || s.includes('bottes') || s.includes('derbies')) {
+    return ['35','36','37','38','39','40','41','42','43','44','45','46','47'];
+  }
+  if (s.includes('bébé') || s.includes('bebe')) {
+    return ['0-1 mois','1-3 mois','3-6 mois','6-9 mois','9-12 mois','12-18 mois','18-24 mois'];
+  }
+  if (s.includes('fille') || s.includes('garçon') || s.includes('garcon')) {
+    return ['2 ans','3 ans','4 ans','5 ans','6 ans','8 ans','10 ans','12 ans','14 ans'];
+  }
+  // Vêtements adultes par défaut
+  return ['XS','S','M','L','XL','XXL','3XL','34','36','38','40','42','44','46','48','Taille unique'];
+}
+
+// Marques selon catégorie (meilleures en premier) + alphabétique ensuite
+function getSellMarques(cat) {
+  const top = SELL_MARQUES[cat] || [];
+  return top;
+}
+
+// Couleurs avec pastilles
+const SELL_COULEURS = [
+  { name:'Noir', hex:'#1a1a1a' },
+  { name:'Blanc', hex:'#ffffff' },
+  { name:'Gris', hex:'#9e9e9e' },
+  { name:'Beige', hex:'#e3d5c0' },
+  { name:'Marron', hex:'#8b5e3c' },
+  { name:'Rouge', hex:'#d6453d' },
+  { name:'Rose', hex:'#f0a8c0' },
+  { name:'Orange', hex:'#e8843c' },
+  { name:'Jaune', hex:'#f2cf4a' },
+  { name:'Vert', hex:'#5b8a72' },
+  { name:'Bleu', hex:'#3d6fb4' },
+  { name:'Bleu marine', hex:'#27374d' },
+  { name:'Violet', hex:'#8e6bb0' },
+  { name:'Doré', hex:'linear-gradient(135deg,#d4af37,#f4e5a0)' },
+  { name:'Argenté', hex:'linear-gradient(135deg,#bcc2c9,#eef1f4)' },
+  { name:'Multicolore', hex:'linear-gradient(135deg,#d6453d,#f2cf4a,#5b8a72,#3d6fb4)' },
+];
   'Femmes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-1 3 3 3-2 2 1 8H6l1-8-2-2 3-3-1-3z"/></svg>',
   'Hommes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-2 3 2 2-3 13-3-13 2-2-2-3z"/></svg>',
   'Enfants': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M8 6c1-2 7-2 8 0"/></svg>',
@@ -3126,16 +3240,42 @@ function renderSellPage() {
       <div class="form-two">
         <div class="form-row">
           <label>Marque</label>
-          <input type="text" id="f_marque" placeholder="Ex : Zara, Nike..." value="${sellData.marque}" oninput="sellData.marque=this.value">
+          <div class="sell-drop" id="selldrop-marque">
+            <div class="sell-drop-trigger" onclick="toggleSellDrop('marque')">
+              <span class="sell-drop-val" id="selldrop-marque-val">${sellData.marque || 'Sélectionner une marque'}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="sell-drop-menu" id="selldrop-marque-menu">
+              <div class="sell-drop-search"><input type="text" id="sellMarqueSearch" placeholder="🔍 Rechercher ou saisir..." oninput="filterSellMarque(this.value)" onclick="event.stopPropagation()"></div>
+              <div id="selldrop-marque-items"></div>
+            </div>
+          </div>
         </div>
+        ${needsTaille(sellData.sous_categorie) ? `
         <div class="form-row">
           <label>Taille</label>
-          <input type="text" id="f_taille" placeholder="Ex : M, 38..." value="${sellData.taille}" oninput="sellData.taille=this.value">
-        </div>
+          <div class="sell-drop" id="selldrop-taille">
+            <div class="sell-drop-trigger" onclick="toggleSellDrop('taille')">
+              <span class="sell-drop-val" id="selldrop-taille-val">${sellData.taille || 'Sélectionner'}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="sell-drop-menu" id="selldrop-taille-menu"></div>
+          </div>
+        </div>` : ''}
       </div>
       <div class="form-row">
         <label>Couleur</label>
-        <input type="text" id="f_couleur" placeholder="Ex : Noir, Blanc..." value="${sellData.couleur}" oninput="sellData.couleur=this.value">
+        <div class="sell-drop" id="selldrop-couleur">
+          <div class="sell-drop-trigger" onclick="toggleSellDrop('couleur')">
+            <span class="sell-drop-val" id="selldrop-couleur-val">${sellData.couleur ? `<span class="couleur-dot" style="background:${(SELL_COULEURS.find(c=>c.name===sellData.couleur)||{}).hex||'#ccc'}"></span>${sellData.couleur}` : 'Sélectionner une couleur'}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="sell-drop-menu" id="selldrop-couleur-menu">
+            <div class="couleur-grid">
+              ${SELL_COULEURS.map(c => `<div class="couleur-option" onclick="selectCouleur('${c.name}','${c.hex}')"><span class="couleur-dot" style="background:${c.hex}"></span>${c.name}</div>`).join('')}
+            </div>
+          </div>
+        </div>
       </div>` : ''}
 
       <div class="form-row">
@@ -3198,12 +3338,89 @@ function renderSellPage() {
       </div>` : `<div style="font-size: 1.124rem;color:var(--text-light);text-align:center;padding:1rem">Complétez les champs obligatoires pour voir le récapitulatif.</div>`}
     </div>
   `;
+  // Initialiser les menus déroulants après rendu
+  setTimeout(initSellDrops, 0);
 }
 
-function toggleCustomSelect(id) {
-  const drop = document.getElementById('drop-' + id);
-  const btn = drop?.previousElementSibling;
-  const allDrops = document.querySelectorAll('.custom-select-dropdown');
+// ===== MENUS DÉROULANTS INTELLIGENTS DU MODULE VENTE =====
+function initSellDrops() {
+  // Remplir les marques selon la catégorie
+  const marqueItems = document.getElementById('selldrop-marque-items');
+  if (marqueItems) {
+    const top = getSellMarques(sellData.categorie);
+    marqueItems.innerHTML = buildSellMarqueList(top);
+  }
+  // Remplir les tailles selon la sous-catégorie
+  const tailleMenu = document.getElementById('selldrop-taille-menu');
+  if (tailleMenu) {
+    const tailles = getTailleOptions(sellData.categorie, sellData.sous_categorie) || [];
+    tailleMenu.innerHTML = tailles.map(t =>
+      `<div class="sell-drop-item${sellData.taille===t?' active':''}" onclick="selectTaille('${t}')">${t}</div>`
+    ).join('');
+  }
+}
+
+function buildSellMarqueList(top) {
+  let html = '';
+  if (top.length) {
+    html += `<div class="sell-drop-label">⭐ Recommandées pour cet article</div>`;
+    html += top.map(m => `<div class="sell-drop-item${sellData.marque===m?' active':''}" onclick="selectMarque('${m.replace(/'/g,"\\'")}')">${m}</div>`).join('');
+  }
+  html += `<div class="sell-drop-item sell-drop-item-other" onclick="selectMarque('Sans marque')">Sans marque / Autre</div>`;
+  return html;
+}
+
+function filterSellMarque(val) {
+  const items = document.getElementById('selldrop-marque-items');
+  if (!items) return;
+  const top = getSellMarques(sellData.categorie);
+  const v = val.trim().toLowerCase();
+  if (!v) { items.innerHTML = buildSellMarqueList(top); return; }
+  const filtered = top.filter(m => m.toLowerCase().includes(v));
+  let html = '';
+  if (filtered.length) {
+    html += filtered.map(m => `<div class="sell-drop-item" onclick="selectMarque('${m.replace(/'/g,"\\'")}')">${m}</div>`).join('');
+  }
+  // Permettre de saisir une marque libre
+  html += `<div class="sell-drop-item sell-drop-item-other" onclick="selectMarque('${val.trim().replace(/'/g,"\\'")}')">Utiliser « ${val.trim()} »</div>`;
+  items.innerHTML = html;
+}
+
+function toggleSellDrop(which) {
+  const drop = document.getElementById('selldrop-' + which);
+  if (!drop) return;
+  const wasOpen = drop.classList.contains('open');
+  document.querySelectorAll('.sell-drop').forEach(d => d.classList.remove('open'));
+  if (!wasOpen) drop.classList.add('open');
+}
+
+function selectMarque(m) {
+  sellData.marque = m;
+  const val = document.getElementById('selldrop-marque-val');
+  if (val) val.textContent = m;
+  document.getElementById('selldrop-marque')?.classList.remove('open');
+}
+
+function selectTaille(t) {
+  sellData.taille = t;
+  const val = document.getElementById('selldrop-taille-val');
+  if (val) val.textContent = t;
+  document.getElementById('selldrop-taille')?.classList.remove('open');
+}
+
+function selectCouleur(name, hex) {
+  sellData.couleur = name;
+  const val = document.getElementById('selldrop-couleur-val');
+  if (val) val.innerHTML = `<span class="couleur-dot" style="background:${hex}"></span>${name}`;
+  document.getElementById('selldrop-couleur')?.classList.remove('open');
+}
+
+// Fermer les menus si clic à l'extérieur
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.sell-drop')) {
+    document.querySelectorAll('.sell-drop').forEach(d => d.classList.remove('open'));
+  }
+});
   allDrops.forEach(d => { if (d.id !== 'drop-' + id) { d.classList.remove('open'); d.previousElementSibling?.classList.remove('open'); } });
   drop?.classList.toggle('open');
   btn?.classList.toggle('open');
