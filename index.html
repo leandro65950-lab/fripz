@@ -298,6 +298,22 @@
   padding: 1rem 0 2.5rem;
 }
 
+/* bannière vendez vos articles dans le hero */
+.hero-banner {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(20,30,28,0.08);
+}
+.hero-banner .sell-banner {
+  height: auto;
+  border-radius: 18px;
+}
+.hero-banner .sell-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* menu catégories vertical */
 .hero-catmenu {
   background: #fff; border: 1px solid #eef0ee;
@@ -476,40 +492,23 @@
   .see-all-cats svg { width:15px; height:15px; }
   .cats-articles-bar { display:none; }
   .cats-wrap {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-rows: auto auto;
-    gap: 1.25rem;
-    align-items: start;
+    display: block;
     max-width: 1150px;
     margin: 0 auto;
   }
-  .sell-cta-col {
-    grid-column: 2;
-    grid-row: 1 / 3;
-  }
   .cats-row-top {
-    grid-column: 1;
-    grid-row: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.9rem;
+    margin-bottom: 0.9rem;
   }
   .cats-row-bottom {
-    grid-column: 1;
-    grid-row: 2;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.9rem;
   }
   @media(max-width: 1100px){
-    .cats-wrap {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-    }
-    .sell-cta-col { grid-column: 1; grid-row: auto; }
     .cats-row-top, .cats-row-bottom {
-      grid-column: 1; grid-row: auto;
       display: flex; overflow-x: auto; gap: 0.75rem;
       padding-bottom: 0.5rem;
       -webkit-overflow-scrolling: touch;
@@ -1372,36 +1371,11 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <!-- MENU CATEGORIES VERTICAL -->
-    <div class="hero-catmenu">
-      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 3 3 3-2 2 1 8H6l1-8-2-2 3-3-1-3z"/></svg></span>
-        Femmes
-      </div>
-      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3m-16 0a2 2 0 0 0-2 2v3h20v-3a2 2 0 0 0-2-2m-16 0h16M5 17v2m14-2v2"/></svg></span>
-        Maison
-      </div>
-      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></span>
-        Tech
-      </div>
-      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-7h5l-3 7m-1-9h3"/></svg></span>
-        Loisirs
-      </div>
-      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h.01M16 8h.01M8 16h.01M16 16h.01M12 12h.01"/></svg></span>
-        Divertissement
-      </div>
-      <div class="hero-catmenu-item" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        <span class="hc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M8 6c1-2 7-2 8 0"/></svg></span>
-        Mode enfants
-      </div>
-      <div class="hero-catmenu-sep"></div>
-      <div class="hero-catmenu-all" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">
-        Voir toutes les catégories
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    <!-- BANNIÈRE VENDEZ VOS ARTICLES -->
+    <div class="hero-banner">
+      <div class="sell-banner" onclick="openSellModal()">
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/banniere.png" alt="Vendez vos articles facilement">
+        <span class="sell-banner-live" id="liveCounter">42 500</span>
       </div>
     </div>
 
@@ -1525,13 +1499,6 @@
         <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)" onmouseenter="hoverOpenSubcat('sport', this)" onmouseleave="scheduleCloseSubcat()">
           <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/catloisirs.png" alt="Sport"></div>
           <div class="cat-body"><div class="cat-name">Sport</div><div class="cat-count">5 980 articles</div></div>
-        </div>
-      </div>
-      <!-- BANNIÈRE -->
-      <div class="sell-cta-col">
-        <div class="sell-banner" onclick="openSellModal()">
-          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/banniere.png" alt="Vendez vos articles facilement">
-          <span class="sell-banner-live" id="liveCounter">42 500</span>
         </div>
       </div>
     </div>
