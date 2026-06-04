@@ -346,8 +346,8 @@
 }
 .hero-inner {
   max-width: 1320px; margin: 0 auto;
-  display: grid; grid-template-columns: 240px 1fr 1.15fr;
-  align-items: start; gap: 2rem;
+  display: grid; grid-template-columns: 250px 1fr 1.15fr;
+  align-items: stretch; gap: 2rem;
   padding: 1rem 0 2.5rem;
 }
 
@@ -358,12 +358,14 @@
   box-shadow: 0 8px 24px rgba(20,30,28,0.08);
 }
 .hero-banner .sell-banner {
-  height: auto;
+  height: 100%;
   border-radius: 18px;
 }
 .hero-banner .sell-banner img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   display: block;
 }
 
@@ -526,14 +528,14 @@
 }
 
   /* ── CATEGORIES ── */
-  .section { padding: 3.5rem 2rem; background:#fff; }
+  .section { padding: 2rem 2rem 3.5rem; background:#fff; }
   .section-inner { max-width: 1280px; margin: 0 auto; }
   .tendances-header {
     display:flex; align-items:center; justify-content:space-between;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.1rem;
   }
   .section-title {
-    text-align: left; font-size: 1.7rem;
+    text-align: left; font-size: 1.4rem;
     font-weight: 800; color: var(--text); letter-spacing:-0.02em;
     margin: 0;
   }
@@ -546,13 +548,13 @@
   .cats-articles-bar { display:none; }
   .cats-wrap {
     display: block;
-    max-width: 1280px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   .cats-row-top {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    gap: 0.7rem;
+    gap: 0.6rem;
   }
   @media(max-width: 1100px){
     .cats-row-top {
@@ -655,13 +657,13 @@
 
   /* ── SUBCATEGORY PANEL ── */
   .subcat-panel {
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1000px; margin: 0 auto;
     display: none;
     background: var(--white);
     border: 1.5px solid var(--teal);
-    border-radius: 16px;
-    padding: 1.75rem 2rem;
-    margin-top: 1rem;
+    border-radius: 14px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 0.8rem;
     animation: fadeSlide 0.22s ease;
   }
   .subcat-panel.open { display: block; }
@@ -670,37 +672,37 @@
     to   { opacity:1; transform: translateY(0); }
   }
   .subcat-panel-title {
-    font-size: 0.991rem; font-weight: 800;
+    font-size: 0.8rem; font-weight: 800;
     text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--teal); margin-bottom: 1.25rem;
+    color: var(--teal); margin-bottom: 0.9rem;
   }
   .subcat-cols {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1rem;
   }
   .subcat-col h4 {
-    font-size: 1.084rem; font-weight: 800;
-    color: var(--text); margin-bottom: 0.6rem;
-    padding-bottom: 0.4rem;
+    font-size: 0.88rem; font-weight: 800;
+    color: var(--text); margin-bottom: 0.45rem;
+    padding-bottom: 0.3rem;
     border-bottom: 1.5px solid var(--border);
   }
-  .subcat-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+  .subcat-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
   .subcat-col ul li {
-    font-size: 1.097rem; color: var(--text-mid);
-    cursor: pointer; padding: 0.25rem 0.5rem;
+    font-size: 0.82rem; color: var(--text-mid);
+    cursor: pointer; padding: 0.2rem 0.4rem;
     border-radius: 6px; transition: all 0.15s;
     display: flex; align-items: center; gap: 0.4rem;
   }
   .subcat-col ul li:hover {
     background: var(--teal-light); color: var(--teal);
-    padding-left: 0.75rem;
+    padding-left: 0.65rem;
   }
   .subcat-col ul li::before {
-    content: '›'; font-size: 1.19rem; color: var(--border);
+    content: '›'; font-size: 0.95rem; color: var(--border);
   }
   .subcat-col ul li:hover::before { color: var(--teal); }
-  .subcat-col ul li.selected { background: var(--teal); color: #fff; padding-left: 0.75rem; }
+  .subcat-col ul li.selected { background: var(--teal); color: #fff; padding-left: 0.65rem; }
   .subcat-col ul li.selected::before { color: var(--text); }
 
   /* Two-level subcat navigation */
@@ -708,8 +710,8 @@
     display: flex; flex-direction: column; gap: 0; width: 100%;
   }
   .subcat-group-item {
-    display: flex; align-items: center; gap: 0.85rem;
-    padding: 0.75rem 1rem; cursor: pointer;
+    display: flex; align-items: center; gap: 0.7rem;
+    padding: 0.55rem 0.8rem; cursor: pointer;
     border-bottom: 1px solid var(--border);
     border-radius: 8px; transition: all 0.15s;
   }
@@ -717,24 +719,24 @@
   .subcat-group-item:hover, .subcat-group-item.active {
     background: var(--teal-light); color: var(--teal);
   }
-  .subcat-group-icon { flex-shrink: 0; color: var(--teal); display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; }
-  .subcat-group-icon svg { width:22px; height:22px; }
-  .subcat-group-name { font-size: 1.217rem; font-weight: 700; color: var(--text); flex: 1; }
+  .subcat-group-icon { flex-shrink: 0; color: var(--teal); display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; }
+  .subcat-group-icon svg { width:18px; height:18px; }
+  .subcat-group-name { font-size: 0.92rem; font-weight: 700; color: var(--text); flex: 1; }
   .subcat-group-item:hover .subcat-group-name,
   .subcat-group-item.active .subcat-group-name { color: var(--teal); }
-  .subcat-group-arrow { font-size: 1.455rem; color: var(--text-light); font-weight: 700; }
+  .subcat-group-arrow { font-size: 1.1rem; color: var(--text-light); font-weight: 700; }
 
   .subcat-items-panel { width: 100%; }
   .subcat-items-title {
-    display: flex; align-items: center; gap: 0.75rem;
-    font-size: 1.217rem; font-weight: 800; color: var(--text);
-    margin-bottom: 0.75rem; padding-bottom: 0.65rem;
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.95rem; font-weight: 800; color: var(--text);
+    margin-bottom: 0.6rem; padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--teal);
   }
   .subcat-back-btn {
     background: none; border: 1.5px solid var(--border);
-    border-radius: 8px; padding: 0.3rem 0.7rem;
-    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.032rem; font-weight: 700;
+    border-radius: 8px; padding: 0.25rem 0.6rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 700;
     color: var(--text-mid); cursor: pointer; transition: all 0.2s;
   }
   .subcat-back-btn:hover { border-color: var(--teal); color: var(--teal); }
