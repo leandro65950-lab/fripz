@@ -546,28 +546,22 @@
   .cats-articles-bar { display:none; }
   .cats-wrap {
     display: block;
-    max-width: 1150px;
+    max-width: 1280px;
     margin: 0 auto;
   }
   .cats-row-top {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.9rem;
-    margin-bottom: 0.9rem;
-  }
-  .cats-row-bottom {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.9rem;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.7rem;
   }
   @media(max-width: 1100px){
-    .cats-row-top, .cats-row-bottom {
-      display: flex; overflow-x: auto; gap: 0.75rem;
+    .cats-row-top {
+      display: flex; overflow-x: auto; gap: 0.6rem;
       padding-bottom: 0.5rem;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
     }
-    .cats-row-top .cat-card, .cats-row-bottom .cat-card { flex: 0 0 150px; }
+    .cats-row-top .cat-card { flex: 0 0 130px; }
   }
   .sell-cta-card {
     background: var(--teal); color: #fff;
@@ -642,7 +636,7 @@
     border-color: #e2e6e2;
   }
   .cat-card.active { border-color: var(--teal); box-shadow:0 0 0 2px var(--teal); }
-  .cat-img-wrap { width:100%; aspect-ratio: 3/2; overflow:hidden; background:#eef0ee; border-radius:10px; }
+  .cat-img-wrap { width:100%; aspect-ratio: 1/1; overflow:hidden; background:#eef0ee; border-radius:10px; }
   .cat-img-wrap img { width:100%; height:100%; object-fit:cover; object-position:center center; transition:transform 0.3s; }
   /* Cadrage personnalisé par catégorie */
   .cat-card[data-cat="enfant"] .cat-img-wrap img   { object-position: center center; }
@@ -654,9 +648,9 @@
   .cat-card[data-cat="sport"] .cat-img-wrap img    { object-position: center center; }
   .cat-card[data-cat="tech"] .cat-img-wrap img     { object-position: left center; }
   .cat-card:hover .cat-img-wrap img { transform:scale(1.05); }
-  .cat-body { padding: 0.4rem 0.5rem 0.5rem; }
-  .cat-name { font-size: 0.75rem; font-weight: 800; color: var(--text); line-height: 1.2; }
-  .cat-count { font-size: 0.65rem; color: var(--teal); margin-top: 1px; font-weight:600; }
+  .cat-body { padding: 0.35rem 0.3rem 0.4rem; }
+  .cat-name { font-size: 0.72rem; font-weight: 800; color: var(--text); line-height: 1.15; }
+  .cat-count { font-size: 0.6rem; color: var(--teal); margin-top: 1px; font-weight:600; }
   .chevron { display:none; }
 
   /* ── SUBCATEGORY PANEL ── */
@@ -1524,7 +1518,7 @@
       <a class="see-all-cats" href="#">Voir toutes les catégories <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
     <div class="cats-wrap">
-      <!-- LIGNE 1 : 4 premières catégories -->
+      <!-- 8 CATÉGORIES SUR UNE LIGNE -->
       <div class="cats-row-top">
         <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)" onmouseenter="hoverOpenSubcat('enfant', this)" onmouseleave="scheduleCloseSubcat()">
           <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2017_00_27.png" alt="Mode enfants"></div>
@@ -1542,9 +1536,6 @@
           <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/cat%20tech%20.png" alt="Tech"></div>
           <div class="cat-body"><div class="cat-name">Tech</div><div class="cat-count">15 320 articles</div></div>
         </div>
-      </div>
-      <!-- LIGNE 2 : 4 dernières catégories -->
-      <div class="cats-row-bottom">
         <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)" onmouseenter="hoverOpenSubcat('divertissement', this)" onmouseleave="scheduleCloseSubcat()">
           <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/divert2.png" alt="Divertissement"></div>
           <div class="cat-body"><div class="cat-name">Divertissement</div><div class="cat-count">7 890 articles</div></div>
