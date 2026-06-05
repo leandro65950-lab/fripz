@@ -346,7 +346,7 @@
 }
 .hero-inner {
   max-width: 1320px; margin: 0 auto;
-  display: grid; grid-template-columns: 250px 1fr 1.15fr;
+  display: grid; grid-template-columns: 300px 1fr 1.05fr;
   align-items: stretch; gap: 2rem;
   padding: 1rem 0 2.5rem;
 }
@@ -356,16 +356,19 @@
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(20,30,28,0.08);
+  background: #f4f2ed;
 }
 .hero-banner .sell-banner {
   height: 100%;
   border-radius: 18px;
+  display: flex;
+  align-items: stretch;
 }
 .hero-banner .sell-banner img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 
@@ -645,7 +648,7 @@
   .cat-card[data-cat="maison"] .cat-img-wrap img   { object-position: center center; }
   .cat-card[data-cat="loisirs"] .cat-img-wrap img  { object-position: center center; }
   .cat-card[data-cat="divert"] .cat-img-wrap img   { object-position: center center; }
-  .cat-card[data-cat="femme"] .cat-img-wrap img    { object-position: center 60%; }
+  .cat-card[data-cat="femme"] .cat-img-wrap img    { object-position: center center; }
   .cat-card[data-cat="homme"] .cat-img-wrap img    { object-position: center center; }
   .cat-card[data-cat="sport"] .cat-img-wrap img    { object-position: center center; }
   .cat-card[data-cat="tech"] .cat-img-wrap img     { object-position: left center; }
@@ -1539,19 +1542,19 @@
           <div class="cat-body"><div class="cat-name">Tech</div><div class="cat-count">15 320 articles</div></div>
         </div>
         <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)" onmouseenter="hoverOpenSubcat('divertissement', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/divert2.png" alt="Divertissement"></div>
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/divertissement.png" alt="Divertissement"></div>
           <div class="cat-body"><div class="cat-name">Divertissement</div><div class="cat-count">7 890 articles</div></div>
         </div>
         <div class="cat-card" data-cat="femme" onclick="toggleSubcat('femme', this)" onmouseenter="hoverOpenSubcat('femme', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/catfemme.png" alt="Mode femme"></div>
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/modefemme.png" alt="Mode femme"></div>
           <div class="cat-body"><div class="cat-name">Mode femme</div><div class="cat-count">18 760 articles</div></div>
         </div>
         <div class="cat-card" data-cat="homme" onclick="toggleSubcat('homme', this)" onmouseenter="hoverOpenSubcat('homme', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2014_52_00.png" alt="Mode homme"></div>
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/modehomme.png" alt="Mode homme"></div>
           <div class="cat-body"><div class="cat-name">Mode homme</div><div class="cat-count">14 230 articles</div></div>
         </div>
         <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)" onmouseenter="hoverOpenSubcat('sport', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/catloisirs.png" alt="Sport"></div>
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/sport.png" alt="Sport"></div>
           <div class="cat-body"><div class="cat-name">Sport</div><div class="cat-count">5 980 articles</div></div>
         </div>
       </div>
