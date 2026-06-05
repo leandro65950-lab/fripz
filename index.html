@@ -709,6 +709,34 @@
   .subcat-col ul li.selected::before { color: var(--text); }
 
   /* Two-level subcat navigation */
+  .subcat-twocol {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .subcat-items-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem 1.5rem;
+    align-content: start;
+  }
+  .subcat-items-block h4 {
+    font-size: 0.85rem; font-weight: 800; color: var(--teal);
+    margin-bottom: 0.45rem; padding-bottom: 0.3rem;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .subcat-items-list {
+    list-style: none; display: flex; flex-direction: column; gap: 0.15rem;
+  }
+  .subcat-items-list li {
+    font-size: 0.82rem; color: var(--text-mid);
+    cursor: pointer; padding: 0.25rem 0.4rem;
+    border-radius: 6px; transition: all 0.15s;
+  }
+  .subcat-items-list li:hover {
+    background: var(--teal-light); color: var(--teal); padding-left: 0.65rem;
+  }
   .subcat-groups {
     display: flex; flex-direction: column; gap: 0; width: 100%;
   }
@@ -2181,13 +2209,13 @@ const subcats = {
       {
         title: '👗 Vêtements', isGroup: true,
         children: [
-          { title: '👕 Hauts & Robes', items: ['T-shirts & Tops', 'Chemises & Blouses', 'Pulls & Sweats', 'Sweat-shirts', 'Débardeurs', 'Robe', 'Tailleurs', 'Combinaisons', 'Bodys'] },
+          { title: '👕 Hauts & Robes', items: ['T-shirts & Tops', 'Chemises & Blouses', 'Pulls & Sweats', 'Sweat-shirts', 'Débardeurs', 'Robe', 'Tailleurs', 'Blazers', 'Combinaisons', 'Bodys'] },
           { title: '👖 Bas', items: ['Jupe', 'Pantalons & Jeans', 'Shorts & Bermudas', 'Leggings & Collants', 'Joggings & Survêtements', 'Salopettes'] },
-          { title: '🩱 Sous-vêtements & Bain', items: ['Maillots de bain', 'Soutiens-gorge', 'Culottes & Strings', 'Gaine', 'Ensemble lingerie', 'Chaussettes & Collants', 'Peignoirs', 'Autres lingerie'] },
+          { title: '🩱 Sous-vêtements & Bain', items: ['Maillots de bain', 'Soutiens-gorge', 'Culottes & Strings', 'Gaine', 'Ensemble lingerie', 'Chaussettes & Collants', 'Peignoirs', 'Autres'] },
           { title: '🧥 Vestes & Manteaux', items: ['Vestes & Blazers', 'Manteaux', 'Parkas & Doudounes', 'Imperméables', 'Vestes en cuir', 'Blousons'] },
           { title: '🏃 Vêtements de sport', items: ['T-shirts & Débardeurs sport', 'Pulls & Sweats sport', 'Shorts sport', 'Leggings sport', 'Brassières sport', 'Vestes coupe-vent', 'Survêtements'] },
           { title: '😴 Pyjamas & Loungewear', items: ['Pyjamas', 'Nuisettes', 'Chemises de nuit', 'Robes de chambre', 'Pyjamas une pièce', 'Loungewear'] },
-          { title: '🤰 Maternité', items: ['Robes de maternité', 'Hauts de maternité', 'Pantalons de maternité', 'Shorts de maternité', 'Jupes de maternité', 'Leggings de maternité', 'Manteaux de maternité', 'Lingerie de maternité', 'Maillots de bain maternité'] },
+          { title: '🤰 Maternité', items: ['Robes de maternité', 'Hauts de maternité', 'Pantalons de maternité', 'Shorts de maternité', 'Jupes de maternité', 'Leggings de maternité', 'Manteaux de maternité', 'Lingerie de maternité', 'Maillots de bain maternité', 'Autres maternité'] },
           { title: '✨ Tenues de soirée', items: ['Robes de soirée', 'Robes de cérémonie', 'Tenues habillées', 'Combinaisons chic', 'Blazers habillés'] },
         ]
       },
@@ -2198,9 +2226,16 @@ const subcats = {
         ]
       },
       {
-        title: '👜 Accessoires', isGroup: true,
+        title: '👜 Sacs', isGroup: true,
         children: [
-          { title: '👜 Accessoires Femme', items: ['Sacs à main', 'Sacs à dos', 'Tote bags & Cabas', 'Pochettes & Clutchs', 'Sacs banane', 'Ceintures', 'Écharpes & Foulards', 'Chapeaux & Bonnets', 'Gants', 'Bijoux', 'Colliers & Pendentifs', 'Boucles d\'oreilles', 'Bracelets', 'Bagues', 'Montres', 'Lunettes de soleil', 'Portefeuilles & Porte-monnaie', 'Porte-clefs', 'Parapluies', 'Valises & Bagages', 'Barrettes & Accessoires cheveux', 'Masques & Bijoux de corps'] },
+          { title: '👜 Sacs Femme', items: ['Sacs à main', 'Sacs à dos', 'Tote bags & Cabas', 'Pochettes & Clutchs', 'Sacs banane', 'Sacs bandoulière', 'Sacs seau', 'Sacs de voyage', 'Sacs de plage', 'Mini sacs', 'Cartables & Sacs ordinateur', 'Autres sacs'] },
+        ]
+      },
+      {
+        title: '👒 Accessoires', isGroup: true,
+        children: [
+          { title: '👒 Accessoires Femme', items: ['Ceintures', 'Écharpes & Foulards', 'Chapeaux & Bonnets', 'Casquettes', 'Gants', 'Lunettes de soleil', 'Parapluies', 'Barrettes & Accessoires cheveux', 'Portefeuilles & Porte-monnaie', 'Porte-clefs', 'Valises & Bagages', 'Autres accessoires'] },
+          { title: '💍 Bijoux', items: ['Colliers & Pendentifs', 'Boucles d\'oreilles', 'Bracelets', 'Bagues', 'Montres', 'Bijoux de corps', 'Parures & Coffrets'] },
         ]
       },
       {
@@ -2209,7 +2244,7 @@ const subcats = {
           { title: '💄 Maquillage', items: ['Fond de teint & BB cream', 'Rouges à lèvres', 'Mascara & Yeux', 'Palettes fards', 'Blush & Bronzer', 'Pinceaux & Outils maquillage'] },
           { title: '🧴 Soin visage', items: ['Crèmes & Hydratants', 'Sérums & Huiles', 'Nettoyants & Démaquillants', 'Masques visage', 'Contour des yeux', 'Protection solaire'] },
           { title: '🛁 Soin corps', items: ['Crèmes & Lotions corps', 'Gommages & Exfoliants', 'Huiles corps', 'Déodorants', 'Épilation & Rasage', 'Soins mains & pieds'] },
-          { title: '💅 Ongles', items: ['Vernis à ongles', 'Gel & Semi-permanent', 'Faux ongles', 'Accessoires manucure'] },
+          { title: '💅 Ongles & Manucure', items: ['Vernis à ongles', 'Gel & Semi-permanent', 'Faux ongles', 'Kits manucure', 'Accessoires manucure', 'Soins ongles'] },
           { title: '💆 Cheveux', items: ['Shampooings & Après-shampooings', 'Masques cheveux', 'Huiles capillaires', 'Colorations', 'Outils coiffure', 'Accessoires cheveux'] },
           { title: '🌸 Parfums Femme', items: ['Eau de parfum', 'Eau de toilette', 'Coffrets parfum', 'Brumes & Body mist'] },
         ]
@@ -2544,17 +2579,67 @@ function getSubIcon(title){
 
 function renderSubcatGroups(cat, data) {
   document.getElementById('subcatCols').innerHTML = `
-    <div class="subcat-groups" id="subcat-level1">
-      ${data.cols.map((col, i) => `
-        <div class="subcat-group-item" onclick="openSubcatGroup(event,'${cat}',${i})">
-          <span class="subcat-group-icon">${getSubIcon(col.title)}</span>
-          <span class="subcat-group-name">${col.title.replace(/^[^\s]+\s/, '')}</span>
-          <span class="subcat-group-arrow">›</span>
-        </div>
-      `).join('')}
+    <div class="subcat-twocol">
+      <div class="subcat-groups" id="subcat-level1">
+        ${data.cols.map((col, i) => `
+          <div class="subcat-group-item${i===0?' active':''}" data-idx="${i}"
+               onmouseenter="hoverSubcatGroup('${cat}',${i}, this)"
+               onclick="hoverSubcatGroup('${cat}',${i}, this)">
+            <span class="subcat-group-icon">${getSubIcon(col.title)}</span>
+            <span class="subcat-group-name">${col.title.replace(/^[^\s]+\s/, '')}</span>
+            <span class="subcat-group-arrow">›</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="subcat-items-panel" id="subcatItemsPanel"></div>
     </div>
-    <div class="subcat-items-panel" id="subcatItemsPanel" style="display:none"></div>
   `;
+  // Ouvrir le 1er groupe par défaut
+  hoverSubcatGroupDirect(cat, 0);
+}
+
+function hoverSubcatGroup(cat, colIndex, el) {
+  document.querySelectorAll('#subcat-level1 .subcat-group-item').forEach(g => g.classList.remove('active'));
+  if (el) el.classList.add('active');
+  hoverSubcatGroupDirect(cat, colIndex);
+}
+
+function hoverSubcatGroupDirect(cat, colIndex) {
+  const col = subcats[cat].cols[colIndex];
+  const panel = document.getElementById('subcatItemsPanel');
+  if (!panel || !col) return;
+  let html = '';
+  if (col.isGroup && col.children) {
+    // Afficher les sous-groupes avec leurs items
+    html = col.children.map(child => `
+      <div class="subcat-items-block">
+        <h4>${child.title.replace(/^[^\s]+\s/, '')}</h4>
+        <ul class="subcat-items-list">
+          ${(child.items||[]).map(it => `<li onclick="pickSubcatNav('${cat}','${String(it).replace(/'/g,"\\'")}')">${it}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+  } else if (col.items) {
+    html = `
+      <div class="subcat-items-block">
+        <h4>${col.title.replace(/^[^\s]+\s/, '')}</h4>
+        <ul class="subcat-items-list">
+          ${col.items.map(it => `<li onclick="pickSubcatNav('${cat}','${String(it).replace(/'/g,"\\'")}')">${it}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+  panel.innerHTML = html || '<div style="color:var(--text-light);padding:1rem">Bientôt disponible</div>';
+}
+
+function pickSubcatNav(cat, sub) {
+  const panel = document.getElementById('subcatPanel');
+  if (panel) panel.classList.remove('open');
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+  currentOpenCat = null;
+  filterCat(cat);
+  toast(`🔍 ${sub}`);
+  document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth' });
 }
 
 function openSubcatGroup(e, cat, colIndex) {
