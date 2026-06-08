@@ -362,19 +362,16 @@
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(20,30,28,0.08);
-  background: #f4f2ed;
+  align-self: start;
 }
 .hero-banner .sell-banner {
-  height: 100%;
   border-radius: 18px;
-  display: flex;
-  align-items: stretch;
+  display: block;
 }
 .hero-banner .sell-banner img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
+  object-fit: contain;
   display: block;
 }
 
@@ -510,10 +507,13 @@
 
 
 /* barre de confiance */
+.hero-bottom-row {
+  display: flex; align-items: flex-start;
+  gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap;
+}
 .hero-trustbar {
-  display: flex; flex-wrap: wrap;
-  gap: 1.25rem 1.75rem;
-  margin-top: 1.5rem;
+  display: flex; flex-direction: column;
+  gap: 0.75rem;
   padding: 0;
   background: transparent;
 }
@@ -1472,52 +1472,7 @@
 </nav>
 
 <!-- BARRE CATÉGORIES (tout en haut, style Vinted) -->
-<section class="cats-topbar-section">
-  <div class="cats-topbar-inner">
-    <div class="cats-wrap">
-      <!-- 8 CATÉGORIES SUR UNE LIGNE -->
-      <div class="cats-row-top">
-        <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)" onmouseenter="hoverOpenSubcat('enfant', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2017_00_27.png" alt="Mode enfants"></div>
-          <div class="cat-body"><div class="cat-name">Mode enfants</div><div class="cat-count">12 540 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="maison" onclick="toggleSubcat('maison', this)" onmouseenter="hoverOpenSubcat('maison', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/08_maison_deco_categorie.jpg" alt="Maison & Déco"></div>
-          <div class="cat-body"><div class="cat-name">Maison & Déco</div><div class="cat-count">8 210 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="loisirs" onclick="toggleSubcat('loisirs', this)" onmouseenter="hoverOpenSubcat('loisirs', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/09_loisirs_categorie.jpg" alt="Loisirs"></div>
-          <div class="cat-body"><div class="cat-name">Loisirs</div><div class="cat-count">6 430 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="tech" onclick="toggleSubcat('electronique', this)" onmouseenter="hoverOpenSubcat('electronique', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/cat%20tech%20.png" alt="Tech"></div>
-          <div class="cat-body"><div class="cat-name">Tech</div><div class="cat-count">15 320 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)" onmouseenter="hoverOpenSubcat('divertissement', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/divertissement.png" alt="Divertissement"></div>
-          <div class="cat-body"><div class="cat-name">Divertissement</div><div class="cat-count">7 890 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="femme" onclick="toggleSubcat('femme', this)" onmouseenter="hoverOpenSubcat('femme', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/modefemme.png" alt="Mode femme"></div>
-          <div class="cat-body"><div class="cat-name">Mode femme</div><div class="cat-count">18 760 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="homme" onclick="toggleSubcat('homme', this)" onmouseenter="hoverOpenSubcat('homme', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/modehomme.png" alt="Mode homme"></div>
-          <div class="cat-body"><div class="cat-name">Mode homme</div><div class="cat-count">14 230 articles</div></div>
-        </div>
-        <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)" onmouseenter="hoverOpenSubcat('sport', this)" onmouseleave="scheduleCloseSubcat()">
-          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/sport.png" alt="Sport"></div>
-          <div class="cat-body"><div class="cat-name">Sport</div><div class="cat-count">5 980 articles</div></div>
-        </div>
-      </div>
-    </div>
-    <!-- SUBCATEGORY PANEL -->
-    <div class="subcat-panel" id="subcatPanel" onmouseenter="cancelCloseSubcat()" onmouseleave="scheduleCloseSubcat()">
-      <div class="subcat-panel-title" id="subcatTitle"></div>
-      <div class="subcat-cols" id="subcatCols"></div>
-    </div>
-  </div>
-</section>
+
 
 <!-- HERO -->
 <section class="hero">
@@ -1545,29 +1500,31 @@
           Vendre mes articles
         </button>
       </div>
-      <div class="hero-members">
-        <div class="hero-avatars">
-          <span style="background-image:url('https://i.pravatar.cc/80?img=47')"></span>
-          <span style="background-image:url('https://i.pravatar.cc/80?img=12')"></span>
-          <span style="background-image:url('https://i.pravatar.cc/80?img=32')"></span>
+      <div class="hero-bottom-row">
+        <div class="hero-members">
+          <div class="hero-avatars">
+            <span style="background-image:url('https://i.pravatar.cc/80?img=47')"></span>
+            <span style="background-image:url('https://i.pravatar.cc/80?img=12')"></span>
+            <span style="background-image:url('https://i.pravatar.cc/80?img=32')"></span>
+          </div>
+          <div class="hero-members-txt"><b>Sophie, Marc &amp; 1000+ membres</b><br>ont rejoint la communauté Fripz</div>
+          <svg class="hero-heart-doodle" viewBox="0 0 40 30" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q10 8 18 16"/><path d="M22 14c-2-3-6-1-6 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-4-5-6-2"/></svg>
         </div>
-        <div class="hero-members-txt"><b>Sophie, Marc &amp; 1000+ membres</b><br>ont rejoint la communauté Fripz</div>
-        <svg class="hero-heart-doodle" viewBox="0 0 40 30" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q10 8 18 16"/><path d="M22 14c-2-3-6-1-6 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-4-5-6-2"/></svg>
-      </div>
 
-      <!-- BARRE DE CONFIANCE -->
-      <div class="hero-trustbar">
-        <div class="trustbar-item">
-          <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
-          <div><div class="trustbar-title">Éco-responsable</div><div class="trustbar-desc">Donnez une seconde vie aux objets</div></div>
-        </div>
-        <div class="trustbar-item">
-          <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-          <div><div class="trustbar-title">Paiement sécurisé</div><div class="trustbar-desc">Vos transactions sont 100% protégées</div></div>
-        </div>
-        <div class="trustbar-item">
-          <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <div><div class="trustbar-title">Communauté engagée</div><div class="trustbar-desc">Des milliers de membres de confiance</div></div>
+        <!-- BARRE DE CONFIANCE -->
+        <div class="hero-trustbar">
+          <div class="trustbar-item">
+            <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
+            <div><div class="trustbar-title">Éco-responsable</div><div class="trustbar-desc">Donnez une seconde vie aux objets</div></div>
+          </div>
+          <div class="trustbar-item">
+            <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <div><div class="trustbar-title">Paiement sécurisé</div><div class="trustbar-desc">Vos transactions sont 100% protégées</div></div>
+          </div>
+          <div class="trustbar-item">
+            <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <div><div class="trustbar-title">Communauté engagée</div><div class="trustbar-desc">Des milliers de membres de confiance</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1704,6 +1661,53 @@
 </section>
 
 <!-- ARTICLES POPULAIRES -->
+<section class="cats-topbar-section">
+  <div class="cats-topbar-inner">
+    <div class="cats-wrap">
+      <!-- 8 CATÉGORIES SUR UNE LIGNE -->
+      <div class="cats-row-top">
+        <div class="cat-card" data-cat="enfant" onclick="toggleSubcat('enfant', this)" onmouseenter="hoverOpenSubcat('enfant', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2017_00_27.png" alt="Mode enfants"></div>
+          <div class="cat-body"><div class="cat-name">Mode enfants</div><div class="cat-count">12 540 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="maison" onclick="toggleSubcat('maison', this)" onmouseenter="hoverOpenSubcat('maison', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/08_maison_deco_categorie.jpg" alt="Maison & Déco"></div>
+          <div class="cat-body"><div class="cat-name">Maison & Déco</div><div class="cat-count">8 210 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="loisirs" onclick="toggleSubcat('loisirs', this)" onmouseenter="hoverOpenSubcat('loisirs', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/09_loisirs_categorie.jpg" alt="Loisirs"></div>
+          <div class="cat-body"><div class="cat-name">Loisirs</div><div class="cat-count">6 430 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="tech" onclick="toggleSubcat('electronique', this)" onmouseenter="hoverOpenSubcat('electronique', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/cat%20tech%20.png" alt="Tech"></div>
+          <div class="cat-body"><div class="cat-name">Tech</div><div class="cat-count">15 320 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="divert" onclick="toggleSubcat('divertissement', this)" onmouseenter="hoverOpenSubcat('divertissement', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/divertissement.png" alt="Divertissement"></div>
+          <div class="cat-body"><div class="cat-name">Divertissement</div><div class="cat-count">7 890 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="femme" onclick="toggleSubcat('femme', this)" onmouseenter="hoverOpenSubcat('femme', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/modefemme.png" alt="Mode femme"></div>
+          <div class="cat-body"><div class="cat-name">Mode femme</div><div class="cat-count">18 760 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="homme" onclick="toggleSubcat('homme', this)" onmouseenter="hoverOpenSubcat('homme', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/modehomme.png" alt="Mode homme"></div>
+          <div class="cat-body"><div class="cat-name">Mode homme</div><div class="cat-count">14 230 articles</div></div>
+        </div>
+        <div class="cat-card" data-cat="sport" onclick="toggleSubcat('sport', this)" onmouseenter="hoverOpenSubcat('sport', this)" onmouseleave="scheduleCloseSubcat()">
+          <div class="cat-img-wrap"><img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/sport.png" alt="Sport"></div>
+          <div class="cat-body"><div class="cat-name">Sport</div><div class="cat-count">5 980 articles</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- SUBCATEGORY PANEL -->
+    <div class="subcat-panel" id="subcatPanel" onmouseenter="cancelCloseSubcat()" onmouseleave="scheduleCloseSubcat()">
+      <div class="subcat-panel-title" id="subcatTitle"></div>
+      <div class="subcat-cols" id="subcatCols"></div>
+    </div>
+  </div>
+</section>
+
 <section class="popular-section" id="articles">
   <div class="popular-inner">
     <div class="popular-header">
