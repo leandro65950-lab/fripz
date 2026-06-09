@@ -19,6 +19,8 @@
     --white: #ffffff;
     --bg: #ffffff;
     --card-bg: #fafafa;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
   }
 
   body {
@@ -30,16 +32,16 @@
 
   /* ── NAVBAR ── */
   nav {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #eef0ee;
+    background: rgba(8,7,6,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
     padding: 0 2rem;
     position: sticky; top: 0; z-index: 100;
   }
   /* Barre catégories texte façon Vinted */
   .cats-textbar {
-    background: #fff;
-    border-bottom: 1px solid #eef0ee;
+    background: #0d0b09;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
     position: relative;
   }
   .cats-textbar-inner {
@@ -51,12 +53,12 @@
   }
   .cats-textbar-inner::-webkit-scrollbar { display: none; }
   .cats-textbar-link {
-    font-size: 0.92rem; font-weight: 600; color: var(--text-mid);
+    font-size: 0.92rem; font-weight: 600; color: rgba(240,237,232,0.55);
     text-decoration: none; white-space: nowrap; cursor: pointer;
     padding: 0.3rem 0; border-bottom: 2px solid transparent;
     transition: color 0.15s, border-color 0.15s;
   }
-  .cats-textbar-link:hover { color: var(--teal); border-bottom-color: var(--teal); }
+  .cats-textbar-link:hover { color: #c9a84c; border-bottom-color: #c9a84c; }
   .cats-textbar-panel {
     position: absolute; left: 50%; transform: translateX(-50%); top: 100%;
     width: 1100px; max-width: 94vw; max-height: 70vh; overflow-y: auto;
@@ -75,18 +77,18 @@
   }
   .nav-logo-icon {
     width: 38px; height: 38px; border-radius: 11px;
-    background: var(--teal);
+    background: linear-gradient(135deg, #c9a84c, #a8873a);
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 1.25rem; font-weight: 800;
+    color: #0a0907; font-size: 1.25rem; font-weight: 800;
   }
-  .nav-logo-text { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+  .nav-logo-text { font-size: 1.45rem; font-weight: 800; color: #f0ede8; letter-spacing: -0.02em; }
   .nav-search {
     flex: 1; max-width: 440px; position: relative;
     display: flex; align-items: center;
   }
   .nav-search .ns-ic { position: absolute; left: 14px; color: #9aa39c; display: flex; }
   .nav-search input {
-    width: 100%; border: none; background: #f3f5f3;
+    width: 100%; border: none; background: rgba(255,255,255,0.08);
     border-radius: 12px; padding: 0.7rem 2.6rem 0.7rem 2.5rem;
     font-family: inherit; font-size: 0.95rem; color: var(--text);
     outline: none; transition: box-shadow 0.2s, background 0.2s;
@@ -103,11 +105,11 @@
     flex-shrink: 0;
   }
   .nav-links a {
-    text-decoration: none; color: var(--text-mid);
+    text-decoration: none; color: rgba(240,237,232,0.7);
     font-size: 0.95rem; font-weight: 600;
     transition: color 0.2s; display: flex; align-items: center; gap: 0.2rem;
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+  .nav-links a:hover, .nav-links a.active { color: #c9a84c; }
   /* ===== MÉGA-MENU CATÉGORIES (barre du haut) ===== */
   .nav-cat-wrap { position: relative; }
   .nav-mega {
@@ -189,13 +191,14 @@
     box-shadow: 0 0 0 1px #e3e7e3;
   }
   .btn-sell-nav {
-    background: var(--teal); color: #fff;
+    background: linear-gradient(135deg, #c9a84c, #a8873a); color: #0a0907;
     border: none; border-radius: 10px;
     padding: 0.5rem 0.95rem;
     font-family: inherit; font-size: 0.85rem; font-weight: 700;
-    cursor: pointer; transition: background 0.2s; white-space: nowrap;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
   }
-  .btn-sell-nav:hover { background: var(--teal-dark); }
+  .btn-sell-nav:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.45); }
   .lang-select {
     position: relative; display: flex; align-items: center; gap: 0.3rem;
     padding: 0.4rem 0.6rem; border-radius: 10px; cursor: pointer;
@@ -1522,94 +1525,367 @@
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <!-- BANNIÈRE VENDEZ VOS ARTICLES -->
-    <div class="hero-banner">
-      <div class="sell-banner" onclick="openSellModal()">
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/banniere.png" alt="Vendez vos articles facilement">
-        <span class="sell-banner-live" id="liveCounter">42 500</span>
-      </div>
-    </div>
+<!-- HERO DARK PREMIUM -->
+<section class="hero-dark">
+  <!-- Fond animé -->
+  <div class="hd-bg">
+    <div class="hd-blob hd-blob-1"></div>
+    <div class="hd-blob hd-blob-2"></div>
+    <div class="hd-blob hd-blob-3"></div>
+    <div class="hd-grid"></div>
+  </div>
 
-    <!-- TEXTE -->
-    <div class="hero-left">
-      <h1 class="hero-title">Achetez, vendez,<br>recommencez<span class="dot">.</span></h1>
-      <p class="hero-slogan">Bon pour vous,<br>bon pour la planète.</p>
-      <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main.</p>
-      <div class="hero-cta">
-        <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">
-          Commencer à acheter
+  <!-- Contenu principal -->
+  <div class="hd-inner">
+    <!-- Colonne gauche : texte -->
+    <div class="hd-left">
+      <div class="hd-badge">
+        <span class="hd-badge-dot"></span>
+        <span id="liveCounter">42 500</span> articles en vente maintenant
+      </div>
+
+      <h1 class="hd-title">
+        <span class="hd-title-line">Achetez.</span>
+        <span class="hd-title-line hd-title-gold">Vendez.</span>
+        <span class="hd-title-line">Recommencez.</span>
+      </h1>
+
+      <p class="hd-sub">La marketplace premium de la seconde main. Des milliers d'articles uniques, des vendeurs de confiance, des prix imbattables.</p>
+
+      <div class="hd-cta">
+        <button class="hd-btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">
+          Explorer les articles
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
-        <button class="btn-secondary" onclick="openSellModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
-          Vendre mes articles
+        <button class="hd-btn-secondary" onclick="openSellModal()">
+          Vendre un article
         </button>
+      </div>
+
+      <div class="hd-trust">
+        <div class="hd-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Paiement sécurisé
+        </div>
+        <div class="hd-trust-sep">·</div>
+        <div class="hd-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Livraison rapide
+        </div>
+        <div class="hd-trust-sep">·</div>
+        <div class="hd-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Retours gratuits
+        </div>
       </div>
     </div>
 
-    <!-- MOSAIQUE PHOTOS -->
-    <div class="hero-mosaic">
-      <div class="mosaic-tile mt-mode">
-        <span class="m-tag">Mode</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/01_mode_femme.jpg" alt="Mode">
-      </div>
-      <div class="mosaic-tile mt-maison">
-        <span class="m-tag">Maison</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/02_maison_deco.jpg" alt="Maison">
-      </div>
-      <div class="mosaic-tile mt-vintage">
-        <span class="m-tag">Vintage</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2014_14_44.png" alt="Vintage" style="object-position: center 30%;">
-      </div>
-      <div class="mosaic-tile mt-loisirs">
-        <span class="m-tag">Loisirs</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/04_loisirs.jpg" alt="Loisirs">
-      </div>
-      <div class="mosaic-tile mt-divert">
-        <span class="m-tag">Divertissement</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/05_divertissement.jpg" alt="Divertissement">
-      </div>
-      <div class="mosaic-tile mt-tech">
-        <span class="m-tag">Tech</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/06_tech.jpg" alt="Tech">
+    <!-- Colonne droite : mosaïque premium -->
+    <div class="hd-right">
+      <div class="hd-mosaic">
+        <div class="hd-tile hd-tile-1">
+          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/01_mode_femme.jpg" alt="Mode">
+          <div class="hd-tile-label">Mode Femme</div>
+        </div>
+        <div class="hd-tile hd-tile-2">
+          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/06_tech.jpg" alt="Tech">
+          <div class="hd-tile-label">Tech</div>
+        </div>
+        <div class="hd-tile hd-tile-3">
+          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/02_maison_deco.jpg" alt="Maison">
+          <div class="hd-tile-label">Maison</div>
+        </div>
+        <div class="hd-tile hd-tile-4">
+          <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/05_divertissement.jpg" alt="Sport">
+          <div class="hd-tile-label">Divertissement</div>
+        </div>
+        <!-- Carte flottante prix -->
+        <div class="hd-float-card hd-float-1">
+          <div class="hd-float-icon">🔥</div>
+          <div class="hd-float-text">
+            <div class="hd-float-title">Offre du jour</div>
+            <div class="hd-float-val">–50%</div>
+          </div>
+        </div>
+        <div class="hd-float-card hd-float-2">
+          <div class="hd-float-icon">⭐</div>
+          <div class="hd-float-text">
+            <div class="hd-float-title">Note moyenne</div>
+            <div class="hd-float-val">4.9 / 5</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- LIGNE BAS : Sophie + barre de confiance -->
-  <div class="hero-bottom-wrap">
-    <div class="hero-bottom-row">
-      <div class="hero-members">
-        <div class="hero-avatars">
-          <span style="background-image:url('https://i.pravatar.cc/80?img=47')"></span>
-          <span style="background-image:url('https://i.pravatar.cc/80?img=12')"></span>
-          <span style="background-image:url('https://i.pravatar.cc/80?img=32')"></span>
-        </div>
-        <div class="hero-members-txt"><b>Sophie, Marc &amp; 1000+ membres</b><br>ont rejoint la communauté Fripz</div>
-        <svg class="hero-heart-doodle" viewBox="0 0 40 30" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q10 8 18 16"/><path d="M22 14c-2-3-6-1-6 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-4-5-6-2"/></svg>
+  <!-- Barre membres -->
+  <div class="hd-members-bar">
+    <div class="hd-members-inner">
+      <div class="hd-avatars">
+        <img src="https://i.pravatar.cc/80?img=47" alt="">
+        <img src="https://i.pravatar.cc/80?img=12" alt="">
+        <img src="https://i.pravatar.cc/80?img=32" alt="">
+        <img src="https://i.pravatar.cc/80?img=56" alt="">
+        <img src="https://i.pravatar.cc/80?img=21" alt="">
       </div>
-
-      <!-- BARRE DE CONFIANCE -->
-      <div class="hero-trustbar">
-        <div class="trustbar-item">
-          <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></span>
-          <div><div class="trustbar-title">Éco-responsable</div><div class="trustbar-desc">Donnez une seconde vie aux objets</div></div>
-        </div>
-        <div class="trustbar-item">
-          <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-          <div><div class="trustbar-title">Paiement sécurisé</div><div class="trustbar-desc">Vos transactions sont 100% protégées</div></div>
-        </div>
-        <div class="trustbar-item">
-          <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <div><div class="trustbar-title">Communauté engagée</div><div class="trustbar-desc">Des milliers de membres de confiance</div></div>
-        </div>
-      </div>
+      <span class="hd-members-txt"><strong>+18 000 membres</strong> nous font confiance</span>
+      <div class="hd-stars">★★★★★ <span>4.9</span></div>
     </div>
   </div>
 </section>
+
+<style>
+/* ═══════════════════════════════════════════
+   HERO DARK & PREMIUM
+   ═══════════════════════════════════════════ */
+.hero-dark {
+  background: #080706;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Fond animé */
+.hd-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.hd-blob {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  animation: hdBlob 10s ease-in-out infinite;
+}
+.hd-blob-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.18), transparent 65%);
+  top: -200px; right: -100px;
+  animation-duration: 12s;
+}
+.hd-blob-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(91,138,114,0.15), transparent 65%);
+  bottom: -100px; left: 5%;
+  animation-duration: 9s; animation-delay: -4s;
+}
+.hd-blob-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 65%);
+  top: 40%; left: 35%;
+  animation-duration: 14s; animation-delay: -7s;
+}
+@keyframes hdBlob {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(30px,-40px) scale(1.08); }
+  66% { transform: translate(-20px,25px) scale(0.95); }
+}
+.hd-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Contenu */
+.hd-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 5rem 2rem 3rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+  position: relative; z-index: 1;
+}
+@media(max-width: 900px) {
+  .hd-inner { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; }
+  .hd-right { display: none; }
+}
+
+/* Badge live */
+.hd-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: #c9a84c; font-size: 0.82rem; font-weight: 700;
+  padding: 0.4rem 1rem; border-radius: 100px;
+  margin-bottom: 2rem; letter-spacing: 0.02em;
+}
+.hd-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #c9a84c;
+  box-shadow: 0 0 8px #c9a84c;
+  animation: hdPulse 1.5s ease-in-out infinite;
+}
+@keyframes hdPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+/* Titre */
+.hd-title {
+  display: flex; flex-direction: column; gap: 0;
+  margin-bottom: 1.75rem;
+}
+.hd-title-line {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900; line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: #f0ede8;
+  display: block;
+  animation: hdTitleIn 0.8s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hd-title-line:nth-child(1) { animation-delay: 0.1s; }
+.hd-title-line:nth-child(2) { animation-delay: 0.2s; }
+.hd-title-line:nth-child(3) { animation-delay: 0.3s; }
+.hd-title-gold {
+  background: linear-gradient(90deg, #c9a84c, #e8c97a, #c9a84c);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hdTitleIn 0.8s cubic-bezier(0.16,1,0.3,1) both, hdShine 3s linear 1s infinite;
+}
+@keyframes hdShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes hdTitleIn {
+  from { opacity: 0; transform: translateY(30px) skewY(2deg); }
+  to   { opacity: 1; transform: translateY(0) skewY(0); }
+}
+
+/* Sous-titre */
+.hd-sub {
+  font-size: 1.05rem; color: rgba(240,237,232,0.6);
+  line-height: 1.7; margin-bottom: 2.5rem;
+  max-width: 440px;
+  animation: hdFadeIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+}
+@keyframes hdFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Boutons */
+.hd-cta {
+  display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;
+  animation: hdFadeIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s both;
+}
+.hd-btn-primary {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: linear-gradient(135deg, #c9a84c, #a8873a);
+  color: #0a0907; border: none; border-radius: 12px;
+  padding: 0.95rem 1.75rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.97rem; font-weight: 800; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+}
+.hd-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(201,168,76,0.5);
+}
+.hd-btn-primary svg { width: 18px; height: 18px; }
+.hd-btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: transparent;
+  color: #f0ede8; border: 1.5px solid rgba(240,237,232,0.2);
+  border-radius: 12px; padding: 0.95rem 1.75rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.97rem; font-weight: 700; cursor: pointer;
+  transition: all 0.2s;
+}
+.hd-btn-secondary:hover {
+  border-color: rgba(201,168,76,0.5);
+  color: #c9a84c;
+  background: rgba(201,168,76,0.06);
+}
+
+/* Trust bar */
+.hd-trust {
+  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  animation: hdFadeIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.6s both;
+}
+.hd-trust-item {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.82rem; color: rgba(240,237,232,0.5); font-weight: 600;
+}
+.hd-trust-item svg { color: #c9a84c; flex-shrink: 0; }
+.hd-trust-sep { color: rgba(240,237,232,0.2); }
+
+/* Mosaïque droite */
+.hd-right { position: relative; }
+.hd-mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px 200px;
+  gap: 14px;
+  position: relative;
+  animation: hdFadeIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+}
+.hd-tile {
+  border-radius: 18px; overflow: hidden; position: relative;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+}
+.hd-tile:hover { transform: scale(1.04); z-index: 2; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.hd-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hd-tile::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+  z-index: 1;
+}
+.hd-tile-label {
+  position: absolute; bottom: 12px; left: 14px; z-index: 2;
+  color: #fff; font-size: 0.82rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.hd-tile-1 { border: 1px solid rgba(201,168,76,0.3); }
+.hd-tile-2 { margin-top: 28px; border: 1px solid rgba(255,255,255,0.1); }
+.hd-tile-3 { margin-top: -28px; border: 1px solid rgba(255,255,255,0.1); }
+.hd-tile-4 { border: 1px solid rgba(201,168,76,0.2); }
+
+/* Cartes flottantes */
+.hd-float-card {
+  position: absolute; z-index: 5;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px; padding: 0.75rem 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  animation: hdFloat 4s ease-in-out infinite;
+  min-width: 140px;
+}
+.hd-float-1 { top: -16px; right: -16px; animation-delay: 0s; }
+.hd-float-2 { bottom: -16px; left: -16px; animation-delay: -2s; }
+@keyframes hdFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hd-float-icon { font-size: 1.5rem; }
+.hd-float-title { font-size: 0.72rem; color: rgba(240,237,232,0.5); font-weight: 600; margin-bottom: 2px; }
+.hd-float-val { font-size: 1rem; font-weight: 900; color: #c9a84c; }
+
+/* Barre membres */
+.hd-members-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.25rem 2rem;
+  position: relative; z-index: 1;
+}
+.hd-members-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; gap: 1.25rem;
+}
+.hd-avatars { display: flex; }
+.hd-avatars img {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.4);
+  margin-left: -10px; object-fit: cover;
+}
+.hd-avatars img:first-child { margin-left: 0; }
+.hd-members-txt {
+  font-size: 0.88rem; color: rgba(240,237,232,0.6);
+}
+.hd-members-txt strong { color: #f0ede8; }
+.hd-stars {
+  margin-left: auto; color: #c9a84c; font-size: 0.88rem; font-weight: 700;
+}
+.hd-stars span { color: rgba(240,237,232,0.6); margin-left: 4px; }
+</style>
 
 <!-- CATEGORIES -->
 <section class="section" style="display:none">
