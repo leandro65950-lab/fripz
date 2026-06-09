@@ -1451,6 +1451,389 @@
   .store-badge svg { width: 27px; height: 27px; flex-shrink: 0; color: #fff; fill: #fff; }
   .store-badge span { display: flex; flex-direction: column; font-size: 0.98rem; font-weight: 700; line-height: 1.15; }
   .store-badge small { font-size: 0.66rem; font-weight: 500; color: #9aa89f; }
+
+
+/* ══════════════════════════════════════════════
+   AMÉLIORATIONS VISUELLES IMPRESSIONNANTES
+   ══════════════════════════════════════════════ */
+
+/* ── HERO BLOBS ANIMÉS ── */
+.hero-blobs {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+}
+.hero-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(60px); opacity: 0.55;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+.hero-blob-1 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(91,138,114,0.35), transparent 70%);
+  top: -80px; right: 5%;
+  animation-delay: 0s; animation-duration: 9s;
+}
+.hero-blob-2 {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(163,215,190,0.3), transparent 70%);
+  bottom: -60px; left: 10%;
+  animation-delay: -3s; animation-duration: 11s;
+}
+.hero-blob-3 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(243,195,140,0.4), transparent 70%);
+  top: 30%; right: 25%;
+  animation-delay: -5s; animation-duration: 7s;
+}
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -25px) scale(1.05); }
+  66% { transform: translate(-15px, 15px) scale(0.97); }
+}
+.hero { position: relative; }
+.hero-inner { position: relative; z-index: 1; }
+
+/* ── GRADIENT TEXT ── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--teal) 0%, #2d9975 50%, #6dc8a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── TRENDING TICKER ── */
+.trending-bar {
+  background: var(--text);
+  padding: 0.65rem 0;
+  overflow: hidden;
+  position: relative;
+}
+.trending-bar::before, .trending-bar::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+  pointer-events: none;
+}
+.trending-bar::before { left: 0; background: linear-gradient(to right, var(--text), transparent); }
+.trending-bar::after  { right: 0; background: linear-gradient(to left, var(--text), transparent); }
+.ticker-label {
+  position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%);
+  z-index: 3; background: var(--teal); color: #fff;
+  font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem; border-radius: 5px;
+}
+.ticker-track {
+  display: flex; gap: 0;
+  animation: tickerScroll 38s linear infinite;
+  width: max-content;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0 2rem;
+  font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.ticker-item:last-child { border-right: none; }
+.ticker-item .t-emoji { font-size: 1rem; }
+.ticker-item .t-price { color: var(--teal); font-weight: 800; }
+.ticker-dot { color: rgba(255,255,255,0.3); }
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── STATS SECTION ── */
+.stats-section {
+  background: linear-gradient(135deg, #0d1f18 0%, #1a2e25 50%, #0d1f18 100%);
+  padding: 4rem 2rem;
+  position: relative; overflow: hidden;
+}
+.stats-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235b8a72' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+.stats-title {
+  text-align: center; color: #fff;
+  font-size: 2.2rem; font-weight: 800;
+  letter-spacing: -0.035em; margin-bottom: 0.5rem;
+}
+.stats-subtitle {
+  text-align: center; color: rgba(255,255,255,0.55);
+  font-size: 1.05rem; margin-bottom: 3rem;
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+@media(max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 2rem 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s, background 0.3s, border-color 0.3s;
+  cursor: default;
+}
+.stat-card:hover {
+  transform: translateY(-6px);
+  background: rgba(91,138,114,0.15);
+  border-color: rgba(91,138,114,0.4);
+}
+.stat-icon {
+  font-size: 2.5rem; margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(91,138,114,0.4));
+}
+.stat-number {
+  font-size: 2.8rem; font-weight: 900;
+  color: #fff; letter-spacing: -0.04em;
+  line-height: 1; margin-bottom: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat-number .stat-suffix { font-size: 2rem; color: var(--teal); }
+.stat-label {
+  font-size: 0.9rem; font-weight: 600;
+  color: rgba(255,255,255,0.55); text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── FEATURED CATEGORIES RIBBON ── */
+.cats-ribbon {
+  background: #f8faf8;
+  padding: 2.5rem 2rem;
+  border-top: 1px solid #eef0ee;
+}
+.cats-ribbon-inner { max-width: 1280px; margin: 0 auto; }
+.ribbon-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+.ribbon-title { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; }
+.ribbon-title span { color: var(--teal); }
+.ribbon-see-all {
+  color: var(--teal); font-weight: 700; font-size: 0.92rem;
+  text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
+}
+.ribbon-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+@media(max-width: 900px) { .ribbon-cards { grid-template-columns: repeat(2, 1fr); } }
+.ribbon-card {
+  border-radius: 18px; overflow: hidden; position: relative;
+  aspect-ratio: 4/3; cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+}
+.ribbon-card:hover {
+  transform: scale(1.03) translateY(-4px);
+  box-shadow: 0 24px 50px rgba(20,30,28,0.22);
+}
+.ribbon-card img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s ease;
+}
+.ribbon-card:hover img { transform: scale(1.08); }
+.ribbon-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,20,15,0.75) 0%, rgba(10,20,15,0.1) 60%, transparent 100%);
+  display: flex; align-items: flex-end; padding: 1.25rem;
+}
+.ribbon-card-info { color: #fff; }
+.ribbon-card-name {
+  font-size: 1.05rem; font-weight: 800; margin-bottom: 0.2rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.ribbon-card-count {
+  font-size: 0.8rem; opacity: 0.8; font-weight: 600;
+}
+.ribbon-card-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(255,255,255,0.95); color: var(--teal-dark);
+  font-size: 0.7rem; font-weight: 800; padding: 0.2rem 0.6rem;
+  border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+/* ── NEWSLETTER SECTION ── */
+.newsletter-section {
+  background: linear-gradient(135deg, var(--teal) 0%, #47745c 100%);
+  padding: 3.5rem 2rem;
+  position: relative; overflow: hidden;
+}
+.newsletter-section::before {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  top: -150px; right: -100px;
+}
+.newsletter-section::after {
+  content: '';
+  position: absolute;
+  width: 250px; height: 250px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  bottom: -100px; left: 5%;
+}
+.newsletter-inner {
+  max-width: 640px; margin: 0 auto;
+  text-align: center; position: relative; z-index: 1;
+}
+.newsletter-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.2); color: #fff;
+  font-size: 0.78rem; font-weight: 700; padding: 0.3rem 0.8rem;
+  border-radius: 100px; margin-bottom: 1rem;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.newsletter-title {
+  font-size: 2rem; font-weight: 800; color: #fff;
+  letter-spacing: -0.035em; margin-bottom: 0.75rem;
+}
+.newsletter-sub {
+  color: rgba(255,255,255,0.8); font-size: 1.05rem;
+  line-height: 1.6; margin-bottom: 2rem;
+}
+.newsletter-form {
+  display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+}
+.newsletter-input {
+  flex: 1; min-width: 240px;
+  padding: 0.85rem 1.25rem;
+  border: none; border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem; color: var(--text);
+  outline: none; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transition: box-shadow 0.2s;
+}
+.newsletter-input:focus {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 0 3px rgba(255,255,255,0.3);
+}
+.newsletter-btn {
+  padding: 0.85rem 1.75rem;
+  background: var(--text); color: #fff; border: none;
+  border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.newsletter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.newsletter-trust {
+  display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+  margin-top: 1.25rem; flex-wrap: wrap;
+}
+.newsletter-trust-item {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 600;
+}
+
+/* ── FLOATING BACK TO TOP ── */
+.back-to-top {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 150;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--teal); color: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(91,138,114,0.4);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  opacity: 0; transform: translateY(20px) scale(0.8); pointer-events: none;
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.back-to-top:hover { background: var(--teal-dark); transform: translateY(-3px) scale(1.05); }
+.back-to-top svg { width: 20px; height: 20px; }
+
+/* ── AMÉLIORATIONS ARTICLE CARDS ── */
+.article-card {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+}
+.article-card:hover { transform: translateY(-6px) scale(1.01); }
+.article-card .article-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.04));
+  pointer-events: none;
+}
+
+/* ── NAV BRAND PULSE ── */
+.nav-logo-icon {
+  animation: brandPulse 4s ease-in-out infinite;
+}
+@keyframes brandPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91,138,114,0); }
+  50% { box-shadow: 0 0 0 8px rgba(91,138,114,0.15); }
+}
+
+/* ── PAGE LOAD ANIMATION ── */
+.page-loaded .hero-title,
+.page-loaded .hero-slogan,
+.page-loaded .hero-sub,
+.page-loaded .hero-cta,
+.page-loaded .hero-members {
+  animation: heroEntrance 0.7s cubic-bezier(0.16,1,0.3,1) both;
+}
+.page-loaded .hero-title { animation-delay: 0.1s; }
+.page-loaded .hero-slogan { animation-delay: 0.2s; }
+.page-loaded .hero-sub { animation-delay: 0.3s; }
+.page-loaded .hero-cta { animation-delay: 0.4s; }
+.page-loaded .hero-members { animation-delay: 0.5s; }
+@keyframes heroEntrance {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-loaded .mosaic-tile {
+  animation: mosaicPop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.page-loaded .mt-mode   { animation-delay: 0.15s; }
+.page-loaded .mt-maison { animation-delay: 0.25s; }
+.page-loaded .mt-vintage{ animation-delay: 0.30s; }
+.page-loaded .mt-loisirs{ animation-delay: 0.20s; }
+.page-loaded .mt-divert { animation-delay: 0.35s; }
+.page-loaded .mt-tech   { animation-delay: 0.40s; }
+@keyframes mosaicPop {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; }
+}
+
+/* ── SHIMMER LOADING ── */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* ── CAT CARD ENHANCED ── */
+.cat-card {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s, border-color 0.2s;
+}
+.cat-card:hover { transform: translateY(-6px) scale(1.02); }
+
+/* ── SECTION DIVIDER ── */
+.section-wave {
+  display: block; width: 100%; overflow: hidden; line-height: 0;
+}
+.section-wave svg { display: block; width: 100%; }
+
 </style>
 </head>
 <body>
@@ -1768,6 +2151,141 @@
   </div>
 </section>
 
+<!-- TRENDING TICKER -->
+<div class="trending-bar">
+  <span class="ticker-label">🔥 Tendances</span>
+  <div style="overflow:hidden;padding-left:130px">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item"><span class="t-emoji">👟</span> Air Jordan 1 Retro High OG <span class="t-price">185 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">👜</span> Sac Longchamp Le Pliage <span class="t-price">45 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">📱</span> iPhone 14 Pro 128Go <span class="t-price">620 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎮</span> PS5 + 2 manettes <span class="t-price">380 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">👗</span> Robe Zara tendance S <span class="t-price">18 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎸</span> Guitare Fender Stratocaster <span class="t-price">490 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎒</span> Sac à dos Kanken Rouge <span class="t-price">55 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">💻</span> MacBook Air M2 <span class="t-price">890 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🧥</span> Manteau Mango camel L <span class="t-price">35 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🃏</span> Cartes Pokémon Dracaufeu <span class="t-price">220 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">👟</span> Nike Dunk Low Panda <span class="t-price">145 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎧</span> AirPods Pro 2ème gen <span class="t-price">170 €</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="t-emoji">👟</span> Air Jordan 1 Retro High OG <span class="t-price">185 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">👜</span> Sac Longchamp Le Pliage <span class="t-price">45 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">📱</span> iPhone 14 Pro 128Go <span class="t-price">620 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎮</span> PS5 + 2 manettes <span class="t-price">380 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">👗</span> Robe Zara tendance S <span class="t-price">18 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎸</span> Guitare Fender Stratocaster <span class="t-price">490 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎒</span> Sac à dos Kanken Rouge <span class="t-price">55 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">💻</span> MacBook Air M2 <span class="t-price">890 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🧥</span> Manteau Mango camel L <span class="t-price">35 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🃏</span> Cartes Pokémon Dracaufeu <span class="t-price">220 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">👟</span> Nike Dunk Low Panda <span class="t-price">145 €</span></span>
+      <span class="ticker-item"><span class="t-emoji">🎧</span> AirPods Pro 2ème gen <span class="t-price">170 €</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES RIBBON -->
+<section class="cats-ribbon reveal">
+  <div class="cats-ribbon-inner">
+    <div class="ribbon-header">
+      <h2 class="ribbon-title">Explorez par <span>univers</span></h2>
+      <a class="ribbon-see-all" href="#">Tout voir →</a>
+    </div>
+    <div class="ribbon-cards">
+      <div class="ribbon-card reveal reveal-delay-1" onclick="openCatFromRibbon('femme')">
+        <img src="catfemme.png" alt="Mode Femme" onerror="this.style.background='linear-gradient(135deg,#fce4ec,#f48fb1)';this.style.display='block';this.src=''">
+        <div class="ribbon-card-overlay">
+          <div class="ribbon-card-info">
+            <div class="ribbon-card-name">Mode Femme</div>
+            <div class="ribbon-card-count">+12 000 articles</div>
+          </div>
+        </div>
+        <span class="ribbon-card-badge">Populaire</span>
+      </div>
+      <div class="ribbon-card reveal reveal-delay-2" onclick="openCatFromRibbon('tech')">
+        <img src="cat tech .png" alt="Tech" onerror="this.style.background='linear-gradient(135deg,#e3f2fd,#90caf9)';this.src=''">
+        <div class="ribbon-card-overlay">
+          <div class="ribbon-card-info">
+            <div class="ribbon-card-name">Tech & Électronique</div>
+            <div class="ribbon-card-count">+8 500 articles</div>
+          </div>
+        </div>
+        <span class="ribbon-card-badge">Coup de ♥</span>
+      </div>
+      <div class="ribbon-card reveal reveal-delay-3" onclick="openCatFromRibbon('loisirs')">
+        <img src="catloisirs.png" alt="Loisirs" onerror="this.style.background='linear-gradient(135deg,#e8f5e9,#a5d6a7)';this.src=''">
+        <div class="ribbon-card-overlay">
+          <div class="ribbon-card-info">
+            <div class="ribbon-card-name">Loisirs & Jeux</div>
+            <div class="ribbon-card-count">+5 200 articles</div>
+          </div>
+        </div>
+      </div>
+      <div class="ribbon-card reveal reveal-delay-4" onclick="openCatFromRibbon('divert')">
+        <img src="cat divert.png" alt="Divertissement" onerror="this.style.background='linear-gradient(135deg,#fce4ec,#ce93d8)';this.src=''">
+        <div class="ribbon-card-overlay">
+          <div class="ribbon-card-info">
+            <div class="ribbon-card-name">Divertissement</div>
+            <div class="ribbon-card-count">+4 100 articles</div>
+          </div>
+        </div>
+        <span class="ribbon-card-badge">Nouveau</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <h2 class="stats-title reveal">La marketplace qui <span class="gradient-text">grandit chaque jour</span></h2>
+    <p class="stats-subtitle reveal">Rejoignez des milliers de vendeurs et d'acheteurs satisfaits</p>
+    <div class="stats-grid">
+      <div class="stat-card reveal reveal-delay-1">
+        <span class="stat-icon">🛍️</span>
+        <div class="stat-number"><span class="stat-count" data-target="42500" data-suffix="+">0</span></div>
+        <div class="stat-label">Articles en vente</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-2">
+        <span class="stat-icon">👥</span>
+        <div class="stat-number"><span class="stat-count" data-target="18200" data-suffix="+">0</span></div>
+        <div class="stat-label">Membres actifs</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <span class="stat-icon">⭐</span>
+        <div class="stat-number"><span class="stat-count" data-target="4.9" data-suffix="/5" data-decimal="true">0</span></div>
+        <div class="stat-label">Note moyenne</div>
+      </div>
+      <div class="stat-card reveal reveal-delay-4">
+        <span class="stat-icon">✅</span>
+        <div class="stat-number"><span class="stat-count" data-target="99" data-suffix="%">0</span></div>
+        <div class="stat-label">Transactions sécurisées</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER SECTION -->
+<section class="newsletter-section">
+  <div class="newsletter-inner reveal">
+    <div class="newsletter-badge">📬 Newsletter</div>
+    <h2 class="newsletter-title">Les meilleures affaires,<br>directement dans votre boîte</h2>
+    <p class="newsletter-sub">Recevez chaque semaine les nouvelles annonces tendances, les bons plans et les alertes de prix.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="votre@email.com" id="newsletterEmail">
+      <button class="newsletter-btn" onclick="subscribeNewsletter()">
+        S'abonner gratuitement →
+      </button>
+    </div>
+    <div class="newsletter-trust">
+      <span class="newsletter-trust-item">🔒 100% gratuit</span>
+      <span class="newsletter-trust-item">✉️ 1 email/semaine</span>
+      <span class="newsletter-trust-item">🚫 Zéro spam</span>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -1823,6 +2341,13 @@
     </span>
   </div>
 </footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" title="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
 
 <!-- PAGE OVERLAY (legal & help) -->
 <div class="page-overlay" id="pageOverlay">
@@ -4314,6 +4839,147 @@ function closeISBNScanner() {
   }, 4000);
 
   render();
+})();
+</script>
+<script>
+/* ══════════════════════════════════════════════
+   ANIMATIONS & INTERACTIONS IMPRESSIONNANTES
+   ══════════════════════════════════════════════ */
+
+// ── PAGE LOAD ──
+window.addEventListener('load', () => {
+  setTimeout(() => document.body.classList.add('page-loaded'), 50);
+});
+
+// ── SCROLL REVEAL (IntersectionObserver) ──
+(function initReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+// ── ANIMATED COUNTERS ──
+(function initCounters() {
+  const counters = document.querySelectorAll('.stat-count');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const isDecimal = el.dataset.decimal === 'true';
+      const duration = 1800;
+      const start = performance.now();
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = isDecimal ? (eased * target).toFixed(1) : Math.round(eased * target).toLocaleString('fr-FR');
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => observer.observe(el));
+})();
+
+// ── BACK TO TOP ──
+(function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+})();
+
+// ── HERO BLOBS (inject dynamically) ──
+(function injectBlobs() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const blobsDiv = document.createElement('div');
+  blobsDiv.className = 'hero-blobs';
+  blobsDiv.innerHTML = `
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+  `;
+  hero.prepend(blobsDiv);
+})();
+
+// ── NEWSLETTER SUBSCRIPTION ──
+function subscribeNewsletter() {
+  const input = document.getElementById('newsletterEmail');
+  if (!input) return;
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.boxShadow = '0 0 0 3px rgba(220,50,50,0.3)';
+    input.focus();
+    setTimeout(() => input.style.boxShadow = '', 2000);
+    return;
+  }
+  input.value = '';
+  input.placeholder = '✅ Merci ! Vous êtes inscrit(e) 🎉';
+  input.style.boxShadow = '0 0 0 3px rgba(91,138,114,0.5)';
+  setTimeout(() => {
+    input.placeholder = 'votre@email.com';
+    input.style.boxShadow = '';
+  }, 4000);
+}
+
+// ── RIBBON CATEGORY CLICK ──
+function openCatFromRibbon(cat) {
+  const catMap = { femme: 'femme', tech: 'tech', loisirs: 'loisirs', divert: 'divert' };
+  const el = document.querySelector(`.cat-card[data-cat="${catMap[cat] || cat}"]`);
+  if (el) { el.click(); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+}
+
+// ── MAGNETIC HOVER ON BUTTONS ──
+(function initMagnetic() {
+  document.querySelectorAll('.btn-primary, .newsletter-btn').forEach(btn => {
+    btn.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      this.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px) translateY(-1px)`;
+    });
+    btn.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+    });
+  });
+})();
+
+// ── CARD TILT EFFECT ──
+(function initTilt() {
+  document.querySelectorAll('.stat-card').forEach(card => {
+    card.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      this.style.transform = `translateY(-6px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg)`;
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+    });
+  });
+})();
+
+// ── SMOOTH SECTION SCROLL PROGRESS INDICATOR ──
+(function initScrollProgress() {
+  const bar = document.createElement('div');
+  bar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#5b8a72,#6dc8a0);width:0%;z-index:9999;transition:width 0.1s;pointer-events:none;';
+  document.body.appendChild(bar);
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(scrolled, 100) + '%';
+  }, { passive: true });
 })();
 </script>
 </body>
