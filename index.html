@@ -36,6 +36,33 @@
     padding: 0 2rem;
     position: sticky; top: 0; z-index: 100;
   }
+  /* Barre catégories texte façon Vinted */
+  .cats-textbar {
+    background: #fff;
+    border-bottom: 1px solid #eef0ee;
+    position: relative;
+  }
+  .cats-textbar-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.6rem;
+    height: 48px; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cats-textbar-inner::-webkit-scrollbar { display: none; }
+  .cats-textbar-link {
+    font-size: 0.92rem; font-weight: 600; color: var(--text-mid);
+    text-decoration: none; white-space: nowrap; cursor: pointer;
+    padding: 0.3rem 0; border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .cats-textbar-link:hover { color: var(--teal); border-bottom-color: var(--teal); }
+  .cats-textbar-panel {
+    position: absolute; left: 0; right: 0; top: 100%;
+    margin: 0 auto; z-index: 90;
+    border-radius: 0 0 14px 14px;
+    border-top: none;
+  }
   .nav-inner {
     max-width: 1280px; margin: 0 auto;
     display: flex; align-items: center; gap: 1.5rem;
@@ -509,7 +536,8 @@
 /* barre de confiance */
 .hero-bottom-wrap {
   max-width: 1280px; margin: 0 auto;
-  padding: 0 0 2rem;
+  padding: 0.5rem 0 1.5rem;
+  margin-top: -1rem;
 }
 .hero-bottom-row {
   display: flex; align-items: center;
@@ -561,9 +589,7 @@
   .see-all-cats svg { width:15px; height:15px; }
   .cats-articles-bar { display:none; }
   .cats-topbar-section {
-    background: #fff;
-    border-bottom: 1px solid #eef0ee;
-    padding: 1.1rem 2rem 1.2rem;
+    display: none;
   }
   .cats-topbar-inner {
     max-width: 1280px; margin: 0 auto;
@@ -1475,8 +1501,24 @@
   </div>
 </nav>
 
-<!-- BARRE CATÉGORIES (tout en haut, style Vinted) -->
-
+<!-- BARRE CATÉGORIES TEXTE (style Vinted, sous la navbar) -->
+<div class="cats-textbar">
+  <div class="cats-textbar-inner">
+    <a class="cats-textbar-link" data-cat="femme" onmouseenter="hoverOpenSubcatText('femme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('femme')">Femmes</a>
+    <a class="cats-textbar-link" data-cat="homme" onmouseenter="hoverOpenSubcatText('homme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('homme')">Hommes</a>
+    <a class="cats-textbar-link" data-cat="enfant" onmouseenter="hoverOpenSubcatText('enfant', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('enfant')">Enfants</a>
+    <a class="cats-textbar-link" data-cat="maison" onmouseenter="hoverOpenSubcatText('maison', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('maison')">Maison &amp; Déco</a>
+    <a class="cats-textbar-link" data-cat="electronique" onmouseenter="hoverOpenSubcatText('electronique', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('electronique')">Tech</a>
+    <a class="cats-textbar-link" data-cat="loisirs" onmouseenter="hoverOpenSubcatText('loisirs', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('loisirs')">Loisirs</a>
+    <a class="cats-textbar-link" data-cat="divertissement" onmouseenter="hoverOpenSubcatText('divertissement', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('divertissement')">Divertissement</a>
+    <a class="cats-textbar-link" data-cat="sport" onmouseenter="hoverOpenSubcatText('sport', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('sport')">Sport</a>
+  </div>
+  <!-- Panneau sous-catégories qui s'ouvre sous la barre texte -->
+  <div class="subcat-panel cats-textbar-panel" id="subcatPanelText" onmouseenter="cancelCloseSubcat()" onmouseleave="scheduleCloseSubcat()">
+    <div class="subcat-panel-title" id="subcatTitleText"></div>
+    <div class="subcat-cols" id="subcatColsText"></div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -2448,10 +2490,28 @@ function scheduleCloseSubcat() {
   clearTimeout(subcatHoverTimer);
   subcatHoverTimer = setTimeout(() => {
     const panel = document.getElementById('subcatPanel');
-    panel.classList.remove('open');
+    if (panel) panel.classList.remove('open');
+    const panelText = document.getElementById('subcatPanelText');
+    if (panelText) panelText.classList.remove('open');
     document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.cats-textbar-link').forEach(c => c.classList.remove('active'));
     currentOpenCat = null;
   }, 220);
+}
+
+// Ouvre le panneau de sous-catégories depuis la barre texte
+function hoverOpenSubcatText(cat, el) {
+  if (!SUPPORTS_HOVER) return;
+  clearTimeout(subcatHoverTimer);
+  const panel = document.getElementById('subcatPanelText');
+  document.querySelectorAll('.cats-textbar-link').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  currentOpenCat = cat;
+  const data = subcats[cat];
+  if (!data) return;
+  document.getElementById('subcatTitleText').textContent = data.label;
+  renderSubcatGroups(cat, data, 'subcatColsText');
+  panel.classList.add('open');
 }
 
 function cancelCloseSubcat() {
@@ -2600,36 +2660,42 @@ function getSubIcon(title){
   return SUBCAT_ICONS[e] || '<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.8\' stroke-linecap=\'round\' stroke-linejoin=\'round\' style=\'width:22px;height:22px\'><rect x=\'4\' y=\'6\' width=\'16\' height=\'13\' rx=\'2\'/><path d=\'M4 10h16\'/></svg>';
 }
 
-function renderSubcatGroups(cat, data) {
-  document.getElementById('subcatCols').innerHTML = `
+function renderSubcatGroups(cat, data, targetId) {
+  targetId = targetId || 'subcatCols';
+  const itemsPanelId = targetId === 'subcatColsText' ? 'subcatItemsPanelText' : 'subcatItemsPanel';
+  const level1Id = targetId === 'subcatColsText' ? 'subcat-level1-text' : 'subcat-level1';
+  document.getElementById(targetId).innerHTML = `
     <div class="subcat-twocol">
-      <div class="subcat-groups" id="subcat-level1">
+      <div class="subcat-groups" id="${level1Id}">
         ${data.cols.map((col, i) => `
           <div class="subcat-group-item${i===0?' active':''}" data-idx="${i}"
-               onmouseenter="hoverSubcatGroup('${cat}',${i}, this)"
-               onclick="hoverSubcatGroup('${cat}',${i}, this)">
+               onmouseenter="hoverSubcatGroup('${cat}',${i}, this, '${itemsPanelId}','${level1Id}')"
+               onclick="hoverSubcatGroup('${cat}',${i}, this, '${itemsPanelId}','${level1Id}')">
             <span class="subcat-group-icon">${getSubIcon(col.title)}</span>
             <span class="subcat-group-name">${col.title.replace(/^[^\s]+\s/, '')}</span>
             <span class="subcat-group-arrow">›</span>
           </div>
         `).join('')}
       </div>
-      <div class="subcat-items-panel" id="subcatItemsPanel"></div>
+      <div class="subcat-items-panel" id="${itemsPanelId}"></div>
     </div>
   `;
   // Ouvrir le 1er groupe par défaut
-  hoverSubcatGroupDirect(cat, 0);
+  hoverSubcatGroupDirect(cat, 0, itemsPanelId);
 }
 
-function hoverSubcatGroup(cat, colIndex, el) {
-  document.querySelectorAll('#subcat-level1 .subcat-group-item').forEach(g => g.classList.remove('active'));
+function hoverSubcatGroup(cat, colIndex, el, itemsPanelId, level1Id) {
+  itemsPanelId = itemsPanelId || 'subcatItemsPanel';
+  level1Id = level1Id || 'subcat-level1';
+  document.querySelectorAll('#'+level1Id+' .subcat-group-item').forEach(g => g.classList.remove('active'));
   if (el) el.classList.add('active');
-  hoverSubcatGroupDirect(cat, colIndex);
+  hoverSubcatGroupDirect(cat, colIndex, itemsPanelId);
 }
 
-function hoverSubcatGroupDirect(cat, colIndex) {
+function hoverSubcatGroupDirect(cat, colIndex, itemsPanelId) {
+  itemsPanelId = itemsPanelId || 'subcatItemsPanel';
   const col = subcats[cat].cols[colIndex];
-  const panel = document.getElementById('subcatItemsPanel');
+  const panel = document.getElementById(itemsPanelId);
   if (!panel || !col) return;
   let html = '';
   if (col.isGroup && col.children) {
@@ -2656,9 +2722,10 @@ function hoverSubcatGroupDirect(cat, colIndex) {
 }
 
 function pickSubcatNav(cat, sub) {
-  const panel = document.getElementById('subcatPanel');
-  if (panel) panel.classList.remove('open');
+  document.getElementById('subcatPanel')?.classList.remove('open');
+  document.getElementById('subcatPanelText')?.classList.remove('open');
   document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.cats-textbar-link').forEach(c => c.classList.remove('active'));
   currentOpenCat = null;
   filterCat(cat);
   toast(`🔍 ${sub}`);
