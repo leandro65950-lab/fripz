@@ -765,9 +765,26 @@
   }
   .subcat-items-panel {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 1rem 1.5rem;
     align-content: start;
+  }
+  .subcat-items-block {
+    break-inside: avoid;
+  }
+  /* Quand le panneau n'a qu'un seul bloc, répartir ses items en colonnes */
+  .subcat-items-panel.single-block {
+    display: block;
+  }
+  .subcat-items-panel.single-block .subcat-items-list {
+    columns: 3;
+    column-gap: 1.5rem;
+  }
+  .subcat-items-panel.single-block .subcat-items-list li {
+    break-inside: avoid;
+  }
+  .subcat-items-list {
+    list-style: none; display: flex; flex-direction: column; gap: 0.15rem;
   }
   .subcat-items-block h4 {
     font-size: 0.85rem; font-weight: 800; color: var(--teal);
@@ -837,6 +854,77 @@
   /* ── POPULAR ARTICLES ── */
   .popular-section { padding: 0 2.5rem 3rem; }
   .popular-inner { max-width: 1560px; margin: 0 auto; }
+
+  /* ── BANDEAU TENDANCES ── */
+  .trends-bar {
+    background: var(--teal-dark);
+    overflow: hidden;
+    padding: 0.7rem 0;
+    white-space: nowrap;
+  }
+  .trends-track {
+    display: inline-flex; align-items: center; gap: 2.5rem;
+    animation: trendsScroll 32s linear infinite;
+    will-change: transform;
+  }
+  .trends-bar:hover .trends-track { animation-play-state: paused; }
+  @keyframes trendsScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .trends-badge {
+    background: #fff; color: var(--teal-dark);
+    font-weight: 800; font-size: 0.8rem;
+    padding: 0.35rem 0.85rem; border-radius: 20px;
+    display: inline-flex; align-items: center; flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+  .trend-item {
+    color: #fff; font-size: 0.92rem; font-weight: 600;
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .trend-item b { color: #a8d5b9; font-weight: 800; }
+
+  /* ── SECTION STATS ── */
+  .stats-section {
+    background:
+      radial-gradient(600px 300px at 50% 0%, rgba(91,138,114,0.08), transparent 70%),
+      var(--teal-light);
+    padding: 3.5rem 2rem;
+  }
+  .stats-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .stats-title {
+    font-size: 1.9rem; font-weight: 800; color: var(--text);
+    letter-spacing: -0.02em; margin-bottom: 0.5rem;
+  }
+  .stats-title span { color: var(--teal); }
+  .stats-subtitle {
+    color: var(--text-mid); font-size: 1rem; margin-bottom: 2.5rem;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+  }
+  .stat-card {
+    background: #fff; border-radius: 18px;
+    padding: 1.75rem 1rem; text-align: center;
+    box-shadow: 0 4px 16px rgba(20,30,28,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(20,30,28,0.1); }
+  .stat-emoji { font-size: 2rem; margin-bottom: 0.6rem; }
+  .stat-number {
+    font-size: 2rem; font-weight: 800; color: var(--text);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem; color: var(--text-light);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 700; margin-top: 0.4rem;
+  }
+  @media(max-width: 768px){
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stats-title { font-size: 1.5rem; }
+  }
   .popular-header {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 1.25rem;
@@ -1770,6 +1858,61 @@
   </div>
 </section>
 
+<!-- BANDEAU TENDANCES -->
+<div class="trends-bar">
+  <div class="trends-track">
+    <span class="trends-badge">🔥 TENDANCES</span>
+    <span class="trend-item">👟 Air Jordan 1 Retro High OG <b>185 €</b></span>
+    <span class="trend-item">👜 Sac Longchamp Le Pliage <b>45 €</b></span>
+    <span class="trend-item">📱 iPhone 14 Pro 128 Go <b>620 €</b></span>
+    <span class="trend-item">🎮 PS5 + 2 manettes <b>380 €</b></span>
+    <span class="trend-item">👗 Robe Sézane neuve <b>65 €</b></span>
+    <span class="trend-item">⌚ Apple Watch Series 8 <b>240 €</b></span>
+    <span class="trend-item">🧥 Veste en cuir vintage <b>55 €</b></span>
+    <span class="trend-item">👟 Nike Dunk Low Panda <b>95 €</b></span>
+    <!-- duplication pour défilement continu -->
+    <span class="trends-badge">🔥 TENDANCES</span>
+    <span class="trend-item">👟 Air Jordan 1 Retro High OG <b>185 €</b></span>
+    <span class="trend-item">👜 Sac Longchamp Le Pliage <b>45 €</b></span>
+    <span class="trend-item">📱 iPhone 14 Pro 128 Go <b>620 €</b></span>
+    <span class="trend-item">🎮 PS5 + 2 manettes <b>380 €</b></span>
+    <span class="trend-item">👗 Robe Sézane neuve <b>65 €</b></span>
+    <span class="trend-item">⌚ Apple Watch Series 8 <b>240 €</b></span>
+    <span class="trend-item">🧥 Veste en cuir vintage <b>55 €</b></span>
+    <span class="trend-item">👟 Nike Dunk Low Panda <b>95 €</b></span>
+  </div>
+</div>
+
+<!-- SECTION STATS -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <h2 class="stats-title">La marketplace qui <span>grandit chaque jour</span></h2>
+    <p class="stats-subtitle">Rejoignez des milliers de vendeurs et d'acheteurs satisfaits</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-emoji">🛍️</div>
+        <div class="stat-number" id="statArticles">42 500+</div>
+        <div class="stat-label">Articles en vente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-emoji">👥</div>
+        <div class="stat-number">18 200+</div>
+        <div class="stat-label">Membres actifs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-emoji">⭐</div>
+        <div class="stat-number">4.9/5</div>
+        <div class="stat-label">Note moyenne</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-emoji">✅</div>
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Transactions sécurisées</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -2700,8 +2843,10 @@ function hoverSubcatGroupDirect(cat, colIndex, itemsPanelId) {
   const panel = document.getElementById(itemsPanelId);
   if (!panel || !col) return;
   let html = '';
+  let singleBlock = false;
   if (col.isGroup && col.children) {
     // Afficher les sous-groupes avec leurs items
+    if (col.children.length === 1) singleBlock = true;
     html = col.children.map(child => `
       <div class="subcat-items-block">
         <h4>${child.title.replace(/^[^\s]+\s/, '')}</h4>
@@ -2711,6 +2856,7 @@ function hoverSubcatGroupDirect(cat, colIndex, itemsPanelId) {
       </div>
     `).join('');
   } else if (col.items) {
+    singleBlock = true;
     html = `
       <div class="subcat-items-block">
         <h4>${col.title.replace(/^[^\s]+\s/, '')}</h4>
@@ -2720,6 +2866,7 @@ function hoverSubcatGroupDirect(cat, colIndex, itemsPanelId) {
       </div>
     `;
   }
+  panel.classList.toggle('single-block', singleBlock);
   panel.innerHTML = html || '<div style="color:var(--text-light);padding:1rem">Bientôt disponible</div>';
 }
 
