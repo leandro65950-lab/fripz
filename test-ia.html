@@ -74,7 +74,7 @@
   var img = document.getElementById('img');
   var preview = document.getElementById('preview');
   var btn = document.getElementById('analyze');
-  var status = document.getElementById('status');
+  var statusEl = document.getElementById('status');
   var err = document.getElementById('err');
   var result = document.getElementById('result');
 
@@ -121,8 +121,8 @@
     btn.disabled = true;
     err.style.display = 'none';
     result.style.display = 'none';
-    status.style.display = 'block';
-    status.innerHTML = '<span class="spinner"></span>Analyse en cours…';
+    statusEl.style.display = 'block';
+    statusEl.innerHTML = '<span class="spinner"></span>Analyse en cours…';
 
     try {
       var resized = await resizeImage(currentDataUrl);
@@ -145,9 +145,9 @@
       document.getElementById('r-titre').textContent = data.titre || '—';
       document.getElementById('r-description').textContent = data.description || '—';
       result.style.display = 'block';
-      status.style.display = 'none';
+      statusEl.style.display = 'none';
     } catch (e2) {
-      status.style.display = 'none';
+      statusEl.style.display = 'none';
       err.style.display = 'block';
       err.textContent = String((e2 && e2.message) || e2);
     } finally {
