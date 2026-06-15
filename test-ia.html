@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fripz — Test analyse IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#5b8a72; --teal-dark:#47745c; --teal-light:#dde8e0;
+    --ink:#2b3a30; --muted:#6b7d72; --line:#e3e9e4; --bg:#f6f8f6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:32px 16px}
+  .wrap{max-width:560px;margin:0 auto}
+  h1{font-size:24px;margin:0 0 4px}
+  .sub{color:var(--muted);margin:0 0 24px;font-size:14px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 30px rgba(43,58,48,.06)}
+  .drop{border:2px dashed var(--teal-light);border-radius:14px;padding:28px;text-align:center;cursor:pointer;transition:.15s;background:#fafcfb}
+  .drop:hover{border-color:var(--teal);background:var(--teal-light)}
+  .drop input{display:none}
+  .drop p{margin:8px 0 0;color:var(--muted);font-size:14px}
+  .preview{margin-top:16px;display:none}
+  .preview img{width:100%;max-height:280px;object-fit:contain;border-radius:12px;background:#f0f3f1}
+  .btn{margin-top:16px;width:100%;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;
+       color:#fff;background:var(--teal);cursor:pointer;font-family:inherit;transition:.15s}
+  .btn:hover{background:var(--teal-dark)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .status{margin-top:16px;font-size:14px;color:var(--muted);text-align:center;display:none}
+  .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--teal-light);
+           border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px;margin-right:8px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .result{margin-top:20px;display:none}
+  .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;gap:16px}
+  .row:last-child{border-bottom:none}
+  .row .k{color:var(--muted);font-weight:500;flex:0 0 auto}
+  .row .v{font-weight:600;text-align:right}
+  .err{margin-top:16px;display:none;background:#fff0ee;border:1px solid #ffd9d3;color:#a3352a;
+       padding:14px;border-radius:12px;font-size:13px;white-space:pre-wrap;word-break:break-word}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Test analyse IA 🪄</h1>
+  <p class="sub">Choisis une photo d'article, l'IA te propose catégorie, marque, état, titre et description.</p>
+
+  <div class="card">
+    <label class="drop" id="drop">
+      <span style="font-size:28px">📷</span>
+      <p><strong>Clique pour choisir une photo</strong><br>JPG ou PNG</p>
+      <input type="file" id="file" accept="image/*">
+    </label>
+
+    <div class="preview" id="preview"><img id="img" alt="aperçu"></div>
+
+    <button class="btn" id="analyze" disabled>Analyser avec l'IA</button>
+
+    <div class="status" id="status"></div>
+    <div class="err" id="err"></div>
+
+    <div class="result" id="result">
+      <div class="row"><span class="k">Catégorie</span><span class="v" id="r-categorie">—</span></div>
+      <div class="row"><span class="k">Marque</span><span class="v" id="r-marque">—</span></div>
+      <div class="row"><span class="k">Couleur</span><span class="v" id="r-couleur">—</span></div>
+      <div class="row"><span class="k">État</span><span class="v" id="r-etat">—</span></div>
+      <div class="row"><span class="k">Titre</span><span class="v" id="r-titre">—</span></div>
+      <div class="row"><span class="k">Description</span><span class="v" id="r-description">—</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var fileInput = document.getElementById('file');
+  var img = document.getElementById('img');
+  var preview = document.getElementById('preview');
+  var btn = document.getElementById('analyze');
+  var status = document.getElementById('status');
+  var err = document.getElementById('err');
+  var result = document.getElementById('result');
+
+  var currentDataUrl = null;
+
+  fileInput.addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      currentDataUrl = reader.result;
+      img.src = currentDataUrl;
+      preview.style.display = 'block';
+      btn.disabled = false;
+      err.style.display = 'none';
+      result.style.display = 'none';
+    };
+    reader.readAsDataURL(f);
+  });
+
+  // Redimensionne l'image (max 1024px) pour alléger l'envoi à Gemini.
+  function resizeImage(dataUrl) {
+    return new Promise(function (resolve) {
+      var image = new Image();
+      image.onload = function () {
+        var max = 1024;
+        var w = image.width, h = image.height;
+        if (w > max || h > max) {
+          if (w >= h) { h = Math.round(h * max / w); w = max; }
+          else { w = Math.round(w * max / h); h = max; }
+        }
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(image, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      image.onerror = function () { resolve(dataUrl); };
+      image.src = dataUrl;
+    });
+  }
+
+  btn.addEventListener('click', async function () {
+    if (!currentDataUrl) return;
+    btn.disabled = true;
+    err.style.display = 'none';
+    result.style.display = 'none';
+    status.style.display = 'block';
+    status.innerHTML = '<span class="spinner"></span>Analyse en cours…';
+
+    try {
+      var resized = await resizeImage(currentDataUrl);
+      var resp = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: resized, mimeType: 'image/jpeg' })
+      });
+
+      var data = await resp.json();
+
+      if (!resp.ok) {
+        throw new Error('Erreur ' + resp.status + ' : ' + JSON.stringify(data, null, 2));
+      }
+
+      document.getElementById('r-categorie').textContent = data.categorie || '—';
+      document.getElementById('r-marque').textContent = data.marque || '—';
+      document.getElementById('r-couleur').textContent = data.couleur || '—';
+      document.getElementById('r-etat').textContent = data.etat || '—';
+      document.getElementById('r-titre').textContent = data.titre || '—';
+      document.getElementById('r-description').textContent = data.description || '—';
+      result.style.display = 'block';
+      status.style.display = 'none';
+    } catch (e2) {
+      status.style.display = 'none';
+      err.style.display = 'block';
+      err.textContent = String((e2 && e2.message) || e2);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
