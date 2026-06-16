@@ -1349,6 +1349,38 @@
   }
   .photo-tip { font-size: 1.032rem; color: var(--text-light); text-align: center; }
 
+  /* ── Carte Pré-remplissage IA ── */
+  .ai-fill-card {
+    background: linear-gradient(135deg, #f0fdf9, #e8f9f6);
+    border: 2px solid var(--teal); border-radius: 16px;
+    padding: 1.1rem; margin-bottom: 1.1rem;
+  }
+  .ai-fill-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+  .ai-fill-head .ai-emoji { font-size: 1.9rem; }
+  .ai-fill-title { font-weight: 800; font-size: 1rem; color: var(--text); }
+  .ai-fill-sub { font-size: 0.86rem; color: var(--text-mid); line-height: 1.3; }
+  .ai-thumbs { display: flex; gap: 0.5rem; margin: 0.7rem 0; flex-wrap: wrap; }
+  .ai-thumb { position: relative; width: 64px; height: 64px; border-radius: 10px;
+    overflow: hidden; border: 1px solid var(--border); background: #fff; flex-shrink: 0; }
+  .ai-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .ai-thumb .ai-del { position: absolute; top: 2px; right: 2px; width: 18px; height: 18px;
+    border: none; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff;
+    font-size: 0.75rem; line-height: 18px; cursor: pointer; padding: 0; }
+  .ai-thumb-add { width: 64px; height: 64px; border-radius: 10px; border: 2px dashed var(--teal);
+    background: #fff; color: var(--teal); font-size: 1.6rem; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; }
+  .ai-fill-btn { width: 100%; background: var(--teal); color: #fff; border: none;
+    border-radius: 10px; padding: 0.7rem; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 800; cursor: pointer; display: flex;
+    align-items: center; justify-content: center; gap: 0.5rem; }
+  .ai-fill-btn:hover { background: var(--teal-dark); }
+  .ai-fill-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ai-fill-status { margin-top: 0.55rem; font-size: 0.84rem; text-align: center; min-height: 1.1rem; }
+  .ai-spin { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--teal-light);
+    border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite;
+    vertical-align: -2px; margin-right: 6px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
   /* Form fields */
   .form-row { margin-bottom: 1.1rem; }
   .form-row label {
@@ -3582,6 +3614,7 @@ function getTypes(cat, sub) {
 
 function openSellModal() {
   sellData = { photos:[], titre:'', categorie:'', sous_categorie:'', type_article:'', marque:'', etat:'', taille:'', couleur:'', description:'', prix:'', prix_original:'', livraison:'colissimo', quantite:1 };
+  aiPhotos = []; aiAnalyzing = false;
   document.getElementById('sellOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderSellPage();
@@ -3593,6 +3626,136 @@ function closeSellModal(e) {
 function closeSellModalDirect() {
   document.getElementById('sellOverlay').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+// ─────────────────────────────────────────────────────────────
+// Pré-remplissage IA (Gemini Vision via /api/analyze sur Vercel)
+// ─────────────────────────────────────────────────────────────
+let aiPhotos = [];          // jusqu'à 3 dataURL pour analyse
+let aiAnalyzing = false;
+
+// Endpoint : relatif si on est déjà sur Vercel, sinon URL absolue (GitHub Pages, etc.)
+const AI_API_URL = (location.hostname.endsWith('vercel.app'))
+  ? '/api/analyze'
+  : 'https://fripz-sigma.vercel.app/api/analyze';
+
+function buildAIBlock() {
+  const thumbs = aiPhotos.map((src, i) =>
+    `<div class="ai-thumb"><img src="${src}" alt=""><button class="ai-del" onclick="aiRemovePhoto(${i})">✕</button></div>`
+  ).join('');
+  const addSlot = aiPhotos.length < 3
+    ? `<div class="ai-thumb-add" onclick="document.getElementById('aiFileInput').click()">+</div>`
+    : '';
+  const btnLabel = aiAnalyzing
+    ? `<span class="ai-spin"></span>Analyse en cours…`
+    : `✨ Analyser avec l'IA`;
+  return `
+    <div class="ai-fill-card">
+      <div class="ai-fill-head">
+        <span class="ai-emoji">🪄</span>
+        <div>
+          <div class="ai-fill-title">Pré-remplissage automatique</div>
+          <div class="ai-fill-sub">Ajoutez 1 à 3 photos (face, dos, étiquette). L'IA remplit la fiche pour vous.</div>
+        </div>
+      </div>
+      <div class="ai-thumbs">${thumbs}${addSlot}</div>
+      <input type="file" id="aiFileInput" accept="image/*" multiple style="display:none" onchange="aiAddPhotos(event)">
+      <button class="ai-fill-btn" onclick="runAIAnalysis()" ${(aiPhotos.length===0||aiAnalyzing)?'disabled':''}>${btnLabel}</button>
+      <div class="ai-fill-status" id="aiFillStatus"></div>
+    </div>`;
+}
+
+function aiAddPhotos(e) {
+  const files = Array.prototype.slice.call(e.target.files || []);
+  files.forEach(function (f) {
+    if (aiPhotos.length >= 3) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      if (aiPhotos.length >= 3) return;
+      aiPhotos.push(reader.result);
+      renderSellPage();
+    };
+    reader.readAsDataURL(f);
+  });
+  e.target.value = '';
+}
+
+function aiRemovePhoto(i) { aiPhotos.splice(i, 1); renderSellPage(); }
+
+// Redimensionne une image (max 1024px) pour alléger l'envoi à Gemini.
+function aiResize(dataUrl) {
+  return new Promise(function (resolve) {
+    const image = new Image();
+    image.onload = function () {
+      const max = 1024;
+      let w = image.width, h = image.height;
+      if (w > max || h > max) {
+        if (w >= h) { h = Math.round(h * max / w); w = max; }
+        else { w = Math.round(w * max / h); h = max; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(image, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', 0.85));
+    };
+    image.onerror = function () { resolve(dataUrl); };
+    image.src = dataUrl;
+  });
+}
+
+async function runAIAnalysis() {
+  if (aiPhotos.length === 0 || aiAnalyzing) return;
+  aiAnalyzing = true;
+  renderSellPage();
+  const status = document.getElementById('aiFillStatus');
+  try {
+    const resized = await Promise.all(aiPhotos.map(aiResize));
+    const resp = await fetch(AI_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ images: resized })
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error((data && data.error) ? data.error : ('Erreur ' + resp.status));
+
+    aiFillFromResult(data);
+    aiAnalyzing = false;
+    renderSellPage();
+    const s = document.getElementById('aiFillStatus');
+    if (s) { s.style.color = 'var(--teal)'; s.textContent = '✓ Fiche pré-remplie — vérifiez et ajustez si besoin.'; }
+    if (window.showToast) showToast('Fiche pré-remplie par l\'IA ✨');
+  } catch (err) {
+    aiAnalyzing = false;
+    renderSellPage();
+    const s = document.getElementById('aiFillStatus');
+    if (s) { s.style.color = '#c0392b'; s.textContent = '✕ ' + String((err && err.message) || err); }
+  }
+}
+
+// Remplit sellData à partir de la réponse Gemini, en validant les valeurs.
+function aiFillFromResult(d) {
+  if (!d || typeof d !== 'object') return;
+  const catKeys = Object.keys(SELL_CATS);
+
+  if (d.titre) sellData.titre = String(d.titre).slice(0, 60);
+  if (d.description) sellData.description = String(d.description);
+  if (d.marque && d.marque !== 'Sans marque') sellData.marque = String(d.marque);
+  if (d.taille && d.taille !== 'Non précisée') sellData.taille = String(d.taille);
+
+  // Catégorie : doit correspondre à une clé existante
+  if (d.categorie && catKeys.indexOf(d.categorie) !== -1) {
+    sellData.categorie = d.categorie;
+    sellData.sous_categorie = '';
+    sellData.type_article = '';
+  }
+  // Couleur : doit exister dans SELL_COULEURS
+  if (d.couleur && SELL_COULEURS.some(c => c.name === d.couleur)) {
+    sellData.couleur = d.couleur;
+  }
+  // État : doit exister dans ETAT_OPTIONS
+  if (d.etat && ETAT_OPTIONS.indexOf(d.etat) !== -1) {
+    sellData.etat = d.etat;
+  }
 }
 
 function renderSellPage() {
@@ -3673,6 +3836,7 @@ function renderSellPage() {
     : '';
 
   body.innerHTML = `
+    ${buildAIBlock()}
     <!-- PHOTOS -->
     <div class="sell-section">
       <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>Photos</div>
