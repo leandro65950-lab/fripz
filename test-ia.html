@@ -16,12 +16,16 @@
   h1{font-size:24px;margin:0 0 4px}
   .sub{color:var(--muted);margin:0 0 24px;font-size:14px}
   .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 30px rgba(43,58,48,.06)}
-  .drop{border:2px dashed var(--teal-light);border-radius:14px;padding:28px;text-align:center;cursor:pointer;transition:.15s;background:#fafcfb}
+  .drop{border:2px dashed var(--teal-light);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.15s;background:#fafcfb;display:block}
   .drop:hover{border-color:var(--teal);background:var(--teal-light)}
   .drop input{display:none}
   .drop p{margin:8px 0 0;color:var(--muted);font-size:14px}
-  .preview{margin-top:16px;display:none}
-  .preview img{width:100%;max-height:280px;object-fit:contain;border-radius:12px;background:#f0f3f1}
+  .thumbs{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .thumb{position:relative;border-radius:12px;overflow:hidden;background:#f0f3f1;aspect-ratio:1/1;border:1px solid var(--line)}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb .del{position:absolute;top:4px;right:4px;width:22px;height:22px;border:none;border-radius:50%;
+              background:rgba(43,58,48,.7);color:#fff;font-size:13px;line-height:22px;cursor:pointer;padding:0}
+  .count{margin-top:8px;font-size:12px;color:var(--muted);text-align:center}
   .btn{margin-top:16px;width:100%;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;
        color:#fff;background:var(--teal);cursor:pointer;font-family:inherit;transition:.15s}
   .btn:hover{background:var(--teal-dark)}
@@ -42,16 +46,17 @@
 <body>
 <div class="wrap">
   <h1>Test analyse IA 🪄</h1>
-  <p class="sub">Choisis une photo d'article, l'IA te propose catégorie, marque, état, titre et description.</p>
+  <p class="sub">Ajoute jusqu'à 3 photos du même article (face, dos, étiquette). L'IA propose catégorie, marque, taille, état, titre et description.</p>
 
   <div class="card">
     <label class="drop" id="drop">
       <span style="font-size:28px">📷</span>
-      <p><strong>Clique pour choisir une photo</strong><br>JPG ou PNG</p>
-      <input type="file" id="file" accept="image/*">
+      <p><strong>Clique pour ajouter des photos</strong><br>jusqu'à 3 — JPG ou PNG</p>
+      <input type="file" id="file" accept="image/*" multiple>
     </label>
 
-    <div class="preview" id="preview"><img id="img" alt="aperçu"></div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="count" id="count"></div>
 
     <button class="btn" id="analyze" disabled>Analyser avec l'IA</button>
 
@@ -62,6 +67,7 @@
       <div class="row"><span class="k">Catégorie</span><span class="v" id="r-categorie">—</span></div>
       <div class="row"><span class="k">Marque</span><span class="v" id="r-marque">—</span></div>
       <div class="row"><span class="k">Couleur</span><span class="v" id="r-couleur">—</span></div>
+      <div class="row"><span class="k">Taille</span><span class="v" id="r-taille">—</span></div>
       <div class="row"><span class="k">État</span><span class="v" id="r-etat">—</span></div>
       <div class="row"><span class="k">Titre</span><span class="v" id="r-titre">—</span></div>
       <div class="row"><span class="k">Description</span><span class="v" id="r-description">—</span></div>
@@ -70,32 +76,56 @@
 </div>
 
 <script>
+  var MAX = 3;
   var fileInput = document.getElementById('file');
-  var img = document.getElementById('img');
-  var preview = document.getElementById('preview');
+  var thumbsBox = document.getElementById('thumbs');
+  var countBox = document.getElementById('count');
   var btn = document.getElementById('analyze');
   var statusEl = document.getElementById('status');
   var err = document.getElementById('err');
   var result = document.getElementById('result');
 
-  var currentDataUrl = null;
+  // Liste des photos sélectionnées (dataURL)
+  var photos = [];
 
   fileInput.addEventListener('change', function (e) {
-    var f = e.target.files && e.target.files[0];
-    if (!f) return;
-    var reader = new FileReader();
-    reader.onload = function () {
-      currentDataUrl = reader.result;
-      img.src = currentDataUrl;
-      preview.style.display = 'block';
-      btn.disabled = false;
-      err.style.display = 'none';
-      result.style.display = 'none';
-    };
-    reader.readAsDataURL(f);
+    var files = Array.prototype.slice.call(e.target.files || []);
+    files.forEach(function (f) {
+      if (photos.length >= MAX) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        if (photos.length >= MAX) return;
+        photos.push(reader.result);
+        render();
+      };
+      reader.readAsDataURL(f);
+    });
+    // Permet de re-sélectionner le même fichier ensuite
+    fileInput.value = '';
   });
 
-  // Redimensionne l'image (max 1024px) pour alléger l'envoi à Gemini.
+  function render() {
+    thumbsBox.innerHTML = '';
+    photos.forEach(function (src, i) {
+      var div = document.createElement('div');
+      div.className = 'thumb';
+      var im = document.createElement('img');
+      im.src = src;
+      var del = document.createElement('button');
+      del.className = 'del';
+      del.textContent = '×';
+      del.onclick = function () { photos.splice(i, 1); render(); };
+      div.appendChild(im);
+      div.appendChild(del);
+      thumbsBox.appendChild(div);
+    });
+    countBox.textContent = photos.length + ' / ' + MAX + ' photo(s)';
+    btn.disabled = photos.length === 0;
+    err.style.display = 'none';
+    result.style.display = 'none';
+  }
+
+  // Redimensionne une image (max 1024px) pour alléger l'envoi.
   function resizeImage(dataUrl) {
     return new Promise(function (resolve) {
       var image = new Image();
@@ -117,7 +147,7 @@
   }
 
   btn.addEventListener('click', async function () {
-    if (!currentDataUrl) return;
+    if (photos.length === 0) return;
     btn.disabled = true;
     err.style.display = 'none';
     result.style.display = 'none';
@@ -125,11 +155,13 @@
     statusEl.innerHTML = '<span class="spinner"></span>Analyse en cours…';
 
     try {
-      var resized = await resizeImage(currentDataUrl);
+      // Redimensionner toutes les photos en parallèle
+      var resized = await Promise.all(photos.map(function (p) { return resizeImage(p); }));
+
       var resp = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: resized, mimeType: 'image/jpeg' })
+        body: JSON.stringify({ images: resized })
       });
 
       var data = await resp.json();
@@ -141,6 +173,7 @@
       document.getElementById('r-categorie').textContent = data.categorie || '—';
       document.getElementById('r-marque').textContent = data.marque || '—';
       document.getElementById('r-couleur').textContent = data.couleur || '—';
+      document.getElementById('r-taille').textContent = data.taille || '—';
       document.getElementById('r-etat').textContent = data.etat || '—';
       document.getElementById('r-titre').textContent = data.titre || '—';
       document.getElementById('r-description').textContent = data.description || '—';
@@ -151,7 +184,7 @@
       err.style.display = 'block';
       err.textContent = String((e2 && e2.message) || e2);
     } finally {
-      btn.disabled = false;
+      btn.disabled = photos.length === 0;
     }
   });
 </script>
