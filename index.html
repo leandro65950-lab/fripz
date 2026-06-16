@@ -3713,7 +3713,7 @@ async function runAIAnalysis() {
     const resp = await fetch(AI_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ images: resized })
+      body: JSON.stringify({ images: resized, taxonomy: SELL_CATS })
     });
     const data = await resp.json();
     if (!resp.ok) throw new Error((data && data.error) ? data.error : ('Erreur ' + resp.status));
@@ -3747,6 +3747,18 @@ function aiFillFromResult(d) {
     sellData.categorie = d.categorie;
     sellData.sous_categorie = '';
     sellData.type_article = '';
+
+    // Sous-catégorie : doit exister sous cette catégorie
+    const subs = getSubcats(sellData.categorie);
+    if (d.sous_categorie && subs.indexOf(d.sous_categorie) !== -1) {
+      sellData.sous_categorie = d.sous_categorie;
+
+      // Type : doit exister dans cette sous-catégorie
+      const types = getTypes(sellData.categorie, sellData.sous_categorie);
+      if (d.type_article && types.indexOf(d.type_article) !== -1) {
+        sellData.type_article = d.type_article;
+      }
+    }
   }
   // Couleur : doit exister dans SELL_COULEURS
   if (d.couleur && SELL_COULEURS.some(c => c.name === d.couleur)) {
