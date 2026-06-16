@@ -1,12 +1,18 @@
 // api/analyze.js
 // Fonction serverless Vercel (CommonJS) : reçoit jusqu'à 3 photos d'un article,
-// appelle Gemini Vision (Gemini 3 Flash), et renvoie
-// categorie / marque / couleur / taille / etat / titre / description.
-// La clé GEMINI_API_KEY est lue depuis les variables d'environnement Vercel
-// (JAMAIS écrite dans le code).
+// appelle Gemini Vision (Gemini 3 Flash), et renvoie les champs de la fiche Fripz.
+// La clé GEMINI_API_KEY est lue depuis les variables d'environnement Vercel.
 
 module.exports = async function handler(req, res) {
-  // Autoriser uniquement POST
+  // CORS : autorise l'appel depuis le site (GitHub Pages, Vercel, local...).
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Pré-vol CORS
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Méthode non autorisée' });
   }
@@ -17,7 +23,6 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Selon le runtime, req.body peut arriver en texte : on parse au besoin.
     let body = req.body;
     if (typeof body === 'string') {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
@@ -38,31 +43,29 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Aucune image fournie' });
     }
 
-    // Chaque photo -> un bloc inline_data pour Gemini.
     const imageParts = images.map(function (img) {
       const base64Data = img.includes(',') ? img.split(',')[1] : img;
       return { inline_data: { mime_type: 'image/jpeg', data: base64Data } };
     });
 
-    // Instruction donnée à Gemini : répondre en JSON strict.
+    // Valeurs EXACTES attendues par le formulaire Fripz (pour remplissage direct).
     const prompt =
       'Tu es un expert en articles de seconde main pour une marketplace française nommée Fripz.\n' +
       'Tu reçois ' + images.length + ' photo(s) du MÊME article (par ex. face, dos, étiquette). Analyse-les ensemble.\n' +
       'Sers-toi de la photo de l\'étiquette si présente pour déterminer la marque et la taille.\n' +
       'Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, sans backticks.\n' +
-      'Format exact attendu :\n' +
+      'Format exact attendu (respecte EXACTEMENT les valeurs proposées) :\n' +
       '{\n' +
-      '  "categorie": "une de: Femmes, Hommes, Enfants, Maison & Déco, Tech, Loisirs, Divertissement, Sport",\n' +
+      '  "categorie": "exactement une de: Femmes, Hommes, Enfants, Sport, Maison, Électronique, Loisirs, Divertissement",\n' +
       '  "marque": "la marque si identifiable, sinon \'Sans marque\'",\n' +
-      '  "couleur": "la couleur principale en français",\n' +
+      '  "couleur": "exactement une de: Noir, Blanc, Gris, Beige, Marron, Rouge, Rose, Orange, Jaune, Vert, Bleu, Bleu marine, Violet, Doré, Argenté, Multicolore",\n' +
       '  "taille": "la taille si une étiquette est visible ou identifiable (ex: S, M, L, XL, 38, 40, T2...), sinon \'Non précisée\'",\n' +
-      '  "etat": "une de: Neuf avec étiquette, Très bon état, Bon état, Satisfaisant",\n' +
+      '  "etat": "exactement une de: Neuf avec étiquette, Neuf sans étiquette, Très bon état, Bon état, Satisfaisant",\n' +
       '  "titre": "un titre d\'annonce court et accrocheur en français (max 60 caractères)",\n' +
       '  "description": "une description vendeuse de 2-3 phrases en français"\n' +
       '}';
 
     // Modèle : Gemini 3 Flash (intelligence niveau Pro à prix Flash).
-    // Nom API exact = gemini-3-flash-preview (sinon erreur 404).
     const MODEL = 'gemini-3-flash-preview';
     const geminiUrl =
       'https://generativelanguage.googleapis.com/v1beta/models/' + MODEL +
@@ -76,9 +79,7 @@ module.exports = async function handler(req, res) {
           parts: [{ text: prompt }].concat(imageParts)
         }],
         generationConfig: {
-          // Force une sortie JSON propre, sans backticks ni blabla.
           responseMimeType: 'application/json',
-          // Réflexion légère : assez pour bien analyser, rapide et économique.
           thinkingConfig: { thinkingLevel: 'low' }
         }
       })
@@ -91,7 +92,6 @@ module.exports = async function handler(req, res) {
 
     const data = await geminiResponse.json();
 
-    // Extraire le texte renvoyé (1re "part" qui contient du texte).
     const parts = (data && data.candidates && data.candidates[0] &&
                    data.candidates[0].content && data.candidates[0].content.parts) || [];
     let text = '';
@@ -102,7 +102,6 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({ error: 'Réponse Gemini vide', details: JSON.stringify(data).slice(0, 500) });
     }
 
-    // Sécurité : retirer d'éventuels backticks malgré la consigne.
     const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim();
 
     let result;
@@ -119,7 +118,6 @@ module.exports = async function handler(req, res) {
   }
 };
 
-// Permet de recevoir des images en base64 plus lourdes.
 module.exports.config = {
   api: {
     bodyParser: { sizeLimit: '10mb' },
