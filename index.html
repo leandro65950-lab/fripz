@@ -3194,8 +3194,8 @@ function renderArticles(items) {
   const grid = document.getElementById('articlesGrid');
   grid.innerHTML = items.map(p => `
     <div class="article-card" onclick="openModal(${p.id})">
-      <div class="article-img">
-        ${p.emoji}
+      <div class="article-img" style="position:relative;overflow:hidden">
+        ${isImg(p.emoji) ? `<img src="${p.emoji}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">` : p.emoji}
         <div class="fav-btn ${liked.has(p.id)?'liked':''}" onclick="toggleLike(event,${p.id})">${liked.has(p.id)?'❤️':'🤍'}</div>
       </div>
       <div class="article-info">
@@ -3226,7 +3226,7 @@ function openModal(id) {
   const colors = ['#fce4ec','#e3f2fd','#e8f5e9','#fff8e1'];
   document.getElementById('modalLeft').innerHTML = `
     <div class="modal-close" onclick="closeModalDirect()">✕</div>
-    <div style="width:100%;height:100%;background:${colors[(id-1)%4]};display:flex;align-items:center;justify-content:center;font-size: 9.258rem;min-height:360px">${p.emoji}</div>
+    <div style="width:100%;height:100%;background:${colors[(id-1)%4]};display:flex;align-items:center;justify-content:center;font-size: 9.258rem;min-height:360px;overflow:hidden">${isImg(p.emoji) ? `<img src="${p.emoji}" style="width:100%;height:100%;object-fit:cover">` : p.emoji}</div>
   `;
   document.getElementById('modalRight').innerHTML = `
     <div class="modal-brand">${p.brand}</div>
@@ -3614,7 +3614,10 @@ function getTypes(cat, sub) {
 
 function openSellModal() {
   sellData = { photos:[], titre:'', categorie:'', sous_categorie:'', type_article:'', marque:'', etat:'', taille:'', couleur:'', description:'', prix:'', prix_original:'', livraison:'colissimo', quantite:1 };
-  aiPhotos = []; aiAnalyzing = false;
+  aiAnalyzing = false;
+  // Réaffiche le pied de page (bouton « Mettre en vente ») au cas où il a été masqué après une publication.
+  const sf = document.querySelector('.sell-footer');
+  if (sf) sf.style.display = '';
   document.getElementById('sellOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderSellPage();
@@ -3631,7 +3634,6 @@ function closeSellModalDirect() {
 // ─────────────────────────────────────────────────────────────
 // Pré-remplissage IA (Gemini Vision via /api/analyze sur Vercel)
 // ─────────────────────────────────────────────────────────────
-let aiPhotos = [];          // jusqu'à 3 dataURL pour analyse
 let aiAnalyzing = false;
 
 // Endpoint : relatif si on est déjà sur Vercel, sinon URL absolue (GitHub Pages, etc.)
@@ -3639,48 +3641,31 @@ const AI_API_URL = (location.hostname.endsWith('vercel.app'))
   ? '/api/analyze'
   : 'https://fripz-sigma.vercel.app/api/analyze';
 
+// Détecte si une "photo" est une vraie image (dataURL) plutôt qu'un emoji.
+function isImg(s) { return typeof s === 'string' && s.indexOf('data:') === 0; }
+
 function buildAIBlock() {
-  const thumbs = aiPhotos.map((src, i) =>
-    `<div class="ai-thumb"><img src="${src}" alt=""><button class="ai-del" onclick="aiRemovePhoto(${i})">✕</button></div>`
-  ).join('');
-  const addSlot = aiPhotos.length < 3
-    ? `<div class="ai-thumb-add" onclick="document.getElementById('aiFileInput').click()">+</div>`
-    : '';
+  const realCount = (sellData.photos || []).filter(isImg).length;
   const btnLabel = aiAnalyzing
     ? `<span class="ai-spin"></span>Analyse en cours…`
     : `✨ Analyser avec l'IA`;
+  const hint = realCount === 0
+    ? `<div class="ai-fill-sub" style="margin-top:6px">Ajoutez d'abord vos photos dans « Photos » ci-dessous, puis lancez l'analyse.</div>`
+    : `<div class="ai-fill-sub" style="margin-top:6px">${realCount} photo(s) ajoutée(s) — l'IA utilisera les 3 premières.</div>`;
   return `
     <div class="ai-fill-card">
       <div class="ai-fill-head">
         <span class="ai-emoji">🪄</span>
         <div>
           <div class="ai-fill-title">Pré-remplissage automatique</div>
-          <div class="ai-fill-sub">Ajoutez 1 à 3 photos (face, dos, étiquette). L'IA remplit la fiche pour vous.</div>
+          <div class="ai-fill-sub">L'IA analyse vos photos et remplit la fiche (catégorie, marque, taille, état, titre, description).</div>
         </div>
       </div>
-      <div class="ai-thumbs">${thumbs}${addSlot}</div>
-      <input type="file" id="aiFileInput" accept="image/*" multiple style="display:none" onchange="aiAddPhotos(event)">
-      <button class="ai-fill-btn" onclick="runAIAnalysis()" ${(aiPhotos.length===0||aiAnalyzing)?'disabled':''}>${btnLabel}</button>
+      ${hint}
+      <button class="ai-fill-btn" onclick="runAIAnalysis()" ${(realCount===0||aiAnalyzing)?'disabled':''}>${btnLabel}</button>
       <div class="ai-fill-status" id="aiFillStatus"></div>
     </div>`;
 }
-
-function aiAddPhotos(e) {
-  const files = Array.prototype.slice.call(e.target.files || []);
-  files.forEach(function (f) {
-    if (aiPhotos.length >= 3) return;
-    const reader = new FileReader();
-    reader.onload = function () {
-      if (aiPhotos.length >= 3) return;
-      aiPhotos.push(reader.result);
-      renderSellPage();
-    };
-    reader.readAsDataURL(f);
-  });
-  e.target.value = '';
-}
-
-function aiRemovePhoto(i) { aiPhotos.splice(i, 1); renderSellPage(); }
 
 // Redimensionne une image (max 1024px) pour alléger l'envoi à Gemini.
 function aiResize(dataUrl) {
@@ -3704,12 +3689,13 @@ function aiResize(dataUrl) {
 }
 
 async function runAIAnalysis() {
-  if (aiPhotos.length === 0 || aiAnalyzing) return;
+  const realPhotos = (sellData.photos || []).filter(isImg).slice(0, 3);
+  if (realPhotos.length === 0 || aiAnalyzing) return;
   aiAnalyzing = true;
   renderSellPage();
   const status = document.getElementById('aiFillStatus');
   try {
-    const resized = await Promise.all(aiPhotos.map(aiResize));
+    const resized = await Promise.all(realPhotos.map(aiResize));
     const resp = await fetch(AI_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -3810,8 +3796,8 @@ function renderSellPage() {
   // Photos — 10 slots en scroll horizontal
   const photoSlots = Array.from({length:10}, (_,i) => {
     const p = sellData.photos[i];
-    if (p) return `<div class="photo-slot filled" style="position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <div style="font-size: 2.909rem">${p}</div>
+    if (p) return `<div class="photo-slot filled" style="position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden">
+      ${isImg(p) ? `<img src="${p}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">` : `<div style="font-size: 2.909rem">${p}</div>`}
       <button onclick="removePhoto(${i})" style="position:absolute;top:3px;right:3px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size: 0.859rem;cursor:pointer;line-height:18px;text-align:center">✕</button>
       ${i===0?`<div style="position:absolute;bottom:0;left:0;right:0;text-align:center;font-size: 0.727rem;font-weight:800;color:#fff;background:rgba(43,191,164,0.9);padding:2px 0;border-radius:0 0 9px 9px">PRINCIPALE</div>`:''}
     </div>`;
@@ -3949,23 +3935,6 @@ function renderSellPage() {
           <span style="font-size:0.85rem;color:var(--text-mid);margin-left:0.3rem">article(s)</span>
         </div>
       </div>
-      ${prix > 0 ? `<div id="prix-preview" style="background:var(--teal-light);border-radius:12px;padding:1rem;margin-top:0.5rem">
-        <div style="display:flex;justify-content:space-between;font-size: 1.124rem;margin-bottom:0.4rem"><span style="color:var(--text-mid)">Prix de vente</span><span style="font-weight:700">${prix.toFixed(2)} €</span></div>
-        <div style="display:flex;justify-content:space-between;font-size: 1.124rem;margin-bottom:0.4rem"><span style="color:var(--text-mid)">Commission Fripz</span><span style="font-weight:700;color:#e55">- ${commission} €</span></div>
-        <div style="display:flex;justify-content:space-between;font-size: 1.256rem;border-top:1px solid #c8ede7;padding-top:0.5rem;margin-top:0.4rem"><span style="font-weight:800">Vous gagnez</span><span style="font-weight:800;color:var(--teal);font-size: 1.389rem">${gain} €</span></div>
-      </div>` : ''}
-    </div>
-
-    <!-- RECAP -->
-    <div class="sell-section" style="margin-bottom:0.5rem">
-      <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Récapitulatif</div>
-      ${sellData.titre && sellData.prix ? `
-      <div style="background:#fafafa;border-radius:14px;padding:1rem;border:1px solid var(--border)">
-        <div style="font-weight:800;font-size: 1.256rem;margin-bottom:0.5rem">${sellData.titre}</div>
-        ${sellData.categorie?`<div style="font-size: 1.058rem;color:var(--text-mid)">📂 ${sellData.categorie}${sellData.sous_categorie?' › '+sellData.sous_categorie:''}</div>`:''}
-        ${sellData.etat?`<div style="font-size: 1.058rem;color:var(--text-mid)">🏷️ ${sellData.etat}</div>`:''}
-        <div style="font-size: 1.455rem;font-weight:800;color:var(--teal);margin-top:0.5rem">${sellData.prix} €</div>
-      </div>` : `<div style="font-size: 1.124rem;color:var(--text-light);text-align:center;padding:1rem">Complétez les champs obligatoires pour voir le récapitulatif.</div>`}
     </div>
   `;
   // Initialiser les menus déroulants après rendu
@@ -4097,11 +4066,34 @@ document.addEventListener('click', (e) => {
 });
 
 function addPhoto(i) {
-  if (i > sellData.photos.length) return;
-  const emojis = ['👗','👟','🧥','👜','👖','👠','🎮','📱','🏀','🌸','🎨','📚','👒','🕶️','🧣'];
-  sellData.photos.push(emojis[Math.floor(Math.random()*emojis.length)]);
-  renderSellPage();
+  // Ouvre le sélecteur de fichiers pour ajouter de vraies photos.
+  let input = document.getElementById('mainPhotoInput');
+  if (!input) {
+    input = document.createElement('input');
+    input.type = 'file'; input.accept = 'image/*'; input.multiple = true;
+    input.id = 'mainPhotoInput'; input.style.display = 'none';
+    input.addEventListener('change', onMainPhotosPicked);
+    document.body.appendChild(input);
+  }
+  input.value = '';
+  input.click();
 }
+
+function onMainPhotosPicked(e) {
+  const files = Array.prototype.slice.call(e.target.files || []);
+  files.forEach(function (f) {
+    if ((sellData.photos || []).length >= 8) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      if (sellData.photos.length >= 8) return;
+      sellData.photos.push(reader.result);
+      renderSellPage();
+    };
+    reader.readAsDataURL(f);
+  });
+  e.target.value = '';
+}
+
 function removePhoto(i) { sellData.photos.splice(i,1); renderSellPage(); }
 
 function setEtat(e) { sellData.etat = e; renderSellPage(); }
@@ -4112,17 +4104,11 @@ function updateCharCount(fieldId, countId, max) {
   if (el && cc) cc.textContent = el.value.length + '/' + max;
 }
 
+
+
+// Le vendeur saisit juste son prix ; pas de décompte affiché côté vendeur.
 function updatePrixPreview() {
   sellData.prix = document.getElementById('f_prix')?.value || '';
-  const prix = parseFloat(sellData.prix) || 0;
-  const commission = prix > 0 ? (prix <= 20 ? 0.70 : parseFloat((prix * 0.05 + 0.70).toFixed(2))) : 0;
-  const gain = prix > 0 ? (prix - commission).toFixed(2) : '—';
-  const preview = document.getElementById('prix-preview');
-  if (preview) {
-    preview.style.display = prix > 0 ? 'block' : 'none';
-  } else if (prix > 0) {
-    renderSellPage();
-  }
 }
 
 function changeQty(d) {
@@ -4146,7 +4132,7 @@ function setLivraison(id) { sellData.livraison = id; renderSellPage(); }
 
 function renderStepConfirm(body) {
   const liv = LIVRAISON_OPTS.find(l => l.id === sellData.livraison);
-  const thumbs = sellData.photos.slice(0,4).map(p => `<div class="confirm-img-thumb">${p}</div>`).join('') ||
+  const thumbs = sellData.photos.slice(0,4).map(p => `<div class="confirm-img-thumb" style="overflow:hidden">${isImg(p) ? `<img src="${p}" style="width:100%;height:100%;object-fit:cover">` : p}</div>`).join('') ||
     `<div class="confirm-img-thumb">📷</div>`;
   body.innerHTML = `
     <div class="sell-step-title">✅ Vérifiez avant de publier</div>
