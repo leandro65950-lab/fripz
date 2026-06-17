@@ -68,7 +68,7 @@ module.exports = async function handler(req, res) {
       '  "description": "une description vendeuse de 2-3 phrases en français"\n' +
       '}';
 
-    const MODEL = 'gemini-3-flash-preview';
+    const MODEL = 'gemini-2.5-flash';
     const geminiUrl =
       'https://generativelanguage.googleapis.com/v1beta/models/' + MODEL +
       ':generateContent?key=' + apiKey;
@@ -79,15 +79,14 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }].concat(imageParts) }],
         generationConfig: {
-          responseMimeType: 'application/json',
-          thinkingConfig: { thinkingLevel: 'low' }
+          responseMimeType: 'application/json'
         }
       })
     });
 
     if (!geminiResponse.ok) {
       const errText = await geminiResponse.text();
-      return res.status(502).json({ error: 'Erreur Gemini', details: errText });
+
     }
 
     const data = await geminiResponse.json();
