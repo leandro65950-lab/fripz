@@ -79,17 +79,34 @@
   }
   .nav-logo-text { font-size: 1.45rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
   .nav-search {
-    flex: 1; max-width: 440px; position: relative;
+    flex: 1; max-width: 480px; position: relative;
     display: flex; align-items: center;
+    background: #f3f5f3; border-radius: 12px;
+    transition: box-shadow 0.2s, background 0.2s;
   }
+  .nav-search:focus-within { background: #fff; box-shadow: 0 0 0 2px var(--teal); }
+  .ns-scope {
+    position: relative; display: flex; align-items: center; gap: 3px;
+    padding: 0 0.6rem 0 0.9rem; border-right: 1px solid #dde2dd;
+    color: var(--text-mid); font-size: 0.88rem; font-weight: 600;
+    cursor: pointer; white-space: nowrap; align-self: stretch;
+  }
+  .ns-scope:hover { color: var(--teal-dark); }
+  .ns-scope-menu {
+    position: absolute; top: calc(100% + 10px); left: 0;
+    background: #fff; border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+    padding: 0.3rem; display: none; z-index: 120; min-width: 150px;
+  }
+  .ns-scope-menu.open { display: block; }
+  .ns-scope-item { padding: 0.55rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem; color: var(--text); }
+  .ns-scope-item:hover { background: var(--teal-light); color: var(--teal-dark); }
   .nav-search .ns-ic { position: absolute; left: 14px; color: #9aa39c; display: flex; }
   .nav-search input {
-    width: 100%; border: none; background: #f3f5f3;
-    border-radius: 12px; padding: 0.7rem 2.6rem 0.7rem 2.5rem;
+    width: 100%; border: none; background: transparent;
+    border-radius: 12px; padding: 0.7rem 2.6rem 0.7rem 0.9rem;
     font-family: inherit; font-size: 0.95rem; color: var(--text);
-    outline: none; transition: box-shadow 0.2s, background 0.2s;
+    outline: none;
   }
-  .nav-search input:focus { background: #fff; box-shadow: 0 0 0 2px var(--teal); }
   .nav-search .ns-btn {
     position: absolute; right: 8px; width: 30px; height: 30px;
     border: none; background: transparent; color: #6b746d;
@@ -194,13 +211,23 @@
     cursor: pointer; transition: background 0.2s; white-space: nowrap;
   }
   .btn-sell-nav:hover { background: var(--teal-dark); }
+  .btn-outline-nav {
+    background: transparent; color: var(--teal-dark);
+    border: 1.5px solid var(--teal); border-radius: 10px;
+    padding: 0.5rem 0.95rem;
+    font-family: inherit; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; transition: 0.2s; white-space: nowrap;
+  }
+  .btn-outline-nav:hover { background: var(--teal-light); }
   .lang-select {
     position: relative; display: flex; align-items: center; gap: 0.3rem;
     padding: 0.4rem 0.6rem; border-radius: 10px; cursor: pointer;
     transition: background 0.2s; user-select: none;
   }
   .lang-select:hover { background: #f0f2f0; }
-  .lang-flag { font-size: 1.05rem; }
+  .lang-flag { display: inline-flex; align-items: center; }
+  .flag { width: 20px; height: 14px; border-radius: 2px; display: inline-block; vertical-align: middle; box-shadow: 0 0 0 1px rgba(0,0,0,0.12); }
+  .lang-item .flag { margin-right: 4px; }
   .lang-code { font-size: 0.85rem; font-weight: 700; color: var(--text); }
   .lang-menu {
     position: absolute; top: 115%; right: 0; z-index: 200;
@@ -378,7 +405,7 @@
 }
 .hero-inner {
   max-width: 1800px; width: 92%; margin: 0 auto;
-  display: grid; grid-template-columns: 340px 1fr 1fr;
+  display: grid; grid-template-columns: 1fr 1.2fr;
   align-items: stretch; gap: 2rem;
   padding: 1rem 0 2.5rem;
 }
@@ -425,52 +452,59 @@
 .hero-catmenu-all svg { width: 15px; height: 15px; }
 
 /* colonne texte */
-.hero-left { padding: 0.5rem 0; }
+.hero-left { padding: 1rem 0 1.5rem; display: flex; flex-direction: column; }
 .hero-title {
   font-size: 3.2rem; font-weight: 800;
   line-height: 1.02; color: var(--text);
   letter-spacing: -0.045em; margin-bottom: 1.1rem;
 }
 .hero-title .dot { color: var(--teal); }
+.hero-recommence { font-style: italic; color: var(--teal); }
+.hero-image-wrap { position: relative; align-self: center; }
+.hero-image { }
+.hero-image img { width: 100%; height: auto; display: block; }
+.hero-product-card { position: absolute; left: -6%; top: 26%; background: #fff; border-radius: 18px; padding: 0.55rem; box-shadow: 0 18px 44px rgba(0,0,0,0.16); width: 148px; }
+.hpc-img { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 1 / 0.82; }
+.hpc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hpc-badge { position: absolute; top: 7px; left: 7px; background: #fff; color: var(--teal-dark); font-size: 0.68rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.hpc-name { font-size: 0.82rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.1rem; padding: 0 0.15rem; }
+.hpc-price { font-size: 0.98rem; font-weight: 800; color: var(--text); padding: 0 0.15rem 0.15rem; }
+.hero-fav-float { position: absolute; right: 4%; top: 14%; width: 46px; height: 46px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 8px 22px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--teal); }
+.hero-fav-float svg { width: 22px; height: 22px; }
 .hero-slogan {
   font-family: 'Caveat', cursive;
-  font-size: 2.4rem; font-weight: 700;
+  font-size: 1.7rem; font-weight: 700;
   color: var(--teal); line-height: 1.05;
   margin: -0.3rem 0 1.1rem;
   display: inline-block; position: relative;
-}
-.hero-slogan::after {
-  content: ""; position: absolute;
-  left: 0; right: 8%; bottom: -4px; height: 3px;
-  background: var(--teal); border-radius: 3px;
 }
 .hero-sub {
   font-size: 1.08rem; color: var(--text-mid);
   line-height: 1.6; margin-bottom: 1.8rem;
   max-width: 400px;
 }
-.hero-cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+.hero-cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 8.5rem; margin-bottom: 1.8rem; }
 .btn-primary {
   background: var(--teal); color: #fff;
   border: none; border-radius: 12px;
-  padding: 0.85rem 1.4rem;
-  font-family: inherit; font-size: 0.98rem; font-weight: 700;
+  padding: 1.05rem 1.9rem;
+  font-family: inherit; font-size: 1.1rem; font-weight: 700;
   cursor: pointer; transition: all 0.2s;
   display: inline-flex; align-items: center; gap: 0.5rem;
   box-shadow: 0 8px 20px rgba(91,138,114,0.25);
 }
 .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
-.btn-primary svg { width: 17px; height: 17px; }
+.btn-primary svg { width: 19px; height: 19px; }
 .btn-secondary {
   background: #fff; color: var(--text);
   border: 1.5px solid #e2e6e2; border-radius: 12px;
-  padding: 0.85rem 1.3rem;
-  font-family: inherit; font-size: 0.98rem; font-weight: 700;
+  padding: 1.05rem 1.8rem;
+  font-family: inherit; font-size: 1.1rem; font-weight: 700;
   cursor: pointer; transition: all 0.2s;
   display: inline-flex; align-items: center; gap: 0.5rem;
 }
 .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
-.btn-secondary svg { width: 17px; height: 17px; }
+.btn-secondary svg { width: 19px; height: 19px; }
 
 /* membres */
 .hero-members { display: flex; align-items: center; gap: 0.8rem; }
@@ -535,28 +569,43 @@
 /* barre de confiance */
 .hero-bottom-wrap {
   max-width: 1800px; width: 92%; margin: 0 auto;
-  padding: 0 0 1.5rem;
-  margin-top: -2.5rem;
+  padding: 0 0 2rem;
+  margin-top: 1.2rem;
 }
 .hero-bottom-row {
-  display: grid;
-  grid-template-columns: 340px 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 1.4rem 2.4rem;
+  background: linear-gradient(120deg, #5b8a72, #466f58);
+  border-radius: 22px;
+  padding: 1.4rem 2.2rem;
+  box-shadow: 0 16px 40px rgba(71,116,92,0.22);
 }
 .hero-bottom-row .hero-members {
-  grid-column: 2;
+  flex: 1 1 260px; min-width: 230px;
+  padding-right: 1.8rem;
+  border-right: 1px solid rgba(255,255,255,0.2);
 }
-.hero-bottom-row .hero-trustbar {
-  grid-column: 3;
+.hero-bottom-row .hero-members-txt { color: rgba(255,255,255,0.82); }
+.hero-bottom-row .hero-members-txt b { color: #fff; }
+.hero-bottom-row .hero-heart-doodle { stroke: rgba(255,255,255,0.7); }
+.promo-stats {
+  flex: 2 1 470px; display: flex; flex-wrap: wrap;
+  gap: 1rem; justify-content: space-between;
 }
+.promo-stat { flex: 1 1 140px; padding: 0 0.2rem; display: flex; align-items: center; gap: 0.7rem; }
+.promo-stat + .promo-stat { border-left: 1px solid rgba(255,255,255,0.2); padding-left: 1.4rem; }
+.promo-ic { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.promo-ic svg { width: 20px; height: 20px; }
+.promo-num { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1; }
+.promo-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.8); margin-top: 0.35rem; line-height: 1.3; }
 .hero-trustbar {
-  display: flex; flex-direction: column;
-  gap: 0.85rem;
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  gap: 1.4rem;
   padding: 0;
   background: transparent;
+  margin-top: 5rem;
 }
-.hero-trustbar .trustbar-item { flex: 0 0 auto; }
+.hero-trustbar .trustbar-item { flex: 1 1 0; min-width: 150px; }
 .trustbar-item { display: flex; gap: 0.7rem; align-items: flex-start; }
 .trustbar-ic {
   color: var(--teal); flex-shrink: 0; margin-top: 1px;
@@ -768,21 +817,22 @@
     align-items: start;
   }
   .subcat-items-panel {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 1rem 1.5rem;
-    align-content: start;
+    display: block;
+    columns: 2;
+    column-gap: 1.5rem;
   }
   .subcat-items-block {
     break-inside: avoid;
+    margin-bottom: 1rem;
   }
   /* Quand le panneau n'a qu'un seul bloc, répartir ses items en colonnes */
   .subcat-items-panel.single-block {
     display: block;
+    columns: 1;
   }
   .subcat-items-panel.single-block .subcat-items-list {
     display: block;
-    columns: 3;
+    columns: 4;
     column-gap: 1.5rem;
   }
   .subcat-items-panel.single-block .subcat-items-list li {
@@ -1639,8 +1689,15 @@
       <span class="nav-logo-text">Fripz</span>
     </a>
     <div class="nav-search">
-      <span class="ns-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
-      <input type="text" placeholder="Rechercher un article, une marque...">
+      <div class="ns-scope" onclick="toggleSearchScope(event)">
+        <span id="nsScopeLabel">Articles</span>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <div class="ns-scope-menu" id="nsScopeMenu">
+          <div class="ns-scope-item" onclick="setSearchScope('articles',event)">Articles</div>
+          <div class="ns-scope-item" onclick="setSearchScope('membres',event)">Membres</div>
+        </div>
+      </div>
+      <input id="navSearchInput" type="text" placeholder="Rechercher un article, une marque...">
       <button class="ns-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
     </div>
     <ul class="nav-links">
@@ -1654,25 +1711,22 @@
         </div>
       </li>
       <li><a href="#" onclick="openSellModal()">Vendre</a></li>
-      <li><a href="#">À propos</a></li>
     </ul>
     <div class="nav-right">
       <div class="lang-select" onclick="toggleLangMenu(event)">
-        <span class="lang-flag">🇫🇷</span><span class="lang-code">FR</span>
+        <span class="lang-flag"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect width="1" height="2" x="2" fill="#EF4135"/></svg></span><span class="lang-code">FR</span>
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         <div class="lang-menu" id="langMenu">
-          <div class="lang-item" onclick="setLang('FR','🇫🇷',event)"><span>🇫🇷</span> Français</div>
-          <div class="lang-item" onclick="setLang('EN','🇬🇧',event)"><span>🇬🇧</span> English</div>
-          <div class="lang-item" onclick="setLang('ES','🇪🇸',event)"><span>🇪🇸</span> Español</div>
-          <div class="lang-item" onclick="setLang('DE','🇩🇪',event)"><span>🇩🇪</span> Deutsch</div>
-          <div class="lang-item" onclick="setLang('IT','🇮🇹',event)"><span>🇮🇹</span> Italiano</div>
+          <div class="lang-item" onclick="setLang('FR',event)"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect width="1" height="2" x="2" fill="#EF4135"/></svg> Français</div>
+          <div class="lang-item" onclick="setLang('EN',event)"><svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg> English</div>
+          <div class="lang-item" onclick="setLang('ES',event)"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect width="3" height="1" y="0.5" fill="#F1BF00"/></svg> Español</div>
+          <div class="lang-item" onclick="setLang('DE',event)"><svg class="flag" viewBox="0 0 5 3" preserveAspectRatio="none"><rect width="5" height="3" fill="#FFCE00"/><rect width="5" height="2" fill="#DD0000"/><rect width="5" height="1" fill="#000"/></svg> Deutsch</div>
+          <div class="lang-item" onclick="setLang('IT',event)"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="2" fill="#CE2B37"/></svg> Italiano</div>
         </div>
       </div>
-      <button class="nav-icon-btn" title="Favoris"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></button>
-      <button class="nav-icon-btn" title="Messages"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="nav-badge">3</span></button>
-      <button class="nav-icon-btn" title="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="nav-badge">2</span></button>
       <div class="nav-avatar" onclick="openAuthModal('login')"></div>
-      <button class="btn-sell-nav" onclick="openAuthModal('login')">Se connecter</button>
+      <button class="btn-outline-nav" onclick="openAuthModal('login')">Se connecter</button>
+      <button class="btn-sell-nav" onclick="openAuthModal('register')">S'inscrire</button>
     </div>
   </div>
 </nav>
@@ -1699,19 +1753,11 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <!-- BANNIÈRE VENDEZ VOS ARTICLES -->
-    <div class="hero-banner">
-      <div class="sell-banner" onclick="openSellModal()">
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/banniere.png" alt="Vendez vos articles facilement">
-        <span class="sell-banner-live" id="liveCounter">42 500</span>
-      </div>
-    </div>
 
     <!-- TEXTE -->
     <div class="hero-left">
-      <h1 class="hero-title">Achetez, vendez,<br>recommencez<span class="dot">.</span></h1>
+      <h1 class="hero-title">Achetez, vendez,<br><em class="hero-recommence">recommencez</em><span class="dot">.</span></h1>
       <p class="hero-slogan">Bon pour vous,<br>bon pour la planète.</p>
-      <p class="hero-sub">Rejoignez une communauté engagée qui partage le goût des bonnes affaires, entre neuf et seconde main.</p>
       <div class="hero-cta">
         <button class="btn-primary" onclick="document.getElementById('articles').scrollIntoView({behavior:'smooth'})">
           Commencer à acheter
@@ -1722,50 +1768,6 @@
           Vendre mes articles
         </button>
       </div>
-    </div>
-
-    <!-- MOSAIQUE PHOTOS -->
-    <div class="hero-mosaic">
-      <div class="mosaic-tile mt-mode">
-        <span class="m-tag">Mode</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/01_mode_femme.jpg" alt="Mode">
-      </div>
-      <div class="mosaic-tile mt-maison">
-        <span class="m-tag">Maison</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/02_maison_deco.jpg" alt="Maison">
-      </div>
-      <div class="mosaic-tile mt-vintage">
-        <span class="m-tag">Vintage</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/ChatGPT%20Image%201%20juin%202026%2C%2014_14_44.png" alt="Vintage" style="object-position: center 30%;">
-      </div>
-      <div class="mosaic-tile mt-loisirs">
-        <span class="m-tag">Loisirs</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/04_loisirs.jpg" alt="Loisirs">
-      </div>
-      <div class="mosaic-tile mt-divert">
-        <span class="m-tag">Divertissement</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/05_divertissement.jpg" alt="Divertissement">
-      </div>
-      <div class="mosaic-tile mt-tech">
-        <span class="m-tag">Tech</span>
-        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/06_tech.jpg" alt="Tech">
-      </div>
-    </div>
-  </div>
-
-  <!-- LIGNE BAS : Sophie + barre de confiance -->
-  <div class="hero-bottom-wrap">
-    <div class="hero-bottom-row">
-      <div class="hero-members">
-        <div class="hero-avatars">
-          <span style="background-image:url('https://i.pravatar.cc/80?img=47')"></span>
-          <span style="background-image:url('https://i.pravatar.cc/80?img=12')"></span>
-          <span style="background-image:url('https://i.pravatar.cc/80?img=32')"></span>
-        </div>
-        <div class="hero-members-txt"><b>Sophie, Marc &amp; 1000+ membres</b><br>ont rejoint la communauté Fripz</div>
-        <svg class="hero-heart-doodle" viewBox="0 0 40 30" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q10 8 18 16"/><path d="M22 14c-2-3-6-1-6 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-4-5-6-2"/></svg>
-      </div>
-
       <!-- BARRE DE CONFIANCE -->
       <div class="hero-trustbar">
         <div class="trustbar-item">
@@ -1780,6 +1782,33 @@
           <span class="trustbar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           <div><div class="trustbar-title">Communauté engagée</div><div class="trustbar-desc">Des milliers de membres de confiance</div></div>
         </div>
+      </div>
+    </div>
+
+    <!-- IMAGE LIFESTYLE + CARTE PRODUIT -->
+    <div class="hero-image-wrap">
+      <div class="hero-image">
+        <img src="https://raw.githubusercontent.com/leandro65950-lab/fripz/main/28d12b7a-04ee-4622-adf4-af20f7dfb027.png" alt="Intérieur seconde main">
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGNE BAS : Sophie + barre de confiance -->
+  <div class="hero-bottom-wrap">
+    <div class="hero-bottom-row">
+      <div class="hero-members">
+        <div class="hero-avatars">
+          <span style="background-image:url('https://i.pravatar.cc/80?img=47')"></span>
+          <span style="background-image:url('https://i.pravatar.cc/80?img=12')"></span>
+          <span style="background-image:url('https://i.pravatar.cc/80?img=32')"></span>
+        </div>
+        <div class="hero-members-txt"><b><span id="heroMemberCount">1 000</span> membres</b><br>ont rejoint la communauté Fripz</div>
+        <svg class="hero-heart-doodle" viewBox="0 0 40 30" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 Q10 8 18 16"/><path d="M22 14c-2-3-6-1-6 2 0 3 5 6 7 7 2-1 7-4 7-7 0-3-4-5-6-2"/></svg>
+      </div>
+      <div class="promo-stats">
+        <div class="promo-stat"><span class="promo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span><div><div class="promo-num">−50%</div><div class="promo-lbl">Frais de la plateforme</div></div></div>
+        <div class="promo-stat"><span class="promo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><div><div class="promo-num">×3</div><div class="promo-lbl">Boost : plus de vues et de ventes</div></div></div>
+        <div class="promo-stat"><span class="promo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M3 9h18"/></svg></span><div><div class="promo-num">×2</div><div class="promo-lbl">Dressing en vitrine : plus de visibilité</div></div></div>
       </div>
     </div>
   </div>
@@ -2625,9 +2654,25 @@ const subcats = {
   enfant: {
     label: 'Enfants — Sous-catégories',
     cols: [
-      { title: '🍼 Bébé (0–24 mois)', items: ['Bodies & Pyjamas', 'Ensembles & Tenues', 'Manteaux & Gilets bébé', 'Chaussons & Chaussures bébé', 'Baskets bébé', 'Sandales bébé', 'Bottes & Bottines bébé', 'Sacs à langer', 'Poussettes & Landaus', 'Chaises hautes', 'Sièges auto & Coques', 'Transats & Bouncers', 'Parcs & Lits bébé', 'Moniteurs & Écoutes-bébé', 'Tapis d\'éveil & Jouets', 'Biberons & Tire-laits', 'Turbulettes & Gigoteuses'] },
-      { title: '👧 Fille (2–14 ans)', items: ['Toute la mode fille', 'Robes & Jupes', 'Hauts & T-shirts', 'Pantalons & Jeans', 'Shorts', 'Joggings', 'Manteaux', 'Sweats & Hoodies', 'Maillots de bain', 'Baskets & Sneakers fille', 'Chaussures de sport fille', 'Sandales fille', 'Bottes & Bottines fille', 'Chaussures ville fille', 'Chaussons & Pantoufles fille'] },
-      { title: '👦 Garçon (2–14 ans)', items: ['Toute la mode garçon', 'T-shirts & Polos', 'Pantalons & Jeans', 'Shorts', 'Joggings', 'Sweats & Hoodies', 'Manteaux', 'Maillots de bain', 'Baskets & Sneakers garçon', 'Chaussures de sport garçon', 'Sandales garçon', 'Bottes & Bottines garçon', 'Chaussures ville garçon', 'Chaussons & Pantoufles garçon'] },
+      { title: '🍼 Bébé (0–24 mois)', isGroup: true, children: [
+        { title: '👕 Vêtements bébé', items: ['Bodies & Pyjamas', 'Ensembles & Tenues', 'Manteaux & Gilets bébé', 'Turbulettes & Gigoteuses'] },
+        { title: '👟 Chaussures bébé', items: ['Chaussons & Chaussures bébé', 'Baskets bébé', 'Sandales bébé', 'Bottes & Bottines bébé'] },
+        { title: '🍼 Puériculture', items: ['Sacs à langer', 'Poussettes & Landaus', 'Chaises hautes', 'Sièges auto & Coques', 'Transats & Bouncers', 'Parcs & Lits bébé', 'Moniteurs & Écoutes-bébé', 'Biberons & Tire-laits'] },
+        { title: '🧸 Éveil & Jouets', items: ['Tapis d\'éveil & Jouets'] },
+      ] },
+      { title: '👧 Fille (2–14 ans)', isGroup: true, children: [
+        { title: '👕 Hauts', items: ['Hauts & T-shirts', 'Sweats & Hoodies'] },
+        { title: '👖 Bas', items: ['Pantalons & Jeans', 'Shorts', 'Joggings'] },
+        { title: '👗 Robes & Jupes', items: ['Robes & Jupes'] },
+        { title: '🧥 Manteaux & Bain', items: ['Manteaux', 'Maillots de bain'] },
+        { title: '👟 Chaussures', items: ['Baskets & Sneakers fille', 'Chaussures de sport fille', 'Sandales fille', 'Bottes & Bottines fille', 'Chaussures ville fille', 'Chaussons & Pantoufles fille'] },
+      ] },
+      { title: '👦 Garçon (2–14 ans)', isGroup: true, children: [
+        { title: '👕 Hauts', items: ['T-shirts & Polos', 'Sweats & Hoodies'] },
+        { title: '👖 Bas', items: ['Pantalons & Jeans', 'Shorts', 'Joggings'] },
+        { title: '🧥 Manteaux & Bain', items: ['Manteaux', 'Maillots de bain'] },
+        { title: '👟 Chaussures', items: ['Baskets & Sneakers garçon', 'Chaussures de sport garçon', 'Sandales garçon', 'Bottes & Bottines garçon', 'Chaussures ville garçon', 'Chaussons & Pantoufles garçon'] },
+      ] },
     ]
   },
   accessoire: {
@@ -2966,16 +3011,26 @@ function hoverSubcatGroupDirect(cat, colIndex, itemsPanelId) {
   let html = '';
   let singleBlock = false;
   if (col.isGroup && col.children) {
-    // Afficher les sous-groupes avec leurs items
-    if (col.children.length === 1) singleBlock = true;
-    html = col.children.map(child => `
+    // Liste a plat facon Vinted : tous les items reunis, repartis en colonnes
+    singleBlock = true;
+    const useGroups = col.children.length >= 3;
+    let lis;
+    if (useGroups) {
+      lis = col.children.map((child, ci) => {
+        const t = child.title.replace(/^[^\s]+\s/, '').trim();
+        return t ? `<li onclick="drillVetGroup('${cat}',${colIndex},${ci},'${itemsPanelId}')">${t}</li>` : '';
+      }).join('');
+    } else {
+      const allItems = [];
+      col.children.forEach(child => (child.items||[]).forEach(it => allItems.push(it)));
+      lis = allItems.map(it => `<li onclick="pickSubcatNav('${cat}','${String(it).replace(/'/g,"\\'")}')">${it}</li>`).join('');
+    }
+    html = `
       <div class="subcat-items-block">
-        <h4>${child.title.replace(/^[^\s]+\s/, '')}</h4>
-        <ul class="subcat-items-list">
-          ${(child.items||[]).map(it => `<li onclick="pickSubcatNav('${cat}','${String(it).replace(/'/g,"\\'")}')">${it}</li>`).join('')}
-        </ul>
+        <h4>${col.title.replace(/^[^\s]+\s/, '')}</h4>
+        <ul class="subcat-items-list">${lis}</ul>
       </div>
-    `).join('');
+    `;
   } else if (col.items) {
     singleBlock = true;
     html = `
@@ -2989,6 +3044,23 @@ function hoverSubcatGroupDirect(cat, colIndex, itemsPanelId) {
   }
   panel.classList.toggle('single-block', singleBlock);
   panel.innerHTML = html || '<div style="color:var(--text-light);padding:1rem">Bientôt disponible</div>';
+}
+
+function drillVetGroup(cat, colIndex, childIndex, itemsPanelId) {
+  itemsPanelId = itemsPanelId || 'subcatItemsPanel';
+  const col = subcats[cat].cols[colIndex];
+  const child = col && col.children && col.children[childIndex];
+  const panel = document.getElementById(itemsPanelId);
+  if (!panel || !child) return;
+  const title = child.title.replace(/^[^\s]+\s/, '').trim();
+  const items = (child.items||[]).map(it => `<li onclick="pickSubcatNav('${cat}','${String(it).replace(/'/g,"\\'")}')">${it}</li>`).join('');
+  panel.classList.add('single-block');
+  panel.innerHTML = `
+    <div class="subcat-items-block">
+      <h4 style="display:flex;align-items:center;gap:0.4rem"><span onclick="hoverSubcatGroupDirect('${cat}',${colIndex},'${itemsPanelId}')" style="cursor:pointer;color:var(--teal);font-weight:800">\u2039 Retour</span><span style="color:var(--text-light);font-weight:500">/ ${title}</span></h4>
+      <ul class="subcat-items-list">${items}</ul>
+    </div>
+  `;
 }
 
 function pickSubcatNav(cat, sub) {
@@ -3472,9 +3544,10 @@ function toggleLangMenu(event) {
   const m = document.getElementById('langMenu');
   if (m) m.classList.toggle('open');
 }
-function setLang(code, flag, event) {
-  event.stopPropagation();
-  document.querySelector('.lang-flag').textContent = flag;
+const FLAGS = { FR: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect width="1" height="2" x="2" fill="#EF4135"/></svg>', EN: '<svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>', ES: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect width="3" height="1" y="0.5" fill="#F1BF00"/></svg>', DE: '<svg class="flag" viewBox="0 0 5 3" preserveAspectRatio="none"><rect width="5" height="3" fill="#FFCE00"/><rect width="5" height="2" fill="#DD0000"/><rect width="5" height="1" fill="#000"/></svg>', IT: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="2" fill="#CE2B37"/></svg>' };
+function setLang(code, event) {
+  if (event) event.stopPropagation();
+  document.querySelector('.lang-flag').innerHTML = FLAGS[code] || '';
   document.querySelector('.lang-code').textContent = code;
   document.getElementById('langMenu').classList.remove('open');
 }
@@ -3808,29 +3881,14 @@ const AI_API_URL = (location.hostname.endsWith('vercel.app'))
   : 'https://fripz-sigma.vercel.app/api/analyze';
 
 function buildAIBlock() {
-  const thumbs = aiPhotos.map((src, i) =>
-    `<div class="ai-thumb"><img src="${src}" alt=""><button class="ai-del" onclick="aiRemovePhoto(${i})">✕</button></div>`
-  ).join('');
-  const addSlot = aiPhotos.length < 3
-    ? `<div class="ai-thumb-add" onclick="document.getElementById('aiFileInput').click()">+</div>`
-    : '';
-  const btnLabel = aiAnalyzing
-    ? `<span class="ai-spin"></span>Analyse en cours…`
-    : `✨ Analyser avec l'IA`;
-  return `
-    <div class="ai-fill-card">
-      <div class="ai-fill-head">
-        <span class="ai-emoji">🪄</span>
-        <div>
-          <div class="ai-fill-title">Pré-remplissage automatique</div>
-          <div class="ai-fill-sub">Ajoutez 1 à 3 photos (face, dos, étiquette). L'IA remplit la fiche pour vous.</div>
-        </div>
-      </div>
-      <div class="ai-thumbs">${thumbs}${addSlot}</div>
-      <input type="file" id="aiFileInput" accept="image/*" multiple style="display:none" onchange="aiAddPhotos(event)">
-      <button class="ai-fill-btn" onclick="runAIAnalysis()" ${(aiPhotos.length===0||aiAnalyzing)?'disabled':''}>${btnLabel}</button>
-      <div class="ai-fill-status" id="aiFillStatus"></div>
-    </div>`;
+  const real = sellData.photos.filter(isImg).length;
+  const btnLabel = aiAnalyzing ? '<span class="ai-spin"></span>Analyse en cours\u2026' : '\u2728 Analyser avec l\'IA';
+  return '<div class="ai-fill-card" style="margin-top:1rem">'
+    + '<div class="ai-fill-head"><span class="ai-emoji">\u2728</span><div>'
+    + '<div class="ai-fill-title">Pr\u00e9-remplissage automatique</div>'
+    + '<div class="ai-fill-sub">L\'IA analyse vos 3 premi\u00e8res photos pour remplir la fiche.</div></div></div>'
+    + '<button class="ai-fill-btn" onclick="runAIAnalysis()" ' + ((real===0||aiAnalyzing)?'disabled':'') + '>' + btnLabel + '</button>'
+    + '<div class="ai-fill-status" id="aiFillStatus"></div></div>';
 }
 
 function aiAddPhotos(e) {
@@ -3872,12 +3930,14 @@ function aiResize(dataUrl) {
 }
 
 async function runAIAnalysis() {
-  if (aiPhotos.length === 0 || aiAnalyzing) return;
+  const aiSrc = sellData.photos.filter(isImg).slice(0, 3);
+  if (aiAnalyzing) return;
+  if (aiSrc.length === 0) { if (window.toast) toast('Ajoutez au moins une photo'); return; }
   aiAnalyzing = true;
   renderSellPage();
   const status = document.getElementById('aiFillStatus');
   try {
-    const resized = await Promise.all(aiPhotos.map(aiResize));
+    const resized = await Promise.all(aiSrc.map(aiResize));
     const resp = await fetch(AI_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -3979,7 +4039,7 @@ function renderSellPage() {
   const photoSlots = Array.from({length:10}, (_,i) => {
     const p = sellData.photos[i];
     if (p) return `<div class="photo-slot filled" style="position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <div style="font-size: 2.909rem">${p}</div>
+      ${isImg(p) ? `<img src="${p}" style="width:100%;height:100%;object-fit:cover;border-radius:9px">` : `<div style="font-size: 2.909rem">${p}</div>`}
       <button onclick="removePhoto(${i})" style="position:absolute;top:3px;right:3px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size: 0.859rem;cursor:pointer;line-height:18px;text-align:center">✕</button>
       ${i===0?`<div style="position:absolute;bottom:0;left:0;right:0;text-align:center;font-size: 0.727rem;font-weight:800;color:#fff;background:rgba(43,191,164,0.9);padding:2px 0;border-radius:0 0 9px 9px">PRINCIPALE</div>`:''}
     </div>`;
@@ -4016,12 +4076,13 @@ function renderSellPage() {
     : '';
 
   body.innerHTML = `
-    ${buildAIBlock()}
     <!-- PHOTOS -->
     <div class="sell-section">
       <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>Photos</div>
       <div class="sell-section-sub">Ajoutez jusqu'à 8 photos. La première sera la photo principale.</div>
       <div class="photo-grid">${photoSlots}</div>
+      <input type="file" id="mainPhotoInput" accept="image/*" multiple style="display:none" onchange="onMainPhotosPicked(event)">
+      ${buildAIBlock()}
     </div>
 
     <!-- INFOS -->
@@ -4265,10 +4326,16 @@ document.addEventListener('click', (e) => {
 });
 
 function addPhoto(i) {
-  if (i > sellData.photos.length) return;
-  const emojis = ['👗','👟','🧥','👜','👖','👠','🎮','📱','🏀','🌸','🎨','📚','👒','🕶️','🧣'];
-  sellData.photos.push(emojis[Math.floor(Math.random()*emojis.length)]);
-  renderSellPage();
+  document.getElementById('mainPhotoInput').click();
+}
+function onMainPhotosPicked(e) {
+  const files = Array.prototype.slice.call(e.target.files || []);
+  files.forEach(function(f){
+    const reader = new FileReader();
+    reader.onload = function(){ if (sellData.photos.length >= 8) return; sellData.photos.push(reader.result); renderSellPage(); };
+    reader.readAsDataURL(f);
+  });
+  e.target.value = '';
 }
 function removePhoto(i) { sellData.photos.splice(i,1); renderSellPage(); }
 
@@ -4824,6 +4891,28 @@ function closeISBNScanner() {
   if (grid && 'IntersectionObserver' in window){ var nums = grid.querySelectorAll('.stat-number'); var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ nums.forEach(countUp); obs.disconnect(); } }); }, { threshold: 0.4 }); obs.observe(grid); }
   else if (grid) { grid.querySelectorAll('.stat-number').forEach(countUp); }
 })();
+</script>
+<script>
+(function(){
+  var el = document.getElementById('heroMemberCount');
+  if (!el) return;
+  var n = 1000;
+  function show(){ el.textContent = n.toLocaleString('fr-FR'); }
+  show();
+  function tick(){ n += 1 + Math.floor(Math.random()*2); show(); el.style.transition='color .3s'; el.style.color='var(--teal)'; setTimeout(function(){ el.style.color=''; }, 400); setTimeout(tick, 7000 + Math.random()*11000); }
+  setTimeout(tick, 5000);
+})();
+</script>
+<script>
+function toggleSearchScope(e){ if(e) e.stopPropagation(); var m=document.getElementById('nsScopeMenu'); if(m) m.classList.toggle('open'); }
+function setSearchScope(scope, e){
+  if(e) e.stopPropagation();
+  document.getElementById('nsScopeLabel').textContent = scope === 'membres' ? 'Membres' : 'Articles';
+  document.getElementById('navSearchInput').placeholder = scope === 'membres' ? 'Rechercher un membre...' : 'Rechercher un article, une marque...';
+  window.searchScope = scope;
+  var m=document.getElementById('nsScopeMenu'); if(m) m.classList.remove('open');
+}
+document.addEventListener('click', function(){ var m=document.getElementById('nsScopeMenu'); if(m) m.classList.remove('open'); });
 </script>
 </body>
 </html>
