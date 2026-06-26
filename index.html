@@ -1678,6 +1678,7 @@
   .footer-apps .store-badge span { font-size: 0.86rem; }
   .footer-apps .store-badge small { font-size: 0.6rem; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -4458,7 +4459,7 @@ function publishArticle() {
   const newId = products.length + 1;
   products.unshift({
     id: newId,
-    emoji: sellData.photos[0] || '🏷️',
+    emoji: sellData.photos[0] ? ('<img src="'+sellData.photos[0]+'" style="width:100%;height:100%;object-fit:cover;display:block">') : '<div style="width:100%;height:100%;background:#eef1ee"></div>',
     brand: sellData.marque || 'Ma marque',
     name: sellData.titre || 'Mon article',
     meta: `${sellData.marque||''} · ${sellData.taille||'Unique'}`,
@@ -4470,6 +4471,7 @@ function publishArticle() {
   renderArticles(products);
   // Incrémenter le compteur live d'articles en vente
   if (window.incrementLiveCounter) window.incrementLiveCounter(1);
+  if (window.saveAnnonce) saveAnnonce({titre:sellData.titre,description:sellData.description,prix:sellData.prix,categorie:sellData.categorie,sous_categorie:sellData.sous_categorie,type_article:sellData.type_article,marque:sellData.marque,couleur:sellData.couleur,taille:sellData.taille,etat:sellData.etat,photos:sellData.photos.slice()});
 }
 
 
@@ -4913,6 +4915,100 @@ function setSearchScope(scope, e){
   var m=document.getElementById('nsScopeMenu'); if(m) m.classList.remove('open');
 }
 document.addEventListener('click', function(){ var m=document.getElementById('nsScopeMenu'); if(m) m.classList.remove('open'); });
+</script>
+<script>
+/* ===== Supabase - backend Fripz ===== */
+const SUPA_URL = 'https://uckndtrfkgfxncefjrjz.supabase.co';
+const SUPA_KEY = 'sb_publishable_lNFjRuPC-1AuB7smB5LHHA_xs0eieSM';
+let supaClient = null;
+try {
+  if (window.supabase && window.supabase.createClient) {
+    supaClient = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+    console.log('Supabase pret');
+  } else {
+    console.warn('Librairie Supabase non chargee');
+  }
+} catch (e) { console.warn('Supabase init', e); }
+
+function dataURLtoBlob(dataurl) {
+  const arr = dataurl.split(',');
+  const m = arr[0].match(/:(.*?);/);
+  const mime = m ? m[1] : 'image/jpeg';
+  const bstr = atob(arr[1]);
+  let n = bstr.length; const u8 = new Uint8Array(n);
+  while (n--) u8[n] = bstr.charCodeAt(n);
+  return new Blob([u8], { type: mime });
+}
+
+async function saveAnnonce(d) {
+  if (!supaClient) { console.warn('Supabase indisponible'); return null; }
+  const urls = [];
+  const photos = d.photos || [];
+  for (let i = 0; i < photos.length; i++) {
+    const ph = photos[i];
+    if (typeof ph !== 'string') continue;
+    if (ph.indexOf('data:') === 0) {
+      try {
+        const blob = dataURLtoBlob(ph);
+        const ext = ((blob.type.split('/')[1]) || 'jpg').replace('jpeg', 'jpg');
+        const path = Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+        const up = await supaClient.storage.from('photos').upload(path, blob, { contentType: blob.type });
+        if (!up.error) {
+          const pub = supaClient.storage.from('photos').getPublicUrl(path);
+          if (pub && pub.data && pub.data.publicUrl) urls.push(pub.data.publicUrl);
+        } else { console.warn('upload photo', up.error); }
+      } catch (e) { console.warn('photo', e); }
+    } else {
+      urls.push(ph);
+    }
+  }
+  const row = {
+    titre: d.titre || '', description: d.description || '',
+    prix: parseFloat(d.prix) || 0,
+    categorie: d.categorie || '', sous_categorie: d.sous_categorie || '',
+    type_article: d.type_article || '', marque: d.marque || '',
+    couleur: d.couleur || '', taille: d.taille || '', etat: d.etat || '',
+    photos: urls
+  };
+  const res = await supaClient.from('annonces').insert(row).select();
+  if (res.error) { console.warn('insert annonce', res.error); return null; }
+  console.log('Annonce enregistree', res.data && res.data[0]);
+  return res.data && res.data[0];
+}
+window.saveAnnonce = saveAnnonce;
+
+function annonceToProduct(a, id) {
+  const ph = (a.photos && a.photos.length) ? a.photos[0] : null;
+  const media = ph
+    ? ('<img src="' + ph + '" style="width:100%;height:100%;object-fit:cover;display:block">')
+    : '<div style="width:100%;height:100%;background:#eef1ee"></div>';
+  return {
+    id: id, uuid: a.id, emoji: media,
+    brand: a.marque || 'Vendeur Fripz',
+    name: a.titre || 'Article',
+    meta: (a.marque ? a.marque : 'Fripz') + ' \u00b7 ' + (a.taille || 'Unique'),
+    price: a.prix ? (a.prix + ' \u20ac') : '\u2014',
+    cat: (a.categorie || 'autre').toLowerCase(),
+    state: a.etat || 'Bon \u00e9tat',
+    desc: a.description || 'Bel article en bon \u00e9tat.'
+  };
+}
+
+async function loadAnnonces() {
+  if (!supaClient) return;
+  try {
+    const res = await supaClient.from('annonces').select('*').order('created_at', { ascending: false });
+    if (res.error) { console.warn('load annonces', res.error); return; }
+    const data = res.data || [];
+    if (!data.length) return;
+    let nextId = 100000;
+    const loaded = data.map(function (a) { return annonceToProduct(a, nextId++); });
+    products.unshift.apply(products, loaded);
+    if (typeof renderArticles === 'function') renderArticles(products);
+    console.log('Annonces chargees:', loaded.length);
+  } catch (e) { console.warn('loadAnnonces', e); }
+}
+window.addEventListener('load', loadAnnonces);
 </script>
 </body>
 </html>
