@@ -4185,18 +4185,6 @@ function renderSellPage() {
         <div style="display:flex;justify-content:space-between;font-size: 1.256rem;border-top:1px solid #c8ede7;padding-top:0.5rem;margin-top:0.4rem"><span style="font-weight:800">Vous gagnez</span><span style="font-weight:800;color:var(--teal);font-size: 1.389rem">${gain} €</span></div>
       </div>` : ''}
     </div>
-
-    <!-- RECAP -->
-    <div class="sell-section" style="margin-bottom:0.5rem">
-      <div class="sell-section-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Récapitulatif</div>
-      ${sellData.titre && sellData.prix ? `
-      <div style="background:#fafafa;border-radius:14px;padding:1rem;border:1px solid var(--border)">
-        <div style="font-weight:800;font-size: 1.256rem;margin-bottom:0.5rem">${sellData.titre}</div>
-        ${sellData.categorie?`<div style="font-size: 1.058rem;color:var(--text-mid)">📂 ${sellData.categorie}${sellData.sous_categorie?' › '+sellData.sous_categorie:''}</div>`:''}
-        ${sellData.etat?`<div style="font-size: 1.058rem;color:var(--text-mid)">🏷️ ${sellData.etat}</div>`:''}
-        <div style="font-size: 1.455rem;font-weight:800;color:var(--teal);margin-top:0.5rem">${sellData.prix} €</div>
-      </div>` : `<div style="font-size: 1.124rem;color:var(--text-light);text-align:center;padding:1rem">Complétez les champs obligatoires pour voir le récapitulatif.</div>`}
-    </div>
   `;
   // Initialiser les menus déroulants après rendu
   setTimeout(initSellDrops, 0);
