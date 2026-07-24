@@ -425,6 +425,112 @@
   .pw-strength-fill { height: 100%; border-radius: 4px; width: 0%; transition: all 0.3s; }
   .pw-strength-label { font-size: 0.926rem; font-weight: 700; }
 
+  /* ══════════ PROFILE PAGE ══════════ */
+  .profile-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: var(--bg); overflow-y: auto;
+  }
+  .profile-overlay.open { display: block; animation: fadeIn 0.2s; }
+  .profile-page { max-width: 900px; margin: 0 auto; padding-bottom: 4rem; }
+
+  .profile-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--white); z-index: 5;
+  }
+  .profile-back {
+    font-weight: 700; color: var(--text-mid); cursor: pointer; font-size: 1rem;
+  }
+  .profile-back:hover { color: var(--teal); }
+  .profile-topbar-title { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+
+  .profile-cover {
+    height: 160px; position: relative;
+    background: linear-gradient(135deg, var(--teal-light), #fce4ec);
+    background-size: cover; background-position: center;
+  }
+  .profile-cover-edit, .profile-avatar-edit {
+    position: absolute; width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.95); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem; transition: transform 0.15s;
+  }
+  .profile-cover-edit { top: 12px; right: 12px; }
+  .profile-cover-edit:hover, .profile-avatar-edit:hover { transform: scale(1.1); }
+
+  .profile-header {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0 1.5rem; text-align: center;
+  }
+  .profile-avatar-wrap {
+    position: relative; margin-top: -55px; margin-bottom: 0.75rem;
+  }
+  .profile-avatar {
+    width: 108px; height: 108px; border-radius: 50%;
+    border: 5px solid var(--white); background: var(--teal);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 2.4rem; font-weight: 800; overflow: hidden;
+  }
+  .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-avatar-edit { bottom: 2px; right: 2px; }
+
+  .profile-username { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+  .profile-bio { font-size: 1rem; color: var(--text-mid); margin-top: 0.35rem; max-width: 480px; }
+  .profile-meta-row { font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem; }
+
+  .profile-edit-toggle {
+    margin-top: 1rem; display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.5rem 1.1rem; border: 1.5px solid var(--border); border-radius: 30px;
+    font-size: 0.95rem; font-weight: 700; color: var(--text-mid); cursor: pointer;
+    transition: all 0.15s;
+  }
+  .profile-edit-toggle:hover { border-color: var(--teal); color: var(--teal); }
+
+  .profile-identity-edit {
+    width: 100%; max-width: 420px; margin-top: 1rem; text-align: left;
+  }
+  .profile-edit-input {
+    width: 100%; padding: 0.7rem 0.9rem; margin-bottom: 0.6rem;
+    border: 1.5px solid var(--border); border-radius: 12px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem;
+    color: var(--text); background: var(--white); outline: none;
+    transition: border-color 0.2s; resize: vertical;
+  }
+  .profile-edit-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(43,191,164,0.08); }
+  .profile-edit-actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 0.4rem; }
+  .profile-btn-primary, .profile-btn-ghost {
+    padding: 0.6rem 1.4rem; border-radius: 12px; font-weight: 800;
+    font-size: 0.98rem; cursor: pointer; border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .profile-btn-primary { background: var(--teal); color: #fff; }
+  .profile-btn-primary:hover { background: var(--teal-dark); }
+  .profile-btn-ghost { background: var(--card-bg); color: var(--text-mid); border: 1.5px solid var(--border); }
+  .profile-btn-ghost:hover { color: var(--text); }
+
+  .profile-stats-row {
+    display: flex; justify-content: center; gap: 2.5rem;
+    padding: 1.5rem; border-bottom: 1px solid var(--border); margin-top: 1rem;
+  }
+  .profile-stat { text-align: center; }
+  .profile-stat-num { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+  .profile-stat-label { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+
+  .profile-section { padding: 1.75rem 1.5rem; }
+  .profile-section-title { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 1.1rem; }
+
+  .profile-empty {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 3rem 1.5rem; background: var(--card-bg); border-radius: 18px;
+    border: 1.5px dashed var(--border);
+  }
+  .profile-empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .profile-empty-title { font-size: 1.15rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+  .profile-empty-sub { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 1.4rem; max-width: 320px; }
+  @media(max-width: 640px){
+    .profile-stats-row { gap: 1.5rem; }
+  }
+
 /* ── HERO ── */
 .hero {
   background:
@@ -2407,6 +2513,59 @@ function closePage() {
   </div>
 </div>
 
+<!-- PROFILE PAGE -->
+<div class="profile-overlay" id="profileOverlay">
+  <div class="profile-page" id="profilePage">
+
+    <div class="profile-topbar">
+      <div class="profile-back" onclick="closeProfileOverlay()">← Retour</div>
+      <div class="profile-topbar-title">Mon profil</div>
+      <div style="width:60px"></div>
+    </div>
+
+    <div class="profile-cover" id="profileCover">
+      <label class="profile-cover-edit" title="Changer la couverture">
+        📷
+        <input type="file" accept="image/*" style="display:none" onchange="handleCoverChange(event)">
+      </label>
+    </div>
+
+    <div class="profile-header">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="profileAvatar"></div>
+        <label class="profile-avatar-edit" title="Changer la photo de profil">
+          📷
+          <input type="file" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
+        </label>
+      </div>
+
+      <div id="profileIdentityView">
+        <div class="profile-username" id="profileUsernameDisplay"></div>
+        <div class="profile-bio" id="profileBioDisplay"></div>
+        <div class="profile-meta-row" id="profileMemberSince"></div>
+        <div class="profile-edit-toggle" id="profileEditToggle" onclick="startProfileEdit()">✏️ Modifier mon profil</div>
+      </div>
+
+      <div class="profile-identity-edit" id="profileIdentityEdit" style="display:none">
+        <input type="text" class="profile-edit-input" id="profileEditUsername" placeholder="Pseudo" maxlength="30">
+        <textarea class="profile-edit-input" id="profileEditBio" placeholder="Une petite bio pour te présenter..." maxlength="160" rows="3"></textarea>
+        <div class="profile-edit-actions">
+          <button class="profile-btn-ghost" onclick="cancelProfileEdit()">Annuler</button>
+          <button class="profile-btn-primary" onclick="saveProfileEdit()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-stats-row" id="profileStatsRow"></div>
+
+    <div class="profile-section">
+      <div class="profile-section-title">Mes annonces</div>
+      <div id="profileListingsArea"></div>
+    </div>
+
+  </div>
+</div>
+
 <!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay" onclick="closeAuthModal(event)">
   <div class="auth-modal" id="authModal">
@@ -3859,19 +4018,152 @@ async function doLogout() {
   showToast('À bientôt ! Vous êtes déconnecté.');
 }
 
+/* ══════════ PROFILE PAGE ══════════ */
+
+function frenchMemberSince(iso) {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso);
+    const txt = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    return 'Membre depuis ' + txt;
+  } catch (e) { return ''; }
+}
+
+function myAnnonces() {
+  if (!currentUser) return [];
+  return products.filter(function (p) { return p.user_id && p.user_id === currentUser.id; });
+}
+
+function renderProfileListings() {
+  const area = document.getElementById('profileListingsArea');
+  const mine = myAnnonces();
+  if (!mine.length) {
+    area.innerHTML =
+      '<div class="profile-empty">' +
+        '<div class="profile-empty-icon">👕</div>' +
+        '<div class="profile-empty-title">Aucune annonce pour l\'instant</div>' +
+        '<div class="profile-empty-sub">Tes articles publiés apparaîtront ici. Prêt(e) à vendre ta première pièce ?</div>' +
+        '<button class="profile-btn-primary" onclick="closeProfileOverlay(); openSellModal();">📷 Vendre mon premier article</button>' +
+      '</div>';
+    return;
+  }
+  area.innerHTML = '<div class="articles-grid">' + mine.map(function (p) {
+    return '<div class="article-card" onclick="closeProfileOverlay(); openModal(' + p.id + ');">' +
+      '<div class="article-img">' + p.emoji + '</div>' +
+      '<div class="article-info">' +
+        '<div class="article-name">' + p.name + '</div>' +
+        '<div class="article-meta">' + p.meta + '</div>' +
+        '<div class="article-price">' + p.price + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('') + '</div>';
+}
+
+function renderProfilePage() {
+  if (!currentUser) return;
+  const prof = currentProfile || {};
+  const av = document.getElementById('profileAvatar');
+  av.innerHTML = prof.avatar_url
+    ? '<img src="' + prof.avatar_url + '" alt="avatar">'
+    : authInitials();
+  const cover = document.getElementById('profileCover');
+  cover.style.backgroundImage = prof.cover_url ? ('url(' + prof.cover_url + ')') : '';
+
+  document.getElementById('profileUsernameDisplay').textContent = authDisplayName();
+  document.getElementById('profileBioDisplay').textContent = prof.bio || '';
+  document.getElementById('profileBioDisplay').style.display = prof.bio ? 'block' : 'none';
+  document.getElementById('profileMemberSince').textContent = frenchMemberSince(currentUser.created_at);
+
+  const mine = myAnnonces();
+  document.getElementById('profileStatsRow').innerHTML =
+    '<div class="profile-stat"><div class="profile-stat-num">' + mine.length + '</div><div class="profile-stat-label">Annonce' + (mine.length > 1 ? 's' : '') + '</div></div>' +
+    '<div class="profile-stat"><div class="profile-stat-num">0</div><div class="profile-stat-label">Ventes</div></div>' +
+    '<div class="profile-stat"><div class="profile-stat-num">—</div><div class="profile-stat-label">Note vendeur</div></div>';
+
+  renderProfileListings();
+}
+
 function openProfile() {
   const m = document.getElementById('navUserMenu'); if (m) m.classList.remove('open');
   if (!currentUser) { openAuthModal('login'); return; }
-  showToast('👤 Page profil — on la construit juste après !');
+  cancelProfileEdit();
+  renderProfilePage();
+  document.getElementById('profileOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProfileOverlay() {
+  document.getElementById('profileOverlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 function openMyListings() {
-  const m = document.getElementById('navUserMenu'); if (m) m.classList.remove('open');
-  if (!currentUser) { openAuthModal('login'); return; }
-  const mine = products.filter(function (p) { return p.user_id && p.user_id === currentUser.id; });
-  renderArticles(mine.length ? mine : products);
-  const sec = document.getElementById('articles'); if (sec) sec.scrollIntoView({ behavior: 'smooth' });
-  showToast(mine.length ? ('Vos annonces : ' + mine.length) : 'Vous n\'avez pas encore publié d\'annonce');
+  openProfile();
+}
+
+function startProfileEdit() {
+  const prof = currentProfile || {};
+  document.getElementById('profileEditUsername').value = prof.username || authDisplayName();
+  document.getElementById('profileEditBio').value = prof.bio || '';
+  document.getElementById('profileIdentityView').style.display = 'none';
+  document.getElementById('profileIdentityEdit').style.display = 'block';
+}
+
+function cancelProfileEdit() {
+  document.getElementById('profileIdentityView').style.display = 'block';
+  document.getElementById('profileIdentityEdit').style.display = 'none';
+}
+
+async function saveProfileEdit() {
+  if (!currentUser || !window.supaClient) return;
+  const username = (document.getElementById('profileEditUsername').value || '').trim();
+  const bio = (document.getElementById('profileEditBio').value || '').trim();
+  if (!username) { showToast('⚠️ Le pseudo ne peut pas être vide'); return; }
+  const res = await window.supaClient.from('profiles')
+    .update({ username: username, bio: bio })
+    .eq('id', currentUser.id);
+  if (res.error) { showToast('⚠️ ' + (res.error.message || 'Mise à jour impossible')); return; }
+  currentProfile = Object.assign({}, currentProfile, { username: username, bio: bio });
+  updateAuthUI();
+  cancelProfileEdit();
+  renderProfilePage();
+  showToast('✅ Profil mis à jour !');
+}
+
+async function uploadProfileImage(file, column) {
+  if (!currentUser || !window.supaClient) return;
+  const reader = new FileReader();
+  reader.onload = async function () {
+    try {
+      const blob = dataURLtoBlob(reader.result);
+      const ext = ((blob.type.split('/')[1]) || 'jpg').replace('jpeg', 'jpg');
+      const path = 'profiles/' + currentUser.id + '-' + column + '-' + Date.now() + '.' + ext;
+      const up = await window.supaClient.storage.from('photos').upload(path, blob, { contentType: blob.type, upsert: true });
+      if (up.error) { showToast('⚠️ Envoi de la photo impossible'); return; }
+      const pub = window.supaClient.storage.from('photos').getPublicUrl(path);
+      const url = pub && pub.data ? pub.data.publicUrl : null;
+      if (!url) return;
+      const patch = {}; patch[column] = url;
+      const res = await window.supaClient.from('profiles').update(patch).eq('id', currentUser.id);
+      if (res.error) { showToast('⚠️ ' + (res.error.message || 'Mise à jour impossible')); return; }
+      currentProfile = Object.assign({}, currentProfile, patch);
+      renderProfilePage();
+      showToast('✅ Photo mise à jour !');
+    } catch (e) { console.warn('uploadProfileImage', e); showToast('⚠️ Erreur lors de l\'envoi'); }
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleAvatarChange(e) {
+  const f = e.target.files && e.target.files[0];
+  if (f) uploadProfileImage(f, 'avatar_url');
+  e.target.value = '';
+}
+
+function handleCoverChange(e) {
+  const f = e.target.files && e.target.files[0];
+  if (f) uploadProfileImage(f, 'cover_url');
+  e.target.value = '';
 }
 
 function showToast(msg) {
