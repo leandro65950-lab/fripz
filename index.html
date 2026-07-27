@@ -445,9 +445,12 @@
   .profile-topbar-title { font-weight: 800; font-size: 1.05rem; color: var(--text); }
 
   .profile-cover {
-    height: 160px; position: relative;
+    height: 360px; position: relative;
     background: linear-gradient(135deg, var(--teal-light), #fce4ec);
     background-size: cover; background-position: center;
+  }
+  @media(max-width: 640px){
+    .profile-cover { height: 220px; }
   }
   .profile-cover-edit, .profile-avatar-edit {
     position: absolute; width: 34px; height: 34px; border-radius: 50%;
