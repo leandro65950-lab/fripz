@@ -431,7 +431,7 @@
     background: var(--bg); overflow-y: auto;
   }
   .profile-overlay.open { display: block; animation: fadeIn 0.2s; }
-  .profile-page { max-width: 900px; margin: 0 auto; padding-bottom: 4rem; }
+  .profile-page { max-width: 1320px; margin: 0 auto; padding-bottom: 4rem; }
 
   .profile-topbar {
     display: flex; align-items: center; justify-content: space-between;
@@ -456,7 +456,7 @@
     position: absolute; width: 34px; height: 34px; border-radius: 50%;
     background: rgba(255,255,255,0.95); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 1rem; transition: transform 0.15s;
+    cursor: pointer; color: var(--text-mid); transition: transform 0.15s;
   }
   .profile-cover-edit { top: 12px; right: 12px; }
   .profile-cover-edit:hover, .profile-avatar-edit:hover { transform: scale(1.1); }
@@ -527,12 +527,121 @@
     padding: 3rem 1.5rem; background: var(--card-bg); border-radius: 18px;
     border: 1.5px dashed var(--border);
   }
-  .profile-empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .profile-empty-icon { color: var(--teal); margin-bottom: 1rem; display: flex; }
   .profile-empty-title { font-size: 1.15rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
   .profile-empty-sub { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 1.4rem; max-width: 320px; }
   @media(max-width: 640px){
     .profile-stats-row { gap: 1.5rem; }
   }
+
+  /* ── PROFILE: TABS ── */
+  .profile-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.1rem; }
+  .profile-tab-btn {
+    padding: 0.7rem 0.2rem; margin-right: 1.6rem; font-weight: 700; font-size: 1rem;
+    color: var(--text-light); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s;
+  }
+  .profile-tab-btn.active { color: var(--text); border-bottom-color: var(--teal); }
+  .profile-tab-btn:hover { color: var(--teal); }
+
+  /* ── PROFILE: FOLLOW BUTTON ── */
+  .follow-btn {
+    margin-top: 1rem; padding: 0.6rem 1.7rem; border-radius: 30px; font-weight: 800;
+    font-size: 0.98rem; cursor: pointer; border: none; font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .follow-btn.is-following { background: var(--card-bg); color: var(--text-mid); border: 1.5px solid var(--border); }
+  .follow-btn.not-following { background: var(--teal); color: #fff; }
+  .follow-btn.not-following:hover { background: var(--teal-dark); }
+
+  .profile-stat.clickable { cursor: pointer; }
+  .profile-stat.clickable:hover .profile-stat-num { color: var(--teal); }
+
+  /* ── COLLECTIONS ── */
+  .collections-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+  .collection-card {
+    border-radius: 16px; overflow: hidden; cursor: pointer; background: var(--card-bg);
+    border: 1px solid var(--border); transition: transform 0.15s;
+  }
+  .collection-card:hover { transform: translateY(-3px); }
+  .collection-cover {
+    height: 120px; background: linear-gradient(135deg, var(--teal-light), #fce4ec);
+    background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center; color: var(--teal);
+  }
+  .collection-info { padding: 0.7rem 0.85rem; }
+  .collection-name { font-weight: 800; font-size: 0.98rem; color: var(--text); }
+  .collection-count { font-size: 0.85rem; color: var(--text-light); margin-top: 2px; }
+  .collection-new-card {
+    border: 1.5px dashed var(--border); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 1.5rem 1rem; min-height: 172px;
+    color: var(--text-mid); font-weight: 700; text-align: center; gap: 0.5rem; cursor: pointer;
+    background: none; transition: all 0.15s;
+  }
+  .collection-new-card:hover { border-color: var(--teal); color: var(--teal); }
+
+  .collection-new-form { display: flex; gap: 0.5rem; margin-bottom: 1.1rem; }
+  .collection-new-form input {
+    flex: 1; padding: 0.65rem 0.9rem; border-radius: 10px; border: 1.5px solid var(--border);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; outline: none;
+  }
+  .collection-new-form input:focus { border-color: var(--teal); }
+
+  .collection-detail-back {
+    font-weight: 700; color: var(--text-mid); cursor: pointer; font-size: 0.95rem; margin-bottom: 1rem; display: inline-block;
+  }
+  .collection-detail-back:hover { color: var(--teal); }
+
+  /* ── SIMPLE LIST OVERLAY (abonnés / abonnements) ── */
+  .simple-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(20,20,20,0.4);
+    z-index: 400; align-items: center; justify-content: center; padding: 1rem;
+  }
+  .simple-overlay.open { display: flex; }
+  .simple-modal {
+    background: #fff; border-radius: 18px; width: 100%; max-width: 380px;
+    max-height: 70vh; display: flex; flex-direction: column; overflow: hidden;
+  }
+  .simple-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-weight: 800;
+  }
+  .simple-modal-close { cursor: pointer; color: var(--text-light); font-size: 1.2rem; }
+  .simple-modal-body { overflow-y: auto; padding: 0.5rem 0; }
+  .simple-list-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 1.2rem; cursor: pointer; }
+  .simple-list-row:hover { background: var(--card-bg); }
+  .simple-list-avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 800;
+    font-size: 0.95rem; overflow: hidden; flex-shrink: 0;
+  }
+  .simple-list-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .simple-list-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+  .simple-empty-text { padding: 2.2rem 1.2rem; text-align: center; color: var(--text-light); font-size: 0.92rem; }
+
+  /* ── COLLECTION PICKER (ajouter une annonce à une collection) ── */
+  .cpick-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(20,20,20,0.4);
+    z-index: 400; align-items: center; justify-content: center; padding: 1rem;
+  }
+  .cpick-overlay.open { display: flex; }
+  .cpick-modal { background: #fff; border-radius: 18px; width: 100%; max-width: 340px; padding: 1.2rem; }
+  .cpick-title { font-weight: 800; font-size: 1.02rem; margin-bottom: 0.9rem; }
+  .cpick-row { display: flex; align-items: center; gap: 0.65rem; padding: 0.5rem 0; cursor: pointer; }
+  .cpick-row input { width: 18px; height: 18px; accent-color: var(--teal); }
+  .cpick-empty { color: var(--text-light); font-size: 0.9rem; padding: 0.4rem 0 0.8rem; }
+  .cpick-new { display: flex; gap: 0.5rem; margin-top: 0.7rem; padding-top: 0.8rem; border-top: 1px solid var(--border); }
+  .cpick-new input {
+    flex: 1; padding: 0.5rem 0.7rem; border-radius: 8px; border: 1.5px solid var(--border);
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; outline: none;
+  }
+  .cpick-close { text-align: center; margin-top: 0.9rem; color: var(--text-light); font-size: 0.9rem; cursor: pointer; }
+
+  .article-collection-btn {
+    position: absolute; top: 10px; left: 10px; width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(255,255,255,0.92); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-mid); z-index: 2; transition: all 0.2s;
+  }
+  .article-collection-btn:hover { color: var(--teal); border-color: var(--teal); }
 
 /* ── HERO ── */
 .hero {
@@ -2522,13 +2631,13 @@ function closePage() {
 
     <div class="profile-topbar">
       <div class="profile-back" onclick="closeProfileOverlay()">← Retour</div>
-      <div class="profile-topbar-title">Mon profil</div>
+      <div class="profile-topbar-title" id="profileTopbarTitle">Mon profil</div>
       <div style="width:60px"></div>
     </div>
 
     <div class="profile-cover" id="profileCover">
-      <label class="profile-cover-edit" title="Changer la couverture">
-        📷
+      <label class="profile-cover-edit" id="profileCoverEditBtn" title="Changer la couverture">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
         <input type="file" accept="image/*" style="display:none" onchange="handleCoverChange(event)">
       </label>
     </div>
@@ -2536,8 +2645,8 @@ function closePage() {
     <div class="profile-header">
       <div class="profile-avatar-wrap">
         <div class="profile-avatar" id="profileAvatar"></div>
-        <label class="profile-avatar-edit" title="Changer la photo de profil">
-          📷
+        <label class="profile-avatar-edit" id="profileAvatarEditBtn" title="Changer la photo de profil">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
           <input type="file" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
         </label>
       </div>
@@ -2547,6 +2656,7 @@ function closePage() {
         <div class="profile-bio" id="profileBioDisplay"></div>
         <div class="profile-meta-row" id="profileMemberSince"></div>
         <div class="profile-edit-toggle" id="profileEditToggle" onclick="startProfileEdit()">✏️ Modifier mon profil</div>
+        <button class="follow-btn" id="profileFollowBtn" style="display:none" onclick="toggleFollow()"></button>
       </div>
 
       <div class="profile-identity-edit" id="profileIdentityEdit" style="display:none">
@@ -2562,10 +2672,37 @@ function closePage() {
     <div class="profile-stats-row" id="profileStatsRow"></div>
 
     <div class="profile-section">
-      <div class="profile-section-title">Mes annonces</div>
-      <div id="profileListingsArea"></div>
+      <div class="profile-tabs" id="profileTabsRow">
+        <div class="profile-tab-btn active" id="profileTabAnnonces" onclick="switchProfileTab('annonces')">Annonces</div>
+        <div class="profile-tab-btn" id="profileTabCollections" onclick="switchProfileTab('collections')">Collections</div>
+      </div>
+      <div id="profileMainArea"></div>
     </div>
 
+  </div>
+</div>
+
+<!-- FOLLOWERS / FOLLOWING LIST -->
+<div class="simple-overlay" id="simpleListOverlay" onclick="if(event.target===this) closeSimpleList()">
+  <div class="simple-modal">
+    <div class="simple-modal-header">
+      <span id="simpleListTitle">Abonnés</span>
+      <span class="simple-modal-close" onclick="closeSimpleList()">✕</span>
+    </div>
+    <div class="simple-modal-body" id="simpleListBody"></div>
+  </div>
+</div>
+
+<!-- ADD TO COLLECTION PICKER -->
+<div class="cpick-overlay" id="cpickOverlay" onclick="if(event.target===this) closeCollectionPicker()">
+  <div class="cpick-modal">
+    <div class="cpick-title">Ajouter à une collection</div>
+    <div id="cpickBody"></div>
+    <div class="cpick-new">
+      <input type="text" id="cpickNewName" placeholder="Nouvelle collection...">
+      <button class="profile-btn-primary" onclick="createCollectionFromPicker()">+</button>
+    </div>
+    <div class="cpick-close" onclick="closeCollectionPicker()">Fermer</div>
   </div>
 </div>
 
@@ -3620,6 +3757,7 @@ function openModal(id) {
       <span class="mtag">${p.meta.split('·')[1]?.trim() || 'Unique'}</span>
     </div>
     <p class="modal-desc">${p.desc}</p>
+    ${p.user_id ? '<div style="margin:-0.4rem 0 0.9rem"><span style="color:var(--teal);font-weight:700;cursor:pointer;font-size:0.95rem" onclick="closeModalDirect(); viewSellerProfile(\'' + p.user_id + '\');">👤 Voir le profil du vendeur</span></div>' : ''}
     <button class="modal-btn-buy" onclick="openCheckout(${p.id})">Acheter · ${p.price}</button>
     <button class="modal-btn-msg" onclick="toast('Messagerie — bientôt disponible !')">💬 Contacter le vendeur</button>
   `;
@@ -4023,6 +4161,15 @@ async function doLogout() {
 
 /* ══════════ PROFILE PAGE ══════════ */
 
+let profileViewedUserId = null;
+let profileViewedProfile = null;
+let profileIsOwn = true;
+let profileActiveTab = 'annonces';
+let profileFollowState = { isFollowing: false, followersCount: 0, followingCount: 0 };
+let profileCollections = [];
+let profileViewingCollectionId = null;
+let cpickTargetProductId = null;
+
 function frenchMemberSince(iso) {
   if (!iso) return '';
   try {
@@ -4032,26 +4179,99 @@ function frenchMemberSince(iso) {
   } catch (e) { return ''; }
 }
 
-function myAnnonces() {
-  if (!currentUser) return [];
-  return products.filter(function (p) { return p.user_id && p.user_id === currentUser.id; });
+function annoncesByUser(userId) {
+  if (!userId) return [];
+  return products.filter(function (p) { return p.user_id && p.user_id === userId; });
+}
+function myAnnonces() { return currentUser ? annoncesByUser(currentUser.id) : []; }
+
+async function loadFollowState(userId) {
+  profileFollowState = { isFollowing: false, followersCount: 0, followingCount: 0 };
+  if (!window.supaClient || !userId) return;
+  try {
+    const followersRes = await window.supaClient.from('follows').select('follower_id', { count: 'exact', head: true }).eq('followed_id', userId);
+    profileFollowState.followersCount = followersRes.count || 0;
+    const followingRes = await window.supaClient.from('follows').select('followed_id', { count: 'exact', head: true }).eq('follower_id', userId);
+    profileFollowState.followingCount = followingRes.count || 0;
+    if (currentUser && currentUser.id !== userId) {
+      const meRes = await window.supaClient.from('follows').select('follower_id').eq('follower_id', currentUser.id).eq('followed_id', userId).maybeSingle();
+      profileFollowState.isFollowing = !!(meRes && meRes.data);
+    }
+  } catch (e) { console.warn('loadFollowState', e); }
+}
+
+async function toggleFollow() {
+  if (!currentUser) { openAuthModal('login'); return; }
+  if (!window.supaClient || !profileViewedUserId || profileIsOwn) return;
+  const targetId = profileViewedUserId;
+  if (profileFollowState.isFollowing) {
+    const res = await window.supaClient.from('follows').delete().eq('follower_id', currentUser.id).eq('followed_id', targetId);
+    if (res.error) { showToast('⚠️ ' + (res.error.message || 'Erreur')); return; }
+    profileFollowState.isFollowing = false;
+    profileFollowState.followersCount = Math.max(0, profileFollowState.followersCount - 1);
+  } else {
+    const res = await window.supaClient.from('follows').insert({ follower_id: currentUser.id, followed_id: targetId });
+    if (res.error) { showToast('⚠️ ' + (res.error.message || 'Erreur')); return; }
+    profileFollowState.isFollowing = true;
+    profileFollowState.followersCount += 1;
+  }
+  renderFollowButton();
+  renderProfileStats();
+}
+
+function renderFollowButton() {
+  const btn = document.getElementById('profileFollowBtn');
+  if (!btn) return;
+  if (profileIsOwn) { btn.style.display = 'none'; return; }
+  btn.style.display = 'inline-block';
+  if (profileFollowState.isFollowing) {
+    btn.textContent = '✓ Suivi(e)';
+    btn.className = 'follow-btn is-following';
+  } else {
+    btn.textContent = '+ Suivre';
+    btn.className = 'follow-btn not-following';
+  }
+}
+
+function renderProfileStats() {
+  const mine = annoncesByUser(profileViewedUserId);
+  document.getElementById('profileStatsRow').innerHTML =
+    '<div class="profile-stat"><div class="profile-stat-num">' + mine.length + '</div><div class="profile-stat-label">Annonce' + (mine.length > 1 ? 's' : '') + '</div></div>' +
+    '<div class="profile-stat clickable" onclick="openFollowList(\'abonnes\')"><div class="profile-stat-num">' + profileFollowState.followersCount + '</div><div class="profile-stat-label">Abonné' + (profileFollowState.followersCount > 1 ? 's' : '') + '</div></div>' +
+    '<div class="profile-stat clickable" onclick="openFollowList(\'abonnements\')"><div class="profile-stat-num">' + profileFollowState.followingCount + '</div><div class="profile-stat-label">Abonnements</div></div>';
+}
+
+function emptyStateIconSvg() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:52px;height:52px"><path d="M8 3 5 6l2 2v11h10V8l2-2-3-3-2 2H10L8 3z"/></svg>';
 }
 
 function renderProfileListings() {
-  const area = document.getElementById('profileListingsArea');
-  const mine = myAnnonces();
+  const area = document.getElementById('profileMainArea');
+  const mine = annoncesByUser(profileViewedUserId);
   if (!mine.length) {
-    area.innerHTML =
-      '<div class="profile-empty">' +
-        '<div class="profile-empty-icon">👕</div>' +
-        '<div class="profile-empty-title">Aucune annonce pour l\'instant</div>' +
-        '<div class="profile-empty-sub">Tes articles publiés apparaîtront ici. Prêt(e) à vendre ta première pièce ?</div>' +
-        '<button class="profile-btn-primary" onclick="closeProfileOverlay(); openSellModal();">📷 Vendre mon premier article</button>' +
-      '</div>';
+    area.innerHTML = profileIsOwn
+      ? ('<div class="profile-empty">' +
+          '<div class="profile-empty-icon">' + emptyStateIconSvg() + '</div>' +
+          '<div class="profile-empty-title">Aucune annonce pour l\'instant</div>' +
+          '<div class="profile-empty-sub">Tes articles publiés apparaîtront ici. Prêt(e) à vendre ta première pièce ?</div>' +
+          '<button class="profile-btn-primary" onclick="closeProfileOverlay(); openSellModal();">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:-3px;margin-right:5px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>' +
+            'Vendre mon premier article' +
+          '</button>' +
+        '</div>')
+      : ('<div class="profile-empty">' +
+          '<div class="profile-empty-icon">' + emptyStateIconSvg() + '</div>' +
+          '<div class="profile-empty-title">Aucune annonce pour l\'instant</div>' +
+          '<div class="profile-empty-sub">Ce vendeur n\'a pas encore publié d\'article.</div>' +
+        '</div>');
     return;
   }
   area.innerHTML = '<div class="articles-grid">' + mine.map(function (p) {
+    const addBtn = profileIsOwn
+      ? '<div class="article-collection-btn" title="Ajouter à une collection" onclick="event.stopPropagation(); openCollectionPicker(' + p.id + ');"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M12 5v14M5 12h14"/></svg></div>'
+      : '';
     return '<div class="article-card" onclick="closeProfileOverlay(); openModal(' + p.id + ');">' +
+      addBtn +
       '<div class="article-img">' + p.emoji + '</div>' +
       '<div class="article-info">' +
         '<div class="article-name">' + p.name + '</div>' +
@@ -4062,37 +4282,312 @@ function renderProfileListings() {
   }).join('') + '</div>';
 }
 
+/* ── Collections ── */
+
+async function loadCollectionsFor(userId) {
+  profileCollections = [];
+  if (!window.supaClient || !userId) return;
+  try {
+    const res = await window.supaClient.from('collections').select('*').eq('user_id', userId).order('created_at', { ascending: false });
+    const cols = (res && res.data) || [];
+    for (let i = 0; i < cols.length; i++) {
+      const itemsRes = await window.supaClient.from('collection_items').select('annonce_id').eq('collection_id', cols[i].id);
+      cols[i]._itemIds = ((itemsRes && itemsRes.data) || []).map(function (r) { return r.annonce_id; });
+    }
+    profileCollections = cols;
+  } catch (e) { console.warn('loadCollectionsFor', e); }
+}
+
+function coverForCollection(c) {
+  const ids = c._itemIds || [];
+  if (!ids.length) return null;
+  const p = products.find(function (pp) { return pp.uuid === ids[0]; });
+  if (!p) return null;
+  const m = (p.emoji.match(/src="([^"]+)"/) || [])[1];
+  return m || null;
+}
+
+function renderCollectionsGrid() {
+  const area = document.getElementById('profileMainArea');
+  if (!profileCollections.length && !profileIsOwn) {
+    area.innerHTML = '<div class="profile-empty"><div class="profile-empty-title">Aucune collection pour l\'instant</div><div class="profile-empty-sub">Ce vendeur n\'a pas encore créé de collection.</div></div>';
+    return;
+  }
+  const newCard = profileIsOwn
+    ? ('<div class="collection-new-card" onclick="showCollectionNewForm()">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><path d="M12 5v14M5 12h14"/></svg>' +
+        'Nouvelle collection' +
+      '</div>')
+    : '';
+  const cardsHtml = profileCollections.map(function (c) {
+    const cover = coverForCollection(c);
+    const n = (c._itemIds || []).length;
+    return '<div class="collection-card" onclick="openCollectionDetail(\'' + c.id + '\')">' +
+      '<div class="collection-cover"' + (cover ? (' style="background-image:url(\'' + cover + '\')"') : '') + '>' +
+        (cover ? '' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:30px;height:30px"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>') +
+      '</div>' +
+      '<div class="collection-info"><div class="collection-name">' + c.name + '</div><div class="collection-count">' + n + ' article' + (n > 1 ? 's' : '') + '</div></div>' +
+    '</div>';
+  }).join('');
+  const formHtml = profileIsOwn
+    ? ('<div class="collection-new-form" id="collectionNewForm" style="display:none">' +
+        '<input type="text" id="collectionNewNameInput" placeholder="Nom de la collection (ex: Vintage été)" maxlength="40">' +
+        '<button class="profile-btn-primary" onclick="submitNewCollection()">Créer</button>' +
+        '<button class="profile-btn-ghost" onclick="hideCollectionNewForm()">Annuler</button>' +
+      '</div>')
+    : '';
+  area.innerHTML = '<div class="collections-grid">' + newCard + cardsHtml + '</div>' + formHtml;
+}
+
+function showCollectionNewForm() {
+  const f = document.getElementById('collectionNewForm');
+  if (f) { f.style.display = 'flex'; document.getElementById('collectionNewNameInput').focus(); }
+}
+function hideCollectionNewForm() {
+  const f = document.getElementById('collectionNewForm');
+  if (f) f.style.display = 'none';
+}
+
+async function submitNewCollection() {
+  const input = document.getElementById('collectionNewNameInput');
+  const name = (input.value || '').trim();
+  if (!name) { showToast('⚠️ Donne un nom à ta collection'); return; }
+  if (!currentUser || !window.supaClient) return;
+  const res = await window.supaClient.from('collections').insert({ user_id: currentUser.id, name: name }).select();
+  if (res.error) { showToast('⚠️ ' + (res.error.message || 'Création impossible')); return; }
+  const row = res.data && res.data[0];
+  if (row) { row._itemIds = []; profileCollections.unshift(row); }
+  input.value = '';
+  hideCollectionNewForm();
+  renderCollectionsGrid();
+  showToast('✅ Collection créée !');
+}
+
+function openCollectionDetail(collectionId) {
+  profileViewingCollectionId = collectionId;
+  renderProfileTabsUI();
+  renderCollectionDetail();
+}
+
+function backToCollections() {
+  profileViewingCollectionId = null;
+  renderProfileTabsUI();
+  renderCollectionsGrid();
+}
+
+function renderCollectionDetail() {
+  const area = document.getElementById('profileMainArea');
+  const c = profileCollections.find(function (x) { return x.id === profileViewingCollectionId; });
+  if (!c) { profileViewingCollectionId = null; renderCollectionsGrid(); return; }
+  const ids = c._itemIds || [];
+  const items = products.filter(function (p) { return ids.indexOf(p.uuid) !== -1; });
+  let html = '<div class="collection-detail-back" onclick="backToCollections()">← Toutes les collections</div>' +
+    '<div class="profile-section-title" style="margin-bottom:1rem">' + c.name + '</div>';
+  if (!items.length) {
+    html += '<div class="profile-empty"><div class="profile-empty-title">Collection vide</div><div class="profile-empty-sub">' +
+      (profileIsOwn ? 'Ajoute des annonces à cette collection depuis l\'onglet Annonces.' : 'Ce vendeur n\'a pas encore ajouté d\'article ici.') +
+      '</div></div>';
+  } else {
+    html += '<div class="articles-grid">' + items.map(function (p) {
+      return '<div class="article-card" onclick="closeProfileOverlay(); openModal(' + p.id + ');">' +
+        '<div class="article-img">' + p.emoji + '</div>' +
+        '<div class="article-info">' +
+          '<div class="article-name">' + p.name + '</div>' +
+          '<div class="article-meta">' + p.meta + '</div>' +
+          '<div class="article-price">' + p.price + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+  area.innerHTML = html;
+}
+
+/* ── Add-to-collection picker ── */
+
+function openCollectionPicker(productId) {
+  if (!currentUser) { openAuthModal('login'); return; }
+  cpickTargetProductId = productId;
+  renderCollectionPickerBody();
+  document.getElementById('cpickOverlay').classList.add('open');
+}
+
+function closeCollectionPicker() {
+  document.getElementById('cpickOverlay').classList.remove('open');
+  cpickTargetProductId = null;
+}
+
+function renderCollectionPickerBody() {
+  const body = document.getElementById('cpickBody');
+  const p = products.find(function (pp) { return pp.id === cpickTargetProductId; });
+  if (!p) { body.innerHTML = ''; return; }
+  if (!profileCollections.length) {
+    body.innerHTML = '<div class="cpick-empty">Tu n\'as pas encore de collection. Crée-en une ci-dessous.</div>';
+    return;
+  }
+  body.innerHTML = profileCollections.map(function (c) {
+    const checked = (c._itemIds || []).indexOf(p.uuid) !== -1 ? 'checked' : '';
+    return '<label class="cpick-row"><input type="checkbox" ' + checked + ' onchange="toggleCollectionItem(\'' + c.id + '\', event.target.checked)"> ' + c.name + '</label>';
+  }).join('');
+}
+
+async function toggleCollectionItem(collectionId, checked) {
+  const p = products.find(function (pp) { return pp.id === cpickTargetProductId; });
+  if (!p || !p.uuid || !window.supaClient) return;
+  const c = profileCollections.find(function (x) { return x.id === collectionId; });
+  if (checked) {
+    const res = await window.supaClient.from('collection_items').insert({ collection_id: collectionId, annonce_id: p.uuid });
+    if (res.error) { showToast('⚠️ ' + (res.error.message || 'Erreur')); return; }
+    if (c) c._itemIds = (c._itemIds || []).concat([p.uuid]);
+  } else {
+    const res = await window.supaClient.from('collection_items').delete().eq('collection_id', collectionId).eq('annonce_id', p.uuid);
+    if (res.error) { showToast('⚠️ ' + (res.error.message || 'Erreur')); return; }
+    if (c) c._itemIds = (c._itemIds || []).filter(function (id) { return id !== p.uuid; });
+  }
+}
+
+async function createCollectionFromPicker() {
+  const input = document.getElementById('cpickNewName');
+  const name = (input.value || '').trim();
+  if (!name) return;
+  if (!currentUser || !window.supaClient) return;
+  const res = await window.supaClient.from('collections').insert({ user_id: currentUser.id, name: name }).select();
+  if (res.error) { showToast('⚠️ ' + (res.error.message || 'Création impossible')); return; }
+  const row = res.data && res.data[0];
+  if (row) { row._itemIds = []; profileCollections.unshift(row); }
+  input.value = '';
+  renderCollectionPickerBody();
+  showToast('✅ Collection créée !');
+}
+
+/* ── Followers / following list ── */
+
+async function openFollowList(type) {
+  if (!window.supaClient || !profileViewedUserId) return;
+  document.getElementById('simpleListTitle').textContent = type === 'abonnes' ? 'Abonnés' : 'Abonnements';
+  document.getElementById('simpleListBody').innerHTML = '<div class="simple-empty-text">Chargement...</div>';
+  document.getElementById('simpleListOverlay').classList.add('open');
+  try {
+    let ids = [];
+    if (type === 'abonnes') {
+      const res = await window.supaClient.from('follows').select('follower_id').eq('followed_id', profileViewedUserId);
+      ids = ((res && res.data) || []).map(function (r) { return r.follower_id; });
+    } else {
+      const res = await window.supaClient.from('follows').select('followed_id').eq('follower_id', profileViewedUserId);
+      ids = ((res && res.data) || []).map(function (r) { return r.followed_id; });
+    }
+    if (!ids.length) {
+      document.getElementById('simpleListBody').innerHTML = '<div class="simple-empty-text">' + (type === 'abonnes' ? 'Aucun abonné pour l\'instant.' : 'Ne suit encore personne.') + '</div>';
+      return;
+    }
+    const profRes = await window.supaClient.from('profiles').select('*').in('id', ids);
+    const profs = (profRes && profRes.data) || [];
+    document.getElementById('simpleListBody').innerHTML = profs.map(function (p) {
+      const av = p.avatar_url ? ('<img src="' + p.avatar_url + '">') : ((p.username || 'U').charAt(0).toUpperCase());
+      return '<div class="simple-list-row" onclick="closeSimpleList(); viewSellerProfile(\'' + p.id + '\');">' +
+        '<div class="simple-list-avatar">' + av + '</div>' +
+        '<div class="simple-list-name">' + (p.username || 'Utilisateur Fripz') + '</div>' +
+      '</div>';
+    }).join('');
+  } catch (e) {
+    console.warn('openFollowList', e);
+    document.getElementById('simpleListBody').innerHTML = '<div class="simple-empty-text">Erreur de chargement.</div>';
+  }
+}
+
+function closeSimpleList() {
+  document.getElementById('simpleListOverlay').classList.remove('open');
+}
+
+/* ── Tabs ── */
+
+function renderProfileTabsUI() {
+  const tabsRow = document.getElementById('profileTabsRow');
+  tabsRow.style.display = profileViewingCollectionId ? 'none' : 'flex';
+  document.getElementById('profileTabAnnonces').classList.toggle('active', profileActiveTab === 'annonces');
+  document.getElementById('profileTabCollections').classList.toggle('active', profileActiveTab === 'collections');
+}
+
+function switchProfileTab(tab) {
+  profileActiveTab = tab;
+  profileViewingCollectionId = null;
+  renderProfileTabsUI();
+  renderProfileMainArea();
+}
+
+function renderProfileMainArea() {
+  if (profileActiveTab === 'collections') {
+    if (profileViewingCollectionId) renderCollectionDetail();
+    else renderCollectionsGrid();
+  } else {
+    renderProfileListings();
+  }
+}
+
+/* ── Page open / render ── */
+
 function renderProfilePage() {
-  if (!currentUser) return;
-  const prof = currentProfile || {};
+  const prof = profileViewedProfile || {};
   const av = document.getElementById('profileAvatar');
   av.innerHTML = prof.avatar_url
     ? '<img src="' + prof.avatar_url + '" alt="avatar">'
-    : authInitials();
+    : (profileIsOwn ? authInitials() : ((prof.username || 'U').charAt(0).toUpperCase()));
   const cover = document.getElementById('profileCover');
-  cover.style.backgroundImage = prof.cover_url ? ('url(' + prof.cover_url + ')') : '';
+  cover.style.backgroundImage = prof.cover_url ? ('url(\'' + prof.cover_url + '\')') : '';
 
-  document.getElementById('profileUsernameDisplay').textContent = authDisplayName();
+  document.getElementById('profileTopbarTitle').textContent = profileIsOwn ? 'Mon profil' : (prof.username || 'Profil');
+  document.getElementById('profileUsernameDisplay').textContent = profileIsOwn ? authDisplayName() : (prof.username || 'Utilisateur Fripz');
   document.getElementById('profileBioDisplay').textContent = prof.bio || '';
   document.getElementById('profileBioDisplay').style.display = prof.bio ? 'block' : 'none';
-  document.getElementById('profileMemberSince').textContent = frenchMemberSince(currentUser.created_at);
 
-  const mine = myAnnonces();
-  document.getElementById('profileStatsRow').innerHTML =
-    '<div class="profile-stat"><div class="profile-stat-num">' + mine.length + '</div><div class="profile-stat-label">Annonce' + (mine.length > 1 ? 's' : '') + '</div></div>' +
-    '<div class="profile-stat"><div class="profile-stat-num">0</div><div class="profile-stat-label">Ventes</div></div>' +
-    '<div class="profile-stat"><div class="profile-stat-num">—</div><div class="profile-stat-label">Note vendeur</div></div>';
+  const memberSinceIso = prof.created_at || (profileIsOwn && currentUser ? currentUser.created_at : null);
+  document.getElementById('profileMemberSince').textContent = frenchMemberSince(memberSinceIso);
 
-  renderProfileListings();
+  document.getElementById('profileEditToggle').style.display = profileIsOwn ? 'inline-flex' : 'none';
+  document.getElementById('profileCoverEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
+  document.getElementById('profileAvatarEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
+  renderFollowButton();
+
+  renderProfileStats();
+  renderProfileTabsUI();
+  renderProfileMainArea();
+}
+
+async function showProfileFor(userId) {
+  if (!userId) return;
+  profileViewedUserId = userId;
+  profileIsOwn = !!(currentUser && currentUser.id === userId);
+  profileActiveTab = 'annonces';
+  profileViewingCollectionId = null;
+  cancelProfileEdit();
+
+  let prof = {};
+  if (profileIsOwn) {
+    prof = currentProfile || {};
+  } else if (window.supaClient) {
+    try {
+      const res = await window.supaClient.from('profiles').select('*').eq('id', userId).maybeSingle();
+      prof = (res && res.data) || {};
+    } catch (e) { prof = {}; }
+  }
+  profileViewedProfile = prof;
+
+  await loadFollowState(userId);
+  await loadCollectionsFor(userId);
+
+  renderProfilePage();
+  document.getElementById('profileOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 function openProfile() {
   const m = document.getElementById('navUserMenu'); if (m) m.classList.remove('open');
   if (!currentUser) { openAuthModal('login'); return; }
-  cancelProfileEdit();
-  renderProfilePage();
-  document.getElementById('profileOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  showProfileFor(currentUser.id);
+}
+
+function viewSellerProfile(userId) {
+  if (!userId) return;
+  showProfileFor(userId);
 }
 
 function closeProfileOverlay() {
@@ -4127,6 +4622,7 @@ async function saveProfileEdit() {
     .eq('id', currentUser.id);
   if (res.error) { showToast('⚠️ ' + (res.error.message || 'Mise à jour impossible')); return; }
   currentProfile = Object.assign({}, currentProfile, { username: username, bio: bio });
+  if (profileIsOwn) profileViewedProfile = currentProfile;
   updateAuthUI();
   cancelProfileEdit();
   renderProfilePage();
@@ -4150,6 +4646,7 @@ async function uploadProfileImage(file, column) {
       const res = await window.supaClient.from('profiles').update(patch).eq('id', currentUser.id);
       if (res.error) { showToast('⚠️ ' + (res.error.message || 'Mise à jour impossible')); return; }
       currentProfile = Object.assign({}, currentProfile, patch);
+      if (profileIsOwn) profileViewedProfile = currentProfile;
       renderProfilePage();
       showToast('✅ Photo mise à jour !');
     } catch (e) { console.warn('uploadProfileImage', e); showToast('⚠️ Erreur lors de l\'envoi'); }
