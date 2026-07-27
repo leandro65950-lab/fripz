@@ -1269,9 +1269,13 @@
   .ai-step-photo {
     height: 190px; border-radius: 14px; overflow: hidden; position: relative;
     background: linear-gradient(135deg, var(--teal-light), #e8ede9);
+    background-size: cover; background-position: center;
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
   }
-  .ai-step-photo svg.ai-garment { width: 108px; height: 108px; }
+  .ai-step-photo::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 60px;
+    background: linear-gradient(to top, rgba(0,0,0,0.35), transparent);
+  }
   .ai-cam-ui {
     position: absolute; bottom: 10px; left: 0; right: 0; z-index: 1;
     display: flex; align-items: center; justify-content: center; gap: 1rem;
@@ -1309,7 +1313,7 @@
     background: linear-gradient(135deg, var(--teal-light), #e8ede9);
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
   }
-  .ai-ready-thumb svg { width: 42px; height: 42px; }
+  .ai-ready-thumb svg { width: 30px; height: 30px; }
   .ai-ready-name { font-weight: 800; font-size: 0.98rem; color: var(--text); }
   .ai-ready-meta { font-size: 0.85rem; color: var(--text-light); margin: 2px 0; }
   .ai-ready-price { font-weight: 800; font-size: 1rem; color: var(--text); }
@@ -2343,7 +2347,7 @@
             Prenez une photo
           </div>
         </div>
-        <div class="ai-step-photo" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=700&amp;q=75&amp;auto=format&amp;fit=crop');background-size:230%;background-position:50% 85%">
+        <div class="ai-step-photo" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=700&amp;q=75&amp;auto=format&amp;fit=crop')">
           <div class="ai-cam-ui">
             <div class="ai-cam-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h5v5M9 20H4v-5M20 4l-6 6M4 20l6-6"/></svg></div>
             <div class="ai-cam-shutter"></div>
@@ -2365,7 +2369,7 @@
         <div class="ai-step-scan">
           <div class="ai-scan-list">
             <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Catégorie : <b>Pull</b></div>
-            <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Marque : <b>Sans marque</b></div>
+            <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Marque : <b>Sézane</b></div>
             <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Couleur : <b>Vert</b></div>
             <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>État : <b>Très bon état</b></div>
           </div>
@@ -2385,9 +2389,9 @@
         </div>
         <div class="ai-step-ready">
           <div class="ai-ready-card">
-            <div class="ai-ready-thumb" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=200&amp;q=70&amp;auto=format&amp;fit=crop');background-size:230%;background-position:50% 85%"></div>
+            <div class="ai-ready-thumb" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=200&amp;q=70&amp;auto=format&amp;fit=crop');background-size:cover;background-position:center"></div>
             <div>
-              <div class="ai-ready-name">Pull vert</div>
+              <div class="ai-ready-name">Pull Sézane vert</div>
               <div class="ai-ready-meta">Taille M · Très bon état</div>
               <div class="ai-ready-price">35 €</div>
             </div>
