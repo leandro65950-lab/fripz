@@ -1269,11 +1269,15 @@
   .ai-step-photo {
     height: 190px; border-radius: 14px; overflow: hidden; position: relative;
     background: linear-gradient(135deg, var(--teal-light), #e8ede9);
+    background-size: cover; background-position: center;
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
   }
-  .ai-step-photo svg.ai-garment { width: 74px; height: 74px; }
+  .ai-step-photo::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 60px;
+    background: linear-gradient(to top, rgba(0,0,0,0.35), transparent);
+  }
   .ai-cam-ui {
-    position: absolute; bottom: 10px; left: 0; right: 0;
+    position: absolute; bottom: 10px; left: 0; right: 0; z-index: 1;
     display: flex; align-items: center; justify-content: center; gap: 1rem;
   }
   .ai-cam-shutter {
@@ -2332,7 +2336,7 @@
 <!-- VENDEZ EN QUELQUES SECONDES (IA) -->
 <section class="ai-showcase-section">
   <div class="ai-showcase-inner">
-    <h2 class="ai-showcase-title">Vendez en <span>quelques secondes</span> grâce à l'IA</h2>
+    <h2 class="ai-showcase-title">Vendez en <span>quelques secondes</span></h2>
     <div class="ai-showcase-steps">
 
       <div class="ai-step">
@@ -2343,8 +2347,7 @@
             Prenez une photo
           </div>
         </div>
-        <div class="ai-step-photo">
-          <svg class="ai-garment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 5 6l2 2v11h10V8l2-2-3-3-2 2H10L8 3z"/></svg>
+        <div class="ai-step-photo" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=700&amp;q=75&amp;auto=format&amp;fit=crop')">
           <div class="ai-cam-ui">
             <div class="ai-cam-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h5v5M9 20H4v-5M20 4l-6 6M4 20l6-6"/></svg></div>
             <div class="ai-cam-shutter"></div>
@@ -2360,7 +2363,7 @@
           <div class="ai-step-num">2</div>
           <div class="ai-step-label">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5-2 2m-9 9-2 2m13-2-2-2m-9-9-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
-            L'IA reconnaît automatiquement
+            Reconnaissance
           </div>
         </div>
         <div class="ai-step-scan">
@@ -2386,7 +2389,7 @@
         </div>
         <div class="ai-step-ready">
           <div class="ai-ready-card">
-            <div class="ai-ready-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 5 6l2 2v11h10V8l2-2-3-3-2 2H10L8 3z"/></svg></div>
+            <div class="ai-ready-thumb" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=200&amp;q=70&amp;auto=format&amp;fit=crop');background-size:cover;background-position:center"></div>
             <div>
               <div class="ai-ready-name">Pull Sézane vert</div>
               <div class="ai-ready-meta">Taille M · Très bon état</div>
