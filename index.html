@@ -1236,6 +1236,99 @@
   }
   .see-all:hover { color: var(--teal); }
 
+  /* ── VENDEZ EN QUELQUES SECONDES (IA) ── */
+  .ai-showcase-section { padding: 3.5rem 2.5rem 4rem; }
+  .ai-showcase-inner { max-width: 1250px; margin: 0 auto; text-align: center; }
+  .ai-showcase-title {
+    font-size: 1.9rem; font-weight: 800; color: var(--text);
+    letter-spacing: -0.02em; margin-bottom: 2.5rem;
+  }
+  .ai-showcase-title span { color: var(--teal); }
+  .ai-showcase-steps {
+    display: flex; align-items: stretch; justify-content: center; gap: 1.25rem;
+  }
+  .ai-showcase-arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--border); flex-shrink: 0;
+  }
+  .ai-showcase-arrow svg { width: 26px; height: 26px; }
+  .ai-step {
+    flex: 1; max-width: 340px; background: var(--white);
+    border: 1.5px solid var(--border); border-radius: 20px;
+    padding: 1.4rem; text-align: left; display: flex; flex-direction: column;
+  }
+  .ai-step-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; }
+  .ai-step-num {
+    width: 26px; height: 26px; border-radius: 50%; background: var(--teal); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.85rem; flex-shrink: 0;
+  }
+  .ai-step-label { font-weight: 800; font-size: 1.02rem; color: var(--text); display: flex; align-items: center; gap: 0.4rem; }
+  .ai-step-label svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+
+  .ai-step-photo {
+    height: 190px; border-radius: 14px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, var(--teal-light), #e8ede9);
+    display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
+  }
+  .ai-step-photo svg.ai-garment { width: 74px; height: 74px; }
+  .ai-cam-ui {
+    position: absolute; bottom: 10px; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .ai-cam-shutter {
+    width: 40px; height: 40px; border-radius: 50%; background: #fff;
+    border: 3px solid rgba(255,255,255,0.6); box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .ai-cam-dot {
+    width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.55);
+    display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
+  }
+  .ai-cam-dot svg { width: 14px; height: 14px; }
+
+  .ai-step-scan { height: 190px; display: flex; align-items: center; gap: 1rem; }
+  .ai-scan-list { flex: 1; display: flex; flex-direction: column; gap: 0.55rem; }
+  .ai-scan-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.92rem; color: var(--text-mid); }
+  .ai-scan-check {
+    width: 18px; height: 18px; border-radius: 50%; background: var(--teal-light); color: var(--teal-dark);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ai-scan-check svg { width: 11px; height: 11px; }
+  .ai-scan-row b { color: var(--text); }
+  .ai-scan-orb {
+    width: 66px; height: 66px; border-radius: 50%; flex-shrink: 0;
+    background: radial-gradient(circle at 35% 30%, #fff, var(--teal-light) 70%);
+    display: flex; align-items: center; justify-content: center; color: var(--teal);
+  }
+  .ai-scan-orb svg { width: 30px; height: 30px; }
+
+  .ai-step-ready { height: 190px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ai-ready-card { display: flex; gap: 0.75rem; align-items: center; }
+  .ai-ready-thumb {
+    width: 62px; height: 62px; border-radius: 12px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--teal-light), #e8ede9);
+    display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
+  }
+  .ai-ready-thumb svg { width: 30px; height: 30px; }
+  .ai-ready-name { font-weight: 800; font-size: 0.98rem; color: var(--text); }
+  .ai-ready-meta { font-size: 0.85rem; color: var(--text-light); margin: 2px 0; }
+  .ai-ready-price { font-weight: 800; font-size: 1rem; color: var(--text); }
+  .ai-ready-btn {
+    margin-top: 1rem; background: var(--teal); color: #fff; border: none;
+    border-radius: 12px; padding: 0.65rem; font-weight: 800; font-size: 0.92rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    transition: background 0.2s;
+  }
+  .ai-ready-btn:hover { background: var(--teal-dark); }
+  .ai-ready-btn svg { width: 15px; height: 15px; }
+
+  @media(max-width: 900px){
+    .ai-showcase-steps { flex-direction: column; align-items: stretch; }
+    .ai-showcase-arrow { transform: rotate(90deg); padding: 0.2rem 0; }
+    .ai-step { max-width: none; }
+  }
+
   .articles-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -2233,6 +2326,81 @@
       <a class="see-all" href="#">Voir tout →</a>
     </div>
     <div class="articles-grid" id="articlesGrid"></div>
+  </div>
+</section>
+
+<!-- VENDEZ EN QUELQUES SECONDES (IA) -->
+<section class="ai-showcase-section">
+  <div class="ai-showcase-inner">
+    <h2 class="ai-showcase-title">Vendez en <span>quelques secondes</span> grâce à l'IA</h2>
+    <div class="ai-showcase-steps">
+
+      <div class="ai-step">
+        <div class="ai-step-head">
+          <div class="ai-step-num">1</div>
+          <div class="ai-step-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
+            Prenez une photo
+          </div>
+        </div>
+        <div class="ai-step-photo">
+          <svg class="ai-garment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 5 6l2 2v11h10V8l2-2-3-3-2 2H10L8 3z"/></svg>
+          <div class="ai-cam-ui">
+            <div class="ai-cam-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h5v5M9 20H4v-5M20 4l-6 6M4 20l6-6"/></svg></div>
+            <div class="ai-cam-shutter"></div>
+            <div class="ai-cam-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6M3.5 9a9 9 0 0 1 14.5-4L23 10M1 14l5 5a9 9 0 0 0 14.5-4"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-showcase-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
+
+      <div class="ai-step">
+        <div class="ai-step-head">
+          <div class="ai-step-num">2</div>
+          <div class="ai-step-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5-2 2m-9 9-2 2m13-2-2-2m-9-9-2-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+            L'IA reconnaît automatiquement
+          </div>
+        </div>
+        <div class="ai-step-scan">
+          <div class="ai-scan-list">
+            <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Catégorie : <b>Pull</b></div>
+            <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Marque : <b>Sézane</b></div>
+            <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Couleur : <b>Vert</b></div>
+            <div class="ai-scan-row"><span class="ai-scan-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>État : <b>Très bon état</b></div>
+          </div>
+          <div class="ai-scan-orb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg></div>
+        </div>
+      </div>
+
+      <div class="ai-showcase-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>
+
+      <div class="ai-step">
+        <div class="ai-step-head">
+          <div class="ai-step-num">3</div>
+          <div class="ai-step-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+            Votre annonce est prête
+          </div>
+        </div>
+        <div class="ai-step-ready">
+          <div class="ai-ready-card">
+            <div class="ai-ready-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 5 6l2 2v11h10V8l2-2-3-3-2 2H10L8 3z"/></svg></div>
+            <div>
+              <div class="ai-ready-name">Pull Sézane vert</div>
+              <div class="ai-ready-meta">Taille M · Très bon état</div>
+              <div class="ai-ready-price">35 €</div>
+            </div>
+          </div>
+          <button class="ai-ready-btn" onclick="openSellModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+            Publier l'annonce
+          </button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
