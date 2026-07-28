@@ -1334,6 +1334,12 @@
   /* ── FEED ── */
   .feed-section { padding: 0 2.5rem 3rem; }
   .feed-section-inner { max-width: 1250px; margin: 0 auto; }
+  .feed-section-inner.two-col-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;
+  }
+  @media(max-width: 900px){
+    .feed-section-inner.two-col-layout { grid-template-columns: 1fr; }
+  }
   .feed-panel {
     background: var(--white); border: 1.5px solid var(--border); border-radius: 20px;
     padding: 1.6rem 1.8rem 1.4rem;
@@ -2486,7 +2492,7 @@
 
 <!-- FEED INTELLIGENT -->
 <section class="feed-section" id="feedSection">
-  <div class="feed-section-inner">
+  <div class="feed-section-inner two-col-layout">
     <div class="feed-panel">
       <div class="feed-panel-title">Un feed intelligent qui apprend vos goûts</div>
       <div class="feed-panel-sub">Découvrez des articles adaptés à vos préférences.</div>
@@ -2525,6 +2531,8 @@
         </button>
       </div>
     </div>
+
+    <div class="sellers-panel-placeholder" id="sellersPanelPlaceholder"></div>
   </div>
 </section>
 
