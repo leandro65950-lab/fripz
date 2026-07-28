@@ -1331,6 +1331,65 @@
     .ai-step { max-width: none; }
   }
 
+  /* ── FEED ── */
+  .feed-section { padding: 0 2.5rem 3rem; }
+  .feed-section-inner { max-width: 1250px; margin: 0 auto; }
+  .feed-panel {
+    background: var(--white); border: 1.5px solid var(--border); border-radius: 20px;
+    padding: 1.6rem 1.8rem 1.4rem;
+  }
+  .feed-panel-title { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+  .feed-panel-sub { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.3rem; }
+
+  .feed-tabs { display: flex; align-items: center; gap: 1.4rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+  .feed-tab-btn { padding: 0.55rem 0.1rem; font-weight: 700; font-size: 0.95rem; color: var(--text-light); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .feed-tab-btn.active { color: var(--text); border-bottom-color: var(--teal); }
+  .feed-tab-btn:hover { color: var(--teal); }
+  .feed-sliders-ic { margin-left: auto; color: var(--text-light); cursor: pointer; display: flex; align-items: center; padding-bottom: 0.5rem; }
+  .feed-sliders-ic svg { width: 19px; height: 19px; }
+  .feed-sliders-ic:hover { color: var(--teal); }
+
+  .feed-cats { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .feed-cat-pill {
+    padding: 0.4rem 0.95rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
+    background: var(--card-bg); color: var(--text-mid); cursor: pointer; border: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+  .feed-cat-pill.active { background: var(--text); color: #fff; border-color: var(--text); }
+  .feed-cat-pill:hover:not(.active) { border-color: var(--teal); color: var(--teal); }
+
+  .feed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; min-height: 80px; }
+  .feed-card { cursor: pointer; }
+  .feed-card-img {
+    position: relative; height: 170px; border-radius: 14px; overflow: hidden;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.4rem; margin-bottom: 0.55rem;
+  }
+  .feed-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .feed-card-img .fav-btn { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; font-size: 0.92rem; }
+  .feed-card-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+  .feed-card-price { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-top: 2px; }
+  .feed-empty { grid-column: 1 / -1; text-align: center; color: var(--text-light); font-size: 0.9rem; padding: 2.2rem 1rem; }
+
+  .feed-actions {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.7rem;
+    margin-top: 1.3rem; padding-top: 1.1rem; border-top: 1px solid var(--border);
+  }
+  .feed-action-btn {
+    display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 700;
+    color: var(--text-mid); cursor: pointer; background: none; border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif; padding: 0.3rem 0.2rem;
+  }
+  .feed-action-btn svg { width: 15px; height: 15px; }
+  .feed-action-btn:hover { color: var(--teal); }
+
+  @media(max-width: 640px){
+    .feed-grid { grid-template-columns: repeat(2, 1fr); }
+    .feed-actions { justify-content: flex-start; }
+    .feed-tabs { gap: 1rem; }
+  }
+
   /* ── CTA FINALE : PHOTO ── */
   .bottom-cta-section { padding: 0 2.5rem 4rem; }
   .bottom-cta-inner { max-width: 1800px; width: 92%; margin: 0 auto; }
@@ -2425,6 +2484,50 @@
   </div>
 </section>
 
+<!-- FEED INTELLIGENT -->
+<section class="feed-section" id="feedSection">
+  <div class="feed-section-inner">
+    <div class="feed-panel">
+      <div class="feed-panel-title">Un feed intelligent qui apprend vos goûts</div>
+      <div class="feed-panel-sub">Découvrez des articles adaptés à vos préférences.</div>
+
+      <div class="feed-tabs">
+        <div class="feed-tab-btn active" data-tab="pourtoi" onclick="switchFeedTab('pourtoi')">Pour toi</div>
+        <div class="feed-tab-btn" data-tab="abonnements" onclick="switchFeedTab('abonnements')">Abonnements</div>
+        <div class="feed-tab-btn" data-tab="nouveautes" onclick="switchFeedTab('nouveautes')">Nouveautés</div>
+        <div class="feed-sliders-ic" title="Filtres" onclick="toast('Filtres avancés — bientôt disponible !')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+        </div>
+      </div>
+
+      <div class="feed-cats">
+        <div class="feed-cat-pill active" data-cat="tous" onclick="switchFeedCat('tous')">Tous</div>
+        <div class="feed-cat-pill" data-cat="maison" onclick="switchFeedCat('maison')">Maison</div>
+        <div class="feed-cat-pill" data-cat="mode" onclick="switchFeedCat('mode')">Mode</div>
+        <div class="feed-cat-pill" data-cat="tech" onclick="switchFeedCat('tech')">Tech</div>
+        <div class="feed-cat-pill" data-cat="sport" onclick="switchFeedCat('sport')">Sport</div>
+      </div>
+
+      <div class="feed-grid" id="feedGrid"></div>
+
+      <div class="feed-actions">
+        <button class="feed-action-btn" onclick="feedShortcut('perso')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>
+          Suggestions personnalisées
+        </button>
+        <button class="feed-action-btn" onclick="feedShortcut('collections')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+          Collections
+        </button>
+        <button class="feed-action-btn" onclick="feedShortcut('favoris')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          Favoris
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="popular-section" id="articles">
   <div class="popular-inner">
     <div class="popular-header">
@@ -3135,6 +3238,9 @@ const products = [
   { id:6, emoji:'🧒', brand:'Petit Bateau', name:'Set bodies bébé 6m', meta:'Petit Bateau · 6 mois', price:'18 €', cat:'enfant', state:'Très bon état', desc:'Set de 5 bodies coton, lavés à basse température, couleurs vives. Taille 6 mois.' },
   { id:7, emoji:'👜', brand:'Sézane', name:'Sac Farida crème', meta:'Sézane · Taille unique', price:'72 €', cat:'accessoire', state:'Très bon état', desc:'Sac Farida Sézane cuir crème, très bon état général.' },
   { id:8, emoji:'🧤', brand:'Longchamp', name:'Gants cuir noirs', meta:'Longchamp · Taille S', price:'38 €', cat:'accessoire', state:'Neuf avec étiquette', desc:'Gants Longchamp cuir agneau doublé cachemire, neufs avec boîte cadeau.' },
+  { id:9, emoji:'<img src="https://images.unsplash.com/photo-1756474215990-a18a9a0521d5?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Lampe champignon', meta:'Fripz · Taille unique', price:'45 €', cat:'maison', state:'Très bon état', desc:'Lampe champignon vintage, ambiance chaleureuse garantie.' },
+  { id:10, emoji:'<img src="https://images.unsplash.com/photo-1763890965387-5afe71908a70?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Chaise scandinave', meta:'Fripz · Taille unique', price:'80 €', cat:'maison', state:'Bon état', desc:'Chaise en bois au design scandinave épuré, parfaite pour un coin lecture.' },
+  { id:11, emoji:'<img src="https://images.unsplash.com/photo-1567069041071-bab3e18d72f0?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike Huarache', meta:'Nike · Taille 42', price:'65 €', cat:'sport', state:'Très bon état', desc:'Nike Huarache noires, boîte incluse. Portées quelques fois, très bon état général.' },
 ];
 
 const subcats = {
@@ -3949,6 +4055,99 @@ function filterCat(cat) {
   const filtered = products.filter(p => p.cat === cat);
   renderArticles(filtered.length ? filtered : products);
   document.getElementById('articles').scrollIntoView({ behavior:'smooth' });
+}
+
+/* ══════════ FEED ══════════ */
+
+let feedTab = 'pourtoi';
+let feedCat = 'tous';
+let feedFollowedIds = null;
+
+function feedCatMatches(p, cat) {
+  if (cat === 'tous') return true;
+  if (cat === 'maison') return p.cat === 'maison';
+  if (cat === 'mode') return p.cat === 'femme' || p.cat === 'homme';
+  if (cat === 'tech') return p.cat === 'electronique';
+  if (cat === 'sport') return p.cat === 'sport';
+  return true;
+}
+
+async function switchFeedTab(tab) {
+  if (tab === 'abonnements' && !currentUser) { openAuthModal('login'); return; }
+  feedTab = tab;
+  document.querySelectorAll('.feed-tab-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === tab); });
+  if (tab === 'abonnements' && feedFollowedIds === null) {
+    feedFollowedIds = [];
+    if (window.supaClient) {
+      try {
+        const res = await window.supaClient.from('follows').select('followed_id').eq('follower_id', currentUser.id);
+        feedFollowedIds = ((res && res.data) || []).map(function (r) { return r.followed_id; });
+      } catch (e) { feedFollowedIds = []; }
+    }
+  }
+  renderFeedGrid();
+}
+
+function switchFeedCat(cat) {
+  feedCat = cat;
+  document.querySelectorAll('.feed-cat-pill').forEach(function (b) { b.classList.toggle('active', b.dataset.cat === cat); });
+  renderFeedGrid();
+}
+
+function renderFeedGrid() {
+  const area = document.getElementById('feedGrid');
+  if (!area) return;
+  let list = products.filter(function (p) { return feedCatMatches(p, feedCat); });
+
+  if (feedTab === 'nouveautes') {
+    list = list.filter(function (p) { return !!p.created_at; })
+      .sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+  } else if (feedTab === 'abonnements') {
+    const ids = feedFollowedIds || [];
+    list = list.filter(function (p) { return p.user_id && ids.indexOf(p.user_id) !== -1; });
+  } else if (feedTab === 'favoris') {
+    list = list.filter(function (p) { return liked.has(p.id); });
+  }
+
+  list = list.slice(0, 6);
+
+  if (!list.length) {
+    let msg = 'Aucun article pour l\'instant.';
+    if (feedTab === 'abonnements') msg = currentUser ? 'Suis des vendeurs pour voir leurs nouveautés ici.' : 'Connecte-toi pour voir les nouveautés de tes abonnements.';
+    else if (feedTab === 'nouveautes') msg = 'Aucune nouveauté récente pour l\'instant.';
+    else if (feedTab === 'favoris') msg = 'Aucun favori pour l\'instant. Clique sur le cœur d\'un article pour l\'ajouter ici.';
+    area.innerHTML = '<div class="feed-empty">' + msg + '</div>';
+    return;
+  }
+
+  area.innerHTML = list.map(function (p) {
+    return '<div class="feed-card" onclick="openModal(' + p.id + ')">' +
+      '<div class="feed-card-img">' + p.emoji +
+        '<div class="fav-btn ' + (liked.has(p.id) ? 'liked' : '') + '" onclick="event.stopPropagation(); toggleLike(event,' + p.id + '); renderFeedGrid();">' + (liked.has(p.id) ? '❤️' : '🤍') + '</div>' +
+      '</div>' +
+      '<div class="feed-card-name">' + p.name + '</div>' +
+      '<div class="feed-card-price">' + p.price + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+async function feedShortcut(mode) {
+  if (mode === 'collections') {
+    if (!currentUser) { openAuthModal('login'); return; }
+    await showProfileFor(currentUser.id);
+    switchProfileTab('collections');
+    return;
+  }
+  if (mode === 'favoris') {
+    feedTab = 'favoris';
+    document.querySelectorAll('.feed-tab-btn').forEach(function (b) { b.classList.remove('active'); });
+    renderFeedGrid();
+    document.getElementById('feedSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  // 'ia' et 'perso' réutilisent le flux "Pour toi"
+  switchFeedTab('pourtoi');
+  document.getElementById('feedSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function openModal(id) {
@@ -6190,7 +6389,8 @@ function annonceToProduct(a, id) {
     price: a.prix ? (a.prix + ' \u20ac') : '\u2014',
     cat: (a.categorie || 'autre').toLowerCase(),
     state: a.etat || 'Bon \u00e9tat',
-    desc: a.description || 'Bel article en bon \u00e9tat.'
+    desc: a.description || 'Bel article en bon \u00e9tat.',
+    created_at: a.created_at || null
   };
 }
 
@@ -6205,12 +6405,14 @@ async function loadAnnonces() {
     const loaded = data.map(function (a) { return annonceToProduct(a, nextId++); });
     products.unshift.apply(products, loaded);
     if (typeof renderArticles === 'function') renderArticles(products);
+    if (typeof renderFeedGrid === 'function') renderFeedGrid();
     console.log('Annonces chargees:', loaded.length);
   } catch (e) { console.warn('loadAnnonces', e); }
 }
 if (supaClient) { supaClient.auth.onAuthStateChange(function (e, s) { if (typeof applySession === 'function') applySession(s); }); }
 window.addEventListener('load', function () { if (typeof refreshAuth === 'function') refreshAuth(); });
 window.addEventListener('load', loadAnnonces);
+window.addEventListener('load', function () { if (typeof renderFeedGrid === 'function') renderFeedGrid(); });
 </script>
 </body>
 </html>
