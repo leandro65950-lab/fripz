@@ -1361,12 +1361,12 @@
   .feed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; min-height: 80px; }
   .feed-card { cursor: pointer; }
   .feed-card-img {
-    position: relative; height: 170px; border-radius: 14px; overflow: hidden;
+    position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden;
     background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
     display: flex; align-items: center; justify-content: center;
     font-size: 3.4rem; margin-bottom: 0.55rem;
   }
-  .feed-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .feed-card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .feed-card-img .fav-btn { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; font-size: 0.92rem; }
   .feed-card-name { font-size: 0.92rem; font-weight: 700; color: var(--text); }
   .feed-card-price { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-top: 2px; }
