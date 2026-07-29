@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fripz — Achetez et vendez facilement</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Playfair+Display:wght@700;800&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -817,7 +817,7 @@
 /* barre de confiance */
 .hero-bottom-wrap {
   max-width: 1800px; width: 92%; margin: 0 auto;
-  padding: 0 0 2rem;
+  padding: 0 0 1rem;
   margin-top: 1.2rem;
 }
 .hero-bottom-row {
@@ -1158,6 +1158,77 @@
   .popular-section { padding: 0 2.5rem 3rem; }
   .popular-inner { max-width: 1800px; width: 92%; margin: 0 auto; }
 
+  /* ── LISTINGS: SIDEBAR + GRID ── */
+  .listings-layout { display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start; }
+  @media(max-width: 900px){ .listings-layout { grid-template-columns: 1fr; } }
+
+  .filters-sidebar { position: sticky; top: 90px; }
+  .filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+  .filters-head h3 { font-size: 1.2rem; font-weight: 800; color: var(--text); }
+  .filters-reset { font-size: 0.85rem; font-weight: 700; color: var(--teal); cursor: pointer; }
+  .filters-reset:hover { text-decoration: underline; }
+
+  .filter-group { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+  .filter-group:first-of-type { padding-top: 0; }
+  .filter-group-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 0.75rem; }
+
+  .filter-cat-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.45rem 0.5rem; border-radius: 9px; cursor: pointer; font-size: 0.92rem; color: var(--text-mid);
+  }
+  .filter-cat-row:hover { background: var(--card-bg); }
+  .filter-cat-row.active { background: var(--teal-light); color: var(--teal-dark); font-weight: 700; }
+  .filter-cat-row .fc-name { display: flex; align-items: center; gap: 0.5rem; }
+  .filter-cat-row .fc-name svg { width: 16px; height: 16px; }
+  .filter-cat-row .fc-count { font-size: 0.82rem; color: var(--text-light); }
+
+  .price-slider { width: 100%; accent-color: var(--teal); margin: 0.4rem 0 0.6rem; }
+  .price-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-mid); }
+
+  .size-chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .size-chip {
+    padding: 0.4rem 0.7rem; border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 0.85rem; font-weight: 700; color: var(--text-mid); cursor: pointer; background: #fff;
+  }
+  .size-chip:hover { border-color: var(--teal); }
+  .size-chip.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+  .state-check-row { display: flex; align-items: center; gap: 0.55rem; padding: 0.3rem 0; cursor: pointer; font-size: 0.9rem; color: var(--text-mid); }
+  .state-check-row input { width: 16px; height: 16px; accent-color: var(--teal); }
+
+  .brand-search { width: 100%; padding: 0.55rem 0.8rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; outline: none; margin-bottom: 0.6rem; box-sizing: border-box; }
+  .brand-search:focus { border-color: var(--teal); }
+  .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 0.3rem; border-radius: 8px; cursor: pointer; font-size: 0.88rem; color: var(--text-mid); }
+  .brand-row:hover { background: var(--card-bg); }
+  .brand-row.active { color: var(--teal-dark); font-weight: 700; }
+
+  .listings-topbar { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.8rem; }
+  .listings-count { font-size: 0.9rem; color: var(--text-light); margin-top: 2px; }
+  .listings-controls { display: flex; align-items: center; gap: 0.6rem; }
+  .view-toggle { display: flex; border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .view-toggle-btn { padding: 0.5rem 0.65rem; cursor: pointer; color: var(--text-light); display: flex; background: #fff; }
+  .view-toggle-btn.active { background: var(--text); color: #fff; }
+  .view-toggle-btn svg { width: 17px; height: 17px; }
+  .sort-select {
+    padding: 0.55rem 0.9rem; border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--text);
+    background: #fff; cursor: pointer; outline: none;
+  }
+
+  .article-badge {
+    position: absolute; top: 10px; left: 10px; padding: 0.25rem 0.6rem; border-radius: 7px;
+    font-size: 0.72rem; font-weight: 800; color: #fff; letter-spacing: 0.02em; z-index: 2;
+  }
+  .article-badge.new { background: #2f7a4f; }
+  .article-seller-av {
+    position: absolute; bottom: 10px; left: 10px; width: 28px; height: 28px; border-radius: 50%;
+    background: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center; color: var(--text-mid); z-index: 2;
+  }
+  .article-seller-av svg { width: 14px; height: 14px; }
+  .article-price-row { display: flex; align-items: center; gap: 5px; }
+  .article-price-row svg { width: 15px; height: 15px; color: #2f7a4f; }
+
   /* ── BANDEAU TENDANCES ── */
   .trends-bar {
     background: var(--teal);
@@ -1192,9 +1263,9 @@
   /* ── SECTION STATS ── */
   .stats-section {
     background: #fff;
-    padding: 3.5rem 2rem;
+    padding: 1.75rem 2rem 1.5rem;
   }
-  .stats-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .stats-inner { max-width: 2100px; width: 96%; margin: 0 auto; text-align: center; }
   .stats-title {
     font-size: 1.9rem; font-weight: 800; color: var(--text);
     letter-spacing: -0.02em; margin-bottom: 0.5rem;
@@ -1226,7 +1297,7 @@
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 1.25rem;
   }
-  .popular-title { font-size: 1.455rem; font-weight: 800; color: var(--text); }
+  .popular-title { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
   .see-all {
     font-size: 1.124rem; color: var(--text-mid); font-weight: 600;
     cursor: pointer; display: flex; align-items: center; gap: 4px;
@@ -1235,15 +1306,15 @@
   .see-all:hover { color: var(--teal); }
 
   /* ── VENDEZ EN QUELQUES SECONDES (IA) ── */
-  .ai-showcase-section { padding: 3.5rem 2.5rem 4rem; }
-  .ai-showcase-inner { max-width: 1250px; margin: 0 auto; text-align: center; }
+  .ai-showcase-section { padding: 1.5rem 2.5rem 1.75rem; }
+  .ai-showcase-inner { max-width: 1500px; margin: 0 auto; text-align: center; }
   .ai-showcase-title {
     font-size: 1.9rem; font-weight: 800; color: var(--text);
     letter-spacing: -0.02em; margin-bottom: 2.5rem;
   }
   .ai-showcase-title span { color: var(--teal); }
   .ai-showcase-steps {
-    display: flex; align-items: stretch; justify-content: center; gap: 1.25rem;
+    display: flex; align-items: stretch; justify-content: center; gap: 1.5rem;
   }
   .ai-showcase-arrow {
     display: flex; align-items: center; justify-content: center;
@@ -1251,9 +1322,9 @@
   }
   .ai-showcase-arrow svg { width: 26px; height: 26px; }
   .ai-step {
-    flex: 1; max-width: 340px; background: var(--white);
-    border: 1.5px solid var(--border); border-radius: 20px;
-    padding: 1.4rem; text-align: left; display: flex; flex-direction: column;
+    flex: 1; background: var(--white);
+    border: 1.5px solid var(--border); border-radius: 18px;
+    padding: 1.1rem; text-align: left; display: flex; flex-direction: column;
   }
   .ai-step-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; }
   .ai-step-num {
@@ -1261,11 +1332,11 @@
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 0.85rem; flex-shrink: 0;
   }
-  .ai-step-label { font-weight: 800; font-size: 1.02rem; color: var(--text); display: flex; align-items: center; gap: 0.4rem; }
+  .ai-step-label { font-weight: 800; font-size: 0.94rem; color: var(--text); display: flex; align-items: center; gap: 0.4rem; }
   .ai-step-label svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
 
   .ai-step-photo {
-    height: 190px; border-radius: 14px; overflow: hidden; position: relative;
+    height: 150px; border-radius: 14px; overflow: hidden; position: relative;
     background: linear-gradient(135deg, var(--teal-light), #e8ede9);
     background-size: cover; background-position: center;
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
@@ -1289,7 +1360,7 @@
   }
   .ai-cam-dot svg { width: 14px; height: 14px; }
 
-  .ai-step-scan { height: 190px; display: flex; align-items: center; gap: 1rem; }
+  .ai-step-scan { height: 150px; display: flex; align-items: center; gap: 1rem; }
   .ai-scan-list { flex: 1; display: flex; flex-direction: column; gap: 0.55rem; }
   .ai-scan-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.92rem; color: var(--text-mid); }
   .ai-scan-check {
@@ -1305,7 +1376,7 @@
   }
   .ai-scan-orb svg { width: 30px; height: 30px; }
 
-  .ai-step-ready { height: 190px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ai-step-ready { height: 150px; display: flex; flex-direction: column; justify-content: space-between; }
   .ai-ready-card { display: flex; gap: 0.75rem; align-items: center; }
   .ai-ready-thumb {
     width: 92px; height: 92px; border-radius: 12px; flex-shrink: 0;
@@ -1335,19 +1406,19 @@
 
   /* ── FEED ── */
   .feed-section { padding: 0 2.5rem 3rem; }
-  .feed-section-inner { max-width: 1250px; margin: 0 auto; }
+  .feed-section-inner { max-width: 1500px; margin: 0 auto; }
   .feed-section-inner.two-col-layout {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch;
   }
   @media(max-width: 900px){
     .feed-section-inner.two-col-layout { grid-template-columns: 1fr; }
   }
   .feed-panel {
     background: var(--white); border: 1.5px solid var(--border); border-radius: 20px;
-    padding: 1.6rem 1.8rem 1.4rem;
+    padding: 1.3rem 1.5rem 1.2rem; box-sizing: border-box; height: 100%;
   }
-  .feed-panel-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 800; color: #1f3d2b; margin-bottom: 0.3rem; letter-spacing: -0.01em; text-align: center; }
-  .feed-panel-sub { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.3rem; text-align: center; }
+  .feed-panel-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 800; color: #1f3d2b; margin-bottom: 0.25rem; letter-spacing: -0.01em; text-align: center; }
+  .feed-panel-sub { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 1.1rem; text-align: center; }
 
   .feed-tabs { display: flex; align-items: center; gap: 1.4rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
   .feed-tab-btn { padding: 0.55rem 0.1rem; font-weight: 700; font-size: 0.95rem; color: var(--text-light); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
@@ -1399,9 +1470,59 @@
     .feed-tabs { gap: 1rem; }
   }
 
+  /* ── SELLERS TO FOLLOW ── */
+  .sellers-panel {
+    background: var(--white); border: 1.5px solid var(--border); border-radius: 20px;
+    padding: 1.3rem 1.5rem 1.2rem; box-sizing: border-box; height: 100%;
+  }
+  .sellers-panel-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 800; color: #1f3d2b; margin-bottom: 0.25rem; letter-spacing: -0.01em; text-align: center; }
+  .sellers-panel-sub { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 1.1rem; text-align: center; }
+
+  .seller-avatar {
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 800; flex-shrink: 0;
+  }
+  .seller-featured-cover {
+    height: 110px; border-radius: 14px 14px 0 0;
+    background: linear-gradient(135deg, var(--teal-light), #e8ede9);
+  }
+  .seller-featured-card { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 1.2rem; }
+  .seller-featured-header { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0 1rem; margin-top: -28px; }
+  .seller-featured-header .seller-avatar { width: 56px; height: 56px; font-size: 1.3rem; border: 3px solid #fff; background: var(--teal); }
+  .seller-featured-info { flex: 1; padding-top: 32px; }
+  .seller-featured-name { font-weight: 800; font-size: 1.05rem; color: var(--text); }
+  .seller-featured-loc { font-size: 0.85rem; color: var(--text-light); margin-top: 1px; }
+  .seller-featured-stats { font-size: 0.85rem; color: var(--text-mid); margin-top: 3px; }
+  .seller-featured-stats .star { color: #f5a623; }
+  .seller-featured-header .follow-btn { margin-top: 32px; padding: 0.5rem 1.2rem; font-size: 0.88rem; }
+
+  .seller-collections-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; padding: 0.9rem 1rem 1.1rem; }
+  .seller-coll-tile { text-align: center; cursor: pointer; }
+  .seller-coll-cover {
+    height: 56px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    color: var(--teal-dark); margin-bottom: 0.35rem;
+  }
+  .seller-coll-cover svg { width: 20px; height: 20px; }
+  .seller-coll-name { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+  .seller-coll-count { font-size: 0.74rem; color: var(--text-light); }
+
+  .seller-mini-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+  .seller-mini-card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 0.7rem;
+    text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  }
+  .seller-mini-card .seller-avatar { width: 40px; height: 40px; font-size: 0.95rem; }
+  .seller-mini-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+  .seller-mini-stats { font-size: 0.74rem; color: var(--text-light); }
+  .seller-mini-card .follow-btn { width: 100%; padding: 0.4rem 0; font-size: 0.8rem; margin-top: 0.2rem; }
+
+  @media(max-width: 640px){
+    .seller-collections-row, .seller-mini-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
   /* ── CTA FINALE : PHOTO ── */
-  .bottom-cta-section { padding: 0 2.5rem 4rem; }
-  .bottom-cta-inner { max-width: 1800px; width: 92%; margin: 0 auto; }
+  .bottom-cta-section { padding: 0 1.5rem 0.75rem; }
+  .bottom-cta-inner { max-width: 2100px; width: 96%; margin: 0 auto; }
 
   .bottom-cta-banner {
     position: relative; border-radius: 22px; overflow: hidden;
@@ -1434,6 +1555,10 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
   }
+  .articles-grid.list-view { grid-template-columns: 1fr; }
+  .articles-grid.list-view .article-card { display: flex; flex-direction: row; }
+  .articles-grid.list-view .article-img { width: 160px; flex-shrink: 0; aspect-ratio: auto; height: 130px; }
+  .articles-grid.list-view .article-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
   @media(max-width: 1200px){ .articles-grid { grid-template-columns: repeat(4, 1fr); } }
   @media(max-width: 980px){ .articles-grid { grid-template-columns: repeat(3, 1fr); } }
   .article-card {
@@ -1464,9 +1589,10 @@
     background: rgba(255,255,255,0.9);
     border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.124rem; cursor: pointer;
+    color: var(--text-mid); cursor: pointer;
     transition: all 0.2s;
   }
+  .fav-btn svg { width: 16px; height: 16px; }
   .fav-btn:hover { transform: scale(1.15); }
   .fav-btn.liked { color: #e53935; }
 
@@ -2534,17 +2660,140 @@
       </div>
     </div>
 
-    <div class="sellers-panel-placeholder" id="sellersPanelPlaceholder"></div>
+    <div class="sellers-panel-placeholder" id="sellersPanelPlaceholder">
+      <div class="sellers-panel">
+        <div class="sellers-panel-title">Des vendeurs à suivre</div>
+        <div class="sellers-panel-sub">Chaque vendeur dispose d'une véritable vitrine personnalisée.</div>
+
+        <div class="seller-featured-card">
+          <div class="seller-featured-cover"></div>
+          <div class="seller-featured-header">
+            <div class="seller-avatar">M</div>
+            <div class="seller-featured-info">
+              <div class="seller-featured-name">MaisonVintage</div>
+              <div class="seller-featured-loc">Lyon, France</div>
+              <div class="seller-featured-stats">2,3k abonnés · <span class="star">★</span> 4,9 (124 avis)</div>
+            </div>
+            <button class="follow-btn not-following" onclick="toast('Fonctionnalité vendeurs — bientôt disponible !')">Suivre</button>
+          </div>
+          <div class="seller-collections-row">
+            <div class="seller-coll-tile">
+              <div class="seller-coll-cover" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21H3z"/><path d="M9 21v-6h6v6"/></svg></div>
+              <div class="seller-coll-name">Décoration</div>
+              <div class="seller-coll-count">18 articles</div>
+            </div>
+            <div class="seller-coll-tile">
+              <div class="seller-coll-cover" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.6.66 1.14 1.34 1.34 2.5"/></svg></div>
+              <div class="seller-coll-name">Luminaires</div>
+              <div class="seller-coll-count">12 articles</div>
+            </div>
+            <div class="seller-coll-tile">
+              <div class="seller-coll-cover" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M11 3 8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg></div>
+              <div class="seller-coll-name">Objets rares</div>
+              <div class="seller-coll-count">7 articles</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="seller-mini-row">
+          <div class="seller-mini-card">
+            <div class="seller-avatar" style="background:#d4537e">A</div>
+            <div class="seller-mini-name">Atelier Pauline</div>
+            <div class="seller-mini-stats">1,8k abonnés · <span class="star" style="color:#f5a623">★</span> 4,8</div>
+            <button class="follow-btn not-following" onclick="toast('Fonctionnalité vendeurs — bientôt disponible !')">Suivre</button>
+          </div>
+          <div class="seller-mini-card">
+            <div class="seller-avatar" style="background:#378add">T</div>
+            <div class="seller-mini-name">Tech Reborn</div>
+            <div class="seller-mini-stats">980 abonnés · <span class="star" style="color:#f5a623">★</span> 4,9</div>
+            <button class="follow-btn not-following" onclick="toast('Fonctionnalité vendeurs — bientôt disponible !')">Suivre</button>
+          </div>
+          <div class="seller-mini-card">
+            <div class="seller-avatar" style="background:#7f77dd">V</div>
+            <div class="seller-mini-name">Vintage Club</div>
+            <div class="seller-mini-stats">1,2k abonnés · <span class="star" style="color:#f5a623">★</span> 4,7</div>
+            <button class="follow-btn not-following" onclick="toast('Fonctionnalité vendeurs — bientôt disponible !')">Suivre</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="popular-section" id="articles">
   <div class="popular-inner">
-    <div class="popular-header">
-      <span class="popular-title">Articles populaires</span>
-      <a class="see-all" href="#">Voir tout →</a>
+    <div class="listings-layout">
+
+      <aside class="filters-sidebar">
+        <div class="filters-head">
+          <h3>Filtres</h3>
+          <span class="filters-reset" onclick="resetListingFilters()">Réinitialiser</span>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Catégories</div>
+          <div id="filterCatList"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Prix</div>
+          <input type="range" class="price-slider" id="priceSlider" min="0" max="200" step="10" value="200" oninput="onPriceSliderChange(this.value)">
+          <div class="price-labels"><span>0 €</span><span id="priceMaxLabel">200 € et +</span></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Taille</div>
+          <div class="size-chip-row" id="sizeChipRow">
+            <div class="size-chip" data-size="XXS" onclick="toggleSizeFilter('XXS')">XXS</div>
+            <div class="size-chip" data-size="XS" onclick="toggleSizeFilter('XS')">XS</div>
+            <div class="size-chip" data-size="S" onclick="toggleSizeFilter('S')">S</div>
+            <div class="size-chip" data-size="M" onclick="toggleSizeFilter('M')">M</div>
+            <div class="size-chip" data-size="L" onclick="toggleSizeFilter('L')">L</div>
+            <div class="size-chip" data-size="XL" onclick="toggleSizeFilter('XL')">XL</div>
+            <div class="size-chip" data-size="XXL" onclick="toggleSizeFilter('XXL')">XXL</div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">État</div>
+          <div id="stateCheckList">
+            <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Neuf avec étiquette', this.checked)"> Neuf avec étiquette</label>
+            <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Très bon état', this.checked)"> Très bon état</label>
+            <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Bon état', this.checked)"> Bon état</label>
+            <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('État correct', this.checked)"> État correct</label>
+          </div>
+        </div>
+
+        <div class="filter-group" style="border-bottom:none">
+          <div class="filter-group-title">Marque</div>
+          <select class="sort-select" id="brandSelect" style="width:100%" onchange="onBrandSelectChange(this.value)">
+            <option value="">Toutes les marques</option>
+          </select>
+        </div>
+      </aside>
+
+      <div class="listings-main">
+        <div class="listings-topbar">
+          <div>
+            <div class="popular-title">Toutes les annonces</div>
+            <div class="listings-count" id="listingsCount"></div>
+          </div>
+          <div class="listings-controls">
+            <div class="view-toggle">
+              <div class="view-toggle-btn active" id="viewGridBtn" onclick="setListView('grid')" title="Vue grille"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+              <div class="view-toggle-btn" id="viewListBtn" onclick="setListView('list')" title="Vue liste"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></div>
+            </div>
+            <select class="sort-select" id="sortSelect" onchange="onSortChange(this.value)">
+              <option value="recent">Plus récentes</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+            </select>
+          </div>
+        </div>
+        <div class="articles-grid" id="articlesGrid"></div>
+      </div>
+
     </div>
-    <div class="articles-grid" id="articlesGrid"></div>
   </div>
 </section>
 
@@ -3240,17 +3489,17 @@ function closePage() {
 
 <script>
 const products = [
-  { id:1, emoji:'👗', brand:'Zara', name:'Robe d\'été fleurie', meta:'Zara · Taille M', price:'28 €', cat:'femme', state:'Neuf avec étiquette', desc:'Robe fleurie légère, jamais portée. Étiquettes d\'origine. Taille M, longueur midi.' },
-  { id:2, emoji:'👖', brand:'Levi\'s', name:'Jean slim bleu', meta:'Levi\'s · Taille 38', price:'42 €', cat:'homme', state:'Très bon état', desc:'Jean Levi\'s 511 slim fit, bleu classique. Porté quelques fois, excellent état général.' },
-  { id:3, emoji:'🧥', brand:'Mango', name:'Veste en cuir noir', meta:'Mango · Taille L', price:'65 €', cat:'femme', state:'Bon état', desc:'Veste en cuir synthétique noire, coupe ajustée. Quelques légères traces d\'usure aux coudes.' },
-  { id:4, emoji:'👟', brand:'Nike', name:'Baskets blanches', meta:'Nike · Taille 42', price:'55 €', cat:'homme', state:'Très bon état', desc:'Nike Air Force 1, blanches, taille 42. Très bien entretenues, semelles propres. Boîte fournie.' },
-  { id:5, emoji:'👠', brand:'Rouje', name:'Escarpins rouges', meta:'Rouje · Taille 38', price:'85 €', cat:'femme', state:'Neuf avec étiquette', desc:'Escarpins Rouje cuir verni rouge, neufs avec boîte. Reçus en cadeau, mauvaise taille.' },
-  { id:6, emoji:'🧒', brand:'Petit Bateau', name:'Set bodies bébé 6m', meta:'Petit Bateau · 6 mois', price:'18 €', cat:'enfant', state:'Très bon état', desc:'Set de 5 bodies coton, lavés à basse température, couleurs vives. Taille 6 mois.' },
-  { id:7, emoji:'👜', brand:'Sézane', name:'Sac Farida crème', meta:'Sézane · Taille unique', price:'72 €', cat:'accessoire', state:'Très bon état', desc:'Sac Farida Sézane cuir crème, très bon état général.' },
-  { id:8, emoji:'🧤', brand:'Longchamp', name:'Gants cuir noirs', meta:'Longchamp · Taille S', price:'38 €', cat:'accessoire', state:'Neuf avec étiquette', desc:'Gants Longchamp cuir agneau doublé cachemire, neufs avec boîte cadeau.' },
-  { id:9, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1756474215990-a18a9a0521d5?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Lampe champignon', meta:'Fripz · Taille unique', price:'45 €', cat:'maison', state:'Très bon état', desc:'Lampe champignon vintage, ambiance chaleureuse garantie.' },
-  { id:10, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1763890965387-5afe71908a70?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Chaise scandinave', meta:'Fripz · Taille unique', price:'80 €', cat:'maison', state:'Bon état', desc:'Chaise en bois au design scandinave épuré, parfaite pour un coin lecture.' },
-  { id:11, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1567069041071-bab3e18d72f0?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike Huarache', meta:'Nike · Taille 42', price:'65 €', cat:'sport', state:'Très bon état', desc:'Nike Huarache noires, boîte incluse. Portées quelques fois, très bon état général.' },
+  { id:1, emoji:'👗', brand:'Zara', name:'Robe d\'été fleurie', meta:'Zara · Taille M', price:'28 €', priceNum:28, size:'M', cat:'femme', state:'Neuf avec étiquette', desc:'Robe fleurie légère, jamais portée. Étiquettes d\'origine. Taille M, longueur midi.' },
+  { id:2, emoji:'👖', brand:'Levi\'s', name:'Jean slim bleu', meta:'Levi\'s · Taille 38', price:'42 €', priceNum:42, size:null, cat:'homme', state:'Très bon état', desc:'Jean Levi\'s 511 slim fit, bleu classique. Porté quelques fois, excellent état général.' },
+  { id:3, emoji:'🧥', brand:'Mango', name:'Veste en cuir noir', meta:'Mango · Taille L', price:'65 €', priceNum:65, size:'L', cat:'femme', state:'Bon état', desc:'Veste en cuir synthétique noire, coupe ajustée. Quelques légères traces d\'usure aux coudes.' },
+  { id:4, emoji:'👟', brand:'Nike', name:'Baskets blanches', meta:'Nike · Taille 42', price:'55 €', priceNum:55, size:null, cat:'homme', state:'Très bon état', desc:'Nike Air Force 1, blanches, taille 42. Très bien entretenues, semelles propres. Boîte fournie.' },
+  { id:5, emoji:'👠', brand:'Rouje', name:'Escarpins rouges', meta:'Rouje · Taille 38', price:'85 €', priceNum:85, size:null, cat:'femme', state:'Neuf avec étiquette', desc:'Escarpins Rouje cuir verni rouge, neufs avec boîte. Reçus en cadeau, mauvaise taille.' },
+  { id:6, emoji:'🧒', brand:'Petit Bateau', name:'Set bodies bébé 6m', meta:'Petit Bateau · 6 mois', price:'18 €', priceNum:18, size:null, cat:'enfant', state:'Très bon état', desc:'Set de 5 bodies coton, lavés à basse température, couleurs vives. Taille 6 mois.' },
+  { id:7, emoji:'👜', brand:'Sézane', name:'Sac Farida crème', meta:'Sézane · Taille unique', price:'72 €', priceNum:72, size:null, cat:'accessoire', state:'Très bon état', desc:'Sac Farida Sézane cuir crème, très bon état général.' },
+  { id:8, emoji:'🧤', brand:'Longchamp', name:'Gants cuir noirs', meta:'Longchamp · Taille S', price:'38 €', priceNum:38, size:'S', cat:'accessoire', state:'Neuf avec étiquette', desc:'Gants Longchamp cuir agneau doublé cachemire, neufs avec boîte cadeau.' },
+  { id:9, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1756474215990-a18a9a0521d5?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Lampe champignon', meta:'Fripz · Taille unique', price:'45 €', priceNum:45, size:null, cat:'maison', state:'Très bon état', desc:'Lampe champignon vintage, ambiance chaleureuse garantie.' },
+  { id:10, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1763890965387-5afe71908a70?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Chaise scandinave', meta:'Fripz · Taille unique', price:'80 €', priceNum:80, size:null, cat:'maison', state:'Bon état', desc:'Chaise en bois au design scandinave épuré, parfaite pour un coin lecture.' },
+  { id:11, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1567069041071-bab3e18d72f0?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike Huarache', meta:'Nike · Taille 42', price:'65 €', priceNum:65, size:null, cat:'sport', state:'Très bon état', desc:'Nike Huarache noires, boîte incluse. Portées quelques fois, très bon état général.' },
 ];
 
 const subcats = {
@@ -4037,23 +4286,6 @@ function applyFilters() {
   document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
 }
 
-function renderArticles(items) {
-  const grid = document.getElementById('articlesGrid');
-  grid.innerHTML = items.map(p => `
-    <div class="article-card" onclick="openModal(${p.id})">
-      <div class="article-img">
-        ${p.emoji}
-        <div class="fav-btn ${liked.has(p.id)?'liked':''}" onclick="toggleLike(event,${p.id})">${liked.has(p.id)?'❤️':'🤍'}</div>
-      </div>
-      <div class="article-info">
-        <div class="article-name">${p.name}</div>
-        <div class="article-meta">${p.meta}</div>
-        <div class="article-price">${p.price}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
 function toggleLike(e, id) {
   e.stopPropagation();
   const willLike = !liked.has(id);
@@ -4087,7 +4319,7 @@ async function loadUserFavorites() {
     products.forEach(function (p) { if (p.uuid && uuids.indexOf(p.uuid) !== -1) liked.add(p.id); });
   } catch (e) { console.warn('loadUserFavorites', e); }
   computePreferredCategories();
-  if (typeof renderArticles === 'function') renderArticles(products);
+  if (typeof renderArticles === 'function') applyListingFilters();
   if (typeof renderFeedGrid === 'function') renderFeedGrid();
 }
 
@@ -4101,10 +4333,162 @@ function computePreferredCategories() {
   feedPreferredCats = Object.keys(count).sort(function (a, b) { return count[b] - count[a]; });
 }
 
+/* ══════════ TOUTES LES ANNONCES : FILTRES ══════════ */
+
+let listingFilters = { cat: 'tous', priceMax: 200, sizes: new Set(), states: new Set(), brand: '', sort: 'recent' };
+let listView = 'grid';
+
+const LISTING_CAT_LABELS = { tous: 'Tous', femme: 'Femme', homme: 'Homme', enfant: 'Enfant', maison: 'Maison & Déco', electronique: 'Tech', loisirs: 'Loisirs', sport: 'Sport' };
+const LISTING_CAT_ICONS = {
+  tous: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+  femme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>',
+  homme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>',
+  enfant: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 15c.5 1 1.5 1.5 3 1.5s2.5-.5 3-1.5"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+  maison: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21H3z"/><path d="M9 21v-6h6v6"/></svg>',
+  electronique: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+  loisirs: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+  sport: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5 17.5 17.5"/><path d="M4 4 2 6l3 3 2-2z"/><path d="M20 20l2-2-3-3-2 2z"/><path d="M14.5 6.5l3-3"/><path d="M6.5 17.5l-3 3"/></svg>'
+};
+
+function computeFilteredProducts() {
+  let list = products.slice();
+  if (listingFilters.cat !== 'tous') list = list.filter(function (p) { return p.cat === listingFilters.cat; });
+  if (listingFilters.priceMax < 200) list = list.filter(function (p) { return (p.priceNum || 0) <= listingFilters.priceMax; });
+  if (listingFilters.sizes.size) list = list.filter(function (p) { return p.size && listingFilters.sizes.has(p.size); });
+  if (listingFilters.states.size) list = list.filter(function (p) { return listingFilters.states.has(p.state); });
+  if (listingFilters.brand) {
+    list = list.filter(function (p) { return p.brand === listingFilters.brand; });
+  }
+  if (listingFilters.sort === 'price-asc') {
+    list.sort(function (a, b) { return (a.priceNum || 0) - (b.priceNum || 0); });
+  } else if (listingFilters.sort === 'price-desc') {
+    list.sort(function (a, b) { return (b.priceNum || 0) - (a.priceNum || 0); });
+  } else {
+    list.sort(function (a, b) {
+      const at = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const bt = b.created_at ? new Date(b.created_at).getTime() : 0;
+      return bt - at;
+    });
+  }
+  return list;
+}
+
+function renderFilterCatList() {
+  const container = document.getElementById('filterCatList');
+  if (!container) return;
+  const cats = ['tous', 'femme', 'homme', 'enfant', 'maison', 'electronique', 'loisirs', 'sport'];
+  container.innerHTML = cats.map(function (c) {
+    const count = c === 'tous' ? products.length : products.filter(function (p) { return p.cat === c; }).length;
+    const active = listingFilters.cat === c ? ' active' : '';
+    return '<div class="filter-cat-row' + active + '" onclick="setCatFilter(\'' + c + '\')"><span class="fc-name">' + (LISTING_CAT_ICONS[c] || '') + LISTING_CAT_LABELS[c] + '</span><span class="fc-count">' + count + '</span></div>';
+  }).join('');
+}
+
+function renderBrandList() {
+  const select = document.getElementById('brandSelect');
+  if (!select) return;
+  const counts = {};
+  products.forEach(function (p) { if (p.brand) counts[p.brand] = (counts[p.brand] || 0) + 1; });
+  const brands = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+  const current = listingFilters.brand;
+  select.innerHTML = '<option value="">Toutes les marques</option>' + brands.map(function (b) {
+    const sel = current === b ? ' selected' : '';
+    return '<option value="' + b.replace(/"/g, '&quot;') + '"' + sel + '>' + b + ' (' + counts[b] + ')</option>';
+  }).join('');
+}
+
+function onBrandSelectChange(val) {
+  listingFilters.brand = val;
+  applyListingFilters();
+}
+
+function selectBrand(b) {
+  listingFilters.brand = b;
+  applyListingFilters();
+}
+
+function setCatFilter(cat) { listingFilters.cat = cat; applyListingFilters(); }
+
+function onPriceSliderChange(val) {
+  listingFilters.priceMax = Number(val);
+  const lbl = document.getElementById('priceMaxLabel');
+  if (lbl) lbl.textContent = (Number(val) >= 200 ? '200 € et +' : val + ' €');
+  applyListingFilters();
+}
+
+function toggleSizeFilter(size) {
+  if (listingFilters.sizes.has(size)) listingFilters.sizes.delete(size); else listingFilters.sizes.add(size);
+  document.querySelectorAll('.size-chip').forEach(function (el) { el.classList.toggle('active', listingFilters.sizes.has(el.dataset.size)); });
+  applyListingFilters();
+}
+
+function toggleStateFilter(state, checked) {
+  if (checked) listingFilters.states.add(state); else listingFilters.states.delete(state);
+  applyListingFilters();
+}
+
+function onBrandSearchInput(val) { listingFilters.brand = val; applyListingFilters(); }
+function onSortChange(val) { listingFilters.sort = val; applyListingFilters(); }
+
+function setListView(view) {
+  listView = view;
+  const gridBtn = document.getElementById('viewGridBtn'); const listBtn = document.getElementById('viewListBtn');
+  if (gridBtn) gridBtn.classList.toggle('active', view === 'grid');
+  if (listBtn) listBtn.classList.toggle('active', view === 'list');
+  const grid = document.getElementById('articlesGrid');
+  if (grid) grid.classList.toggle('list-view', view === 'list');
+}
+
+function resetListingFilters() {
+  listingFilters = { cat: 'tous', priceMax: 200, sizes: new Set(), states: new Set(), brand: '', sort: 'recent' };
+  const slider = document.getElementById('priceSlider'); if (slider) slider.value = 200;
+  const lbl = document.getElementById('priceMaxLabel'); if (lbl) lbl.textContent = '200 € et +';
+  document.querySelectorAll('.size-chip').forEach(function (el) { el.classList.remove('active'); });
+  document.querySelectorAll('#stateCheckList input').forEach(function (el) { el.checked = false; });
+  const brandSelect = document.getElementById('brandSelect'); if (brandSelect) brandSelect.value = '';
+  const sortSelect = document.getElementById('sortSelect'); if (sortSelect) sortSelect.value = 'recent';
+  applyListingFilters();
+}
+
+function applyListingFilters() {
+  const list = computeFilteredProducts();
+  renderArticles(list);
+  const countEl = document.getElementById('listingsCount');
+  if (countEl) countEl.textContent = list.length + ' résultat' + (list.length > 1 ? 's' : '');
+  renderFilterCatList();
+  renderBrandList();
+}
+
 function filterCat(cat) {
-  const filtered = products.filter(p => p.cat === cat);
-  renderArticles(filtered.length ? filtered : products);
-  document.getElementById('articles').scrollIntoView({ behavior:'smooth' });
+  setCatFilter(cat);
+  document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
+}
+
+function isRecentListing(p) {
+  if (!p.created_at) return false;
+  const days = (Date.now() - new Date(p.created_at).getTime()) / 86400000;
+  return days <= 7;
+}
+
+function renderArticles(items) {
+  const grid = document.getElementById('articlesGrid');
+  grid.innerHTML = items.map(p => `
+    <div class="article-card" onclick="openModal(${p.id})">
+      <div class="article-img">
+        ${p.emoji}
+        ${isRecentListing(p) ? '<div class="article-badge new">NOUVEAU</div>' : ''}
+        ${p.user_id ? '<div class="article-seller-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="8" r="4"/></svg></div>' : ''}
+        <div class="fav-btn ${liked.has(p.id)?'liked':''}" onclick="toggleLike(event,${p.id})">
+          <svg viewBox="0 0 24 24" fill="${liked.has(p.id)?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </div>
+      </div>
+      <div class="article-info">
+        <div class="article-name">${p.name}</div>
+        <div class="article-meta">${p.meta}</div>
+        <div class="article-price-row"><span class="article-price">${p.price}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+      </div>
+    </div>
+  `).join('');
 }
 
 
@@ -4390,7 +4774,7 @@ function toast(msg) {
   _t = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
-renderArticles(products);
+applyListingFilters();
 
 /* ══════════════════════════
    AUTH MODAL
@@ -4684,7 +5068,7 @@ async function doLogout() {
   liked = new Set();
   feedPreferredCats = [];
   updateAuthUI();
-  if (typeof renderArticles === 'function') renderArticles(products);
+  if (typeof renderArticles === 'function') applyListingFilters();
   if (typeof renderFeedGrid === 'function') renderFeedGrid();
   showToast('À bientôt ! Vous êtes déconnecté.');
 }
@@ -5979,7 +6363,7 @@ function publishArticle() {
     state: sellData.etat || 'Bon état',
     desc: sellData.description || 'Bel article en bon état.',
   });
-  renderArticles(products);
+  applyListingFilters();
   // Incrémenter le compteur live d'articles en vente
   if (window.incrementLiveCounter) window.incrementLiveCounter(1);
   if (window.saveAnnonce) saveAnnonce({titre:sellData.titre,description:sellData.description,prix:sellData.prix,categorie:sellData.categorie,sous_categorie:sellData.sous_categorie,type_article:sellData.type_article,marque:sellData.marque,couleur:sellData.couleur,taille:sellData.taille,etat:sellData.etat,photos:sellData.photos.slice()});
@@ -6507,6 +6891,8 @@ function annonceToProduct(a, id) {
     name: a.titre || 'Article',
     meta: (a.marque ? a.marque : 'Fripz') + ' \u00b7 ' + (a.taille || 'Unique'),
     price: a.prix ? (a.prix + ' \u20ac') : '\u2014',
+    priceNum: a.prix ? Number(a.prix) : null,
+    size: a.taille || null,
     cat: (a.categorie || 'autre').toLowerCase(),
     state: a.etat || 'Bon \u00e9tat',
     desc: a.description || 'Bel article en bon \u00e9tat.',
@@ -6524,7 +6910,7 @@ async function loadAnnonces() {
     let nextId = 100000;
     const loaded = data.map(function (a) { return annonceToProduct(a, nextId++); });
     products.unshift.apply(products, loaded);
-    if (typeof renderArticles === 'function') renderArticles(products);
+    if (typeof renderArticles === 'function') applyListingFilters();
     if (typeof renderFeedGrid === 'function') renderFeedGrid();
     console.log('Annonces chargees:', loaded.length);
   } catch (e) { console.warn('loadAnnonces', e); }
