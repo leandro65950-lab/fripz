@@ -1198,7 +1198,13 @@
 
   .brand-search { width: 100%; padding: 0.55rem 0.8rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; outline: none; margin-bottom: 0.6rem; box-sizing: border-box; }
   .brand-search:focus { border-color: var(--teal); }
-  .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 0.3rem; border-radius: 8px; cursor: pointer; font-size: 0.88rem; color: var(--text-mid); }
+  .brand-dropdown {
+    display: none; position: absolute; top: calc(100% - 0.5rem); left: 0; right: 0; z-index: 20;
+    background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+    max-height: 260px; overflow-y: auto; box-shadow: 0 8px 20px rgba(0,0,0,0.1); padding: 0.3rem;
+  }
+  .brand-dropdown.open { display: block; }
+  .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer; font-size: 0.88rem; color: var(--text-mid); }
   .brand-row:hover { background: var(--card-bg); }
   .brand-row.active { color: var(--teal-dark); font-weight: 700; }
 
@@ -1211,7 +1217,7 @@
   .view-toggle-btn svg { width: 17px; height: 17px; }
   .sort-select {
     padding: 0.55rem 0.9rem; border: 1.5px solid var(--border); border-radius: 10px;
-    font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 600; color: var(--text);
+    font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 600; color: var(--text-mid);
     background: #fff; cursor: pointer; outline: none;
   }
 
@@ -1591,12 +1597,23 @@
   }
   .fav-btn svg { width: 16px; height: 16px; }
   .fav-btn:hover { transform: scale(1.15); }
-  .fav-btn.liked { color: #e53935; }
+  .fav-btn.liked { color: var(--teal); }
 
   .article-info { padding: 0.75rem; }
   .article-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
   .article-meta { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.5rem; }
-  .article-price { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.6rem; font-weight: 400; color: var(--text); }
+  .article-price { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.3rem; font-weight: 400; color: var(--text); }
+
+  .pagination-row { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 2rem; flex-wrap: wrap; }
+  .page-btn {
+    min-width: 36px; height: 36px; padding: 0 0.6rem; border-radius: 9px; border: 1.5px solid var(--border);
+    background: #fff; color: var(--text-mid); font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .page-btn:hover:not(:disabled) { border-color: var(--teal); color: var(--teal); }
+  .page-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+  .page-btn:disabled { opacity: 0.4; cursor: default; }
 
   /* ── MODAL ── */
   .modal-overlay {
@@ -1657,10 +1674,11 @@
     position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
     background: #1a1a2e; color: #fff;
     padding: 0.75rem 1.25rem; border-radius: 10px;
-    font-size: 1.124rem; font-weight: 600;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 600;
     display: none; align-items: center; gap: 0.5rem;
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
+  .toast svg { width: 17px; height: 17px; flex-shrink: 0; vertical-align: -3px; }
   .toast.show { display: flex; animation: toastIn 0.25s ease; }
   @keyframes toastIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
@@ -2765,8 +2783,10 @@
 
         <div class="filter-group" style="border-bottom:none">
           <div class="filter-group-title">Marque</div>
-          <input type="text" class="brand-search" id="brandSearchInput" placeholder="Rechercher une marque..." autocomplete="off" oninput="onBrandSearchInput(this.value)" onfocus="onBrandSearchInput(this.value)">
-          <div id="brandList"></div>
+          <div style="position:relative">
+            <input type="text" class="brand-search" id="brandSearchInput" placeholder="Rechercher une marque..." autocomplete="off" oninput="onBrandSearchInput(this.value)" onfocus="showBrandDropdown()" onblur="hideBrandDropdownDelayed()">
+            <div id="brandList" class="brand-dropdown"></div>
+          </div>
         </div>
       </aside>
 
@@ -2789,6 +2809,7 @@
           </div>
         </div>
         <div class="articles-grid" id="articlesGrid"></div>
+        <div class="pagination-row" id="paginationRow"></div>
       </div>
 
     </div>
@@ -3499,6 +3520,53 @@ const products = [
   { id:10, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1763890965387-5afe71908a70?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Chaise scandinave', meta:'Taille unique', price:'80 €', priceNum:80, size:null, cat:'maison', state:'Bon état', desc:'Chaise en bois au design scandinave épuré, parfaite pour un coin lecture.' },
   { id:11, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1567069041071-bab3e18d72f0?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike Huarache', meta:'42', price:'65 €', priceNum:65, size:null, cat:'sport', state:'Très bon état', desc:'Nike Huarache noires, boîte incluse. Portées quelques fois, très bon état général.' },
 ];
+
+(function generateBulkListings() {
+  const templates = [
+    { item:'Pull', cat:'femme', photo:'photo-1758537698215-af1e35acb911', brands:['Sézane','Uniqlo','COS','Zara','American Vintage'] },
+    { item:'Robe fleurie', cat:'femme', photo:'photo-1583316174775-bd6dc0e9f298', brands:['Zara','H&M','Mango','Bershka'] },
+    { item:'Veste en cuir', cat:'femme', photo:'photo-1727515546577-f7d82a47b51d', brands:['Mango','Sandro','Maje','Zara'] },
+    { item:'Jean slim', cat:'homme', photo:'photo-1589226849736-8d0e0c78e869', brands:['Levi\'s','Diesel','Uniqlo','Gap'] },
+    { item:'Baskets', cat:'homme', photo:'photo-1615743472612-93b21e520fad', brands:['Nike','Adidas','New Balance','Puma'] },
+    { item:'Escarpins', cat:'femme', photo:'photo-1654077813634-9ff6b843caab', brands:['Rouje','Sézane','Mango'] },
+    { item:'Body bébé', cat:'enfant', photo:'photo-1622290319146-7b63df48a635', brands:['Petit Bateau','Jacadi','Okaidi'] },
+    { item:'Sac à main', cat:'accessoire', photo:'photo-1473188588951-666fce8e7c68', brands:['Sézane','Polène','Longchamp','Furla'] },
+    { item:'Gants en cuir', cat:'accessoire', photo:'photo-1630477577863-4baf945ddb22', brands:['Longchamp','Zara'] },
+    { item:'Lampe champignon', cat:'maison', photo:'photo-1756474215990-a18a9a0521d5', brands:['Fripz','Maisons du Monde','Habitat'] },
+    { item:'Chaise scandinave', cat:'maison', photo:'photo-1763890965387-5afe71908a70', brands:['Fripz','IKEA','AM.PM'] },
+    { item:'Baskets running', cat:'sport', photo:'photo-1567069041071-bab3e18d72f0', brands:['Nike','Asics','New Balance'] }
+  ];
+  const states = ['Neuf avec étiquette','Neuf sans étiquette','Très bon état','Bon état','État correct'];
+  const sizes = ['XXS','XS','S','M','L','XL','XXL'];
+  const bulk = [];
+  let id = 500;
+  const TOTAL = 100;
+  for (let i = 0; i < TOTAL; i++) {
+    const t = templates[i % templates.length];
+    const brand = t.brands[i % t.brands.length];
+    const isSized = ['femme','homme','enfant'].indexOf(t.cat) !== -1;
+    const size = isSized ? sizes[(i * 3) % sizes.length] : null;
+    const state = states[(i * 5 + i) % states.length];
+    const priceBase = 15 + ((i * 13) % 90);
+    const daysAgo = i % 20;
+    const createdAt = new Date(Date.now() - daysAgo * 86400000).toISOString();
+    bulk.push({
+      id: id++,
+      emoji: '<img src="https://images.unsplash.com/' + t.photo + '?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">',
+      brand: brand,
+      name: brand + ' ' + t.item,
+      meta: size || 'Taille unique',
+      price: priceBase + ' €',
+      priceNum: priceBase,
+      size: size,
+      cat: t.cat,
+      state: state,
+      desc: t.item + ' ' + brand + ', ' + state.toLowerCase() + '.',
+      created_at: createdAt
+    });
+  }
+  products.push.apply(products, bulk);
+})();
 
 const subcats = {
   femme: {
@@ -4288,7 +4356,7 @@ function toggleLike(e, id) {
   e.stopPropagation();
   const willLike = !liked.has(id);
   willLike ? liked.add(id) : liked.delete(id);
-  toast(willLike ? '❤️ Ajouté aux favoris' : 'Retiré des favoris');
+  toast(willLike ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg> Ajouté aux favoris' : 'Retiré des favoris');
   renderArticles(products.filter(p => !currentOpenCat || p.cat === currentOpenCat));
   syncLikeToSupabase(id, willLike);
 }
@@ -4397,6 +4465,24 @@ const KNOWN_BRANDS = [
   'Versace','Vertbaudet','Weekday','Zadig & Voltaire','Zara','Zara Home','Zara Kids'
 ];
 
+function showBrandDropdown() {
+  const list = document.getElementById('brandList');
+  if (list) list.classList.add('open');
+  renderBrandList();
+}
+
+function hideBrandDropdownDelayed() {
+  setTimeout(function () {
+    const list = document.getElementById('brandList');
+    if (list) list.classList.remove('open');
+  }, 150);
+}
+
+const TOP_BRANDS = [
+  'Nike','Apple','Samsung','Sony','Ralph Lauren','Adidas','Louis Vuitton','Chanel',
+  'Gucci','Zara','H&M','Levi\'s','Uniqlo','IKEA','Dyson'
+];
+
 function renderBrandList() {
   const container = document.getElementById('brandList');
   if (!container) return;
@@ -4404,7 +4490,12 @@ function renderBrandList() {
   const q = ((input && input.value) || '').trim().toLowerCase();
   const productBrands = products.filter(function (p) { return p.brand; }).map(function (p) { return p.brand; });
   const allBrands = Array.from(new Set(KNOWN_BRANDS.concat(productBrands))).sort(function (a, b) { return a.localeCompare(b, 'fr'); });
-  const matches = (q ? allBrands.filter(function (b) { return b.toLowerCase().indexOf(q) !== -1; }) : allBrands).slice(0, 8);
+  let matches;
+  if (!q) {
+    matches = TOP_BRANDS;
+  } else {
+    matches = allBrands.filter(function (b) { return b.toLowerCase().indexOf(q) !== -1; }).slice(0, 8);
+  }
   if (!matches.length) {
     container.innerHTML = '<div class="cpick-empty">Aucune marque trouvée</div>';
     return;
@@ -4419,6 +4510,8 @@ function selectBrand(b) {
   listingFilters.brand = b;
   const input = document.getElementById('brandSearchInput');
   if (input) input.value = b;
+  const list = document.getElementById('brandList');
+  if (list) list.classList.remove('open');
   applyListingFilters();
 }
 
@@ -4469,13 +4562,48 @@ function resetListingFilters() {
   applyListingFilters();
 }
 
-function applyListingFilters() {
-  const list = computeFilteredProducts();
-  renderArticles(list);
+let currentPage = 1;
+const PAGE_SIZE = 40;
+let currentFilteredList = [];
+
+function applyListingFilters(keepPage) {
+  currentFilteredList = computeFilteredProducts();
+  if (!keepPage) currentPage = 1;
+  const totalPages = Math.max(1, Math.ceil(currentFilteredList.length / PAGE_SIZE));
+  if (currentPage > totalPages) currentPage = totalPages;
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = currentFilteredList.slice(start, start + PAGE_SIZE);
+  renderArticles(pageItems);
   const countEl = document.getElementById('listingsCount');
-  if (countEl) countEl.textContent = list.length + ' résultat' + (list.length > 1 ? 's' : '');
+  if (countEl) countEl.textContent = currentFilteredList.length + ' résultat' + (currentFilteredList.length > 1 ? 's' : '');
   renderFilterCatList();
   renderBrandList();
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+  const el = document.getElementById('paginationRow');
+  if (!el) return;
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  let html = '<button class="page-btn" onclick="goToPage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '>←</button>';
+  const pages = [];
+  for (let p = 1; p <= totalPages; p++) {
+    if (p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1) pages.push(p);
+    else if (pages[pages.length - 1] !== '…') pages.push('…');
+  }
+  pages.forEach(function (p) {
+    if (p === '…') { html += '<span class="page-btn" style="border:none;cursor:default">…</span>'; return; }
+    html += '<button class="page-btn' + (p === currentPage ? ' active' : '') + '" onclick="goToPage(' + p + ')">' + p + '</button>';
+  });
+  html += '<button class="page-btn" onclick="goToPage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '>→</button>';
+  el.innerHTML = html;
+}
+
+function goToPage(p) {
+  currentPage = p;
+  applyListingFilters(true);
+  const grid = document.getElementById('articlesGrid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function filterCat(cat) {
@@ -4796,7 +4924,7 @@ function confirmOrder() {
 let _t;
 function toast(msg) {
   const el = document.getElementById('toastEl');
-  el.textContent = msg;
+  el.innerHTML = msg;
   el.classList.add('show');
   clearTimeout(_t);
   _t = setTimeout(() => el.classList.remove('show'), 2200);
