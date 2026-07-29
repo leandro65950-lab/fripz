@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fripz — Achetez et vendez facilement</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Playfair+Display:wght@700;800&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=Playfair+Display:wght@700;800&family=Outfit:wght@500;600;700&family=Cormorant+Garamond:wght@600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -1164,7 +1164,7 @@
 
   .filters-sidebar { position: sticky; top: 90px; }
   .filters-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-  .filters-head h3 { font-size: 1.2rem; font-weight: 800; color: var(--text); }
+  .filters-head h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); }
   .filters-reset { font-size: 0.85rem; font-weight: 700; color: var(--teal); cursor: pointer; }
   .filters-reset:hover { text-decoration: underline; }
 
@@ -1211,7 +1211,7 @@
   .view-toggle-btn svg { width: 17px; height: 17px; }
   .sort-select {
     padding: 0.55rem 0.9rem; border: 1.5px solid var(--border); border-radius: 10px;
-    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--text);
+    font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 600; color: var(--text);
     background: #fff; cursor: pointer; outline: none;
   }
 
@@ -1224,6 +1224,7 @@
     position: absolute; bottom: 10px; left: 10px; width: 28px; height: 28px; border-radius: 50%;
     background: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     display: flex; align-items: center; justify-content: center; color: var(--text-mid); z-index: 2;
+    overflow: hidden;
   }
   .article-seller-av svg { width: 14px; height: 14px; }
   .article-price-row { display: flex; align-items: center; gap: 5px; }
@@ -1297,7 +1298,7 @@
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 1.25rem;
   }
-  .popular-title { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .popular-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
   .see-all {
     font-size: 1.124rem; color: var(--text-mid); font-weight: 600;
     cursor: pointer; display: flex; align-items: center; gap: 4px;
@@ -1306,101 +1307,97 @@
   .see-all:hover { color: var(--teal); }
 
   /* ── VENDEZ EN QUELQUES SECONDES (IA) ── */
-  .ai-showcase-section { padding: 1.5rem 2.5rem 1.75rem; }
-  .ai-showcase-inner { max-width: 1500px; margin: 0 auto; text-align: center; }
+  .ai-showcase-section { padding: 1.2rem 2.0rem 1.4rem; }
+  .ai-showcase-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
   .ai-showcase-title {
-    font-size: 1.9rem; font-weight: 800; color: var(--text);
-    letter-spacing: -0.02em; margin-bottom: 2.5rem;
+    font-size: 1.52rem; font-weight: 800; color: var(--text);
+    letter-spacing: -0.02em; margin-bottom: 2.0rem;
   }
   .ai-showcase-title span { color: var(--teal); }
   .ai-showcase-steps {
-    display: flex; align-items: stretch; justify-content: center; gap: 1.5rem;
+    display: flex; align-items: stretch; justify-content: center; gap: 1.2rem;
   }
   .ai-showcase-arrow {
     display: flex; align-items: center; justify-content: center;
     color: var(--border); flex-shrink: 0;
   }
-  .ai-showcase-arrow svg { width: 26px; height: 26px; }
+  .ai-showcase-arrow svg { width: 21px; height: 21px; }
   .ai-step {
     flex: 1; background: var(--white);
-    border: 1.5px solid var(--border); border-radius: 18px;
-    padding: 1.1rem; text-align: left; display: flex; flex-direction: column;
+    border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 0.88rem; text-align: left; display: flex; flex-direction: column;
   }
-  .ai-step-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.1rem; }
+  .ai-step-head { display: flex; align-items: center; gap: 0.48rem; margin-bottom: 0.88rem; }
   .ai-step-num {
-    width: 26px; height: 26px; border-radius: 50%; background: var(--teal); color: #fff;
+    width: 21px; height: 21px; border-radius: 50%; background: var(--teal); color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 0.85rem; flex-shrink: 0;
+    font-weight: 800; font-size: 0.68rem; flex-shrink: 0;
   }
-  .ai-step-label { font-weight: 800; font-size: 0.94rem; color: var(--text); display: flex; align-items: center; gap: 0.4rem; }
-  .ai-step-label svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+  .ai-step-label { font-weight: 800; font-size: 0.752rem; color: var(--text); display: flex; align-items: center; gap: 0.32rem; }
+  .ai-step-label svg { width: 14px; height: 14px; color: var(--teal); flex-shrink: 0; }
 
   .ai-step-photo {
-    height: 150px; border-radius: 14px; overflow: hidden; position: relative;
-    background: linear-gradient(135deg, var(--teal-light), #e8ede9);
-    background-size: cover; background-position: center;
+    height: 184px; border-radius: 11px; overflow: hidden; position: relative;
+    background: #fff;
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
     transition: opacity 0.6s ease;
   }
-  .ai-step-photo::after {
-    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 60px;
-    background: linear-gradient(to top, rgba(0,0,0,0.35), transparent);
-  }
+  .ai-step-photo img { max-width: 100%; max-height: 100%; border-radius: 8px; display: block; object-fit: contain; }
   .ai-cam-ui {
-    position: absolute; bottom: 10px; left: 0; right: 0; z-index: 1;
-    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    position: absolute; bottom: 8px; left: 0; right: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: center; gap: 0.8rem;
   }
   .ai-cam-shutter {
-    width: 40px; height: 40px; border-radius: 50%; background: #fff;
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.35), 0 2px 8px rgba(0,0,0,0.25);
+    width: 32px; height: 32px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.35), 0 2px 6px rgba(0,0,0,0.25);
   }
   .ai-cam-dot {
-    width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.55);
+    width: 21px; height: 21px; border-radius: 50%; background: rgba(255,255,255,0.55);
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
   }
-  .ai-cam-dot svg { width: 14px; height: 14px; }
+  .ai-cam-dot svg { width: 11px; height: 11px; }
 
-  .ai-step-scan { height: 150px; display: flex; align-items: center; gap: 1rem; }
-  .ai-scan-list { flex: 1; display: flex; flex-direction: column; gap: 0.55rem; }
-  .ai-scan-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.92rem; color: var(--text-mid); }
+  .ai-step-scan { height: 184px; display: flex; align-items: center; gap: 0.8rem; }
+  .ai-scan-list { flex: 1; display: flex; flex-direction: column; gap: 0.88rem; }
+  .ai-scan-row { display: flex; align-items: center; gap: 0.56rem; font-size: 0.92rem; color: var(--text-mid); }
   .ai-scan-check {
-    width: 18px; height: 18px; border-radius: 50%; background: var(--teal-light); color: var(--teal-dark);
+    width: 19px; height: 19px; border-radius: 50%; background: var(--teal-light); color: var(--teal-dark);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .ai-scan-check svg { width: 11px; height: 11px; }
   .ai-scan-row b { color: var(--text); }
   .ai-scan-orb {
-    width: 66px; height: 66px; border-radius: 50%; flex-shrink: 0;
+    width: 53px; height: 53px; border-radius: 50%; flex-shrink: 0;
     background: radial-gradient(circle at 35% 30%, #fff, var(--teal-light) 70%);
     display: flex; align-items: center; justify-content: center; color: var(--teal);
   }
-  .ai-scan-orb svg { width: 30px; height: 30px; }
+  .ai-scan-orb svg { width: 24px; height: 24px; }
 
-  .ai-step-ready { height: 150px; display: flex; flex-direction: column; justify-content: space-between; }
-  .ai-ready-card { display: flex; gap: 0.75rem; align-items: center; }
+  .ai-step-ready { height: 184px; display: flex; flex-direction: column; justify-content: space-between; }
+  .ai-ready-card { display: flex; gap: 0.88rem; align-items: center; }
   .ai-ready-thumb {
-    width: 92px; height: 92px; border-radius: 12px; flex-shrink: 0;
-    background: linear-gradient(135deg, var(--teal-light), #e8ede9);
+    width: 104px; height: 104px; border-radius: 10px; flex-shrink: 0; overflow: hidden;
+    background: #fff;
     display: flex; align-items: center; justify-content: center; color: var(--teal-dark);
-    transition: opacity 0.6s ease;
   }
-  .ai-ready-thumb svg { width: 30px; height: 30px; }
-  .ai-ready-name { font-weight: 800; font-size: 0.98rem; color: var(--text); }
-  .ai-ready-meta { font-size: 0.85rem; color: var(--text-light); margin: 2px 0; }
-  .ai-ready-price { font-weight: 800; font-size: 1rem; color: var(--text); }
+  .ai-ready-thumb img { max-width: 100%; max-height: 100%; border-radius: 6px; display: block; object-fit: contain; transition: opacity 0.6s ease; }
+  .ai-ready-thumb svg { width: 34px; height: 34px; }
+  .ai-ready-name { font-weight: 800; font-size: 1.04rem; color: var(--text); }
+  .ai-ready-meta { font-size: 0.84rem; color: var(--text-light); margin: 4px 0; }
+  .ai-ready-price { font-weight: 800; font-size: 1.08rem; color: var(--text); }
   .ai-ready-btn {
-    margin-top: 1rem; background: var(--teal); color: #fff; border: none;
-    border-radius: 12px; padding: 0.65rem; font-weight: 800; font-size: 0.92rem;
+    margin-top: 0.96rem; background: var(--teal); color: #fff; border: none;
+    border-radius: 10px; padding: 0.72rem; font-weight: 800; font-size: 0.84rem;
     font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer;
     display: flex; align-items: center; justify-content: center; gap: 0.4rem;
     transition: background 0.2s;
   }
   .ai-ready-btn:hover { background: var(--teal-dark); }
-  .ai-ready-btn svg { width: 15px; height: 15px; }
+  .ai-ready-btn svg { width: 14px; height: 14px; }
 
-  @media(max-width: 900px){
+  @media(max-width: 720px){
     .ai-showcase-steps { flex-direction: column; align-items: stretch; }
-    .ai-showcase-arrow { transform: rotate(90deg); padding: 0.2rem 0; }
+    .ai-showcase-arrow { transform: rotate(90deg); padding: 0.16rem 0; }
     .ai-step { max-width: none; }
   }
 
@@ -1597,9 +1594,9 @@
   .fav-btn.liked { color: #e53935; }
 
   .article-info { padding: 0.75rem; }
-  .article-name { font-size: 1.164rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-  .article-meta { font-size: 1.005rem; color: var(--text-light); margin-bottom: 0.5rem; }
-  .article-price { font-size: 1.217rem; font-weight: 800; color: var(--text); }
+  .article-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .article-meta { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.5rem; }
+  .article-price { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.6rem; font-weight: 400; color: var(--text); }
 
   /* ── MODAL ── */
   .modal-overlay {
@@ -2559,7 +2556,8 @@
             Prenez une photo
           </div>
         </div>
-        <div class="ai-step-photo" id="aiStepPhoto" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=700&amp;q=75&amp;auto=format&amp;fit=crop')">
+        <div class="ai-step-photo">
+          <img id="aiStepPhoto" src="https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=700&amp;q=75&amp;auto=format&amp;fit=crop" alt="">
           <div class="ai-cam-ui">
             <div class="ai-cam-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
             <div class="ai-cam-shutter"></div>
@@ -2600,7 +2598,7 @@
         </div>
         <div class="ai-step-ready">
           <div class="ai-ready-card">
-            <div class="ai-ready-thumb" id="aiReadyThumb" style="background-image:url('https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=200&amp;q=70&amp;auto=format&amp;fit=crop');background-size:cover;background-position:center"></div>
+            <div class="ai-ready-thumb"><img id="aiReadyThumb" src="https://images.unsplash.com/photo-1530053364863-7afc6bcdca88?w=200&amp;q=70&amp;auto=format&amp;fit=crop" alt=""></div>
             <div>
               <div class="ai-ready-name" id="aiReadyName">Pull</div>
               <div class="ai-ready-meta" id="aiReadyMeta">Taille M · Très bon état</div>
@@ -2758,6 +2756,7 @@
           <div class="filter-group-title">État</div>
           <div id="stateCheckList">
             <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Neuf avec étiquette', this.checked)"> Neuf avec étiquette</label>
+            <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Neuf sans étiquette', this.checked)"> Neuf sans étiquette</label>
             <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Très bon état', this.checked)"> Très bon état</label>
             <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('Bon état', this.checked)"> Bon état</label>
             <label class="state-check-row"><input type="checkbox" onchange="toggleStateFilter('État correct', this.checked)"> État correct</label>
@@ -2766,9 +2765,8 @@
 
         <div class="filter-group" style="border-bottom:none">
           <div class="filter-group-title">Marque</div>
-          <select class="sort-select" id="brandSelect" style="width:100%" onchange="onBrandSelectChange(this.value)">
-            <option value="">Toutes les marques</option>
-          </select>
+          <input type="text" class="brand-search" id="brandSearchInput" placeholder="Rechercher une marque..." autocomplete="off" oninput="onBrandSearchInput(this.value)" onfocus="onBrandSearchInput(this.value)">
+          <div id="brandList"></div>
         </div>
       </aside>
 
@@ -3489,17 +3487,17 @@ function closePage() {
 
 <script>
 const products = [
-  { id:1, emoji:'👗', brand:'Zara', name:'Robe d\'été fleurie', meta:'Zara · Taille M', price:'28 €', priceNum:28, size:'M', cat:'femme', state:'Neuf avec étiquette', desc:'Robe fleurie légère, jamais portée. Étiquettes d\'origine. Taille M, longueur midi.' },
-  { id:2, emoji:'👖', brand:'Levi\'s', name:'Jean slim bleu', meta:'Levi\'s · Taille 38', price:'42 €', priceNum:42, size:null, cat:'homme', state:'Très bon état', desc:'Jean Levi\'s 511 slim fit, bleu classique. Porté quelques fois, excellent état général.' },
-  { id:3, emoji:'🧥', brand:'Mango', name:'Veste en cuir noir', meta:'Mango · Taille L', price:'65 €', priceNum:65, size:'L', cat:'femme', state:'Bon état', desc:'Veste en cuir synthétique noire, coupe ajustée. Quelques légères traces d\'usure aux coudes.' },
-  { id:4, emoji:'👟', brand:'Nike', name:'Baskets blanches', meta:'Nike · Taille 42', price:'55 €', priceNum:55, size:null, cat:'homme', state:'Très bon état', desc:'Nike Air Force 1, blanches, taille 42. Très bien entretenues, semelles propres. Boîte fournie.' },
-  { id:5, emoji:'👠', brand:'Rouje', name:'Escarpins rouges', meta:'Rouje · Taille 38', price:'85 €', priceNum:85, size:null, cat:'femme', state:'Neuf avec étiquette', desc:'Escarpins Rouje cuir verni rouge, neufs avec boîte. Reçus en cadeau, mauvaise taille.' },
-  { id:6, emoji:'🧒', brand:'Petit Bateau', name:'Set bodies bébé 6m', meta:'Petit Bateau · 6 mois', price:'18 €', priceNum:18, size:null, cat:'enfant', state:'Très bon état', desc:'Set de 5 bodies coton, lavés à basse température, couleurs vives. Taille 6 mois.' },
-  { id:7, emoji:'👜', brand:'Sézane', name:'Sac Farida crème', meta:'Sézane · Taille unique', price:'72 €', priceNum:72, size:null, cat:'accessoire', state:'Très bon état', desc:'Sac Farida Sézane cuir crème, très bon état général.' },
-  { id:8, emoji:'🧤', brand:'Longchamp', name:'Gants cuir noirs', meta:'Longchamp · Taille S', price:'38 €', priceNum:38, size:'S', cat:'accessoire', state:'Neuf avec étiquette', desc:'Gants Longchamp cuir agneau doublé cachemire, neufs avec boîte cadeau.' },
-  { id:9, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1756474215990-a18a9a0521d5?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Lampe champignon', meta:'Fripz · Taille unique', price:'45 €', priceNum:45, size:null, cat:'maison', state:'Très bon état', desc:'Lampe champignon vintage, ambiance chaleureuse garantie.' },
-  { id:10, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1763890965387-5afe71908a70?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Chaise scandinave', meta:'Fripz · Taille unique', price:'80 €', priceNum:80, size:null, cat:'maison', state:'Bon état', desc:'Chaise en bois au design scandinave épuré, parfaite pour un coin lecture.' },
-  { id:11, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1567069041071-bab3e18d72f0?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike Huarache', meta:'Nike · Taille 42', price:'65 €', priceNum:65, size:null, cat:'sport', state:'Très bon état', desc:'Nike Huarache noires, boîte incluse. Portées quelques fois, très bon état général.' },
+  { id:1, emoji:'<img src="https://images.unsplash.com/photo-1583316174775-bd6dc0e9f298?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Zara', name:'Robe Zara fleurie', meta:'M', price:'28 €', priceNum:28, size:'M', cat:'femme', state:'Neuf avec étiquette', desc:'Robe fleurie légère, jamais portée. Étiquettes d\'origine. Taille M, longueur midi.' },
+  { id:2, emoji:'<img src="https://images.unsplash.com/photo-1589226849736-8d0e0c78e869?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Levi\'s', name:'Jean slim Levi\'s', meta:'38', price:'42 €', priceNum:42, size:null, cat:'homme', state:'Très bon état', desc:'Jean Levi\'s 511 slim fit, bleu classique. Porté quelques fois, excellent état général.' },
+  { id:3, emoji:'<img src="https://images.unsplash.com/photo-1727515546577-f7d82a47b51d?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Mango', name:'Veste cuir Mango', meta:'L', price:'65 €', priceNum:65, size:'L', cat:'femme', state:'Bon état', desc:'Veste en cuir synthétique noire, coupe ajustée. Quelques légères traces d\'usure aux coudes.' },
+  { id:4, emoji:'<img src="https://images.unsplash.com/photo-1615743472612-93b21e520fad?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike blanches', meta:'42', price:'55 €', priceNum:55, size:null, cat:'homme', state:'Très bon état', desc:'Nike Air Force 1, blanches, taille 42. Très bien entretenues, semelles propres. Boîte fournie.' },
+  { id:5, emoji:'<img src="https://images.unsplash.com/photo-1654077813634-9ff6b843caab?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Rouje', name:'Escarpins Rouje rouges', meta:'38', price:'85 €', priceNum:85, size:null, cat:'femme', state:'Neuf avec étiquette', desc:'Escarpins Rouje cuir verni rouge, neufs avec boîte. Reçus en cadeau, mauvaise taille.' },
+  { id:6, emoji:'<img src="https://images.unsplash.com/photo-1622290319146-7b63df48a635?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Petit Bateau', name:'Set bodies Petit Bateau 6m', meta:'6 mois', price:'18 €', priceNum:18, size:null, cat:'enfant', state:'Très bon état', desc:'Set de 5 bodies coton, lavés à basse température, couleurs vives. Taille 6 mois.' },
+  { id:7, emoji:'<img src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Sézane', name:'Sac Farida Sézane crème', meta:'Taille unique', price:'72 €', priceNum:72, size:null, cat:'accessoire', state:'Très bon état', desc:'Sac Farida Sézane cuir crème, très bon état général.' },
+  { id:8, emoji:'<img src="https://images.unsplash.com/photo-1630477577863-4baf945ddb22?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Longchamp', name:'Gants Longchamp noirs', meta:'S', price:'38 €', priceNum:38, size:'S', cat:'accessoire', state:'Neuf avec étiquette', desc:'Gants Longchamp cuir agneau doublé cachemire, neufs avec boîte cadeau.' },
+  { id:9, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1756474215990-a18a9a0521d5?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Lampe champignon', meta:'Taille unique', price:'45 €', priceNum:45, size:null, cat:'maison', state:'Très bon état', desc:'Lampe champignon vintage, ambiance chaleureuse garantie.' },
+  { id:10, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1763890965387-5afe71908a70?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Fripz', name:'Chaise scandinave', meta:'Taille unique', price:'80 €', priceNum:80, size:null, cat:'maison', state:'Bon état', desc:'Chaise en bois au design scandinave épuré, parfaite pour un coin lecture.' },
+  { id:11, curated:true, emoji:'<img src="https://images.unsplash.com/photo-1567069041071-bab3e18d72f0?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike Huarache', meta:'42', price:'65 €', priceNum:65, size:null, cat:'sport', state:'Très bon état', desc:'Nike Huarache noires, boîte incluse. Portées quelques fois, très bon état général.' },
 ];
 
 const subcats = {
@@ -4384,26 +4382,43 @@ function renderFilterCatList() {
   }).join('');
 }
 
-function renderBrandList() {
-  const select = document.getElementById('brandSelect');
-  if (!select) return;
-  const counts = {};
-  products.forEach(function (p) { if (p.brand) counts[p.brand] = (counts[p.brand] || 0) + 1; });
-  const brands = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
-  const current = listingFilters.brand;
-  select.innerHTML = '<option value="">Toutes les marques</option>' + brands.map(function (b) {
-    const sel = current === b ? ' selected' : '';
-    return '<option value="' + b.replace(/"/g, '&quot;') + '"' + sel + '>' + b + ' (' + counts[b] + ')</option>';
-  }).join('');
-}
+const KNOWN_BRANDS = [
+  'Absorba','Acne Studios','Adidas','AM.PM','American Vintage','Aigle','Apple','Arket',
+  'Asics','Ba&sh','Balenciaga','Balzac Paris','Bershka','Bonobo','Bose','Burberry',
+  'Calvin Klein','Camaïeu','Canon','Catimini','Céline','Celio','Chanel','COS',
+  'Comptoir des Cotonniers','Converse','Coach','Diesel','Dior','Dr. Martens','Du Pareil au Même',
+  'Dyson','Etam','Fendi','Fila','Furla','Gap','Givenchy','Gucci','H&M','H&M Home','Habitat',
+  'Hermès','IKEA','Isabel Marant','Jacadi','JBL','Jules','Kate Spade','Kiabi','La Redoute Intérieurs',
+  'Lacoste','Le Coq Sportif','Le Slip Français','Levi\'s','Longchamp','Louis Vuitton','Maisons du Monde',
+  'Maje','Mango','Massimo Dutti','Michael Kors','Monki','Naf Naf','New Balance','Nike','Nikon',
+  'Okaidi','Petit Bateau','Pimkie','Polène','Prada','Promod','Puma','Pull&Bear','Ralph Lauren',
+  'Reebok','Rouje','Saint Laurent','Samsung','Sandro','Sézane','Sony','Springfield','Stradivarius',
+  'Superdry','The Kooples','Timberland','Tommy Hilfiger','Under Armour','Uniqlo','Vans','Veja',
+  'Versace','Vertbaudet','Weekday','Zadig & Voltaire','Zara','Zara Home','Zara Kids'
+];
 
-function onBrandSelectChange(val) {
-  listingFilters.brand = val;
-  applyListingFilters();
+function renderBrandList() {
+  const container = document.getElementById('brandList');
+  if (!container) return;
+  const input = document.getElementById('brandSearchInput');
+  const q = ((input && input.value) || '').trim().toLowerCase();
+  const productBrands = products.filter(function (p) { return p.brand; }).map(function (p) { return p.brand; });
+  const allBrands = Array.from(new Set(KNOWN_BRANDS.concat(productBrands))).sort(function (a, b) { return a.localeCompare(b, 'fr'); });
+  const matches = (q ? allBrands.filter(function (b) { return b.toLowerCase().indexOf(q) !== -1; }) : allBrands).slice(0, 8);
+  if (!matches.length) {
+    container.innerHTML = '<div class="cpick-empty">Aucune marque trouvée</div>';
+    return;
+  }
+  container.innerHTML = matches.map(function (b) {
+    const active = listingFilters.brand === b ? ' active' : '';
+    return '<div class="brand-row' + active + '" onclick="selectBrand(\'' + b.replace(/'/g, "\\'") + '\')">' + b + '</div>';
+  }).join('');
 }
 
 function selectBrand(b) {
   listingFilters.brand = b;
+  const input = document.getElementById('brandSearchInput');
+  if (input) input.value = b;
   applyListingFilters();
 }
 
@@ -4427,7 +4442,11 @@ function toggleStateFilter(state, checked) {
   applyListingFilters();
 }
 
-function onBrandSearchInput(val) { listingFilters.brand = val; applyListingFilters(); }
+function onBrandSearchInput(val) {
+  if (listingFilters.brand && val !== listingFilters.brand) listingFilters.brand = '';
+  renderBrandList();
+  applyListingFilters();
+}
 function onSortChange(val) { listingFilters.sort = val; applyListingFilters(); }
 
 function setListView(view) {
@@ -4445,7 +4464,7 @@ function resetListingFilters() {
   const lbl = document.getElementById('priceMaxLabel'); if (lbl) lbl.textContent = '200 € et +';
   document.querySelectorAll('.size-chip').forEach(function (el) { el.classList.remove('active'); });
   document.querySelectorAll('#stateCheckList input').forEach(function (el) { el.checked = false; });
-  const brandSelect = document.getElementById('brandSelect'); if (brandSelect) brandSelect.value = '';
+  const brandInput = document.getElementById('brandSearchInput'); if (brandInput) brandInput.value = '';
   const sortSelect = document.getElementById('sortSelect'); if (sortSelect) sortSelect.value = 'recent';
   applyListingFilters();
 }
@@ -4464,6 +4483,15 @@ function filterCat(cat) {
   document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
 }
 
+function sellerAvatarHTML(userId) {
+  const prof = sellerProfilesCache[userId];
+  if (prof && prof.avatar_url) {
+    return '<img src="' + prof.avatar_url + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
+  }
+  const initial = (prof && prof.username ? prof.username.charAt(0) : 'V').toUpperCase();
+  return '<span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;font-size:0.8rem">' + initial + '</span>';
+}
+
 function isRecentListing(p) {
   if (!p.created_at) return false;
   const days = (Date.now() - new Date(p.created_at).getTime()) / 86400000;
@@ -4477,14 +4505,14 @@ function renderArticles(items) {
       <div class="article-img">
         ${p.emoji}
         ${isRecentListing(p) ? '<div class="article-badge new">NOUVEAU</div>' : ''}
-        ${p.user_id ? '<div class="article-seller-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="8" r="4"/></svg></div>' : ''}
+
         <div class="fav-btn ${liked.has(p.id)?'liked':''}" onclick="toggleLike(event,${p.id})">
           <svg viewBox="0 0 24 24" fill="${liked.has(p.id)?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
         </div>
       </div>
       <div class="article-info">
         <div class="article-name">${p.name}</div>
-        <div class="article-meta">${p.meta}</div>
+        <div class="article-meta">${p.meta}${p.state ? ' · ' + p.state : ''}</div>
         <div class="article-price-row"><span class="article-price">${p.price}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
       </div>
     </div>
@@ -4520,8 +4548,8 @@ function renderAiShowcaseArticle() {
     photoEl.style.opacity = '0';
     thumbEl.style.opacity = '0';
     setTimeout(function () {
-      photoEl.style.backgroundImage = "url('" + a.photo + "')";
-      thumbEl.style.backgroundImage = "url('" + a.photoThumb + "')";
+      photoEl.src = a.photo;
+      thumbEl.src = a.photoThumb;
       const catEl = document.getElementById('aiScanCat'); if (catEl) catEl.textContent = a.cat;
       const brandEl = document.getElementById('aiScanBrand'); if (brandEl) brandEl.textContent = a.brand;
       const colorEl = document.getElementById('aiScanColor'); if (colorEl) colorEl.textContent = a.color;
@@ -6889,7 +6917,7 @@ function annonceToProduct(a, id) {
     id: id, uuid: a.id, user_id: a.user_id || null, emoji: media,
     brand: a.marque || 'Vendeur Fripz',
     name: a.titre || 'Article',
-    meta: (a.marque ? a.marque : 'Fripz') + ' \u00b7 ' + (a.taille || 'Unique'),
+    meta: (a.taille && a.taille.trim().toLowerCase() !== 'unique') ? a.taille : 'Taille unique',
     price: a.prix ? (a.prix + ' \u20ac') : '\u2014',
     priceNum: a.prix ? Number(a.prix) : null,
     size: a.taille || null,
@@ -6905,7 +6933,15 @@ async function loadAnnonces() {
   try {
     const res = await supaClient.from('annonces').select('*').order('created_at', { ascending: false });
     if (res.error) { console.warn('load annonces', res.error); return; }
-    const data = res.data || [];
+    let data = res.data || [];
+    if (!data.length) return;
+    const hiddenTitles = ['chemise ralph lauren blanche xl, classique et élégante'];
+    data = data.filter(function (a) {
+      const titre = (a.titre || '').trim().toLowerCase();
+      if (hiddenTitles.indexOf(titre) !== -1) return false;
+      if (!a.titre && !a.prix) return false; // annonce test incomplète ("Article" / —)
+      return true;
+    });
     if (!data.length) return;
     let nextId = 100000;
     const loaded = data.map(function (a) { return annonceToProduct(a, nextId++); });
@@ -6913,7 +6949,23 @@ async function loadAnnonces() {
     if (typeof renderArticles === 'function') applyListingFilters();
     if (typeof renderFeedGrid === 'function') renderFeedGrid();
     console.log('Annonces chargees:', loaded.length);
+    await loadSellerProfiles();
   } catch (e) { console.warn('loadAnnonces', e); }
+}
+
+let sellerProfilesCache = {};
+
+async function loadSellerProfiles() {
+  if (!supaClient) return;
+  const ids = Array.from(new Set(products.filter(function (p) { return p.user_id; }).map(function (p) { return p.user_id; })));
+  const missing = ids.filter(function (id) { return !sellerProfilesCache[id]; });
+  if (!missing.length) return;
+  try {
+    const res = await supaClient.from('profiles').select('id, username, avatar_url').in('id', missing);
+    ((res && res.data) || []).forEach(function (p) { sellerProfilesCache[p.id] = p; });
+    if (typeof applyListingFilters === 'function') applyListingFilters();
+    if (typeof renderFeedGrid === 'function') renderFeedGrid();
+  } catch (e) { console.warn('loadSellerProfiles', e); }
 }
 if (supaClient) { supaClient.auth.onAuthStateChange(function (e, s) { if (typeof applySession === 'function') applySession(s); }); }
 window.addEventListener('load', function () { if (typeof refreshAuth === 'function') refreshAuth(); });
