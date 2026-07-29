@@ -182,7 +182,7 @@
   }
   .nav-mega-items a:hover { color: var(--teal); }
   @media(max-width: 900px){ .nav-mega { display: none !important; } }
-  .nav-right { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; }
+  .nav-right { display: flex; align-items: center; gap: 0.9rem; flex-shrink: 0; margin-left: auto; }
   .nav-icon-btn {
     position: relative; width: 40px; height: 40px; border-radius: 11px;
     border: none; background: transparent; color: #4a534c;
@@ -2284,15 +2284,6 @@
       <button class="ns-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
     </div>
     <ul class="nav-links">
-      <li class="nav-cat-wrap" onmouseenter="openNavMega()" onmouseleave="scheduleCloseNavMega()">
-        <a href="#" onclick="event.preventDefault()">Catégories <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
-        <div class="nav-mega" id="navMega" onmouseenter="cancelCloseNavMega()" onmouseleave="scheduleCloseNavMega()">
-          <div class="nav-mega-list" id="navMegaList"></div>
-          <div class="nav-mega-panel" id="navMegaPanel">
-            <div class="nav-mega-hint">Survolez une catégorie pour voir les sous-catégories</div>
-          </div>
-        </div>
-      </li>
       <li><a href="#" onclick="openSellModal()">Vendre</a></li>
     </ul>
     <div class="nav-right">
