@@ -6501,6 +6501,7 @@ function publishArticle() {
   const newId = products.length + 1;
   products.unshift({
     id: newId,
+    user_id: (window.currentUser ? window.currentUser.id : null),
     emoji: sellData.photos[0] ? ('<img src="'+sellData.photos[0]+'" style="width:100%;height:100%;object-fit:cover;display:block">') : '<div style="width:100%;height:100%;background:#eef1ee"></div>',
     brand: sellData.marque || 'Ma marque',
     name: sellData.titre || 'Mon article',
