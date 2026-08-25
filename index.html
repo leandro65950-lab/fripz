@@ -2573,12 +2573,12 @@
 .profile-overlay .pstat span { font-size: 0.82rem; }
 .profile-overlay .profile-section-title { font-size: 1.18rem; }
 .profile-overlay .pside-title { font-size: 1.05rem; }
-.profile-overlay .profile-avatar { width: 188px; height: 282px; }
-.profile-overlay .profile-avatar-wrap { width: 188px; margin-top: -112px; }
+.profile-overlay .profile-avatar { width: 200px; height: 300px; }
+.profile-overlay .profile-avatar-wrap { width: 200px; margin-top: -72px; }
 .profile-overlay .profile-tab-btn { font-size: 0.95rem; }
 @media (max-width: 900px){
-  .profile-overlay .profile-avatar { width: 150px; height: 226px; }
-  .profile-overlay .profile-avatar-wrap { width: 150px; }
+  .profile-overlay .profile-avatar { width: 162px; height: 244px; }
+  .profile-overlay .profile-avatar-wrap { width: 162px; }
 }
 </style>
 <style>
@@ -2606,6 +2606,102 @@
 
 /* Avatar du header : accepte une photo */
 .nav-user-avatar { background-size: cover; background-position: center; overflow: hidden; }
+</style>
+
+<!-- Fiche typo Fripz : Satoshi (réel) + Fraunces (alternative libre à Canela, police payante) -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+/* ================= FICHE TYPO PAGE VENDEUR ================= */
+.profile-overlay {
+  --fz-sans: 'Satoshi', 'Inter', system-ui, sans-serif;
+  --fz-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --fz-ink: #17251F;
+  --fz-green: #527D68;
+}
+/* Base : tout en Satoshi par défaut */
+.profile-overlay, .profile-overlay * { font-family: var(--fz-sans); }
+
+/* 1. Nom du vendeur (Canela) */
+.profile-overlay .profile-username {
+  font-family: var(--fz-serif); font-size: 32px; font-weight: 500;
+  line-height: 38px; letter-spacing: -0.01em; color: var(--fz-ink); }
+/* 2. @pseudo */
+.profile-overlay .profile-handle {
+  font-size: 13px; font-weight: 500; line-height: 18px; letter-spacing: 0; color: #59645F; }
+/* 3. Badge « Vendeur pro » */
+.profile-overlay .profile-pro-pill {
+  font-size: 11px; font-weight: 600; line-height: 16px;
+  color: var(--fz-green); background: #EEF5F1; }
+/* 4. Description */
+.profile-overlay .profile-bio {
+  font-size: 14px; font-weight: 400; line-height: 21px; color: #4B5563; }
+/* 5. Localisation / infos */
+.profile-overlay .profile-meta-row,
+.profile-overlay .profile-meta-row .mrow {
+  font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
+/* 6. Statistiques — chiffre (Canela) */
+.profile-overlay .pstat b {
+  font-family: var(--fz-serif); font-size: 24px; font-weight: 500;
+  line-height: 28px; color: var(--fz-ink); letter-spacing: 0; }
+/* 7. Statistiques — libellé */
+.profile-overlay .pstat span {
+  font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
+/* 8. Bouton Suivre */
+.profile-overlay .follow-btn {
+  font-size: 14px; font-weight: 600; line-height: 20px; color: #fff; }
+.profile-overlay .follow-btn.is-following { color: var(--fz-green); }
+/* 9. Bouton Message */
+.profile-overlay .profile-act-btn {
+  font-size: 14px; font-weight: 500; line-height: 20px; color: var(--fz-ink); }
+/* 10. Lien « Voir tout » */
+.profile-overlay .profile-section-title a {
+  font-size: 14px; font-weight: 500; line-height: 20px; color: var(--fz-green); letter-spacing: 0; }
+/* 11. Onglets de navigation */
+.profile-overlay .profile-tab-btn {
+  font-size: 14px; font-weight: 400; line-height: 20px; color: #6B7280; }
+.profile-overlay .profile-tab-btn.active { font-weight: 600; color: var(--fz-ink); }
+/* 12 & 20. Titres de section (Collections, À propos) — Canela */
+.profile-overlay .profile-section-title,
+.profile-overlay .pside-title {
+  font-family: var(--fz-serif); font-size: 20px; font-weight: 500;
+  line-height: 26px; color: var(--fz-ink); letter-spacing: 0; }
+/* 15. Titre « Articles en vente » — Satoshi */
+.profile-overlay .profile-section-title.pst-sans {
+  font-family: var(--fz-sans); font-size: 20px; font-weight: 600;
+  line-height: 28px; letter-spacing: -0.01em; color: var(--fz-ink); }
+/* 13. Nom de collection */
+.profile-overlay .pcol-name {
+  font-size: 13px; font-weight: 600; line-height: 18px; color: var(--fz-ink); }
+/* 14. Compteur « 24 articles » */
+.profile-overlay .pcol-count {
+  font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
+/* 17. Nom du produit */
+.profile-overlay .article-name {
+  font-family: var(--fz-sans); font-style: normal; font-size: 14px; font-weight: 500;
+  line-height: 20px; color: var(--fz-ink); }
+/* 18. État du produit */
+.profile-overlay .article-meta {
+  font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
+/* 19. Prix du produit */
+.profile-overlay .article-price {
+  font-family: var(--fz-sans); font-style: normal; font-size: 16px; font-weight: 600;
+  line-height: 22px; color: var(--fz-ink); }
+/* 21. Texte « À propos » */
+.profile-overlay .pside-card p {
+  font-family: var(--fz-sans) !important; font-size: 13px !important; font-weight: 400 !important;
+  line-height: 20px !important; color: #59645F !important; }
+/* 22. Petites infos (répond vite, expéditions…) */
+.profile-overlay .pside-row {
+  font-size: 12px; font-weight: 500; line-height: 18px; color: var(--fz-green); }
+/* 23. Bannière — titre (Canela, texte clair car fond vert) */
+.profile-overlay .promo-band h4 {
+  font-family: var(--fz-serif); font-size: 24px; font-weight: 500; line-height: 30px; }
+/* 24. Bannière — description */
+.profile-overlay .promo-band p {
+  font-family: var(--fz-sans); font-size: 13px; font-weight: 400; line-height: 20px; }
+/* ================= FIN FICHE TYPO ================= */
 </style>
 </head>
 <body>
@@ -6011,7 +6107,7 @@ function renderVitrine() {
         return `<div class="pcol-card" onclick="switchProfileTab('collections')"><div class="pcol-thumb">${thumb}</div><div class="pcol-name">${c.name}</div><div class="pcol-count">${ids.length} article${ids.length>1?'s':''}</div></div>`;
       }).join('') + `</div></div>`;
   }
-  out += `<div class="profile-block"><div class="profile-section-title">Articles en vente<a onclick="switchProfileTab('annonces')">Voir tout</a></div>`;
+  out += `<div class="profile-block"><div class="profile-section-title pst-sans">Articles en vente<a onclick="switchProfileTab('annonces')">Voir tout</a></div>`;
   if (mine.length) {
     out += `<div class="articles-grid">` + mine.slice(0, 8).map(profileCardHTML).join('') + `</div>`;
   } else if (profileIsOwn) {
