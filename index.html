@@ -2581,6 +2581,32 @@
   .profile-overlay .profile-avatar-wrap { width: 150px; }
 }
 </style>
+<style>
+/* Largeur commune : couverture, carte et corps alignes et plus larges */
+.profile-overlay { --pf-w: min(1560px, calc(100% - 2.6rem)); }
+.profile-cover { width: var(--pf-w); margin: 0.9rem auto 0; height: 320px; border-radius: 24px; }
+.profile-headwrap { width: var(--pf-w); max-width: none; margin: -104px auto 0; padding: 0; }
+.profile-body { width: var(--pf-w); max-width: none; margin: 0.6rem auto 0; padding: 1.6rem 0 3rem;
+  grid-template-columns: 1fr 330px; gap: 2.2rem; }
+.profile-headcard { padding: 1.5rem 2rem 1.4rem; }
+.profile-tabsbar { padding: 0 2rem; }
+@media (max-width: 900px){
+  .profile-overlay { --pf-w: calc(100% - 1.6rem); }
+  .profile-cover { height: 180px; margin-top: 0.6rem; }
+  .profile-headwrap { margin-top: -96px; }
+  .profile-body { grid-template-columns: 1fr; padding: 1rem 0 2rem; }
+  .profile-headcard { padding: 1.2rem 1.1rem; }
+  .profile-tabsbar { padding: 0 1rem; }
+}
+
+/* Icones de la barre categories (accueil + page vendeur) */
+.cats-textbar-link { display: inline-flex; align-items: center; gap: 0.5rem; }
+.cats-textbar-link svg { width: 19px; height: 19px; flex-shrink: 0; opacity: 0.85; }
+.cats-textbar-link:hover svg { opacity: 1; }
+
+/* Avatar du header : accepte une photo */
+.nav-user-avatar { background-size: cover; background-position: center; overflow: hidden; }
+</style>
 </head>
 <body>
 
@@ -2650,14 +2676,14 @@
 <!-- BARRE CATÉGORIES TEXTE (style Vinted, sous la navbar) -->
 <div class="cats-textbar">
   <div class="cats-textbar-inner">
-    <a class="cats-textbar-link" data-cat="femme" onmouseenter="hoverOpenSubcatText('femme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('femme')">Femmes</a>
-    <a class="cats-textbar-link" data-cat="homme" onmouseenter="hoverOpenSubcatText('homme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('homme')">Hommes</a>
-    <a class="cats-textbar-link" data-cat="enfant" onmouseenter="hoverOpenSubcatText('enfant', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('enfant')">Enfants</a>
-    <a class="cats-textbar-link" data-cat="maison" onmouseenter="hoverOpenSubcatText('maison', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('maison')">Maison &amp; Déco</a>
-    <a class="cats-textbar-link" data-cat="electronique" onmouseenter="hoverOpenSubcatText('electronique', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('electronique')">Tech</a>
-    <a class="cats-textbar-link" data-cat="loisirs" onmouseenter="hoverOpenSubcatText('loisirs', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('loisirs')">Loisirs</a>
-    <a class="cats-textbar-link" data-cat="divertissement" onmouseenter="hoverOpenSubcatText('divertissement', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('divertissement')">Divertissement</a>
-    <a class="cats-textbar-link" data-cat="sport" onmouseenter="hoverOpenSubcatText('sport', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('sport')">Sport</a>
+    <a class="cats-textbar-link" data-cat="femme" onmouseenter="hoverOpenSubcatText('femme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('femme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3.2"/><path d="M12 9.2c-2.3 0-3.6 1.4-4 3.3L6.5 20h11L16 12.5c-.4-1.9-1.7-3.3-4-3.3z"/></svg>Femmes</a>
+    <a class="cats-textbar-link" data-cat="homme" onmouseenter="hoverOpenSubcatText('homme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('homme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5 12 6l4-2.5L20 6l-1.5 4L17 9.5V20H7V9.5L5.5 10 4 6z"/></svg>Hommes</a>
+    <a class="cats-textbar-link" data-cat="enfant" onmouseenter="hoverOpenSubcatText('enfant', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('enfant')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.4"/><path d="M6 21v-3a6 6 0 0 1 12 0v3"/></svg>Enfants</a>
+    <a class="cats-textbar-link" data-cat="maison" onmouseenter="hoverOpenSubcatText('maison', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('maison')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5h4v5"/></svg>Maison &amp; Déco</a>
+    <a class="cats-textbar-link" data-cat="electronique" onmouseenter="hoverOpenSubcatText('electronique', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('electronique')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12" rx="2"/><path d="M8 20h8"/></svg>Tech</a>
+    <a class="cats-textbar-link" data-cat="loisirs" onmouseenter="hoverOpenSubcatText('loisirs', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('loisirs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 1.6 3.5 1.6 3.5-1.6 3.5-1.6"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>Loisirs</a>
+    <a class="cats-textbar-link" data-cat="divertissement" onmouseenter="hoverOpenSubcatText('divertissement', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('divertissement')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M10 9.5l5 2.5-5 2.5z"/></svg>Divertissement</a>
+    <a class="cats-textbar-link" data-cat="sport" onmouseenter="hoverOpenSubcatText('sport', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('sport')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.5 2.4 2.5 15.6 0 18M3.3 9.5c3.4 1.4 14 1.4 17.4 0M3.3 14.5c3.4-1.4 14-1.4 17.4 0"/></svg>Sport</a>
   </div>
   <!-- Panneau sous-catégories qui s'ouvre sous la barre texte -->
   <div class="subcat-panel cats-textbar-panel" id="subcatPanelText" onmouseenter="cancelCloseSubcat()" onmouseleave="scheduleCloseSubcat()">
@@ -5470,7 +5496,18 @@ function updateAuthUI() {
     box.style.display = 'block';
     const av = document.getElementById('navUserAvatar');
     const nm = document.getElementById('navUserName');
-    if (av) av.textContent = authInitials();
+    if (av) {
+      const url = (currentProfile && currentProfile.avatar_url) ? currentProfile.avatar_url : '';
+      if (url) {
+        av.textContent = '';
+        av.style.backgroundImage = 'url(' + url + ')';
+        av.style.backgroundSize = 'cover';
+        av.style.backgroundPosition = 'center';
+      } else {
+        av.style.backgroundImage = '';
+        av.textContent = authInitials();
+      }
+    }
     if (nm) nm.textContent = authDisplayName();
   } else {
     guest.style.display = 'inline-flex';
