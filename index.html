@@ -3346,12 +3346,13 @@ function closePage() {
               <button class="follow-btn" id="profileFollowBtn" style="display:none" onclick="toggleFollow()"></button>
               <div class="profile-edit-toggle" id="profileEditToggle" onclick="startProfileEdit()">✏️ Modifier mon profil</div>
               <button class="profile-act-btn" id="profileMsgBtn" style="display:none" onclick="toast('Messagerie — bientôt disponible !')">✉️ Message</button>
-              <button class="profile-act-btn profile-act-icon" onclick="shareProfile()" title="Partager">⤴</button>
+              <button class="profile-act-btn profile-act-icon" onclick="shareProfile()" title="Partager"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg></button>
             </div>
           </div>
 
           <div class="profile-identity-edit" id="profileIdentityEdit" style="display:none">
             <input type="text" class="profile-edit-input" id="profileEditUsername" placeholder="Pseudo" maxlength="30">
+            <input type="text" class="profile-edit-input" id="profileEditVille" placeholder="Ville (ex. Lyon, France)" maxlength="60">
             <textarea class="profile-edit-input" id="profileEditBio" placeholder="Une petite bio pour te présenter..." maxlength="160" rows="3"></textarea>
             <div class="profile-edit-actions">
               <button class="profile-btn-ghost" onclick="cancelProfileEdit()">Annuler</button>
@@ -5418,8 +5419,8 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b>${mine.length}</b><span>Article${mine.length>1?'s':''}</span></div>
-      <div class="pstat"><b class="pstat-star">—</b><span>0 avis</span></div>
+      <div class="pstat"><b class="pstat-star">—</b><span>Note</span></div>
+      <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>Engagé éco-responsable</div>`;
 }
@@ -5811,13 +5812,14 @@ function renderProfilePage() {
   bioEl.style.display = prof.bio ? 'block' : 'none';
 
   const memberSinceIso = prof.created_at || (profileIsOwn && currentUser ? currentUser.created_at : null);
-  document.getElementById('profileMemberSince').textContent = frenchMemberSince(memberSinceIso);
+  const villeTxt = prof.ville ? ('📍 ' + prof.ville + '   ·   ') : '';
+  document.getElementById('profileMemberSince').innerHTML = villeTxt + frenchMemberSince(memberSinceIso);
 
   document.getElementById('profileEditToggle').style.display = profileIsOwn ? 'inline-flex' : 'none';
   document.getElementById('profileCoverEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
   document.getElementById('profileAvatarEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
   const msgBtn = document.getElementById('profileMsgBtn');
-  if (msgBtn) msgBtn.style.display = profileIsOwn ? 'none' : 'inline-flex';
+  if (msgBtn) msgBtn.style.display = 'inline-flex';
   renderFollowButton();
 
   renderProfileStats();
@@ -5877,6 +5879,7 @@ function startProfileEdit() {
   const prof = currentProfile || {};
   document.getElementById('profileEditUsername').value = prof.username || authDisplayName();
   document.getElementById('profileEditBio').value = prof.bio || '';
+  document.getElementById('profileEditVille').value = prof.ville || '';
   document.getElementById('profileIdentityView').style.display = 'none';
   document.getElementById('profileIdentityEdit').style.display = 'block';
 }
@@ -5890,12 +5893,13 @@ async function saveProfileEdit() {
   if (!currentUser || !window.supaClient) return;
   const username = (document.getElementById('profileEditUsername').value || '').trim();
   const bio = (document.getElementById('profileEditBio').value || '').trim();
+  const ville = (document.getElementById('profileEditVille').value || '').trim();
   if (!username) { showToast('⚠️ Le pseudo ne peut pas être vide'); return; }
   const res = await window.supaClient.from('profiles')
-    .update({ username: username, bio: bio })
+    .update({ username: username, bio: bio, ville: ville })
     .eq('id', currentUser.id);
   if (res.error) { showToast('⚠️ ' + (res.error.message || 'Mise à jour impossible')); return; }
-  currentProfile = Object.assign({}, currentProfile, { username: username, bio: bio });
+  currentProfile = Object.assign({}, currentProfile, { username: username, bio: bio, ville: ville });
   if (profileIsOwn) profileViewedProfile = currentProfile;
   updateAuthUI();
   cancelProfileEdit();
