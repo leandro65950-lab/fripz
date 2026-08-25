@@ -2641,10 +2641,10 @@
 .profile-overlay .profile-meta-row,
 .profile-overlay .profile-meta-row .mrow {
   font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
-/* 6. Statistiques — chiffre (Canela) */
+/* 6. Statistiques — chiffre (Satoshi 24 / 600 / -0.02em) */
 .profile-overlay .pstat b {
-  font-family: var(--fz-serif); font-size: 24px; font-weight: 500;
-  line-height: 28px; color: var(--fz-ink); letter-spacing: 0; }
+  font-family: var(--fz-sans); font-size: 24px; font-weight: 600;
+  line-height: 28px; color: var(--fz-ink); letter-spacing: -0.02em; }
 /* 7. Statistiques — libellé */
 .profile-overlay .pstat span {
   font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
@@ -2701,20 +2701,28 @@
 /* ===== Corrections mise en page page vendeur ===== */
 /* Retirer la barre « ← Retour / Mon profil » */
 .profile-overlay .profile-topbar { display: none !important; }
-/* Largeur : remplit mieux les écrans larges (moins de blanc sur les côtés) */
-.profile-overlay { --pf-w: min(1400px, calc(100% - 3rem)); }
-/* Header : contenu groupé à gauche (avatar + infos + stats) pour éviter le gros trou au milieu quand c'est large */
+/* Conteneur : 1200px max, gouttières 24px (densité compacte, cible 1440×900) */
+.profile-overlay { --pf-w: min(1200px, calc(100% - 48px)); }
+.profile-overlay .profile-body { max-width: var(--pf-w); margin: 16px auto 0; padding: 8px 0 3rem; }
+/* Header : contenu groupé à gauche (avatar + infos + stats) */
 @media (min-width: 901px){
-  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,560px) auto minmax(0,1fr); }
+  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,540px) auto minmax(0,1fr); }
   .profile-overlay .profile-statscard { min-width: 300px; }
 }
-/* Encadrer les blocs de contenu (comme la colonne de droite) */
+/* --- Densité verticale compacte --- */
+.profile-overlay .profile-headwrap { margin-top: -20px; }   /* bannière → carte : léger chevauchement */
+.profile-overlay .profile-bio { margin-top: 8px; }          /* nom → description : 8px */
+.profile-overlay .profile-meta-row { margin-top: 10px; }
+.profile-overlay .profile-actions { margin-top: 20px; }     /* stats → boutons : 20px */
+.profile-overlay .profile-headcard { padding-bottom: 1.2rem; } /* boutons → navigation */
+.profile-overlay .profile-section-title { margin: 0 0 16px; }  /* titre → contenu : 16px */
+/* Encadrer les blocs de contenu (marge ≤ 40px entre grandes sections) */
 .profile-overlay .profile-block {
   background: #fff; border: 1px solid var(--border); border-radius: 18px;
-  padding: 1.5rem 1.7rem; margin-bottom: 1.4rem; }
-/* Grille d'articles : cartes régulières qui remplissent bien l'espace */
+  padding: 1.3rem 1.5rem; margin-bottom: 24px; }
+/* Grille produits : gap 16px horizontal, 24px vertical */
 .profile-overlay .articles-grid {
-  grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: 1.1rem; }
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); column-gap: 16px; row-gap: 24px; }
 /* ================= FIN FICHE TYPO ================= */
 </style>
 </head>
@@ -5804,7 +5812,7 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b><svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B301" style="vertical-align:-3px"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> —</b><span>avis</span></div>
+      <div class="pstat"><b class="pstat-avis"><svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B301"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>(avis)</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
