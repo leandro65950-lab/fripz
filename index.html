@@ -2698,15 +2698,22 @@
 /* 24. Bannière — description */
 .profile-overlay .promo-band p {
   font-family: var(--fz-sans); font-size: 13px; font-weight: 400; line-height: 20px; }
-/* ===== Corrections mise en page page vendeur ===== */
+/* ===== Largeur & densité page vendeur (cible 1440×900) ===== */
 /* Retirer la barre « ← Retour / Mon profil » */
 .profile-overlay .profile-topbar { display: none !important; }
-/* Conteneur : 1200px max, gouttières 24px (densité compacte, cible 1440×900) */
-.profile-overlay { --pf-w: min(1200px, calc(100% - 48px)); }
-.profile-overlay .profile-body { max-width: var(--pf-w); margin: 16px auto 0; padding: 8px 0 3rem; }
+/* Conteneur unifié 1440px, ~32px de marge sur écran 1440 */
+.profile-overlay { --pf-w: min(1440px, calc(100% - 64px)); }
+/* Header principal + barre catégories : même conteneur large, alignés au logo */
+.nav-inner, .cats-textbar-inner { max-width: 1440px; width: calc(100% - 64px); }
+/* Catégories réparties sur toute la largeur (1re catégorie alignée au logo) */
+.cats-textbar-inner { justify-content: space-between; }
+/* Corps : colonne principale ~70% + colonne droite ~30% */
+.profile-overlay .profile-body {
+  max-width: var(--pf-w); margin: 16px auto 0; padding: 8px 0 3rem;
+  grid-template-columns: minmax(0, 1fr) 400px; gap: 28px; }
 /* Header : contenu groupé à gauche (avatar + infos + stats) */
 @media (min-width: 901px){
-  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,540px) auto minmax(0,1fr); }
+  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,560px) auto minmax(0,1fr); }
   .profile-overlay .profile-statscard { min-width: 300px; }
 }
 /* --- Densité verticale compacte --- */
@@ -2716,13 +2723,13 @@
 .profile-overlay .profile-actions { margin-top: 20px; }     /* stats → boutons : 20px */
 .profile-overlay .profile-headcard { padding-bottom: 1.2rem; } /* boutons → navigation */
 .profile-overlay .profile-section-title { margin: 0 0 16px; }  /* titre → contenu : 16px */
-/* Encadrer les blocs de contenu (marge ≤ 40px entre grandes sections) */
+/* Encadrer les blocs de contenu (marge ≤ 32px entre grandes sections) */
 .profile-overlay .profile-block {
   background: #fff; border: 1px solid var(--border); border-radius: 18px;
-  padding: 1.3rem 1.5rem; margin-bottom: 24px; }
-/* Grille produits : gap 16px horizontal, 24px vertical */
+  padding: 1.4rem 1.6rem; margin-bottom: 28px; }
+/* Grille produits : ~4 colonnes, gap 18px horizontal / 24px vertical */
 .profile-overlay .articles-grid {
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); column-gap: 16px; row-gap: 24px; }
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); column-gap: 18px; row-gap: 24px; }
 /* ================= FIN FICHE TYPO ================= */
 </style>
 </head>
