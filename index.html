@@ -2458,7 +2458,7 @@
 .profile-actions .follow-btn, .profile-actions .profile-act-btn {
   height: 48px; border-radius: 12px; font-size: 0.95rem; font-weight: 500; padding: 0 1.5rem;
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: inherit; }
-.profile-actions .follow-btn { background: var(--mq-green); color: #fff; border: none; padding: 0 2.6rem; font-weight: 600; }
+.profile-actions .follow-btn { background: var(--mq-green); color: #fff; border: none; padding: 0 2.6rem; font-weight: 600; margin-top: 0; }
 .profile-actions .follow-btn:hover { background: var(--mq-green-d); }
 .profile-actions .follow-btn.is-following { background: #fff; color: var(--mq-green); border: 1.5px solid var(--mq-line); }
 .profile-actions .profile-act-btn { background: var(--mq-beige); color: #2c312c; border: none; }
@@ -2585,7 +2585,7 @@
 /* Largeur commune : couverture, carte et corps alignes et plus larges */
 .profile-overlay { --pf-w: min(1560px, calc(100% - 2.6rem)); }
 .profile-cover { width: var(--pf-w); margin: 0.9rem auto 0; height: 320px; border-radius: 24px; }
-.profile-headwrap { width: var(--pf-w); max-width: none; margin: -104px auto 0; padding: 0; }
+.profile-headwrap { width: var(--pf-w); max-width: none; margin: -40px auto 0; padding: 0; }
 .profile-body { width: var(--pf-w); max-width: none; margin: 0.6rem auto 0; padding: 1.6rem 0 3rem;
   grid-template-columns: 1fr 330px; gap: 2.2rem; }
 .profile-headcard { padding: 1.5rem 2rem 1.4rem; }
@@ -2593,7 +2593,7 @@
 @media (max-width: 900px){
   .profile-overlay { --pf-w: calc(100% - 1.6rem); }
   .profile-cover { height: 180px; margin-top: 0.6rem; }
-  .profile-headwrap { margin-top: -96px; }
+  .profile-headwrap { margin-top: -40px; }
   .profile-body { grid-template-columns: 1fr; padding: 1rem 0 2rem; }
   .profile-headcard { padding: 1.2rem 1.1rem; }
   .profile-tabsbar { padding: 0 1rem; }
