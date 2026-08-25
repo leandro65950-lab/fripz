@@ -2412,6 +2412,106 @@
 .profile-actions .follow-btn:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
 .profile-actions .follow-btn.is-following { background: #fff; color: var(--teal); }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================= PROFIL — calque maquette ================= */
+.profile-overlay { --mq-bg:#fcfaf8; --mq-card:#fdfbfa; --mq-line:#ece8e2; --mq-beige:#f6f3ee;
+  --mq-beige2:#f3f0eb; --mq-green:#41553d; --mq-green-d:#33452f; --mq-ink:#24292a; --mq-grey:#7b7b74;
+  background: var(--mq-bg); }
+.profile-overlay, .profile-overlay * { font-family: 'Inter', system-ui, sans-serif; }
+.profile-page { background: var(--mq-bg); max-width: 100%; }
+
+/* Couverture */
+.profile-cover { height: 250px; margin: 0 1.4rem; border-radius: 22px; }
+@media (max-width: 860px){ .profile-cover { height: 165px; margin: 0 0.8rem; } }
+
+/* Carte d'en-tete */
+.profile-headwrap { max-width: 1160px; margin: -104px auto 0; padding: 0 1.6rem; }
+.profile-headcard { background: var(--mq-card); border: none; border-radius: 26px;
+  box-shadow: 0 14px 40px rgba(30,40,25,0.09); padding: 1.5rem 1.9rem 1.6rem;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 1.8rem; align-items: start; }
+@media (max-width: 900px){ .profile-headcard { grid-template-columns: 1fr; text-align: center; gap: 1.1rem; } }
+
+/* Avatar portrait, grand, qui descend dans la carte */
+.profile-avatar-wrap { margin-top: -118px; width: 196px; }
+.profile-avatar { width: 196px; height: 292px; border-radius: 24px; border: 7px solid #fff;
+  background: var(--mq-green); color: #fff; font-size: 3.4rem; font-weight: 700;
+  box-shadow: 0 14px 34px rgba(30,40,25,0.16); }
+.profile-avatar img { border-radius: 17px; }
+@media (max-width: 900px){
+  .profile-avatar-wrap { margin: -120px auto 0; width: 158px; }
+  .profile-avatar { width: 158px; height: 236px; font-size: 2.6rem; }
+}
+
+/* Identite */
+.profile-idcol { padding-top: 0.3rem; }
+.profile-username { font-size: 1.95rem; font-weight: 700; color: var(--mq-ink); letter-spacing: -0.6px; }
+.profile-verified svg { width: 22px; height: 22px; color: #3f7d4f; }
+.profile-pro-pill { background: var(--mq-beige2); color: #3d3d38; font-weight: 500; font-size: 0.85rem;
+  padding: 0.32rem 0.85rem; border-radius: 22px; text-transform: none; letter-spacing: 0; }
+.profile-handle { color: var(--mq-grey); font-size: 0.95rem; }
+.profile-nameline { gap: 0.5rem; }
+.profile-handleline { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.45rem; flex-wrap: wrap; }
+@media (max-width: 900px){ .profile-handleline { justify-content: center; } }
+.profile-bio { color: #4a4a45; font-size: 1rem; line-height: 1.62; margin-top: 0.85rem; max-width: 540px; }
+.profile-meta-row { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap;
+  color: var(--mq-grey); font-size: 0.92rem; margin-top: 0.75rem; }
+@media (max-width: 900px){ .profile-meta-row { justify-content: center; } }
+.profile-meta-row .mrow { display: inline-flex; align-items: center; gap: 0.42rem; }
+.profile-meta-row svg { width: 16px; height: 16px; color: #9a9a92; }
+
+/* Boutons : rectangles arrondis (pas des pilules) */
+.profile-actions { gap: 0.7rem; margin-top: 1.3rem; }
+.profile-actions .follow-btn, .profile-actions .profile-act-btn {
+  height: 48px; border-radius: 12px; font-size: 0.95rem; font-weight: 500; padding: 0 1.5rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: inherit; }
+.profile-actions .follow-btn { background: var(--mq-green); color: #fff; border: none; padding: 0 2.6rem; font-weight: 600; }
+.profile-actions .follow-btn:hover { background: var(--mq-green-d); }
+.profile-actions .follow-btn.is-following { background: #fff; color: var(--mq-green); border: 1.5px solid var(--mq-line); }
+.profile-actions .profile-act-btn { background: var(--mq-beige); color: #2c312c; border: none; }
+.profile-actions .profile-act-btn:hover { background: #efeae2; color: #2c312c; }
+.profile-actions .profile-act-icon { width: 48px; padding: 0; background: #fff; border: 1.5px solid var(--mq-line); }
+
+/* Carte stats : grille avec separateurs + bande eco */
+.profile-statscard { background: var(--mq-card); border: 1px solid var(--mq-line); border-radius: 20px;
+  padding: 0; min-width: 300px; overflow: hidden; }
+@media (max-width: 900px){ .profile-statscard { max-width: 420px; margin: 0 auto; } }
+.pstat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0.4rem 0.5rem; }
+.pstat { padding: 1rem 1.1rem; }
+.pstat:nth-child(1), .pstat:nth-child(3) { border-right: 1px solid var(--mq-line); }
+.pstat:nth-child(1), .pstat:nth-child(2) { border-bottom: 1px solid var(--mq-line); }
+.pstat b { font-size: 1.75rem; font-weight: 700; color: var(--mq-ink); letter-spacing: -0.5px; }
+.pstat span { font-size: 0.85rem; color: var(--mq-grey); font-weight: 400; }
+.pstat-star { color: #e8a33d; }
+.pstat-sub { color: var(--mq-grey); font-size: 0.82rem; font-style: normal; }
+.peco { margin: 0; padding: 0.95rem 1.1rem; background: #f5f2ec; border: none; border-radius: 0;
+  display: flex; align-items: center; gap: 0.8rem; }
+.peco-ic { width: 44px; height: 44px; border-radius: 50%; background: #e4e7dc; }
+.peco-ic svg { width: 22px; height: 22px; color: var(--mq-green); }
+.peco b { font-size: 0.92rem; font-weight: 600; color: var(--mq-ink); }
+.peco span { font-size: 0.86rem; color: var(--mq-grey); }
+
+/* Onglets */
+.profile-tabsbar { max-width: 1160px; margin: 1.5rem auto 0; padding: 0 3.6rem; gap: 2.4rem;
+  border-bottom: 1px solid var(--mq-line); }
+.profile-tab-btn { font-size: 0.98rem; font-weight: 500; color: var(--mq-grey); padding: 0.85rem 0.1rem; border-bottom-width: 2.5px; }
+.profile-tab-btn.active { color: var(--mq-ink); font-weight: 600; border-bottom-color: var(--mq-green); }
+
+/* Corps */
+.profile-body { max-width: 1160px; padding: 1.8rem 3.6rem 3rem; gap: 2rem; grid-template-columns: 1fr 300px; }
+@media (max-width: 900px){ .profile-body { padding: 1.4rem 1rem 2rem; grid-template-columns: 1fr; } }
+.profile-section-title { font-size: 1.22rem; font-weight: 700; color: var(--mq-ink); letter-spacing: -0.3px; }
+.profile-section-title a { color: var(--mq-grey); font-weight: 500; font-size: 0.88rem; }
+.profile-section-title a:hover { color: var(--mq-green); }
+.pcol-thumb { height: 138px; border-radius: 14px; }
+.pcol-name { font-weight: 600; color: var(--mq-ink); font-size: 0.95rem; }
+.pcol-count { color: var(--mq-grey); font-size: 0.83rem; }
+.pside-card { background: var(--mq-card); border: 1px solid var(--mq-line); border-radius: 18px; padding: 1.3rem 1.4rem; }
+.pside-title { font-size: 1.1rem; font-weight: 700; color: var(--mq-ink); }
+.pside-row, .pguar-item { color: #4a4a45; font-size: 0.92rem; }
+.pside-row svg, .pguar-item svg { color: var(--mq-green); }
+.promo-band { background: linear-gradient(120deg, #566b4f, var(--mq-green)); border-radius: 18px; }
+</style>
 </head>
 <body>
 
@@ -3391,9 +3491,11 @@ function closePage() {
             <div class="profile-nameline">
               <span class="profile-username" id="profileUsernameDisplay"></span>
               <span class="profile-verified" title="Membre Fripz"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l2.4 1.8 3 .3 1 2.8 2.3 1.9-1 2.9 .3 3-2.6 1.6-1.3 2.7-3-.3L12 22l-2.1-2 -3 .3 -1.3-2.7 -2.6-1.6 .3-3 -1-2.9L4.6 6.9l1-2.8 3-.3z" opacity="0.18"/><path d="M9.5 12.5l1.8 1.8 3.7-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="profile-pro-pill" id="profileProPill">Membre Fripz</span>
             </div>
-            <div class="profile-handle" id="profileHandle"></div>
+            <div class="profile-handleline">
+              <span class="profile-handle" id="profileHandle"></span>
+              <span class="profile-pro-pill" id="profileProPill">Vendeur Fripz</span>
+            </div>
             <div class="profile-bio" id="profileBioDisplay"></div>
             <div class="profile-meta-row" id="profileMemberSince"></div>
             <div class="profile-actions" id="profileActions">
@@ -5479,7 +5581,7 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b class="pstat-star">—</b><span>Note <em class="pstat-sub">(0 avis)</em></span></div>
+      <div class="pstat"><b>— <span class="pstat-star">★</span></b><span class="pstat-sub">(0 avis)</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
@@ -5883,8 +5985,8 @@ function renderProfilePage() {
   bioEl.style.display = prof.bio ? 'block' : 'none';
 
   const memberSinceIso = prof.created_at || (profileIsOwn && currentUser ? currentUser.created_at : null);
-  const villeTxt = prof.ville ? ('📍 ' + prof.ville + '   ·   ') : '';
-  document.getElementById('profileMemberSince').innerHTML = villeTxt + frenchMemberSince(memberSinceIso);
+  const villeHtml = prof.ville ? ('<span class="mrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>' + prof.ville + '</span>') : '';
+  document.getElementById('profileMemberSince').innerHTML = villeHtml + '<span class="mrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' + frenchMemberSince(memberSinceIso) + '</span>';
 
   var moreEdit = document.getElementById('profileMoreEdit'); if (moreEdit) moreEdit.style.display = profileIsOwn ? 'block' : 'none';
   document.getElementById('profileCoverEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
