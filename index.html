@@ -2667,10 +2667,7 @@
 .profile-overlay .pside-title {
   font-family: var(--fz-serif); font-size: 20px; font-weight: 500;
   line-height: 26px; color: var(--fz-ink); letter-spacing: 0; }
-/* 15. Titre « Articles en vente » — Satoshi */
-.profile-overlay .profile-section-title.pst-sans {
-  font-family: var(--fz-sans); font-size: 20px; font-weight: 600;
-  line-height: 28px; letter-spacing: -0.01em; color: var(--fz-ink); }
+/* 15. Titre « Articles en vente » : identique à « Collections » (hérite de .profile-section-title) */
 /* 13. Nom de collection */
 .profile-overlay .pcol-name {
   font-size: 13px; font-weight: 600; line-height: 18px; color: var(--fz-ink); }
@@ -2704,8 +2701,13 @@
 /* ===== Corrections mise en page page vendeur ===== */
 /* Retirer la barre « ← Retour / Mon profil » */
 .profile-overlay .profile-topbar { display: none !important; }
-/* Largeur plus compacte : supprime le gros espace blanc du header */
-.profile-overlay { --pf-w: min(1200px, calc(100% - 2.6rem)); }
+/* Largeur : remplit mieux les écrans larges (moins de blanc sur les côtés) */
+.profile-overlay { --pf-w: min(1400px, calc(100% - 3rem)); }
+/* Header : contenu groupé à gauche (avatar + infos + stats) pour éviter le gros trou au milieu quand c'est large */
+@media (min-width: 901px){
+  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,560px) auto minmax(0,1fr); }
+  .profile-overlay .profile-statscard { min-width: 300px; }
+}
 /* Encadrer les blocs de contenu (comme la colonne de droite) */
 .profile-overlay .profile-block {
   background: #fff; border: 1px solid var(--border); border-radius: 18px;
@@ -3714,7 +3716,7 @@ function closePage() {
               <button class="profile-act-btn" id="profileMsgBtn" onclick="toast('Messagerie — bientôt disponible !')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</button>
               <button class="profile-act-btn profile-act-icon" onclick="shareProfile()" title="Partager"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg></button>
               <div class="profile-more-wrap">
-                <button class="profile-act-btn profile-act-icon" onclick="toggleProfileMore(event)" title="Plus"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg></button>
+                <button class="profile-act-btn profile-act-icon" onclick="startProfileEdit()" title="Modifier le profil"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
                 <div class="profile-more-menu" id="profileMoreMenu">
                   <div class="profile-more-item" id="profileMoreEdit" onclick="startProfileEdit(); closeProfileMore();">✏️ Modifier mon profil</div>
                   <div class="profile-more-item" onclick="shareProfile(); closeProfileMore();">⤴ Partager le profil</div>
@@ -5802,7 +5804,7 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b>—</b><span>Note <em class="pstat-sub">(0 avis)</em></span></div>
+      <div class="pstat"><b><svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B301" style="vertical-align:-3px"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> —</b><span>avis</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
