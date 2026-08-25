@@ -2391,6 +2391,27 @@
 .peco b { display: block; font-size: 0.85rem; color: var(--text); font-weight: 800; }
 .peco span { font-size: 0.76rem; color: var(--text-light); }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Police de la page vendeur = maquette */
+.profile-overlay, .profile-overlay h1, .profile-overlay h2, .profile-overlay h3, .profile-overlay h4,
+.profile-overlay p, .profile-overlay span, .profile-overlay div, .profile-overlay button,
+.profile-overlay input, .profile-overlay textarea, .profile-overlay a, .profile-overlay em {
+  font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
+}
+/* Bouton Suivre : pilule verte pleine, meme hauteur que les autres -> aligne */
+.profile-actions .follow-btn, .profile-actions .profile-act-btn {
+  padding: 0.62rem 1.25rem; font-size: 0.9rem; line-height: 1.2; height: auto;
+  display: inline-flex; align-items: center; border-radius: 30px; font-weight: 700; cursor: pointer;
+}
+.profile-actions .profile-act-icon { padding: 0.62rem 0.72rem; }
+.profile-actions .follow-btn { padding-left: 1.7rem; padding-right: 1.7rem;
+  background: var(--teal); color: #fff; border: 1.5px solid var(--teal); }
+.profile-actions .follow-btn:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+.profile-actions .follow-btn.is-following { background: #fff; color: var(--teal); }
+</style>
 </head>
 <body>
 
@@ -3376,7 +3397,7 @@ function closePage() {
             <div class="profile-bio" id="profileBioDisplay"></div>
             <div class="profile-meta-row" id="profileMemberSince"></div>
             <div class="profile-actions" id="profileActions">
-              <button class="follow-btn not-following" id="profileFollowBtn" onclick="toggleFollow()">+ Suivre</button>
+              <button class="follow-btn not-following" id="profileFollowBtn" onclick="toggleFollow()">Suivre</button>
               <button class="profile-act-btn" id="profileMsgBtn" onclick="toast('Messagerie — bientôt disponible !')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</button>
               <button class="profile-act-btn profile-act-icon" onclick="shareProfile()" title="Partager"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg></button>
               <div class="profile-more-wrap">
@@ -5443,7 +5464,7 @@ function renderFollowButton() {
     btn.textContent = '✓ Suivi(e)';
     btn.className = 'follow-btn is-following';
   } else {
-    btn.textContent = '+ Suivre';
+    btn.textContent = 'Suivre';
     btn.className = 'follow-btn not-following';
   }
 }
