@@ -2393,14 +2393,7 @@
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* Police de la page vendeur = maquette */
-.profile-overlay, .profile-overlay h1, .profile-overlay h2, .profile-overlay h3, .profile-overlay h4,
-.profile-overlay p, .profile-overlay span, .profile-overlay div, .profile-overlay button,
-.profile-overlay input, .profile-overlay textarea, .profile-overlay a, .profile-overlay em {
-  font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
-}
 /* Bouton Suivre : pilule verte pleine, meme hauteur que les autres -> aligne */
 .profile-actions .follow-btn, .profile-actions .profile-act-btn {
   padding: 0.62rem 1.25rem; font-size: 0.9rem; line-height: 1.2; height: auto;
@@ -2511,6 +2504,48 @@
 .pside-row, .pguar-item { color: #4a4a45; font-size: 0.92rem; }
 .pside-row svg, .pguar-item svg { color: var(--mq-green); }
 .promo-band { background: linear-gradient(120deg, #566b4f, var(--mq-green)); border-radius: 18px; }
+</style>
+<style>
+/* Onglets integres a la carte blanche (une seule carte, une ligne de separation) */
+.profile-headcard { border-radius: 26px 26px 0 0; box-shadow: 0 -4px 26px rgba(30,40,25,0.05); padding-bottom: 1.35rem; }
+.profile-tabsbar { max-width: none; margin: 0; padding: 0 2rem; gap: 2.4rem;
+  background: var(--mq-card); border-top: 1px solid var(--mq-line); border-bottom: none;
+  border-radius: 0 0 26px 26px; box-shadow: 0 16px 40px rgba(30,40,25,0.08); }
+@media (max-width: 900px){ .profile-tabsbar { padding: 0 1rem; gap: 1.4rem; } }
+.profile-body { margin-top: 0.4rem; }
+
+/* Titres de section : meme police que la maquette */
+.profile-overlay .profile-section-title,
+.profile-overlay .pside-title,
+.profile-overlay .profile-username,
+.profile-overlay .pcol-name,
+.profile-overlay .pstat b,
+.profile-overlay .promo-band h4 {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  letter-spacing: -0.3px;
+}
+.profile-overlay .profile-section-title { font-size: 1.25rem; font-weight: 700; color: var(--mq-ink); }
+.profile-overlay .pside-title { font-size: 1.1rem; font-weight: 700; color: var(--mq-ink); }
+</style>
+<style>
+/* Couverture et carte alignees sur le meme gabarit (comme la maquette) */
+.profile-cover {
+  width: min(1108px, calc(100% - 3.2rem));
+  margin: 0 auto;
+  border-radius: 24px;
+  height: 260px;
+}
+.profile-headwrap { max-width: 1160px; margin: -108px auto 0; padding: 0 1.6rem; }
+.profile-headcard { border-radius: 26px 26px 0 0; }
+@media (max-width: 900px){
+  .profile-cover { width: calc(100% - 2rem); height: 170px; border-radius: 18px; }
+  .profile-headwrap { padding: 0 1rem; margin-top: -110px; }
+}
+/* Onglets alignes sur la meme largeur que la carte */
+.profile-tabsbar { width: 100%; }
+/* Corps aligne lui aussi sur le meme gabarit */
+.profile-body { max-width: 1160px; padding-left: 1.6rem; padding-right: 1.6rem; }
+@media (max-width: 900px){ .profile-body { padding-left: 1rem; padding-right: 1rem; } }
 </style>
 </head>
 <body>
@@ -3525,14 +3560,13 @@ function closePage() {
 
         <div class="profile-statscard" id="profileStatsCard"></div>
       </div>
-    </div>
-
-    <div class="profile-tabsbar" id="profileTabsRow">
+      <div class="profile-tabsbar" id="profileTabsRow">
       <div class="profile-tab-btn active" id="profileTabVitrine" onclick="switchProfileTab('vitrine')">Vitrine</div>
       <div class="profile-tab-btn" id="profileTabAnnonces" onclick="switchProfileTab('annonces')">Articles</div>
       <div class="profile-tab-btn" id="profileTabCollections" onclick="switchProfileTab('collections')">Collections</div>
       <div class="profile-tab-btn" id="profileTabApropos" onclick="switchProfileTab('apropos')">À propos</div>
       <div class="profile-tab-btn" id="profileTabAvis" onclick="switchProfileTab('avis')">Avis</div>
+      </div>
     </div>
 
     <div class="profile-body">
@@ -5581,7 +5615,7 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b>— <span class="pstat-star">★</span></b><span class="pstat-sub">(0 avis)</span></div>
+      <div class="pstat"><b>—</b><span>Note <em class="pstat-sub">(0 avis)</em></span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
