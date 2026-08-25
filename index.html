@@ -2358,6 +2358,39 @@
 .pguar-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--text); margin: 0.6rem 0; }
 .pguar-item svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
 </style>
+<style>
+/* Ajustements profil pour coller a la maquette */
+.profile-headcard { align-items: center; gap: 1.6rem; padding: 1.5rem 1.8rem; }
+.profile-avatar-wrap { margin-top: -84px; width: 182px; align-self: start; }
+.profile-avatar { width: 182px; height: 216px; border-radius: 22px; font-size: 3rem; }
+.profile-idcol { align-self: center; }
+@media (max-width: 860px){
+  .profile-avatar-wrap { margin: -96px auto 0; width: 150px; }
+  .profile-avatar { width: 150px; height: 182px; }
+}
+.profile-act-btn { display: inline-flex; align-items: center; gap: 0.45rem; }
+.follow-btn { display: inline-flex; align-items: center; }
+.profile-more-wrap { position: relative; display: inline-block; }
+.profile-more-menu { position: absolute; top: calc(100% + 6px); right: 0; background: #fff;
+  border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  padding: 0.35rem; min-width: 215px; display: none; z-index: 60; }
+.profile-more-menu.open { display: block; }
+.profile-more-item { padding: 0.62rem 0.8rem; border-radius: 8px; font-size: 0.9rem; cursor: pointer; color: var(--text); white-space: nowrap; }
+.profile-more-item:hover { background: var(--teal-light); color: var(--teal-dark); }
+
+.profile-statscard { min-width: 270px; padding: 1.15rem 1.25rem; border-radius: 18px; }
+.pstat-grid { gap: 1rem 1.4rem; }
+.pstat b { font-size: 1.5rem; }
+.pstat span { font-size: 0.82rem; }
+.pstat-sub { font-style: normal; color: var(--text-light); font-size: 0.72rem; }
+.peco { display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem; padding: 0.8rem 0.9rem;
+  background: #fff; border: 1px solid var(--border); border-radius: 14px; }
+.peco-ic { width: 40px; height: 40px; border-radius: 50%; background: var(--teal-light);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.peco-ic svg { width: 21px; height: 21px; color: var(--teal); }
+.peco b { display: block; font-size: 0.85rem; color: var(--text); font-weight: 800; }
+.peco span { font-size: 0.76rem; color: var(--text-light); }
+</style>
 </head>
 <body>
 
@@ -3343,10 +3376,16 @@ function closePage() {
             <div class="profile-bio" id="profileBioDisplay"></div>
             <div class="profile-meta-row" id="profileMemberSince"></div>
             <div class="profile-actions" id="profileActions">
-              <button class="follow-btn" id="profileFollowBtn" style="display:none" onclick="toggleFollow()"></button>
-              <div class="profile-edit-toggle" id="profileEditToggle" onclick="startProfileEdit()">✏️ Modifier mon profil</div>
-              <button class="profile-act-btn" id="profileMsgBtn" style="display:none" onclick="toast('Messagerie — bientôt disponible !')">✉️ Message</button>
+              <button class="follow-btn not-following" id="profileFollowBtn" onclick="toggleFollow()">+ Suivre</button>
+              <button class="profile-act-btn" id="profileMsgBtn" onclick="toast('Messagerie — bientôt disponible !')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Message</button>
               <button class="profile-act-btn profile-act-icon" onclick="shareProfile()" title="Partager"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg></button>
+              <div class="profile-more-wrap">
+                <button class="profile-act-btn profile-act-icon" onclick="toggleProfileMore(event)" title="Plus"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg></button>
+                <div class="profile-more-menu" id="profileMoreMenu">
+                  <div class="profile-more-item" id="profileMoreEdit" onclick="startProfileEdit(); closeProfileMore();">✏️ Modifier mon profil</div>
+                  <div class="profile-more-item" onclick="shareProfile(); closeProfileMore();">⤴ Partager le profil</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -5378,7 +5417,8 @@ async function loadFollowState(userId) {
 
 async function toggleFollow() {
   if (!currentUser) { openAuthModal('login'); return; }
-  if (!window.supaClient || !profileViewedUserId || profileIsOwn) return;
+  if (profileIsOwn) { showToast("C'est votre profil 🙂"); return; }
+  if (!window.supaClient || !profileViewedUserId) return;
   const targetId = profileViewedUserId;
   if (profileFollowState.isFollowing) {
     const res = await window.supaClient.from('follows').delete().eq('follower_id', currentUser.id).eq('followed_id', targetId);
@@ -5398,9 +5438,8 @@ async function toggleFollow() {
 function renderFollowButton() {
   const btn = document.getElementById('profileFollowBtn');
   if (!btn) return;
-  if (profileIsOwn) { btn.style.display = 'none'; return; }
-  btn.style.display = 'inline-block';
-  if (profileFollowState.isFollowing) {
+  btn.style.display = 'inline-flex';
+  if (!profileIsOwn && profileFollowState.isFollowing) {
     btn.textContent = '✓ Suivi(e)';
     btn.className = 'follow-btn is-following';
   } else {
@@ -5419,10 +5458,10 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b class="pstat-star">—</b><span>Note</span></div>
+      <div class="pstat"><b class="pstat-star">—</b><span>Note <em class="pstat-sub">(0 avis)</em></span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
-    <div class="peco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>Engagé éco-responsable</div>`;
+    <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
 }
 
 function emptyStateIconSvg() {
@@ -5785,6 +5824,17 @@ function renderProfileSide() {
     `</div>`;
 }
 
+function toggleProfileMore(e) {
+  if (e) e.stopPropagation();
+  const m = document.getElementById('profileMoreMenu');
+  if (m) m.classList.toggle('open');
+}
+function closeProfileMore() {
+  const m = document.getElementById('profileMoreMenu');
+  if (m) m.classList.remove('open');
+}
+document.addEventListener('click', closeProfileMore);
+
 function shareProfile() {
   const name = (profileViewedProfile && profileViewedProfile.username) ? profileViewedProfile.username : 'ce profil';
   if (navigator.share) { navigator.share({ title: 'Fripz', text: 'Découvre ' + name + ' sur Fripz', url: location.href }).catch(function(){}); }
@@ -5815,7 +5865,7 @@ function renderProfilePage() {
   const villeTxt = prof.ville ? ('📍 ' + prof.ville + '   ·   ') : '';
   document.getElementById('profileMemberSince').innerHTML = villeTxt + frenchMemberSince(memberSinceIso);
 
-  document.getElementById('profileEditToggle').style.display = profileIsOwn ? 'inline-flex' : 'none';
+  var moreEdit = document.getElementById('profileMoreEdit'); if (moreEdit) moreEdit.style.display = profileIsOwn ? 'block' : 'none';
   document.getElementById('profileCoverEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
   document.getElementById('profileAvatarEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
   const msgBtn = document.getElementById('profileMsgBtn');
