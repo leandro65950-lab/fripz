@@ -2261,6 +2261,103 @@
   .footer-apps .store-badge small { font-size: 0.6rem; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+/* ===== PROFIL VENDEUR — redesign type boutique ===== */
+.profile-page { max-width: 1180px; }
+.profile-cover { height: 240px; background:
+  linear-gradient(120deg, #e7eee7 0%, #d7e4da 55%, #cfe0d4 100%);
+  background-size: cover; background-position: center; border-radius: 0 0 20px 20px; position: relative; }
+@media (max-width: 640px){ .profile-cover { height: 150px; } }
+
+.profile-headwrap { max-width: 1120px; margin: -72px auto 0; padding: 0 1.2rem; position: relative; z-index: 3; }
+.profile-headcard { background: #fff; border: 1px solid var(--border); border-radius: 20px;
+  box-shadow: 0 12px 34px rgba(20,40,30,0.08); padding: 1.4rem 1.6rem;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 1.4rem; align-items: start; }
+@media (max-width: 860px){ .profile-headcard { grid-template-columns: 1fr; text-align: center; } }
+
+.profile-avatar-wrap { position: relative; margin-top: -64px; }
+.profile-avatar { width: 132px; height: 132px; border-radius: 22px; border: 5px solid #fff;
+  background: var(--teal); color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 2.6rem; font-weight: 800; overflow: hidden; box-shadow: 0 8px 22px rgba(20,40,30,0.14); }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 860px){ .profile-avatar-wrap { margin: -70px auto 0; width: 132px; } }
+
+.profile-idcol { min-width: 0; }
+.profile-nameline { display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap; }
+@media (max-width: 860px){ .profile-nameline { justify-content: center; } }
+.profile-username { font-size: 1.6rem; font-weight: 800; color: var(--text); line-height: 1.1; }
+.profile-verified { color: var(--teal); display: inline-flex; }
+.profile-pro-pill { background: var(--teal-light); color: var(--teal-dark); font-size: 0.72rem;
+  font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; }
+.profile-handle { color: var(--text-light); font-size: 0.95rem; margin-top: 0.15rem; }
+.profile-bio { color: var(--text-mid); font-size: 0.98rem; margin-top: 0.6rem; max-width: 520px; line-height: 1.5; }
+@media (max-width: 860px){ .profile-bio { margin-left: auto; margin-right: auto; } }
+.profile-meta-row { color: var(--text-light); font-size: 0.9rem; margin-top: 0.6rem; }
+.profile-actions { display: flex; gap: 0.6rem; margin-top: 1rem; flex-wrap: wrap; align-items: center; }
+@media (max-width: 860px){ .profile-actions { justify-content: center; } }
+.profile-act-btn { border: 1.5px solid var(--border); background: #fff; color: var(--text);
+  border-radius: 30px; padding: 0.6rem 1.1rem; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+  font-family: inherit; transition: 0.2s; }
+.profile-act-btn:hover { border-color: var(--teal); color: var(--teal); }
+.profile-act-icon { padding: 0.6rem 0.8rem; }
+
+/* Carte stats */
+.profile-statscard { background: #fbfcfb; border: 1px solid var(--border); border-radius: 16px;
+  padding: 1rem 1.1rem; min-width: 250px; }
+@media (max-width: 860px){ .profile-statscard { max-width: 360px; margin: 0.4rem auto 0; } }
+.pstat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem 1.2rem; }
+.pstat { }
+.pstat b { display: block; font-size: 1.35rem; font-weight: 800; color: var(--text); line-height: 1.1; }
+.pstat span { font-size: 0.8rem; color: var(--text-light); }
+.pstat.clickable { cursor: pointer; }
+.pstat.clickable:hover b { color: var(--teal); }
+.pstat-star { color: #f4b942; }
+.peco { display: flex; align-items: center; gap: 0.55rem; margin-top: 0.9rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--teal-dark); font-weight: 600; }
+.peco svg { width: 26px; height: 26px; color: var(--teal); flex-shrink: 0; }
+
+/* Onglets */
+.profile-tabsbar { max-width: 1120px; margin: 1.6rem auto 0; padding: 0 1.4rem; display: flex; gap: 1.8rem;
+  border-bottom: 1px solid var(--border); overflow-x: auto; }
+.profile-tab-btn { padding: 0.9rem 0.1rem; font-weight: 700; font-size: 0.98rem; color: var(--text-light);
+  cursor: pointer; border-bottom: 2.5px solid transparent; white-space: nowrap; transition: 0.15s; }
+.profile-tab-btn:hover { color: var(--text-mid); }
+.profile-tab-btn.active { color: var(--text); border-bottom-color: var(--teal); }
+
+/* Corps 2 colonnes */
+.profile-body { max-width: 1120px; margin: 1.4rem auto 0; padding: 0 1.4rem 3rem;
+  display: grid; grid-template-columns: 1fr 320px; gap: 1.6rem; align-items: start; }
+@media (max-width: 900px){ .profile-body { grid-template-columns: 1fr; } }
+.profile-section-title { font-size: 1.15rem; font-weight: 800; color: var(--text); margin: 0.4rem 0 0.9rem;
+  display: flex; align-items: center; justify-content: space-between; }
+.profile-section-title a { color: var(--teal); font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+.profile-block { margin-bottom: 2rem; }
+
+/* Carrousel collections */
+.pcarousel { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x mandatory; }
+.pcol-card { flex: 0 0 168px; scroll-snap-align: start; cursor: pointer; }
+.pcol-thumb { height: 130px; border-radius: 14px; background: var(--teal-light); overflow: hidden;
+  display: flex; align-items: center; justify-content: center; }
+.pcol-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pcol-name { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-top: 0.5rem; }
+.pcol-count { font-size: 0.8rem; color: var(--text-light); }
+
+/* Bandeau soin */
+.promo-band { background: linear-gradient(120deg, var(--teal), var(--teal-dark)); color: #fff;
+  border-radius: 18px; padding: 1.5rem 1.7rem; margin-bottom: 2rem; }
+.promo-band h4 { font-size: 1.15rem; margin: 0 0 0.35rem; }
+.promo-band p { margin: 0; font-size: 0.92rem; opacity: 0.92; max-width: 460px; line-height: 1.5; }
+
+/* Sidebar */
+.pside-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem 1.3rem; margin-bottom: 1.2rem; }
+.pside-title { font-size: 1.02rem; font-weight: 800; color: var(--text); margin-bottom: 0.8rem; }
+.pside-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--text-mid); margin: 0.55rem 0; }
+.pside-row svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+.pside-empty { text-align: center; color: var(--text-light); font-size: 0.9rem; padding: 1.2rem 0.5rem; }
+.pside-empty svg { width: 40px; height: 40px; color: var(--border); margin-bottom: 0.5rem; }
+.pguar-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--text); margin: 0.6rem 0; }
+.pguar-item svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+</style>
 </head>
 <body>
 
@@ -3225,43 +3322,60 @@ function closePage() {
       </label>
     </div>
 
-    <div class="profile-header">
-      <div class="profile-avatar-wrap">
-        <div class="profile-avatar" id="profileAvatar"></div>
-        <label class="profile-avatar-edit" id="profileAvatarEditBtn" title="Changer la photo de profil">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
-          <input type="file" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
-        </label>
-      </div>
-
-      <div id="profileIdentityView">
-        <div class="profile-username" id="profileUsernameDisplay"></div>
-        <div class="profile-bio" id="profileBioDisplay"></div>
-        <div class="profile-meta-row" id="profileMemberSince"></div>
-        <div class="profile-edit-toggle" id="profileEditToggle" onclick="startProfileEdit()">✏️ Modifier mon profil</div>
-        <button class="follow-btn" id="profileFollowBtn" style="display:none" onclick="toggleFollow()"></button>
-      </div>
-
-      <div class="profile-identity-edit" id="profileIdentityEdit" style="display:none">
-        <input type="text" class="profile-edit-input" id="profileEditUsername" placeholder="Pseudo" maxlength="30">
-        <textarea class="profile-edit-input" id="profileEditBio" placeholder="Une petite bio pour te présenter..." maxlength="160" rows="3"></textarea>
-        <div class="profile-edit-actions">
-          <button class="profile-btn-ghost" onclick="cancelProfileEdit()">Annuler</button>
-          <button class="profile-btn-primary" onclick="saveProfileEdit()">Enregistrer</button>
+    <div class="profile-headwrap">
+      <div class="profile-headcard">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatar"></div>
+          <label class="profile-avatar-edit" id="profileAvatarEditBtn" title="Changer la photo de profil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
+            <input type="file" accept="image/*" style="display:none" onchange="handleAvatarChange(event)">
+          </label>
         </div>
+
+        <div class="profile-idcol">
+          <div id="profileIdentityView">
+            <div class="profile-nameline">
+              <span class="profile-username" id="profileUsernameDisplay"></span>
+              <span class="profile-verified" title="Membre Fripz"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l2.4 1.8 3 .3 1 2.8 2.3 1.9-1 2.9 .3 3-2.6 1.6-1.3 2.7-3-.3L12 22l-2.1-2 -3 .3 -1.3-2.7 -2.6-1.6 .3-3 -1-2.9L4.6 6.9l1-2.8 3-.3z" opacity="0.18"/><path d="M9.5 12.5l1.8 1.8 3.7-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="profile-pro-pill" id="profileProPill">Membre Fripz</span>
+            </div>
+            <div class="profile-handle" id="profileHandle"></div>
+            <div class="profile-bio" id="profileBioDisplay"></div>
+            <div class="profile-meta-row" id="profileMemberSince"></div>
+            <div class="profile-actions" id="profileActions">
+              <button class="follow-btn" id="profileFollowBtn" style="display:none" onclick="toggleFollow()"></button>
+              <div class="profile-edit-toggle" id="profileEditToggle" onclick="startProfileEdit()">✏️ Modifier mon profil</div>
+              <button class="profile-act-btn" id="profileMsgBtn" style="display:none" onclick="toast('Messagerie — bientôt disponible !')">✉️ Message</button>
+              <button class="profile-act-btn profile-act-icon" onclick="shareProfile()" title="Partager">⤴</button>
+            </div>
+          </div>
+
+          <div class="profile-identity-edit" id="profileIdentityEdit" style="display:none">
+            <input type="text" class="profile-edit-input" id="profileEditUsername" placeholder="Pseudo" maxlength="30">
+            <textarea class="profile-edit-input" id="profileEditBio" placeholder="Une petite bio pour te présenter..." maxlength="160" rows="3"></textarea>
+            <div class="profile-edit-actions">
+              <button class="profile-btn-ghost" onclick="cancelProfileEdit()">Annuler</button>
+              <button class="profile-btn-primary" onclick="saveProfileEdit()">Enregistrer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-statscard" id="profileStatsCard"></div>
       </div>
     </div>
 
-    <div class="profile-stats-row" id="profileStatsRow"></div>
-
-    <div class="profile-section">
-      <div class="profile-tabs" id="profileTabsRow">
-        <div class="profile-tab-btn active" id="profileTabAnnonces" onclick="switchProfileTab('annonces')">Annonces</div>
-        <div class="profile-tab-btn" id="profileTabCollections" onclick="switchProfileTab('collections')">Collections</div>
-      </div>
-      <div id="profileMainArea"></div>
+    <div class="profile-tabsbar" id="profileTabsRow">
+      <div class="profile-tab-btn active" id="profileTabVitrine" onclick="switchProfileTab('vitrine')">Vitrine</div>
+      <div class="profile-tab-btn" id="profileTabAnnonces" onclick="switchProfileTab('annonces')">Articles</div>
+      <div class="profile-tab-btn" id="profileTabCollections" onclick="switchProfileTab('collections')">Collections</div>
+      <div class="profile-tab-btn" id="profileTabApropos" onclick="switchProfileTab('apropos')">À propos</div>
+      <div class="profile-tab-btn" id="profileTabAvis" onclick="switchProfileTab('avis')">Avis</div>
     </div>
 
+    <div class="profile-body">
+      <div class="profile-main" id="profileMainArea"></div>
+      <div class="profile-side" id="profileSideArea"></div>
+    </div>
   </div>
 </div>
 
@@ -5225,7 +5339,7 @@ async function doLogout() {
 let profileViewedUserId = null;
 let profileViewedProfile = null;
 let profileIsOwn = true;
-let profileActiveTab = 'annonces';
+let profileActiveTab = 'vitrine';
 let profileFollowState = { isFollowing: false, followersCount: 0, followingCount: 0 };
 let profileCollections = [];
 let profileViewingCollectionId = null;
@@ -5296,10 +5410,18 @@ function renderFollowButton() {
 
 function renderProfileStats() {
   const mine = annoncesByUser(profileViewedUserId);
-  document.getElementById('profileStatsRow').innerHTML =
-    '<div class="profile-stat"><div class="profile-stat-num">' + mine.length + '</div><div class="profile-stat-label">Annonce' + (mine.length > 1 ? 's' : '') + '</div></div>' +
-    '<div class="profile-stat clickable" onclick="openFollowList(\'abonnes\')"><div class="profile-stat-num">' + profileFollowState.followersCount + '</div><div class="profile-stat-label">Abonné' + (profileFollowState.followersCount > 1 ? 's' : '') + '</div></div>' +
-    '<div class="profile-stat clickable" onclick="openFollowList(\'abonnements\')"><div class="profile-stat-num">' + profileFollowState.followingCount + '</div><div class="profile-stat-label">Abonnements</div></div>';
+  const el = document.getElementById('profileStatsCard');
+  if (!el) return;
+  const fmt = function (n) { return n >= 1000 ? (Math.round(n / 100) / 10) + 'k' : ('' + n); };
+  const f = profileFollowState;
+  el.innerHTML = `
+    <div class="pstat-grid">
+      <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
+      <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
+      <div class="pstat"><b>${mine.length}</b><span>Article${mine.length>1?'s':''}</span></div>
+      <div class="pstat"><b class="pstat-star">—</b><span>0 avis</span></div>
+    </div>
+    <div class="peco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>Engagé éco-responsable</div>`;
 }
 
 function emptyStateIconSvg() {
@@ -5563,9 +5685,12 @@ function closeSimpleList() {
 
 function renderProfileTabsUI() {
   const tabsRow = document.getElementById('profileTabsRow');
-  tabsRow.style.display = profileViewingCollectionId ? 'none' : 'flex';
-  document.getElementById('profileTabAnnonces').classList.toggle('active', profileActiveTab === 'annonces');
-  document.getElementById('profileTabCollections').classList.toggle('active', profileActiveTab === 'collections');
+  if (tabsRow) tabsRow.style.display = profileViewingCollectionId ? 'none' : 'flex';
+  const map = { vitrine:'profileTabVitrine', annonces:'profileTabAnnonces', collections:'profileTabCollections', apropos:'profileTabApropos', avis:'profileTabAvis' };
+  Object.keys(map).forEach(function (k) {
+    const t = document.getElementById(map[k]);
+    if (t) t.classList.toggle('active', profileActiveTab === k);
+  });
 }
 
 function switchProfileTab(tab) {
@@ -5576,12 +5701,93 @@ function switchProfileTab(tab) {
 }
 
 function renderProfileMainArea() {
+  const area = document.getElementById('profileMainArea');
+  if (!area) return;
   if (profileActiveTab === 'collections') {
     if (profileViewingCollectionId) renderCollectionDetail();
     else renderCollectionsGrid();
+  } else if (profileActiveTab === 'apropos') {
+    renderProfileApropos();
+  } else if (profileActiveTab === 'avis') {
+    renderProfileAvis();
+  } else if (profileActiveTab === 'vitrine') {
+    renderVitrine();
   } else {
     renderProfileListings();
   }
+}
+
+function profileCardHTML(p) {
+  return `<div class="article-card" onclick="closeProfileOverlay(); openModal(${p.id});"><div class="article-img">${p.emoji}</div><div class="article-info"><div class="article-name">${p.name}</div><div class="article-meta">${p.meta}</div><div class="article-price">${p.price}</div></div></div>`;
+}
+
+function renderVitrine() {
+  const area = document.getElementById('profileMainArea');
+  const mine = annoncesByUser(profileViewedUserId);
+  const cols = (profileCollections || []);
+  let out = '';
+  if (cols.length) {
+    out += `<div class="profile-block"><div class="profile-section-title">Collections<a onclick="switchProfileTab('collections')">Voir toutes</a></div><div class="pcarousel">` +
+      cols.slice(0, 8).map(function (c) {
+        const ids = c._itemIds || [];
+        const first = products.find(function (p) { return p.uuid && ids.indexOf(p.uuid) !== -1; });
+        const thumb = first ? first.emoji : '<div style="width:100%;height:100%;background:var(--teal-light)"></div>';
+        return `<div class="pcol-card" onclick="switchProfileTab('collections')"><div class="pcol-thumb">${thumb}</div><div class="pcol-name">${c.name}</div><div class="pcol-count">${ids.length} article${ids.length>1?'s':''}</div></div>`;
+      }).join('') + `</div></div>`;
+  }
+  out += `<div class="profile-block"><div class="profile-section-title">Articles en vente<a onclick="switchProfileTab('annonces')">Voir tout</a></div>`;
+  if (mine.length) {
+    out += `<div class="articles-grid">` + mine.slice(0, 8).map(profileCardHTML).join('') + `</div>`;
+  } else if (profileIsOwn) {
+    out += `<div class="profile-empty"><div class="profile-empty-icon">${emptyStateIconSvg()}</div><div class="profile-empty-title">Aucune annonce pour l'instant</div><div class="profile-empty-sub">Tes articles publiés apparaîtront ici.</div><button class="profile-btn-primary" onclick="closeProfileOverlay(); openSellModal();">Vendre mon premier article</button></div>`;
+  } else {
+    out += `<div class="profile-empty"><div class="profile-empty-icon">${emptyStateIconSvg()}</div><div class="profile-empty-title">Aucune annonce pour l'instant</div></div>`;
+  }
+  out += `</div>`;
+  out += `<div class="promo-band"><h4>Sélectionné avec soin ✨</h4><p>Chaque article est vérifié et préparé avec soin avant l'envoi. Achète en toute confiance sur Fripz.</p></div>`;
+  area.innerHTML = out;
+}
+
+function renderProfileApropos() {
+  const area = document.getElementById('profileMainArea');
+  const prof = profileViewedProfile || {};
+  const bio = prof.bio || (profileIsOwn ? 'Ajoute une bio depuis « Modifier mon profil » pour te présenter aux acheteurs.' : 'Ce vendeur n\'a pas encore ajouté de description.');
+  const since = frenchMemberSince(prof.created_at || (profileIsOwn && currentUser ? currentUser.created_at : null));
+  area.innerHTML = `<div class="pside-card"><div class="pside-title">À propos</div>` +
+    `<p style="color:var(--text-mid);line-height:1.6;font-size:0.98rem;margin:0 0 1rem">${bio}</p>` +
+    `<div class="pside-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${since}</div>` +
+    `<div class="pside-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>Vendeur de confiance Fripz</div>` +
+    `</div>`;
+}
+
+function renderProfileAvis() {
+  const area = document.getElementById('profileMainArea');
+  area.innerHTML = `<div class="pside-card"><div class="pside-title">Avis clients</div><div class="pside-empty">${emptyStateIconSvg()}<div>Pas encore d'avis.<br>Ils apparaîtront après les premières ventes.</div></div></div>`;
+}
+
+function guarRow(t) {
+  return `<div class="pguar-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>${t}</div>`;
+}
+
+function renderProfileSide() {
+  const el = document.getElementById('profileSideArea');
+  if (!el) return;
+  const prof = profileViewedProfile || {};
+  const bio = prof.bio || '';
+  el.innerHTML =
+    (bio ? `<div class="pside-card"><div class="pside-title">À propos</div><p style="color:var(--text-mid);line-height:1.55;font-size:0.9rem;margin:0">${bio}</p></div>` : '') +
+    `<div class="pside-card"><div class="pside-title">Avis clients</div><div class="pside-empty">${emptyStateIconSvg()}<div>Pas encore d'avis</div></div></div>` +
+    `<div class="pside-card"><div class="pside-title">Garanties Fripz</div>` +
+      guarRow('Paiement 100% sécurisé') +
+      guarRow('Protection acheteur incluse') +
+      guarRow('Emballage responsable') +
+    `</div>`;
+}
+
+function shareProfile() {
+  const name = (profileViewedProfile && profileViewedProfile.username) ? profileViewedProfile.username : 'ce profil';
+  if (navigator.share) { navigator.share({ title: 'Fripz', text: 'Découvre ' + name + ' sur Fripz', url: location.href }).catch(function(){}); }
+  else { try { navigator.clipboard.writeText(location.href); } catch(e){} showToast('Lien du profil copié !'); }
 }
 
 /* ── Page open / render ── */
@@ -5595,10 +5801,14 @@ function renderProfilePage() {
   const cover = document.getElementById('profileCover');
   cover.style.backgroundImage = prof.cover_url ? ('url(\'' + prof.cover_url + '\')') : '';
 
-  document.getElementById('profileTopbarTitle').textContent = profileIsOwn ? 'Mon profil' : (prof.username || 'Profil');
-  document.getElementById('profileUsernameDisplay').textContent = profileIsOwn ? authDisplayName() : (prof.username || 'Utilisateur Fripz');
-  document.getElementById('profileBioDisplay').textContent = prof.bio || '';
-  document.getElementById('profileBioDisplay').style.display = prof.bio ? 'block' : 'none';
+  const name = profileIsOwn ? authDisplayName() : (prof.username || 'Utilisateur Fripz');
+  document.getElementById('profileTopbarTitle').textContent = profileIsOwn ? 'Mon profil' : name;
+  document.getElementById('profileUsernameDisplay').textContent = name;
+  const handle = document.getElementById('profileHandle');
+  if (handle) handle.textContent = '@' + String(prof.username || name || 'membre').toLowerCase().replace(/[^a-z0-9_]/g, '');
+  const bioEl = document.getElementById('profileBioDisplay');
+  bioEl.textContent = prof.bio || '';
+  bioEl.style.display = prof.bio ? 'block' : 'none';
 
   const memberSinceIso = prof.created_at || (profileIsOwn && currentUser ? currentUser.created_at : null);
   document.getElementById('profileMemberSince').textContent = frenchMemberSince(memberSinceIso);
@@ -5606,10 +5816,13 @@ function renderProfilePage() {
   document.getElementById('profileEditToggle').style.display = profileIsOwn ? 'inline-flex' : 'none';
   document.getElementById('profileCoverEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
   document.getElementById('profileAvatarEditBtn').style.display = profileIsOwn ? 'flex' : 'none';
+  const msgBtn = document.getElementById('profileMsgBtn');
+  if (msgBtn) msgBtn.style.display = profileIsOwn ? 'none' : 'inline-flex';
   renderFollowButton();
 
   renderProfileStats();
   renderProfileTabsUI();
+  renderProfileSide();
   renderProfileMainArea();
 }
 
