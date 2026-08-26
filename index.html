@@ -3079,6 +3079,104 @@
 }
 </style>
 
+
+<style id="fripz-profile-reference-match-v2">
+/* ===== Ajustements V2 : alignement du corps + encadrement général ===== */
+.profile-overlay{
+  --pf-shell-w:min(1560px, calc(100% - 48px));
+  --pf-w:min(1500px, calc(100% - 64px));
+  --pf-head-w:min(1420px, calc(100% - 112px));
+}
+
+/* Encadrement général de la page vendeur, comme une grande feuille premium */
+.profile-overlay .profile-page{
+  position:relative !important;
+  width:var(--pf-shell-w) !important;
+  max-width:none !important;
+  margin:0 auto !important;
+  background:#FBFAF7 !important;
+  border-left:1px solid #ECE8E1 !important;
+  border-right:1px solid #ECE8E1 !important;
+  box-shadow:0 0 40px rgba(23,37,31,.035) !important;
+  overflow:visible !important;
+}
+
+/* La couverture reste généreuse, avec une marge intérieure régulière */
+.profile-overlay .profile-cover{
+  width:calc(100% - 48px) !important;
+  margin:16px 24px 0 !important;
+}
+
+/* Le bloc profil et le corps partagent exactement les mêmes axes gauche/droite */
+.profile-overlay .profile-headwrap,
+.profile-overlay .profile-body{
+  width:calc(100% - 96px) !important;
+  max-width:none !important;
+  margin-left:48px !important;
+  margin-right:48px !important;
+}
+
+/* Profil : largeur interne stable, sans décalage parasite */
+.profile-overlay .profile-headrow{
+  width:100% !important;
+  padding-left:24px !important;
+  padding-right:24px !important;
+}
+
+/* Corps : même début visuel que la carte profil. */
+.profile-overlay .profile-body{
+  margin-top:14px !important;
+  padding:0 0 42px !important;
+  grid-template-columns:minmax(0,1fr) 300px !important;
+  gap:24px !important;
+}
+.profile-overlay .profile-main,
+.profile-overlay .profile-side{
+  min-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+/* Les blocs Collections / Articles démarrent sur le même axe que le contenu du profil. */
+.profile-overlay .profile-main .profile-block{
+  margin-left:0 !important;
+  margin-right:0 !important;
+  width:100% !important;
+  padding:18px 20px !important;
+}
+
+/* Sidebar calée sur le bord droit des statistiques */
+.profile-overlay .profile-side{
+  width:300px !important;
+}
+
+/* Encadrement des grandes zones : plus proche de la référence, moins "blocs flottants" */
+.profile-overlay .profile-block,
+.profile-overlay .pside-card{
+  border-color:#E6E1D9 !important;
+  box-shadow:0 6px 18px rgba(23,37,31,.025) !important;
+}
+
+/* Liseré discret en bas pour finir la grande feuille */
+.profile-overlay .profile-page::after{
+  content:'';
+  display:block;
+  height:1px;
+  width:calc(100% - 48px);
+  margin:0 24px;
+  background:#ECE8E1;
+}
+
+@media (max-width:1000px){
+  .profile-overlay{--pf-shell-w:100%;}
+  .profile-overlay .profile-page{border-left:0 !important;border-right:0 !important;box-shadow:none !important;}
+  .profile-overlay .profile-cover{width:calc(100% - 28px) !important;margin:14px 14px 0 !important;}
+  .profile-overlay .profile-headwrap,
+  .profile-overlay .profile-body{width:calc(100% - 36px) !important;margin-left:18px !important;margin-right:18px !important;}
+  .profile-overlay .profile-side{width:100% !important;}
+}
+</style>
+
 </head>
 <body>
 
