@@ -8356,3 +8356,20 @@ window.addEventListener('load', function () { if (typeof renderFeedGrid === 'fun
   min-width: 0;
 }
 </style>
+<style>
+/* V4 — alignement du corps sur le bord gauche de la CARTE BLANCHE profil (pas l'avatar) */
+.profile-overlay .profile-body {
+  width: var(--pf-w) !important;
+  max-width: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+/* Le premier bloc (Collections / Articles) commence exactement au bord de la carte blanche */
+.profile-overlay .profile-maincol {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+</style>
