@@ -3496,6 +3496,17 @@
 .profile-overlay .profile-social-link svg { width:14px; height:14px; flex:0 0 auto; }
 .profile-overlay .profile-social-link .social-at { opacity:.72; font-weight:500; }
 </style>
+
+<style>
+/* Étape 19 — réseaux sociaux + bio fidèle à la saisie */
+.profile-overlay .profile-bio{
+  white-space:pre-line !important;
+  overflow-wrap:anywhere !important;
+}
+/* L'ancien @pseudo n'est plus affiché : Instagram et X servent de liens publics. */
+.profile-overlay .profile-handle{display:none !important;}
+.profile-overlay .profile-handleline{margin-top:6px !important;}
+</style>
 </head>
 <body>
 
@@ -4485,7 +4496,6 @@ function closePage() {
               <span class="profile-verified" title="Membre Fripz"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l2.4 1.8 3 .3 1 2.8 2.3 1.9-1 2.9 .3 3-2.6 1.6-1.3 2.7-3-.3L12 22l-2.1-2 -3 .3 -1.3-2.7 -2.6-1.6 .3-3 -1-2.9L4.6 6.9l1-2.8 3-.3z" opacity="0.18"/><path d="M9.5 12.5l1.8 1.8 3.7-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </div>
             <div class="profile-handleline">
-              <span class="profile-handle" id="profileHandle"></span>
               <span class="profile-pro-pill" id="profileProPill">Vendeur Fripz</span>
             </div>
             <div class="profile-social-row" id="profileSocialRow" style="display:none"></div>
