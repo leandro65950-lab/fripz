@@ -8373,3 +8373,112 @@ window.addEventListener('load', function () { if (typeof renderFeedGrid === 'fun
   padding-left: 0 !important;
 }
 </style>
+
+<style>
+/* === V5 alignement fin selon capture utilisateur === */
+/* Aligner le contenu Collections / Articles avec le bord gauche du grand bloc blanc profil */
+.profile-overlay .profile-body{
+  width: var(--pf-w) !important;
+  max-width: none !important;
+  margin: 16px auto 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  grid-template-columns: minmax(0,1fr) 330px !important;
+  gap: 22px !important;
+}
+.profile-overlay .profile-main,
+.profile-overlay .profile-side{ min-width:0; }
+
+/* Les blocs de gauche commencent exactement sur l'axe du grand rectangle blanc */
+.profile-overlay .profile-main .profile-block{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Rééquilibrer le bloc profil : identité un peu à droite, stats un peu à gauche */
+.profile-overlay .profile-headrow{
+  width: calc(100% - 72px) !important;
+  max-width: 1380px !important;
+  grid-template-columns: 180px minmax(470px, 1fr) 330px !important;
+  column-gap: 28px !important;
+  padding-top: 34px !important;
+  padding-bottom: 24px !important;
+}
+.profile-overlay .profile-avatar-wrap{
+  left: 8px !important;
+  top: -82px !important;
+  width: 180px !important;
+  height: 238px !important;
+}
+.profile-overlay .profile-avatar{
+  width: 180px !important;
+  height: 238px !important;
+}
+.profile-overlay .profile-idcol{
+  grid-column: 2 !important;
+  padding-left: 10px !important;
+  padding-top: 4px !important;
+  max-width: 610px !important;
+}
+.profile-overlay .profile-statscard{
+  grid-column: 3 !important;
+  width: 330px !important;
+  transform: translateX(-10px);
+}
+
+/* Bio plus présente pour combler visuellement le centre */
+.profile-overlay .profile-bio{
+  font-family: var(--fz-sans) !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+  color: #4f5d56 !important;
+  max-width: 590px !important;
+  margin-top: 14px !important;
+}
+.profile-overlay .profile-meta-row{
+  font-size: 13px !important;
+  margin-top: 10px !important;
+}
+.profile-overlay .profile-actions{
+  margin-top: 18px !important;
+}
+
+/* Légère réduction de la sensation de vide sous le contenu */
+.profile-overlay .profile-headcard{
+  padding-bottom: 0 !important;
+}
+.profile-overlay .profile-tabswrap{
+  margin-top: 0 !important;
+}
+
+@media (max-width: 900px){
+  .profile-overlay .profile-headrow{
+    width: calc(100% - 36px) !important;
+    grid-template-columns: 1fr !important;
+    padding-top: 165px !important;
+  }
+  .profile-overlay .profile-avatar-wrap{
+    left: 0 !important;
+    width: 158px !important;
+    height: 214px !important;
+  }
+  .profile-overlay .profile-avatar{
+    width: 158px !important;
+    height: 214px !important;
+  }
+  .profile-overlay .profile-idcol{
+    grid-column: 1 !important;
+    padding-left: 0 !important;
+    max-width: none !important;
+  }
+  .profile-overlay .profile-statscard{
+    grid-column: 1 !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+  .profile-overlay .profile-body{
+    width: calc(100% - 1.6rem) !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
