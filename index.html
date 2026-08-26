@@ -3452,6 +3452,22 @@
 }
 </style>
 
+
+<style id="fripz-step16-center-profile-spacing">
+/* ETAPE 16 — rapprocher uniquement l'identité et les statistiques pour réduire le grand vide central. */
+@media (min-width:1001px){
+  /* Tout l'ensemble nom / pseudo / badge / bio / ville / membre / boutons part vers la droite. */
+  .profile-overlay .profile-idcol{
+    transform:translateX(34px) !important;
+  }
+
+  /* La carte statistiques part vers la gauche, sans changer sa taille. */
+  .profile-overlay .profile-statscard{
+    transform:translateX(-34px) !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
