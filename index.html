@@ -3327,6 +3327,43 @@
 }
 </style>
 
+
+<style id="fripz-step9-corners-right-space-cover-align">
+/* ETAPE 9 — coins propres + plus d'air à droite + couverture alignée au cadre premium */
+@media (min-width:1001px){
+  /* 1) Le trait premium droit est repoussé de 32px : la sidebar respire enfin. */
+  .profile-overlay .profile-page::before{
+    right:-32px !important;
+  }
+
+  /* 2) La couverture garde exactement son bord gauche actuel,
+        mais s'allonge UNIQUEMENT vers la droite jusqu'au trait premium. */
+  .profile-overlay .profile-cover{
+    width:calc(var(--pf-w) + 64px) !important;
+    margin-left:calc((100% - var(--pf-w)) / 2) !important;
+    margin-right:0 !important;
+    max-width:none !important;
+  }
+}
+
+/* 3) Bas du grand bloc profil : vrais coins arrondis, sans oreilles carrées. */
+.profile-overlay .profile-tabswrap{
+  border-radius:0 0 26px 26px !important;
+  overflow:hidden !important;
+  clip-path:none !important;
+  background:#fff !important;
+}
+.profile-overlay .profile-tabsbar{
+  border-radius:0 0 26px 26px !important;
+  overflow:hidden !important;
+  background:#fff !important;
+}
+/* Masque toute arête résiduelle au niveau des coins bas. */
+.profile-overlay .profile-headwrap{
+  border-radius:0 0 26px 26px !important;
+}
+</style>
+
 </head>
 <body>
 
