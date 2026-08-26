@@ -2787,7 +2787,11 @@
 .profile-overlay .pstat-grid .pstat:nth-child(3n) { border-right: none; }
 .profile-overlay .pstat-grid .pstat:nth-child(n+4) { border-bottom: none; }
 /* Bloc éco-responsable : pleine largeur, ~70px */
-.profile-overlay .peco { min-height: 70px; }
+/* Stats = 2 cartes distinctes (grille + éco-responsable), comme la maquette */
+.profile-overlay .profile-statscard { background: transparent; border: none; box-shadow: none; padding: 0; }
+.profile-overlay .pstat-grid { background: #f5f7f4; border: 1px solid var(--mq-line); border-radius: 16px; overflow: hidden; }
+.profile-overlay .peco { min-height: 68px; margin-top: 12px; padding: 12px 16px;
+  background: #f5f7f4; border: 1px solid var(--mq-line); border-radius: 16px; }
 /* ================= FIN FICHE TYPO ================= */
 </style>
 </head>
