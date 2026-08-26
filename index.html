@@ -8340,6 +8340,177 @@ window.addEventListener('load', function () { if (typeof refreshAuth === 'functi
 window.addEventListener('load', loadAnnonces);
 window.addEventListener('load', function () { if (typeof renderFeedGrid === 'function') renderFeedGrid(); });
 </script>
+
+<style id="fripz-profile-v7-precision-fix">
+/* V7 — alignement exact + cadre premium + profil plus compact */
+
+/* 1) Collections / Articles : même bord extérieur que la carte blanche du profil */
+.profile-overlay .profile-body{
+  width:var(--pf-w) !important;
+  max-width:none !important;
+  margin:14px auto 0 !important;
+  padding:0 0 42px !important;
+  grid-template-columns:minmax(0,1fr) 300px !important;
+  gap:24px !important;
+  box-sizing:border-box !important;
+}
+.profile-overlay .profile-main,
+.profile-overlay .profile-side{
+  margin:0 !important;
+  padding:0 !important;
+  min-width:0 !important;
+}
+.profile-overlay .profile-main .profile-block{
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+.profile-overlay .profile-side{width:300px !important;}
+
+/* 2) Cadre premium général : commence SOUS la couverture, jamais autour de la couverture */
+.profile-overlay .profile-page{
+  position:relative !important;
+  background:#F8F7F3 !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+.profile-overlay .profile-page::after{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  left:calc((100% - var(--pf-w))/2) !important;
+  right:calc((100% - var(--pf-w))/2) !important;
+  top:306px !important; /* 16px marge couverture + 290px hauteur couverture */
+  bottom:18px !important;
+  border-left:1px solid rgba(23,37,31,.07) !important;
+  border-right:1px solid rgba(23,37,31,.07) !important;
+  border-bottom:1px solid rgba(23,37,31,.06) !important;
+  border-radius:0 0 24px 24px !important;
+  box-shadow:0 18px 55px rgba(23,37,31,.035) !important;
+}
+.profile-overlay .profile-cover,
+.profile-overlay .profile-headwrap,
+.profile-overlay .profile-body{
+  position:relative !important;
+  z-index:1 !important;
+}
+
+/* 3) Bloc blanc plus compact : supprimer le grand vide vertical */
+.profile-overlay .profile-headrow{
+  width:calc(100% - 72px) !important;
+  max-width:none !important;
+  grid-template-columns:188px minmax(540px, 650px) 1fr 330px !important;
+  column-gap:26px !important;
+  justify-content:stretch !important;
+  padding:24px 36px 14px !important;
+  min-height:204px !important;
+  box-sizing:border-box !important;
+}
+
+/* 4) Photo un peu plus à droite, sans toucher à la couverture */
+.profile-overlay .profile-avatar-wrap{
+  left:20px !important;
+  top:-72px !important;
+  width:180px !important;
+  height:232px !important;
+}
+.profile-overlay .profile-avatar{
+  width:180px !important;
+  height:232px !important;
+}
+
+/* 5) Identité/bio un peu à droite et plus présente */
+.profile-overlay .profile-idcol{
+  grid-column:2 !important;
+  padding-left:14px !important;
+  padding-top:2px !important;
+  max-width:650px !important;
+}
+.profile-overlay .profile-username{
+  font-size:30px !important;
+  line-height:34px !important;
+}
+.profile-overlay .profile-bio{
+  font-size:16px !important;
+  line-height:1.55 !important;
+  max-width:640px !important;
+  margin-top:13px !important;
+  color:#46534c !important;
+}
+.profile-overlay .profile-meta-row{
+  font-size:13px !important;
+  margin-top:9px !important;
+}
+.profile-overlay .profile-actions{
+  margin-top:15px !important;
+}
+
+/* 6) Stats plus à droite, proche du bord intérieur comme sur la maquette */
+.profile-overlay .profile-statscard{
+  grid-column:4 !important;
+  width:330px !important;
+  transform:translateX(8px) !important;
+  align-self:start !important;
+  margin:0 !important;
+}
+
+/* 7) Onglets remontés : très peu de blanc sous les boutons */
+.profile-overlay .profile-headcard{
+  min-height:0 !important;
+  padding-bottom:0 !important;
+}
+.profile-overlay .profile-tabswrap{
+  margin-top:0 !important;
+}
+.profile-overlay .profile-tabsbar{
+  min-height:48px !important;
+  height:48px !important;
+}
+
+@media (max-width:1100px){
+  .profile-overlay .profile-headrow{
+    grid-template-columns:170px minmax(420px,1fr) 300px !important;
+    width:calc(100% - 48px) !important;
+    padding-left:24px !important;
+    padding-right:24px !important;
+  }
+  .profile-overlay .profile-statscard{grid-column:3 !important;width:300px !important;transform:none !important;}
+  .profile-overlay .profile-idcol{grid-column:2 !important;}
+}
+@media (max-width:900px){
+  .profile-overlay .profile-page::after{display:none !important;}
+  .profile-overlay .profile-body{
+    width:calc(100% - 1.6rem) !important;
+    grid-template-columns:1fr !important;
+  }
+  .profile-overlay .profile-side{width:100% !important;}
+  .profile-overlay .profile-headrow{
+    width:calc(100% - 36px) !important;
+    grid-template-columns:1fr !important;
+    padding:155px 0 20px !important;
+    min-height:0 !important;
+  }
+  .profile-overlay .profile-avatar-wrap{
+    left:0 !important;
+    top:-58px !important;
+    width:158px !important;
+    height:214px !important;
+  }
+  .profile-overlay .profile-avatar{width:158px !important;height:214px !important;}
+  .profile-overlay .profile-idcol{
+    grid-column:1 !important;
+    padding-left:0 !important;
+    max-width:none !important;
+  }
+  .profile-overlay .profile-statscard{
+    grid-column:1 !important;
+    width:100% !important;
+    transform:none !important;
+  }
+}
+</style>
 </body>
 </html>
 <style>
