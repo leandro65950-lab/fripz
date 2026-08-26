@@ -2701,12 +2701,18 @@
 /* ===== Largeur & densité page vendeur (cible 1440×900) ===== */
 /* Retirer la barre « ← Retour / Mon profil » */
 .profile-overlay .profile-topbar { display: none !important; }
-/* Conteneur unifié 1440px, ~32px de marge sur écran 1440 */
-.profile-overlay { --pf-w: min(1440px, calc(100% - 64px)); }
+/* Conteneur unifié 1500px, ~32px de marge (calc(100% - 64px)) */
+.profile-overlay { --pf-w: min(1500px, calc(100% - 64px)); }
 /* Header principal + barre catégories : même conteneur large, alignés au logo */
-.nav-inner, .cats-textbar-inner { max-width: 1440px; width: calc(100% - 64px); }
+.nav-inner, .cats-textbar-inner { max-width: 1500px; width: calc(100% - 64px); }
 /* Catégories réparties sur toute la largeur (1re catégorie alignée au logo) */
 .cats-textbar-inner { justify-content: space-between; }
+/* --- Réorganisation horizontale du header : occuper toute la largeur --- */
+.nav-inner { height: 64px; gap: 1.6rem; }        /* hauteur 64px, éléments aérés */
+.nav-search { max-width: 560px; }                /* recherche large qui remplit l'espace central */
+.nav-links { gap: 1.7rem; }                      /* espace entre Catégories / Vendre / À propos */
+.nav-right { gap: 1.05rem; }                     /* groupe droit aéré */
+.nav-ico-group { gap: 0.45rem; }                 /* icônes espacées (au lieu d'être collées) */
 /* Corps : colonne principale ~70% + colonne droite ~30% */
 .profile-overlay .profile-body {
   max-width: var(--pf-w); margin: 16px auto 0; padding: 8px 0 3rem;
