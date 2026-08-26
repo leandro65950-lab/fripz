@@ -3468,6 +3468,34 @@
 }
 </style>
 
+
+<style id="fripz-step17-bio-wrap">
+/* ETAPE 17 — uniquement limiter la largeur de la bio pour obtenir 2 lignes équilibrées. */
+@media (min-width:1001px){
+  .profile-overlay .profile-bio{
+    max-width:430px !important;
+    width:430px !important;
+    white-space:normal !important;
+    text-wrap:pretty;
+  }
+}
+</style>
+
+
+<style>
+/* Réseaux sociaux du profil */
+.profile-overlay .profile-social-row {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:8px;
+}
+.profile-overlay .profile-social-link {
+  display:inline-flex; align-items:center; gap:6px; color:#3f4a43; text-decoration:none;
+  font-family:var(--fz-sans, 'Satoshi', 'Inter', system-ui, sans-serif); font-size:12px; font-weight:600;
+  padding:5px 9px; border:1px solid #E8E6DF; border-radius:999px; background:#fff; transition:.15s;
+}
+.profile-overlay .profile-social-link:hover { color:#527D68; border-color:#cfd9d1; background:#F8FAF7; }
+.profile-overlay .profile-social-link svg { width:14px; height:14px; flex:0 0 auto; }
+.profile-overlay .profile-social-link .social-at { opacity:.72; font-weight:500; }
+</style>
 </head>
 <body>
 
@@ -4460,6 +4488,7 @@ function closePage() {
               <span class="profile-handle" id="profileHandle"></span>
               <span class="profile-pro-pill" id="profileProPill">Vendeur Fripz</span>
             </div>
+            <div class="profile-social-row" id="profileSocialRow" style="display:none"></div>
             <div class="profile-bio" id="profileBioDisplay"></div>
             <div class="profile-meta-row" id="profileMemberSince"></div>
             <div class="profile-actions" id="profileActions">
@@ -4479,6 +4508,8 @@ function closePage() {
           <div class="profile-identity-edit" id="profileIdentityEdit" style="display:none">
             <input type="text" class="profile-edit-input" id="profileEditUsername" placeholder="Pseudo" maxlength="30">
             <input type="text" class="profile-edit-input" id="profileEditVille" placeholder="Ville (ex. Lyon, France)" maxlength="60">
+            <input type="text" class="profile-edit-input" id="profileEditInstagram" placeholder="Instagram (ex. atelierpauline)" maxlength="50" autocomplete="off">
+            <input type="text" class="profile-edit-input" id="profileEditX" placeholder="X / Twitter (ex. atelierpauline)" maxlength="50" autocomplete="off">
             <textarea class="profile-edit-input" id="profileEditBio" placeholder="Une petite bio pour te présenter..." maxlength="160" rows="3"></textarea>
             <div class="profile-edit-actions">
               <button class="profile-btn-ghost" onclick="cancelProfileEdit()">Annuler</button>
@@ -7111,6 +7142,12 @@ function shareProfile() {
   else { try { navigator.clipboard.writeText(location.href); } catch(e){} showToast('Lien du profil copié !'); }
 }
 
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 /* ── Page open / render ── */
 
 function renderProfilePage() {
@@ -7127,6 +7164,23 @@ function renderProfilePage() {
   document.getElementById('profileUsernameDisplay').textContent = name;
   const handle = document.getElementById('profileHandle');
   if (handle) handle.textContent = '@' + String(prof.username || name || 'membre').toLowerCase().replace(/[^a-z0-9_]/g, '');
+
+  // Réseaux sociaux : Instagram + X. Les colonnes Supabase attendues sont `instagram` et `x_handle`.
+  // Si elles n'existent pas encore, la version locale reste utilisable grâce au fallback localStorage.
+  const socialFallbackKey = 'fripz_profile_socials_' + (profileViewedUserId || (currentUser && currentUser.id) || 'me');
+  let socialFallback = {};
+  try { socialFallback = JSON.parse(localStorage.getItem(socialFallbackKey) || '{}') || {}; } catch(e) {}
+  const instagram = String(prof.instagram || socialFallback.instagram || '').trim().replace(/^@/, '');
+  const xHandle = String(prof.x_handle || socialFallback.x_handle || '').trim().replace(/^@/, '');
+  const socialRow = document.getElementById('profileSocialRow');
+  if (socialRow) {
+    const socialParts = [];
+    if (instagram) socialParts.push('<a class="profile-social-link" href="https://www.instagram.com/' + encodeURIComponent(instagram) + '" target="_blank" rel="noopener noreferrer" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span><span class="social-at">@' + escapeHtml(instagram) + '</span></a>');
+    if (xHandle) socialParts.push('<a class="profile-social-link" href="https://x.com/' + encodeURIComponent(xHandle) + '" target="_blank" rel="noopener noreferrer" title="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>X</span><span class="social-at">@' + escapeHtml(xHandle) + '</span></a>');
+    socialRow.innerHTML = socialParts.join('');
+    socialRow.style.display = socialParts.length ? 'flex' : 'none';
+  }
+
   const bioEl = document.getElementById('profileBioDisplay');
   bioEl.textContent = prof.bio || '';
   bioEl.style.display = prof.bio ? 'block' : 'none';
@@ -7202,6 +7256,10 @@ function startProfileEdit() {
   document.getElementById('profileEditUsername').value = prof.username || authDisplayName();
   document.getElementById('profileEditBio').value = prof.bio || '';
   document.getElementById('profileEditVille').value = prof.ville || '';
+  let socialFallback = {};
+  try { socialFallback = JSON.parse(localStorage.getItem('fripz_profile_socials_' + (currentUser && currentUser.id || 'me')) || '{}') || {}; } catch(e) {}
+  document.getElementById('profileEditInstagram').value = prof.instagram || socialFallback.instagram || '';
+  document.getElementById('profileEditX').value = prof.x_handle || socialFallback.x_handle || '';
   document.getElementById('profileIdentityView').style.display = 'none';
   document.getElementById('profileIdentityEdit').style.display = 'block';
 }
@@ -7216,12 +7274,25 @@ async function saveProfileEdit() {
   const username = (document.getElementById('profileEditUsername').value || '').trim();
   const bio = (document.getElementById('profileEditBio').value || '').trim();
   const ville = (document.getElementById('profileEditVille').value || '').trim();
+  const instagram = (document.getElementById('profileEditInstagram').value || '').trim().replace(/^@/, '').replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/\/$/, '');
+  const xHandle = (document.getElementById('profileEditX').value || '').trim().replace(/^@/, '').replace(/^https?:\/\/(www\.)?(x|twitter)\.com\//i, '').replace(/\/$/, '');
   if (!username) { showToast('⚠️ Le pseudo ne peut pas être vide'); return; }
-  const res = await window.supaClient.from('profiles')
-    .update({ username: username, bio: bio, ville: ville })
+
+  // On tente d'enregistrer les réseaux dans Supabase. Si les colonnes `instagram` et `x_handle`
+  // n'existent pas encore, on sauvegarde quand même le profil standard + un fallback local.
+  let res = await window.supaClient.from('profiles')
+    .update({ username: username, bio: bio, ville: ville, instagram: instagram || null, x_handle: xHandle || null })
     .eq('id', currentUser.id);
-  if (res.error) { showToast('⚠️ ' + (res.error.message || 'Mise à jour impossible')); return; }
-  currentProfile = Object.assign({}, currentProfile, { username: username, bio: bio, ville: ville });
+  if (res.error) {
+    const baseRes = await window.supaClient.from('profiles')
+      .update({ username: username, bio: bio, ville: ville })
+      .eq('id', currentUser.id);
+    if (baseRes.error) { showToast('⚠️ ' + (baseRes.error.message || 'Mise à jour impossible')); return; }
+    try { localStorage.setItem('fripz_profile_socials_' + currentUser.id, JSON.stringify({ instagram: instagram, x_handle: xHandle })); } catch(e) {}
+  } else {
+    try { localStorage.setItem('fripz_profile_socials_' + currentUser.id, JSON.stringify({ instagram: instagram, x_handle: xHandle })); } catch(e) {}
+  }
+  currentProfile = Object.assign({}, currentProfile, { username: username, bio: bio, ville: ville, instagram: instagram, x_handle: xHandle });
   if (profileIsOwn) profileViewedProfile = currentProfile;
   updateAuthUI();
   cancelProfileEdit();
