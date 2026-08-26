@@ -3350,12 +3350,15 @@
 }
 </style>
 
+
 <style id="fripz-step11-cover-right-only">
-/* ETAPE 11 — toucher UNIQUEMENT a la couverture : allonger son bord droit jusqu'a la ligne premium */
+/* ETAPE 11 — depuis l’étape 10 : agrandir UNIQUEMENT la couverture vers la droite.
+   Le bord gauche reste strictement inchangé à 24px. Aucun autre bloc n’est modifié. */
 @media (min-width:1001px){
   .profile-overlay .profile-cover{
-    width:calc(var(--pf-w) + 24px) !important;
-    transform:translateX(12px) !important;
+    width:calc(100% - 24px) !important;
+    margin-left:24px !important;
+    margin-right:0 !important;
   }
 }
 </style>
