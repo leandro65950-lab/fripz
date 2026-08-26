@@ -2730,100 +2730,105 @@
 /* 16px entre barre catégories et couverture */
 .profile-overlay .profile-cover { margin-top: 16px; }
 
-/* ============ BLOC PROFIL — transposition fidele du composant ============ */
-/* Cover : h-[290px] rounded-t-[22px] */
+/* ============ BLOC PROFIL — SOURCE UNIQUE DE MISE EN PAGE ============ */
+/* Couverture */
 .profile-overlay .profile-cover {
   height: 290px !important; border-radius: 22px 22px 0 0 !important; overflow: hidden;
   width: var(--pf-w); margin: 16px auto 0; }
 
-/* Carte blanche : rounded-b-[22px] + shadow */
+/* Corps du profil : relative bg-white */
 .profile-overlay .profile-headwrap { margin-top: 0; }
 .profile-overlay .profile-headcard {
   position: relative; display: block; background: #ffffff;
   border-radius: 0 0 22px 22px; box-shadow: 0 10px 35px rgba(23,37,31,0.06);
-  padding: 0 0 4px; overflow: visible; }
+  padding: 0; margin: 0; overflow: visible; min-height: 0; }
 
-/* Conteneur interne compact : max-w-[1180px] px-6 pt-7 */
-/* Grille : grid-cols-[160px_520px_340px] justify-between gap-x-7 items-start */
+/* CONTENU PRINCIPAL : grid-cols-[170px_1fr_350px] gap-x-30 pt-30 pb-26 */
 .profile-overlay .profile-headrow {
-  width: min(1132px, calc(100% - 48px)); margin: 0 auto; padding: 28px 0 0;
-  display: grid; grid-template-columns: 160px 520px 340px;
-  justify-content: space-between; column-gap: 28px; align-items: start; }
+  position: relative; margin: 0 auto; width: calc(100% - 96px); max-width: 1360px;
+  display: grid; grid-template-columns: 170px 1fr 350px;
+  column-gap: 30px; padding: 30px 0 26px; align-items: start; min-height: 0; }
 
-/* PHOTO : dans la grille, decalee -translate-x-5 -translate-y-8 */
+/* 1 — AVATAR : absolute left-0 top-[-78px], 170x230 */
 .profile-overlay .profile-avatar-wrap {
-  position: relative; left: auto; top: auto; width: 160px; margin: 0; z-index: 20;
-  transform: translate(-20px, -32px); }
+  position: absolute; left: 0; top: -78px; width: 170px; height: 230px;
+  margin: 0; transform: none; z-index: 20; }
 .profile-overlay .profile-avatar {
-  width: 160px; height: 220px; object-fit: cover; border-radius: 18px;
-  border: 5px solid #fff; box-shadow: 0 10px 28px rgba(23,37,31,0.12); }
+  width: 170px; height: 230px; object-fit: cover; border-radius: 20px;
+  border: 5px solid #ffffff; background: #fff;
+  box-shadow: 0 12px 35px rgba(20,35,25,0.14); }
 
-/* SELLER INFO : pt-2 */
-.profile-overlay .profile-idcol { grid-column: 2; min-width: 0; max-width: 520px; padding-top: 8px; }
+/* 2 — INFORMATIONS VENDEUR : pt-[6px] */
+.profile-overlay .profile-idcol {
+  grid-column: 2; min-width: 0; max-width: none; padding-top: 6px; }
 .profile-overlay .profile-username {
   font-family: var(--fz-sans); font-size: 28px; font-weight: 600;
-  line-height: 34px; letter-spacing: -0.025em; color: #17251F; margin-bottom: 0; }
-.profile-overlay .profile-handle { font-size: 14px; font-weight: 500; color: #59645F; }
+  line-height: 34px; letter-spacing: -0.025em; color: #17251F; margin: 0; }
+.profile-overlay .profile-handle { font-size: 13px; font-weight: 500; color: #59645F; }
 .profile-overlay .profile-pro-pill {
-  font-size: 12px; font-weight: 600; color: #527D68; background: #EEF5F1;
-  border-radius: 999px; padding: 4px 12px; }
+  font-size: 11px; font-weight: 600; color: #527D68; background: #EEF5F1;
+  border-radius: 999px; padding: 5px 12px; }
 .profile-overlay .profile-bio {
-  font-size: 14px; font-weight: 400; line-height: 21px; color: #59645F; margin-top: 12px; }
-.profile-overlay .profile-meta-row { font-size: 13px; color: #7A837E; margin-top: 10px; gap: 20px; }
-.profile-overlay .profile-meta-row .mrow { font-size: 13px; color: #7A837E; }
+  margin-top: 14px; max-width: 500px; font-size: 14px; font-weight: 400;
+  line-height: 20px; color: #59645F; }
+.profile-overlay .profile-meta-row { margin-top: 10px; gap: 22px; font-size: 12px; color: #7A837E; }
+.profile-overlay .profile-meta-row .mrow { font-size: 12px; color: #7A837E; }
 .profile-overlay .profile-actions { margin-top: 18px; display: flex; align-items: center; gap: 10px; }
 .profile-overlay .follow-btn {
-  height: 42px; min-width: 115px; border-radius: 12px; background: #3F604B; color: #fff;
-  padding: 0 20px; font-size: 14px; font-weight: 600; margin-top: 0; border: none; }
+  height: 42px; min-width: 116px; border-radius: 10px; background: #3F604B; color: #fff;
+  padding: 0 22px; font-size: 13px; font-weight: 600; border: none; margin: 0; }
 .profile-overlay .profile-act-btn {
-  height: 42px; min-width: 115px; border-radius: 12px; border: 1px solid #E8E6DF;
-  background: #F8F7F3; color: #17251F; padding: 0 20px; font-size: 14px; font-weight: 600; margin-top: 0; }
+  height: 42px; min-width: 116px; border-radius: 10px; border: 1px solid #E8E6DF;
+  background: #F8F7F3; color: #17251F; padding: 0 20px; font-size: 13px; font-weight: 600; margin: 0; }
 .profile-overlay .profile-act-icon {
-  height: 42px; width: 42px; min-width: 42px; border-radius: 12px;
+  height: 42px; width: 42px; min-width: 42px; border-radius: 10px;
   border: 1px solid #E8E6DF; background: #fff; padding: 0; }
 
-/* STATS : rounded-[16px] border-[#E8E6DF] bg-[#FBFAF7] p-3.5 */
+/* 3 — STATISTIQUES : w-350 rounded-18 bg-#FBFAF7 p-14 */
 .profile-overlay .profile-statscard {
-  grid-column: 3; align-self: start; width: 340px; border-radius: 16px;
-  border: 1px solid #E8E6DF; background: #FBFAF7; padding: 14px; box-shadow: none; }
+  grid-column: 3; align-self: start; width: 350px; border-radius: 18px;
+  border: 1px solid #E8E6DF; background: #FBFAF7; padding: 14px;
+  box-shadow: none; margin: 0; min-width: 0; }
 .profile-overlay .pstat-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; overflow: hidden;
-  border-radius: 12px; border: 1px solid #ECEAE4; background: #fff; }
+  border-radius: 12px; border: 1px solid #ECEAE4; background: #fff; padding: 0; }
 .profile-overlay .pstat-grid .pstat { min-height: 72px; padding: 14px; border: none; }
 .profile-overlay .pstat-grid .pstat:nth-child(2n) { border-left: 1px solid #ECEAE4; }
 .profile-overlay .pstat-grid .pstat:nth-child(n+3) { border-top: 1px solid #ECEAE4; }
 .profile-overlay .pstat b {
   font-family: var(--fz-sans); font-size: 20px; font-weight: 600;
-  line-height: 28px; letter-spacing: -0.02em; color: #17251F; }
+  line-height: 26px; letter-spacing: -0.02em; color: #17251F; }
 .profile-overlay .pstat span {
-  display: block; margin-top: 4px; font-size: 11px; font-weight: 400; line-height: 16px; color: #7A837E; }
+  display: block; margin-top: 3px; font-size: 11px; font-weight: 400; line-height: 15px; color: #7A837E; }
+/* ECO */
 .profile-overlay .peco {
   margin-top: 12px; display: flex; align-items: center; gap: 12px;
-  padding: 16px; border-radius: 12px; background: #F1F4EA;
-  border: none; border-top: none; box-shadow: none; min-height: 0; }
+  border-radius: 12px; background: #F1F4EA; padding: 13px 14px;
+  border: none; box-shadow: none; min-height: 0; }
 .profile-overlay .peco-ic {
-  height: 40px; width: 40px; min-width: 40px; border-radius: 999px; background: #E3EADA; }
+  height: 38px; width: 38px; min-width: 38px; border-radius: 999px; background: #E3EADA; }
 .profile-overlay .peco b { font-size: 13px; font-weight: 600; color: #17251F; }
-.profile-overlay .peco span { font-size: 12px; color: #59645F; margin-top: 2px; }
+.profile-overlay .peco span { display: block; margin-top: 2px; font-size: 11px; color: #59645F; }
 
-/* TABS integres : mt-5 border-t, h-[50px] gap-12 */
+/* NAVIGATION PROFIL : border-top pleine largeur + nav centree h-52 gap-52 */
+.profile-overlay .profile-tabswrap { border-top: 1px solid #EEECE7; }
 .profile-overlay .profile-tabsbar {
-  width: min(1132px, calc(100% - 48px)); margin: 20px auto 0; padding: 0;
-  height: 50px; display: flex; align-items: center; gap: 48px;
-  border-top: 1px solid #EEECE7; border-bottom: none; border-radius: 0;
-  background: transparent; box-shadow: none; }
+  margin: 0 auto; width: calc(100% - 96px); max-width: 1360px; padding: 0;
+  height: 52px; display: flex; align-items: center; gap: 52px;
+  border: none; border-radius: 0; background: transparent; box-shadow: none; }
 .profile-overlay .profile-tab-btn {
-  position: relative; height: 50px; display: flex; align-items: center;
+  position: relative; height: 52px; display: flex; align-items: center;
   font-size: 13px; font-weight: 400; color: #59645F; padding: 0; }
 .profile-overlay .profile-tab-btn:hover { color: #17251F; }
 .profile-overlay .profile-tab-btn.active { font-weight: 600; color: #17251F; }
 .profile-overlay .profile-tab-btn.active::after {
-  content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 36px; background: #527D68; }
+  content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 38px; background: #527D68; }
 
 @media (max-width: 900px){
   .profile-overlay .profile-cover { height: 200px !important; }
-  .profile-overlay .profile-headrow { grid-template-columns: 1fr; row-gap: 18px; width: calc(100% - 36px); }
-  .profile-overlay .profile-avatar-wrap { grid-column: 1; transform: translate(0, -28px); }
+  .profile-overlay .profile-headrow {
+    grid-template-columns: 1fr; row-gap: 18px; width: calc(100% - 36px); padding: 165px 0 22px; }
+  .profile-overlay .profile-avatar-wrap { top: -60px; }
   .profile-overlay .profile-idcol, .profile-overlay .profile-statscard { grid-column: 1; }
   .profile-overlay .profile-statscard { width: 100%; }
   .profile-overlay .profile-tabsbar { width: calc(100% - 36px); gap: 22px; overflow-x: auto; }
@@ -3879,12 +3884,14 @@ function closePage() {
 
         <div class="profile-statscard" id="profileStatsCard"></div>
         </div>
+      <div class="profile-tabswrap">
       <div class="profile-tabsbar" id="profileTabsRow">
       <div class="profile-tab-btn active" id="profileTabVitrine" onclick="switchProfileTab('vitrine')">Vitrine</div>
       <div class="profile-tab-btn" id="profileTabAnnonces" onclick="switchProfileTab('annonces')">Articles</div>
       <div class="profile-tab-btn" id="profileTabCollections" onclick="switchProfileTab('collections')">Collections</div>
       <div class="profile-tab-btn" id="profileTabApropos" onclick="switchProfileTab('apropos')">À propos</div>
       <div class="profile-tab-btn" id="profileTabAvis" onclick="switchProfileTab('avis')">Avis</div>
+      </div>
       </div>
     </div>
 
@@ -5994,7 +6001,7 @@ function renderProfileStats() {
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b class="pstat-avis"><svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B301"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>(avis)</span></div>
+      <div class="pstat"><b class="pstat-avis"><svg viewBox="0 0 24 24" width="20" height="20" fill="#ECAF17"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>(avis)</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
