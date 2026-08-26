@@ -2625,8 +2625,8 @@
 
 /* 1. Nom du vendeur (Satoshi 24 / 600) */
 .profile-overlay .profile-username {
-  font-family: var(--fz-sans); font-size: 28px; font-weight: 650;
-  line-height: 34px; letter-spacing: -0.02em; color: var(--fz-ink); }
+  font-family: var(--fz-sans); font-size: 27px; font-weight: 600;
+  line-height: 32px; letter-spacing: -0.025em; color: var(--fz-ink); }
 /* 2. @pseudo */
 .profile-overlay .profile-handle {
   font-size: 14px; font-weight: 500; line-height: 19px; letter-spacing: 0; color: #59645F; }
@@ -2643,11 +2643,11 @@
   font-size: 13px; font-weight: 400; line-height: 19px; color: #7A837E; }
 /* 6. Statistiques — chiffre (Satoshi 24 / 600 / -0.02em) */
 .profile-overlay .pstat b {
-  font-family: var(--fz-sans); font-size: 22px; font-weight: 650;
-  line-height: 28px; color: var(--fz-ink); letter-spacing: -0.02em; }
+  font-family: var(--fz-sans); font-size: 20px; font-weight: 600;
+  line-height: 26px; color: var(--fz-ink); letter-spacing: -0.02em; }
 /* 7. Statistiques — libellé */
 .profile-overlay .pstat span {
-  font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
+  font-size: 11px; font-weight: 400; line-height: 16px; color: #6B7280; }
 /* 8. Bouton Suivre */
 .profile-overlay .follow-btn {
   font-size: 14px; font-weight: 600; line-height: 20px; color: #fff; }
@@ -2734,22 +2734,24 @@
   grid-template-columns: minmax(0, 1fr) 400px; gap: 28px; }
 /* Header profil : photo | infos (bloc large) | stats à droite, contenu centré */
 @media (min-width: 901px){
-  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 24px; overflow: visible; }
+  .profile-overlay .profile-headcard { grid-template-columns: 160px minmax(430px, 480px) minmax(0,1fr) 360px; align-items: start; column-gap: 24px; overflow: visible; }
+  .profile-overlay .profile-idcol { grid-column: 2; }
+  .profile-overlay .profile-statscard { grid-column: 4; }
   .profile-overlay .profile-statscard { width: 380px; }
 }
 /* Photo de profil : 180×180, arrondi 20, léger chevauchement bannière */
-.profile-overlay .profile-avatar { width: 190px; height: 280px; border-radius: 20px; border: 4px solid #fff; box-shadow: 0 12px 30px rgba(20,40,30,0.18); }
-.profile-overlay .profile-avatar-wrap { width: 190px; margin-top: -80px; margin-left: 26px; align-self: start; }
+.profile-overlay .profile-avatar { width: 160px; height: 220px; object-fit: cover; border-radius: 18px; border: 5px solid #fff; box-shadow: 0 10px 30px rgba(23,37,31,0.12); }
+.profile-overlay .profile-avatar-wrap { width: 160px; margin-top: -70px; margin-left: -30px; align-self: start; }
 /* Boutons vendeur : 40px, 13/600, gap 8px */
 .profile-overlay .profile-actions { gap: 10px; }
-.profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 44px; font-size: 14px; font-weight: 600; min-width: 115px; padding: 0 16px; }
-.profile-overlay .profile-act-icon { width: 44px; height: 44px; }
+.profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 40px; font-size: 14px; font-weight: 600; min-width: 110px; padding: 0 16px; }
+.profile-overlay .profile-act-icon { width: 40px; height: 40px; min-width: 40px; }
 /* --- Densité verticale compacte --- */
 .profile-overlay .profile-headwrap { margin-top: -48px; }   /* remonté vers la couverture */
 .profile-overlay .profile-bio { margin-top: 8px; }          /* nom → description : 8px */
 .profile-overlay .profile-meta-row { margin-top: 10px; }
 .profile-overlay .profile-actions { margin-top: 20px; }     /* stats → boutons : 20px */
-.profile-overlay .profile-headcard { padding: 1.15rem 2rem 1rem; border-radius: 22px; box-shadow: 0 10px 30px rgba(30,40,25,0.06); }
+.profile-overlay .profile-headcard { padding: 32px 2rem 28px; border-radius: 22px; box-shadow: 0 10px 30px rgba(30,40,25,0.06); }
 .profile-overlay .profile-section-title { margin: 0 0 16px; }  /* titre → contenu : 16px */
 /* Encadrer les blocs de contenu (marge ≤ 32px entre grandes sections) */
 .profile-overlay .profile-block {
@@ -2780,14 +2782,14 @@
 /* 16px entre barre catégories et couverture */
 .profile-overlay .profile-cover { margin-top: 16px; }
 /* Statistiques en 3 x 2, séparateurs subtils, padding 16px */
-.profile-overlay .pstat-grid { grid-template-columns: repeat(3, 1fr); gap: 0; }
+.profile-overlay .pstat-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
 .profile-overlay .pstat-grid .pstat { padding: 16px 8px; border-right: 1px solid #eef1ee; border-bottom: 1px solid #eef1ee; }
-.profile-overlay .pstat-grid .pstat:nth-child(3n) { border-right: none; }
-.profile-overlay .pstat-grid .pstat:nth-child(n+4) { border-bottom: none; }
+.profile-overlay .pstat-grid .pstat:nth-child(2n) { border-right: none; }
+.profile-overlay .pstat-grid .pstat:nth-child(n+3) { border-bottom: none; }
 /* Bloc éco-responsable : pleine largeur, ~70px */
 /* Stats = 2 cartes distinctes (grille + éco-responsable), comme la maquette */
-/* carré extérieur (entoure) */
-.profile-overlay .profile-statscard { background: #eef2ea; border: 1px solid #dde4d3; box-shadow: none; border-radius: 18px; padding: 12px; }
+/* carte statistiques indépendante */
+.profile-overlay .profile-statscard { background: #FBFAF7; border: 1px solid #E8E6DF; box-shadow: 0 2px 8px rgba(23,37,31,0.05); border-radius: 18px; padding: 14px; width: 360px; }
 /* carré intérieur (les chiffres) */
 .profile-overlay .pstat-grid { background: #ffffff; border: 1px solid #e6ebe0; border-radius: 13px; overflow: hidden; box-shadow: none; }
 .profile-overlay .pstat-grid .pstat { border-color: #eef1eb; }
@@ -5934,8 +5936,6 @@ function renderProfileStats() {
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
       <div class="pstat"><b class="pstat-avis"><svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B301"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>(avis)</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
-      <div class="pstat"><b>${mine.length}</b><span>Articles</span></div>
-      <div class="pstat"><b>100%</b><span>Évaluations</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
 }
