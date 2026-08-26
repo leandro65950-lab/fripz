@@ -2623,10 +2623,10 @@
 /* Base : tout en Satoshi par défaut */
 .profile-overlay, .profile-overlay * { font-family: var(--fz-sans); }
 
-/* 1. Nom du vendeur (Canela) */
+/* 1. Nom du vendeur (Satoshi 24 / 600) */
 .profile-overlay .profile-username {
-  font-family: var(--fz-serif); font-size: 32px; font-weight: 500;
-  line-height: 38px; letter-spacing: -0.01em; color: var(--fz-ink); }
+  font-family: var(--fz-sans); font-size: 24px; font-weight: 600;
+  line-height: 30px; letter-spacing: -0.02em; color: var(--fz-ink); }
 /* 2. @pseudo */
 .profile-overlay .profile-handle {
   font-size: 13px; font-weight: 500; line-height: 18px; letter-spacing: 0; color: #59645F; }
@@ -2636,11 +2636,11 @@
   color: var(--fz-green); background: #EEF5F1; }
 /* 4. Description */
 .profile-overlay .profile-bio {
-  font-size: 14px; font-weight: 400; line-height: 21px; color: #4B5563; }
+  font-size: 13px; font-weight: 400; line-height: 20px; color: #59645F; }
 /* 5. Localisation / infos */
 .profile-overlay .profile-meta-row,
 .profile-overlay .profile-meta-row .mrow {
-  font-size: 12px; font-weight: 400; line-height: 18px; color: #6B7280; }
+  font-size: 12px; font-weight: 400; line-height: 18px; color: #7A837E; }
 /* 6. Statistiques — chiffre (Satoshi 24 / 600 / -0.02em) */
 .profile-overlay .pstat b {
   font-family: var(--fz-sans); font-size: 24px; font-weight: 600;
@@ -2707,21 +2707,43 @@
 .nav-inner, .cats-textbar-inner { max-width: 1500px; width: calc(100% - 64px); }
 /* Catégories réparties sur toute la largeur (1re catégorie alignée au logo) */
 .cats-textbar-inner { justify-content: space-between; }
-/* --- Réorganisation horizontale du header : occuper toute la largeur --- */
-.nav-inner { height: 64px; gap: 1.6rem; }        /* hauteur 64px, éléments aérés */
-.nav-search { max-width: 560px; }                /* recherche large qui remplit l'espace central */
-.nav-links { gap: 1.7rem; }                      /* espace entre Catégories / Vendre / À propos */
-.nav-right { gap: 1.05rem; }                     /* groupe droit aéré */
-.nav-ico-group { gap: 0.45rem; }                 /* icônes espacées (au lieu d'être collées) */
+/* --- Dimensionnement header (respirant, cf. fiche) --- */
+.nav-inner { height: 64px; gap: 1.6rem; }
+.nav-logo { gap: 8px; }
+.nav-logo-icon { width: 36px; height: 36px; border-radius: 10px; }
+.nav-logo-text { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
+.nav-search { flex: 0 1 340px; width: 340px; max-width: 360px; min-width: 300px; height: 40px; border-radius: 12px; }
+.nav-search input { font-size: 13px; padding: 0 42px 0 14px; height: 40px; }
+.ns-scope { font-size: 13px; font-weight: 500; padding: 0 14px; }
+.nav-links { gap: 1.7rem; }                      /* 27px entre Catégories / Vendre / À propos */
+.nav-links a { font-size: 14px; font-weight: 500; }
+.nav-right { gap: 1.05rem; }
+.nav-ico-group { gap: 8px; }
+.nav-ico svg { width: 20px; height: 20px; }
+.btn-sell-cta { height: 40px; padding: 0 17px; font-size: 13px; font-weight: 600; border-radius: 10px; }
+.nav-user-trigger { height: 40px; }
+.nav-user-avatar { width: 32px; height: 32px; }
+.nav-user-name { font-size: 13px; font-weight: 600; }
+/* Barre catégories : 48px, 13/500, icônes 18px, gap 7px */
+.cats-textbar-inner { height: 48px; }
+.cats-textbar-link { font-size: 13px; font-weight: 500; gap: 7px; }
+.cats-textbar-link svg { width: 18px; height: 18px; }
 /* Corps : colonne principale ~70% + colonne droite ~30% */
 .profile-overlay .profile-body {
   max-width: var(--pf-w); margin: 16px auto 0; padding: 8px 0 3rem;
   grid-template-columns: minmax(0, 1fr) 400px; gap: 28px; }
-/* Header : contenu groupé à gauche (avatar + infos + stats) */
+/* Header profil : photo | infos (bloc large) | stats à droite, contenu centré */
 @media (min-width: 901px){
-  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,560px) auto minmax(0,1fr); }
-  .profile-overlay .profile-statscard { min-width: 300px; }
+  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,1fr) auto; align-items: center; }
+  .profile-overlay .profile-statscard { min-width: 280px; }
 }
+/* Photo de profil : 180×180, arrondi 20, léger chevauchement bannière */
+.profile-overlay .profile-avatar { width: 180px; height: 180px; border-radius: 20px; }
+.profile-overlay .profile-avatar-wrap { width: 180px; margin-top: -56px; align-self: start; }
+/* Boutons vendeur : 40px, 13/600, gap 8px */
+.profile-overlay .profile-actions { gap: 8px; }
+.profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 40px; font-size: 13px; font-weight: 600; }
+.profile-overlay .profile-act-icon { width: 40px; height: 40px; }
 /* --- Densité verticale compacte --- */
 .profile-overlay .profile-headwrap { margin-top: -20px; }   /* bannière → carte : léger chevauchement */
 .profile-overlay .profile-bio { margin-top: 8px; }          /* nom → description : 8px */
