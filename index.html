@@ -3289,6 +3289,44 @@
 }
 </style>
 
+
+<style id="fripz-step7-clean-rounded-tabs">
+/* ETAPE 7 — supprimer les petits coins/oreilles visibles et garder un arrondi propre */
+.profile-overlay .profile-tabswrap{
+  border-radius:0 0 24px 24px !important;
+  overflow:hidden !important;
+  clip-path:inset(0 round 0 0 24px 24px) !important;
+}
+.profile-overlay .profile-tabsbar{
+  border-radius:0 !important;
+}
+</style>
+
+
+<style id="fripz-step8-contain-right-sidebar">
+/* ETAPE 8 — contenir proprement la colonne droite dans la feuille premium */
+@media (min-width:1001px){
+  /* Le bord droit premium passe au bord réel de la feuille :
+     la sidebar garde ainsi une marge intérieure au lieu de dépasser. */
+  .profile-overlay .profile-page::before{
+    right:0 !important;
+  }
+
+  /* Sécurise la colonne droite dans la grille sans modifier les blocs de gauche. */
+  .profile-overlay .profile-body{
+    box-sizing:border-box !important;
+  }
+  .profile-overlay .profile-side{
+    box-sizing:border-box !important;
+    max-width:300px !important;
+  }
+  .profile-overlay .pside-card{
+    width:100% !important;
+    box-sizing:border-box !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
