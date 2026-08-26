@@ -2625,25 +2625,25 @@
 
 /* 1. Nom du vendeur (Satoshi 24 / 600) */
 .profile-overlay .profile-username {
-  font-family: var(--fz-sans); font-size: 24px; font-weight: 600;
-  line-height: 30px; letter-spacing: -0.02em; color: var(--fz-ink); }
+  font-family: var(--fz-sans); font-size: 28px; font-weight: 650;
+  line-height: 34px; letter-spacing: -0.02em; color: var(--fz-ink); }
 /* 2. @pseudo */
 .profile-overlay .profile-handle {
-  font-size: 13px; font-weight: 500; line-height: 18px; letter-spacing: 0; color: #59645F; }
+  font-size: 14px; font-weight: 500; line-height: 19px; letter-spacing: 0; color: #59645F; }
 /* 3. Badge « Vendeur pro » */
 .profile-overlay .profile-pro-pill {
-  font-size: 11px; font-weight: 600; line-height: 16px;
+  font-size: 12px; font-weight: 600; line-height: 16px;
   color: var(--fz-green); background: #EEF5F1; }
 /* 4. Description */
 .profile-overlay .profile-bio {
-  font-size: 13px; font-weight: 400; line-height: 20px; color: #59645F; }
+  font-size: 14px; font-weight: 400; line-height: 21px; color: #59645F; }
 /* 5. Localisation / infos */
 .profile-overlay .profile-meta-row,
 .profile-overlay .profile-meta-row .mrow {
-  font-size: 12px; font-weight: 400; line-height: 18px; color: #7A837E; }
+  font-size: 13px; font-weight: 400; line-height: 19px; color: #7A837E; }
 /* 6. Statistiques — chiffre (Satoshi 24 / 600 / -0.02em) */
 .profile-overlay .pstat b {
-  font-family: var(--fz-sans); font-size: 24px; font-weight: 600;
+  font-family: var(--fz-sans); font-size: 22px; font-weight: 650;
   line-height: 28px; color: var(--fz-ink); letter-spacing: -0.02em; }
 /* 7. Statistiques — libellé */
 .profile-overlay .pstat span {
@@ -2734,16 +2734,16 @@
   grid-template-columns: minmax(0, 1fr) 400px; gap: 28px; }
 /* Header profil : photo | infos (bloc large) | stats à droite, contenu centré */
 @media (min-width: 901px){
-  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,1fr) auto; align-items: center; }
-  .profile-overlay .profile-statscard { min-width: 280px; }
+  .profile-overlay .profile-headcard { grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 24px; overflow: visible; }
+  .profile-overlay .profile-statscard { width: 380px; }
 }
 /* Photo de profil : 180×180, arrondi 20, léger chevauchement bannière */
-.profile-overlay .profile-avatar { width: 180px; height: 180px; border-radius: 20px; }
-.profile-overlay .profile-avatar-wrap { width: 180px; margin-top: -56px; align-self: start; }
+.profile-overlay .profile-avatar { width: 190px; height: 190px; border-radius: 20px; border: 4px solid #fff; box-shadow: 0 12px 30px rgba(20,40,30,0.18); }
+.profile-overlay .profile-avatar-wrap { width: 190px; margin-top: -30px; margin-left: -40px; align-self: start; }
 /* Boutons vendeur : 40px, 13/600, gap 8px */
-.profile-overlay .profile-actions { gap: 8px; }
-.profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 40px; font-size: 13px; font-weight: 600; }
-.profile-overlay .profile-act-icon { width: 40px; height: 40px; }
+.profile-overlay .profile-actions { gap: 10px; }
+.profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 44px; font-size: 14px; font-weight: 600; min-width: 115px; padding: 0 16px; }
+.profile-overlay .profile-act-icon { width: 44px; height: 44px; }
 /* --- Densité verticale compacte --- */
 .profile-overlay .profile-headwrap { margin-top: -20px; }   /* bannière → carte : léger chevauchement */
 .profile-overlay .profile-bio { margin-top: 8px; }          /* nom → description : 8px */
@@ -2758,6 +2758,31 @@
 /* Grille produits : ~4 colonnes, gap 18px horizontal / 24px vertical */
 .profile-overlay .articles-grid {
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); column-gap: 18px; row-gap: 24px; }
+/* Bouton supprimer une annonce (visible sur ses propres cartes) */
+.card-del-btn { position: absolute; top: 8px; right: 8px; z-index: 4; width: 30px; height: 30px;
+  border-radius: 9px; border: none; background: rgba(255,255,255,0.94); color: #c0392b;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.16); transition: background 0.15s, transform 0.15s; }
+.card-del-btn:hover { background: #fff; transform: scale(1.08); }
+.card-del-btn svg { width: 16px; height: 16px; }
+/* Cartes collection enrichies (infos calculées automatiquement) */
+.coll-badge { display: inline-block; margin-left: 8px; font-size: 10px; font-weight: 600; color: #527D68;
+  background: #EEF5F1; padding: 2px 8px; border-radius: 20px; vertical-align: middle; white-space: nowrap; }
+.coll-dot { color: #c8cec9; margin: 0 5px; }
+.collection-meta { font-size: 12px; font-weight: 500; color: #59645F; margin-top: 4px; }
+.collection-cat { font-size: 12px; color: #7A837E; margin-top: 3px; }
+.collection-new { font-size: 12px; font-weight: 600; color: #527D68; margin-top: 5px; }
+.collection-updated { font-size: 11px; color: #9aa39c; margin-top: 5px; }
+.pcol-new { font-size: 11px; font-weight: 600; color: #527D68; margin-top: 3px; line-height: 1.3; }
+/* 16px entre barre catégories et couverture */
+.profile-overlay .profile-cover { margin-top: 16px; }
+/* Statistiques en 3 x 2, séparateurs subtils, padding 16px */
+.profile-overlay .pstat-grid { grid-template-columns: repeat(3, 1fr); gap: 0; }
+.profile-overlay .pstat-grid .pstat { padding: 16px 8px; border-right: 1px solid #eef1ee; border-bottom: 1px solid #eef1ee; }
+.profile-overlay .pstat-grid .pstat:nth-child(3n) { border-right: none; }
+.profile-overlay .pstat-grid .pstat:nth-child(n+4) { border-bottom: none; }
+/* Bloc éco-responsable : pleine largeur, ~70px */
+.profile-overlay .peco { min-height: 70px; }
 /* ================= FIN FICHE TYPO ================= */
 </style>
 </head>
@@ -5783,6 +5808,55 @@ function frenchMemberSince(iso) {
   } catch (e) { return ''; }
 }
 
+// Accole automatiquement le pays à la ville saisie (ex: "lyon" -> "Lyon, France").
+// Si l'utilisateur a déjà mis une virgule (donc un pays/région), on ne touche à rien.
+function cityCountry(ville) {
+  if (!ville) return '';
+  var raw = String(ville).trim();
+  if (!raw) return '';
+  if (raw.indexOf(',') !== -1) return raw; // pays déjà précisé
+  var key = raw.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  var PAYS = {
+    // France
+    'paris':'France','marseille':'France','lyon':'France','toulouse':'France','nice':'France','nantes':'France',
+    'montpellier':'France','strasbourg':'France','bordeaux':'France','lille':'France','rennes':'France','reims':'France',
+    'le havre':'France','toulon':'France','grenoble':'France','dijon':'France','angers':'France','nimes':'France',
+    'clermont-ferrand':'France','le mans':'France','aix-en-provence':'France','brest':'France','tours':'France',
+    'limoges':'France','annecy':'France','perpignan':'France','metz':'France','besancon':'France','orleans':'France',
+    'rouen':'France','mulhouse':'France','caen':'France','nancy':'France','avignon':'France','cannes':'France',
+    'antibes':'France','biarritz':'France','la rochelle':'France','pau':'France','bayonne':'France','ajaccio':'France','bastia':'France',
+    // Espagne
+    'barcelone':'Espagne','barcelona':'Espagne','madrid':'Espagne','valence':'Espagne','seville':'Espagne','malaga':'Espagne',
+    'bilbao':'Espagne','saragosse':'Espagne','grenade':'Espagne','palma':'Espagne','ibiza':'Espagne','alicante':'Espagne',
+    // Italie
+    'rome':'Italie','milan':'Italie','naples':'Italie','turin':'Italie','florence':'Italie','venise':'Italie','bologne':'Italie','palerme':'Italie',
+    // Royaume-Uni / Irlande
+    'londres':'Royaume-Uni','london':'Royaume-Uni','manchester':'Royaume-Uni','liverpool':'Royaume-Uni','edimbourg':'Royaume-Uni','glasgow':'Royaume-Uni',
+    'dublin':'Irlande','cork':'Irlande',
+    // Allemagne
+    'berlin':'Allemagne','munich':'Allemagne','hambourg':'Allemagne','cologne':'Allemagne','francfort':'Allemagne','stuttgart':'Allemagne','dusseldorf':'Allemagne',
+    // Benelux + Luxembourg
+    'bruxelles':'Belgique','anvers':'Belgique','gand':'Belgique','liege':'Belgique','bruges':'Belgique','charleroi':'Belgique',
+    'amsterdam':'Pays-Bas','rotterdam':'Pays-Bas','la haye':'Pays-Bas','utrecht':'Pays-Bas','luxembourg':'Luxembourg',
+    // Suisse / Autriche
+    'geneve':'Suisse','zurich':'Suisse','lausanne':'Suisse','bale':'Suisse','berne':'Suisse','lugano':'Suisse',
+    'vienne':'Autriche','salzbourg':'Autriche','graz':'Autriche',
+    // Portugal
+    'lisbonne':'Portugal','porto':'Portugal','faro':'Portugal','braga':'Portugal',
+    // Europe du Nord
+    'stockholm':'Suède','goteborg':'Suède','malmo':'Suède','copenhague':'Danemark','oslo':'Norvège','bergen':'Norvège',
+    'helsinki':'Finlande','reykjavik':'Islande',
+    // Europe centrale / de l'Est
+    'prague':'Tchéquie','varsovie':'Pologne','cracovie':'Pologne','budapest':'Hongrie','bratislava':'Slovaquie',
+    'bucarest':'Roumanie','sofia':'Bulgarie','zagreb':'Croatie','ljubljana':'Slovénie','belgrade':'Serbie',
+    // Europe du Sud
+    'athenes':'Grèce','thessalonique':'Grèce','la valette':'Malte'
+  };
+  var pretty = raw.toLowerCase().replace(/(^|[\s\-'])(\S)/g, function(m, sep, ch){ return sep + ch.toUpperCase(); });
+  var pays = PAYS[key];
+  return pays ? (pretty + ', ' + pays) : (pretty + ', France');
+}
+
 function annoncesByUser(userId) {
   if (!userId) return [];
   return products.filter(function (p) { return p.user_id && p.user_id === userId; });
@@ -5849,6 +5923,8 @@ function renderProfileStats() {
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
       <div class="pstat"><b class="pstat-avis"><svg viewBox="0 0 24 24" width="20" height="20" fill="#F5B301"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>(avis)</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
+      <div class="pstat"><b>${mine.length}</b><span>Articles</span></div>
+      <div class="pstat"><b>100%</b><span>Évaluations</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
 }
@@ -5919,6 +5995,47 @@ function coverForCollection(c) {
   return m || null;
 }
 
+// Calcule automatiquement les infos d'une collection à partir des annonces qu'elle contient.
+function collectionStats(c) {
+  const ids = (c && c._itemIds) || [];
+  const items = products.filter(function (p) { return p.uuid && ids.indexOf(p.uuid) !== -1; });
+  const count = items.length;
+  // Fourchette de prix
+  const prices = items.map(function (p) { return p.priceNum; }).filter(function (n) { return typeof n === 'number' && !isNaN(n); });
+  let priceRange = '';
+  if (prices.length) {
+    const min = Math.min.apply(null, prices), max = Math.max.apply(null, prices);
+    priceRange = (min === max) ? (min + ' €') : (min + ' € – ' + max + ' €');
+  }
+  // Catégorie dominante
+  const CATLABEL = { femme: 'Mode · Femme', homme: 'Mode · Homme', enfant: 'Mode · Enfant', maison: 'Maison & Déco', electronique: 'Tech', loisirs: 'Loisirs', divertissement: 'Divertissement', sport: 'Sport', autre: 'Divers' };
+  const freq = {};
+  items.forEach(function (p) { const k = (p.cat || '').toLowerCase(); if (k) freq[k] = (freq[k] || 0) + 1; });
+  let topCat = '', topN = 0;
+  Object.keys(freq).forEach(function (k) { if (freq[k] > topN) { topN = freq[k]; topCat = k; } });
+  const category = topCat ? (CATLABEL[topCat] || (topCat.charAt(0).toUpperCase() + topCat.slice(1))) : '';
+  // Dernière MAJ + nouveautés de la semaine
+  const now = Date.now(), DAY = 86400000, WEEK = 7 * DAY;
+  let newestTs = 0, newThisWeek = 0;
+  items.forEach(function (p) {
+    if (!p.created_at) return;
+    const ts = new Date(p.created_at).getTime();
+    if (isNaN(ts)) return;
+    if (ts > newestTs) newestTs = ts;
+    if (now - ts <= WEEK) newThisWeek++;
+  });
+  let updated = '';
+  if (newestTs) {
+    const days = Math.floor((now - newestTs) / DAY);
+    if (days <= 0) updated = "Mis à jour aujourd'hui";
+    else if (days === 1) updated = 'Mis à jour hier';
+    else if (days < 7) updated = 'Mis à jour il y a ' + days + ' jours';
+    else if (days < 14) updated = 'Mis à jour la semaine dernière';
+    else updated = 'Mis à jour il y a ' + Math.floor(days / 7) + ' semaines';
+  }
+  return { count: count, priceRange: priceRange, category: category, updated: updated, newThisWeek: newThisWeek, hot: newThisWeek >= 3 };
+}
+
 function renderCollectionsGrid() {
   const area = document.getElementById('profileMainArea');
   if (!profileCollections.length && !profileIsOwn) {
@@ -5933,12 +6050,23 @@ function renderCollectionsGrid() {
     : '';
   const cardsHtml = profileCollections.map(function (c) {
     const cover = coverForCollection(c);
-    const n = (c._itemIds || []).length;
+    const s = collectionStats(c);
+    const badge = s.hot ? '<span class="coll-badge">Très demandé</span>' : '';
+    const metaBits = [s.count + ' article' + (s.count > 1 ? 's' : '')];
+    if (s.priceRange) metaBits.push(s.priceRange);
+    const highlight = s.newThisWeek > 0
+      ? '<div class="collection-new">' + s.newThisWeek + ' nouvelle' + (s.newThisWeek > 1 ? 's' : '') + ' pièce' + (s.newThisWeek > 1 ? 's' : '') + ' cette semaine</div>'
+      : (s.updated ? '<div class="collection-updated">' + s.updated + '</div>' : '');
     return '<div class="collection-card" onclick="openCollectionDetail(\'' + c.id + '\')">' +
       '<div class="collection-cover"' + (cover ? (' style="background-image:url(\'' + cover + '\')"') : '') + '>' +
         (cover ? '' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:30px;height:30px"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>') +
       '</div>' +
-      '<div class="collection-info"><div class="collection-name">' + c.name + '</div><div class="collection-count">' + n + ' article' + (n > 1 ? 's' : '') + '</div></div>' +
+      '<div class="collection-info">' +
+        '<div class="collection-name">' + c.name + badge + '</div>' +
+        '<div class="collection-meta">' + metaBits.join('<span class="coll-dot">·</span>') + '</div>' +
+        (s.category ? '<div class="collection-cat">' + s.category + '</div>' : '') +
+        highlight +
+      '</div>' +
     '</div>';
   }).join('');
   const formHtml = profileIsOwn
@@ -6147,7 +6275,27 @@ function renderProfileMainArea() {
 }
 
 function profileCardHTML(p) {
-  return `<div class="article-card" onclick="closeProfileOverlay(); openModal(${p.id});"><div class="article-img">${p.emoji}</div><div class="article-info"><div class="article-name">${p.name}</div><div class="article-meta">${p.meta}</div><div class="article-price">${p.price}</div></div></div>`;
+  const delBtn = (profileIsOwn && p.uuid) ? `<button class="card-del-btn" title="Supprimer l'annonce" onclick="deleteAnnonce('${p.uuid}', event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>` : '';
+  return `<div class="article-card" onclick="closeProfileOverlay(); openModal(${p.id});">${delBtn}<div class="article-img">${p.emoji}</div><div class="article-info"><div class="article-name">${p.name}</div><div class="article-meta">${p.meta}</div><div class="article-price">${p.price}</div></div></div>`;
+}
+
+async function deleteAnnonce(uuid, ev) {
+  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
+  if (!uuid) return;
+  if (!window.confirm('Supprimer définitivement cette annonce ? Cette action est irréversible.')) return;
+  if (window.supaClient) {
+    try {
+      const res = await window.supaClient.from('annonces').delete().eq('id', uuid);
+      if (res && res.error) { showToast('Suppression impossible'); console.warn('delete annonce', res.error); return; }
+    } catch (e) { showToast('Suppression impossible'); console.warn('delete annonce', e); return; }
+  }
+  const idx = products.findIndex(function (p) { return p.uuid === uuid; });
+  if (idx !== -1) products.splice(idx, 1);
+  showToast('Annonce supprimée');
+  if (typeof applyListingFilters === 'function') applyListingFilters();
+  if (typeof renderFeedGrid === 'function') renderFeedGrid();
+  const ov = document.getElementById('profileOverlay');
+  if (ov && ov.classList.contains('open')) renderProfileMainArea();
 }
 
 function renderVitrine() {
@@ -6161,7 +6309,11 @@ function renderVitrine() {
         const ids = c._itemIds || [];
         const first = products.find(function (p) { return p.uuid && ids.indexOf(p.uuid) !== -1; });
         const thumb = first ? first.emoji : '<div style="width:100%;height:100%;background:var(--teal-light)"></div>';
-        return `<div class="pcol-card" onclick="switchProfileTab('collections')"><div class="pcol-thumb">${thumb}</div><div class="pcol-name">${c.name}</div><div class="pcol-count">${ids.length} article${ids.length>1?'s':''}</div></div>`;
+        const s = collectionStats(c);
+        const badge = s.hot ? '<span class="coll-badge">Très demandé</span>' : '';
+        const priceBit = s.priceRange ? (' <span class="coll-dot">·</span> ' + s.priceRange) : '';
+        const newBit = s.newThisWeek > 0 ? ('<div class="pcol-new">' + s.newThisWeek + ' nouvelle' + (s.newThisWeek > 1 ? 's' : '') + ' pièce' + (s.newThisWeek > 1 ? 's' : '') + ' cette semaine</div>') : '';
+        return `<div class="pcol-card" onclick="switchProfileTab('collections')"><div class="pcol-thumb">${thumb}</div><div class="pcol-name">${c.name}${badge}</div><div class="pcol-count">${s.count} article${s.count>1?'s':''}${priceBit}</div>${newBit}</div>`;
       }).join('') + `</div></div>`;
   }
   out += `<div class="profile-block"><div class="profile-section-title pst-sans">Articles en vente<a onclick="switchProfileTab('annonces')">Voir tout</a></div>`;
@@ -6279,7 +6431,7 @@ function renderProfilePage() {
   bioEl.style.display = prof.bio ? 'block' : 'none';
 
   const memberSinceIso = prof.created_at || (profileIsOwn && currentUser ? currentUser.created_at : null);
-  const villeHtml = prof.ville ? ('<span class="mrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>' + prof.ville + '</span>') : '';
+  const villeHtml = prof.ville ? ('<span class="mrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>' + cityCountry(prof.ville) + '</span>') : '';
   document.getElementById('profileMemberSince').innerHTML = villeHtml + '<span class="mrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' + frenchMemberSince(memberSinceIso) + '</span>';
 
   var moreEdit = document.getElementById('profileMoreEdit'); if (moreEdit) moreEdit.style.display = profileIsOwn ? 'block' : 'none';
@@ -6299,7 +6451,7 @@ async function showProfileFor(userId) {
   if (!userId) return;
   profileViewedUserId = userId;
   profileIsOwn = !!(currentUser && currentUser.id === userId);
-  profileActiveTab = 'annonces';
+  profileActiveTab = 'vitrine';
   profileViewingCollectionId = null;
   cancelProfileEdit();
 
