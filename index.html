@@ -3256,6 +3256,39 @@
 }
 </style>
 
+
+<style id="fripz-step5-rounded-profile-bottom">
+/* ETAPE 5 — arrondir uniquement le bas du bloc profil / onglets */
+.profile-overlay .profile-headcard{
+  border-radius:24px 24px 0 0 !important;
+}
+.profile-overlay .profile-tabswrap{
+  border-radius:0 0 24px 24px !important;
+  overflow:hidden !important;
+}
+.profile-overlay .profile-tabsbar{
+  border-radius:0 0 24px 24px !important;
+}
+</style>
+
+
+<style id="fripz-step6-widen-premium-right">
+/* ETAPE 6 — élargir uniquement la feuille premium côté droit pour contenir la sidebar */
+@media (min-width:1001px){
+  .profile-overlay{
+    --pf-shell-w:min(1620px, calc(100% - 24px)) !important;
+  }
+  .profile-overlay .profile-page{
+    width:var(--pf-shell-w) !important;
+  }
+  /* Conserve les traits premium sur les bords internes de la couverture. */
+  .profile-overlay .profile-page::before{
+    left:24px !important;
+    right:24px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
