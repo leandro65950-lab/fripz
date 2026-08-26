@@ -2745,11 +2745,11 @@
 .profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 44px; font-size: 14px; font-weight: 600; min-width: 115px; padding: 0 16px; }
 .profile-overlay .profile-act-icon { width: 44px; height: 44px; }
 /* --- Densité verticale compacte --- */
-.profile-overlay .profile-headwrap { margin-top: -20px; }   /* bannière → carte : léger chevauchement */
+.profile-overlay .profile-headwrap { margin-top: -48px; }   /* remonté vers la couverture */
 .profile-overlay .profile-bio { margin-top: 8px; }          /* nom → description : 8px */
 .profile-overlay .profile-meta-row { margin-top: 10px; }
 .profile-overlay .profile-actions { margin-top: 20px; }     /* stats → boutons : 20px */
-.profile-overlay .profile-headcard { padding-bottom: 1.2rem; } /* boutons → navigation */
+.profile-overlay .profile-headcard { padding: 1.15rem 2rem 1rem; border-radius: 22px; box-shadow: 0 10px 30px rgba(30,40,25,0.06); }
 .profile-overlay .profile-section-title { margin: 0 0 16px; }  /* titre → contenu : 16px */
 /* Encadrer les blocs de contenu (marge ≤ 32px entre grandes sections) */
 .profile-overlay .profile-block {
@@ -2775,6 +2775,10 @@
 .collection-updated { font-size: 11px; color: #9aa39c; margin-top: 5px; }
 .pcol-new { font-size: 11px; font-weight: 600; color: #527D68; margin-top: 3px; line-height: 1.3; }
 .pcol-card, .collection-card { position: relative; }
+/* 3e rectangle : barre d'onglets = carte blanche séparée */
+.profile-overlay .profile-tabsbar {
+  margin-top: 12px; border: 1px solid var(--mq-line); border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(30,40,25,0.06); padding-top: 2px; padding-bottom: 2px; }
 /* 16px entre barre catégories et couverture */
 .profile-overlay .profile-cover { margin-top: 16px; }
 /* Statistiques en 3 x 2, séparateurs subtils, padding 16px */
