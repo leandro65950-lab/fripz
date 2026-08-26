@@ -3381,6 +3381,30 @@
 }
 </style>
 
+<style id="fripz-step13-sidebar-proportions">
+/* ETAPE 13 — affiner la colonne droite uniquement : plus etroite, plus verticale, bien alignee. */
+@media (min-width:1001px){
+  /* Ne touche pas aux blocs de gauche : seule la colonne droite change. */
+  .profile-overlay .profile-body{
+    grid-template-columns:minmax(0,1fr) 272px !important;
+    column-gap:28px !important;
+  }
+  .profile-overlay .profile-side{
+    width:272px !important;
+    max-width:272px !important;
+    align-self:start !important;
+  }
+  .profile-overlay .pside-card{
+    width:100% !important;
+    padding:20px 18px !important;
+  }
+  /* Un peu plus de hauteur pour retrouver l'effet vertical/premium de la maquette. */
+  .profile-overlay .profile-side .pside-card:nth-child(1){min-height:138px !important;}
+  .profile-overlay .profile-side .pside-card:nth-child(2){min-height:150px !important;}
+  .profile-overlay .profile-side .pside-card:nth-child(3){min-height:162px !important;}
+}
+</style>
+
 </head>
 <body>
 
