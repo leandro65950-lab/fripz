@@ -2739,7 +2739,7 @@
 }
 /* Photo de profil : 180×180, arrondi 20, léger chevauchement bannière */
 .profile-overlay .profile-avatar { width: 190px; height: 190px; border-radius: 20px; border: 4px solid #fff; box-shadow: 0 12px 30px rgba(20,40,30,0.18); }
-.profile-overlay .profile-avatar-wrap { width: 190px; margin-top: -30px; margin-left: -40px; align-self: start; }
+.profile-overlay .profile-avatar-wrap { width: 190px; margin-top: -30px; margin-left: 60px; align-self: start; }
 /* Boutons vendeur : 40px, 13/600, gap 8px */
 .profile-overlay .profile-actions { gap: 10px; }
 .profile-overlay .follow-btn, .profile-overlay .profile-act-btn { height: 44px; font-size: 14px; font-weight: 600; min-width: 115px; padding: 0 16px; }
@@ -2774,6 +2774,7 @@
 .collection-new { font-size: 12px; font-weight: 600; color: #527D68; margin-top: 5px; }
 .collection-updated { font-size: 11px; color: #9aa39c; margin-top: 5px; }
 .pcol-new { font-size: 11px; font-weight: 600; color: #527D68; margin-top: 3px; line-height: 1.3; }
+.pcol-card, .collection-card { position: relative; }
 /* 16px entre barre catégories et couverture */
 .profile-overlay .profile-cover { margin-top: 16px; }
 /* Statistiques en 3 x 2, séparateurs subtils, padding 16px */
@@ -6058,6 +6059,7 @@ function renderCollectionsGrid() {
       ? '<div class="collection-new">' + s.newThisWeek + ' nouvelle' + (s.newThisWeek > 1 ? 's' : '') + ' pièce' + (s.newThisWeek > 1 ? 's' : '') + ' cette semaine</div>'
       : (s.updated ? '<div class="collection-updated">' + s.updated + '</div>' : '');
     return '<div class="collection-card" onclick="openCollectionDetail(\'' + c.id + '\')">' +
+      (profileIsOwn ? '<button class="card-del-btn" title="Supprimer la collection" onclick="deleteCollection(\'' + c.id + '\', event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>' : '') +
       '<div class="collection-cover"' + (cover ? (' style="background-image:url(\'' + cover + '\')"') : '') + '>' +
         (cover ? '' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:30px;height:30px"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>') +
       '</div>' +
@@ -6276,7 +6278,7 @@ function renderProfileMainArea() {
 
 function profileCardHTML(p) {
   const delBtn = (profileIsOwn && p.uuid) ? `<button class="card-del-btn" title="Supprimer l'annonce" onclick="deleteAnnonce('${p.uuid}', event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>` : '';
-  return `<div class="article-card" onclick="closeProfileOverlay(); openModal(${p.id});">${delBtn}<div class="article-img">${p.emoji}</div><div class="article-info"><div class="article-name">${p.name}</div><div class="article-meta">${p.meta}</div><div class="article-price">${p.price}</div></div></div>`;
+  return `<div class="article-card" onclick="openModal(${p.id});">${delBtn}<div class="article-img">${p.emoji}</div><div class="article-info"><div class="article-name">${p.name}</div><div class="article-meta">${p.meta}</div><div class="article-price">${p.price}</div></div></div>`;
 }
 
 async function deleteAnnonce(uuid, ev) {
@@ -6298,6 +6300,23 @@ async function deleteAnnonce(uuid, ev) {
   if (ov && ov.classList.contains('open')) renderProfileMainArea();
 }
 
+async function deleteCollection(id, ev) {
+  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
+  if (!id) return;
+  if (!window.confirm('Supprimer cette collection ? Les articles ne seront pas supprimés, seulement la collection.')) return;
+  if (window.supaClient) {
+    try {
+      await window.supaClient.from('collection_items').delete().eq('collection_id', id);
+      const res = await window.supaClient.from('collections').delete().eq('id', id);
+      if (res && res.error) { showToast('Suppression impossible'); console.warn('delete collection', res.error); return; }
+    } catch (e) { showToast('Suppression impossible'); console.warn('delete collection', e); return; }
+  }
+  profileCollections = profileCollections.filter(function (c) { return String(c.id) !== String(id); });
+  if (String(profileViewingCollectionId) === String(id)) profileViewingCollectionId = null;
+  showToast('Collection supprimée');
+  renderProfileMainArea();
+}
+
 function renderVitrine() {
   const area = document.getElementById('profileMainArea');
   const mine = annoncesByUser(profileViewedUserId);
@@ -6313,7 +6332,7 @@ function renderVitrine() {
         const badge = s.hot ? '<span class="coll-badge">Très demandé</span>' : '';
         const priceBit = s.priceRange ? (' <span class="coll-dot">·</span> ' + s.priceRange) : '';
         const newBit = s.newThisWeek > 0 ? ('<div class="pcol-new">' + s.newThisWeek + ' nouvelle' + (s.newThisWeek > 1 ? 's' : '') + ' pièce' + (s.newThisWeek > 1 ? 's' : '') + ' cette semaine</div>') : '';
-        return `<div class="pcol-card" onclick="switchProfileTab('collections')"><div class="pcol-thumb">${thumb}</div><div class="pcol-name">${c.name}${badge}</div><div class="pcol-count">${s.count} article${s.count>1?'s':''}${priceBit}</div>${newBit}</div>`;
+        return `<div class="pcol-card" onclick="switchProfileTab('collections')">${profileIsOwn ? `<button class="card-del-btn" title="Supprimer la collection" onclick="deleteCollection('${c.id}', event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>` : ''}<div class="pcol-thumb">${thumb}</div><div class="pcol-name">${c.name}${badge}</div><div class="pcol-count">${s.count} article${s.count>1?'s':''}${priceBit}</div>${newBit}</div>`;
       }).join('') + `</div></div>`;
   }
   out += `<div class="profile-block"><div class="profile-section-title pst-sans">Articles en vente<a onclick="switchProfileTab('annonces')">Voir tout</a></div>`;
