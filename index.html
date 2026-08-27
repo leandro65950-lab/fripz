@@ -8847,6 +8847,14 @@ function sellerPerformanceMetrics(prof){
 }
 function sellerPerformanceBadgesHTML(prof){
   var m = sellerPerformanceMetrics(prof);
+
+  // Sur MON profil, afficher les deux badges même si aucune statistique
+  // historique n'est encore disponible. Dès que des données existent,
+  // les autres profils restent soumis aux vrais seuils automatiques.
+  var isOwnProfile = !!(typeof profileIsOwn !== 'undefined' && profileIsOwn);
+  if (isOwnProfile && m.responseAvgMinutes === null) m.fastResponse = true;
+  if (isOwnProfile && m.shippingAvgHours === null) m.fastShipping = true;
+
   var rows = [];
   if (m.fastResponse) {
     rows.push(
