@@ -6683,17 +6683,29 @@ function renderFollowButton() {
   }
 }
 
+function getProfileReviewStats() {
+  var reviews = (Array.isArray(profileSellerReviews) && profileSellerReviews.length)
+    ? profileSellerReviews
+    : (Array.isArray(window.FRIPZ_DEMO_REVIEWS) ? window.FRIPZ_DEMO_REVIEWS : []);
+  if (!reviews.length) return { count: 0, avg: 0 };
+  var total = reviews.reduce(function(sum, r) { return sum + (Number(r.rating) || 0); }, 0);
+  return { count: reviews.length, avg: total / reviews.length };
+}
+
 function renderProfileStats() {
   const mine = annoncesByUser(profileViewedUserId);
   const el = document.getElementById('profileStatsCard');
   if (!el) return;
   const fmt = function (n) { return n >= 1000 ? (Math.round(n / 100) / 10) + 'k' : ('' + n); };
   const f = profileFollowState;
+  const rs = getProfileReviewStats();
+  const reviewValue = rs.count ? rs.avg.toFixed(1).replace('.', ',') : '—';
+  const reviewLabel = rs.count ? (rs.count + ' avis') : 'Aucun avis';
   el.innerHTML = `
     <div class="pstat-grid">
       <div class="pstat clickable" onclick="openFollowList('abonnes')"><b>${fmt(f.followersCount)}</b><span>Abonné${f.followersCount>1?'s':''}</span></div>
       <div class="pstat clickable" onclick="openFollowList('abonnements')"><b>${fmt(f.followingCount)}</b><span>Abonnements</span></div>
-      <div class="pstat"><b class="pstat-avis"><svg viewBox="0 0 24 24" width="20" height="20" fill="#ECAF17"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>(avis)</span></div>
+      <div class="pstat clickable" onclick="switchProfileTab('avis')" title="Voir tous les avis"><b class="pstat-avis">${reviewValue} <svg viewBox="0 0 24 24" width="18" height="18" fill="#ECAF17" style="vertical-align:-2px"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></b><span>${reviewLabel}</span></div>
       <div class="pstat"><b>100%</b><span>Réactivité</span></div>
     </div>
     <div class="peco"><div class="peco-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div><div><b>Engagé éco-responsable</b><span>La seconde main, un geste vert</span></div></div>`;
@@ -9030,6 +9042,7 @@ renderProfileSide = function(){
       await loadSellerReviews(userId||profileViewedUserId);
       if(document.getElementById('profileOverlay') && document.getElementById('profileOverlay').classList.contains('open')){
         renderProfileSide();
+        renderProfileStats();
         if(profileActiveTab==='avis') renderProfileAvis();
       }
       return result;
@@ -9050,6 +9063,7 @@ renderProfileSide = function(){
     {name:'Sophie A.', rating:5, text:'Super expérience, je rachèterai sans hésiter.', date:'Il y a 1 mois', avatar:'SA'},
     {name:'Lucas P.', rating:4, text:'Conforme aux photos et très bien emballé.', date:'Il y a 1 mois', avatar:'LP'}
   ];
+  window.FRIPZ_DEMO_REVIEWS = demoReviews;
 
   function stars(n){ return '★'.repeat(n) + '☆'.repeat(5-n); }
   function demoTrim(text,maxChars){ text=String(text||''); if(text.length<=maxChars) return text; var cut=text.slice(0,maxChars).replace(/\s+\S*$/,'').trim(); return cut+'…'; }
@@ -9078,6 +9092,7 @@ renderProfileSide = function(){
       '<div style="display:flex;align-items:center;gap:8px;margin:8px 0 4px"><strong style="font-size:18px;color:#17251F">'+avg+'</strong><span style="color:#ECAF17;font-size:13px">★★★★★</span><span style="font-size:10px;color:#7A837E">('+demoReviews.length+' avis)</span></div>' +
       recent.map(r=>card(r,true)).join('') +
       '<button type="button" id="demoSeeAllReviews" style="width:100%;margin-top:10px;height:36px;border:1px solid #E8E6DF;border-radius:10px;background:#fff;font-size:11px;font-weight:600;color:#17251F;cursor:pointer">Voir tous les avis</button>';
+    if (typeof renderProfileStats === 'function') renderProfileStats();
     const b=document.getElementById('demoSeeAllReviews');
     if(b) b.onclick=function(){
       const tabs=Array.from(document.querySelectorAll('.profile-tab-btn'));
