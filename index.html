@@ -9095,10 +9095,21 @@ renderProfileSide = function(){
     };
   }
 
-  const obs=new MutationObserver(()=>{ fillSidebar(); });
-  obs.observe(document.body,{subtree:true,childList:true});
-  document.addEventListener('DOMContentLoaded',()=>setTimeout(fillSidebar,100));
-  setTimeout(fillSidebar,300);
+  // IMPORTANT : ne pas observer tout le DOM ici. Un MutationObserver qui appelle
+  // fillSidebar() après chaque modification de innerHTML peut créer une boucle
+  // infinie et bloquer l'ouverture du profil vendeur.
+  const originalRenderProfileSideDemo = window.renderProfileSide;
+  if(typeof originalRenderProfileSideDemo === 'function'){
+    window.renderProfileSide = function(){
+      const r = originalRenderProfileSideDemo.apply(this, arguments);
+      fillSidebar();
+      return r;
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(fillSidebar, 100);
+  });
 })();
 </script>
 
