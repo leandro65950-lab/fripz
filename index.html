@@ -6594,12 +6594,12 @@ function renderFeedGrid() {
     return;
   }
 
-  area.innerHTML = list.map(function (p) {
+  area.innerHTML = list.map(function (p, feedIndex) {
     return '<div class="feed-card" onclick="openModal(' + p.id + ')">' +
       '<div class="feed-card-img">' + p.emoji +
-        ((p.boosted || p.is_boosted || p.boost_active || (!p.uuid && p.curated && p.id === 10))
-          ? '<div class="feed-listing-badge boosted">BOOSTÉ</div>'
-          : ((isRecentListing(p) || (!p.uuid && p.curated && (p.id === 9 || p.id === 11))) ? '<div class="feed-listing-badge new">NOUVEAU</div>' : '')) +
+        ((p.boosted || p.is_boosted || p.boost_active || feedIndex === 1)
+          ? '<div class="feed-listing-badge boosted"><span class="boost-icon">⚡</span> BOOSTÉ</div>'
+          : ((isRecentListing(p) || feedIndex === 0 || feedIndex === 2) ? '<div class="feed-listing-badge new">NOUVEAU</div>' : '')) +
         '<div class="fav-btn ' + (liked.has(p.id) ? 'liked' : '') + '" onclick="event.stopPropagation(); toggleLike(event,' + p.id + '); renderFeedGrid();">' +
           '<svg viewBox="0 0 24 24" fill="' + (liked.has(p.id) ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>' +
         '</div>' +
