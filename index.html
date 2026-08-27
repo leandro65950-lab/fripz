@@ -3529,6 +3529,21 @@
   }
 }
 </style>
+
+<style id="fripz-step22-avatar-size-only">
+/* STEP 22 corrigée — UNIQUEMENT la taille de la photo de profil.
+   Aucun déplacement de la bio, identité, stats ou autres blocs. */
+@media (min-width:1001px){
+  .profile-overlay .profile-avatar-wrap{
+    width:218px !important;
+    height:282px !important;
+  }
+  .profile-overlay .profile-avatar{
+    width:218px !important;
+    height:282px !important;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -8736,15 +8751,3 @@ window.addEventListener('load', function () { if (typeof renderFeedGrid === 'fun
 </script>
 </body>
 </html>
-<style>
-/* STEP 22 — uniquement agrandissement de la photo de profil : un peu plus haute et un peu plus large vers la droite */
-@media (min-width: 901px) {
-  .profile-avatar-wrap {
-    width: 210px !important;
-  }
-  .profile-avatar {
-    width: 210px !important;
-    height: 316px !important;
-  }
-}
-</style>
