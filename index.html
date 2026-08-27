@@ -3817,6 +3817,63 @@
 }
 </style>
 
+
+<style id="fripz-satoshi-larger-and-listing-badges">
+/* Ajustement demandé : Satoshi légèrement plus grand sur Toutes les annonces */
+.popular-section .popular-title{font-size:34px!important;line-height:40px!important;}
+.popular-section .listings-count{font-size:14px!important;line-height:21px!important;}
+.popular-section .filters-head h3,
+.popular-section .filter-group-title,
+.popular-section .filter-cat-row,
+.popular-section .state-check-row,
+.popular-section .size-chip,
+.popular-section .brand-row,
+.popular-section .price-labels,
+.popular-section .filters-reset,
+.popular-section .brand-search,
+.popular-section .sort-select,
+.popular-section .page-btn,
+.popular-section .view-toggle-btn{font-size:14px!important;line-height:20px!important;}
+.popular-section .article-name{font-size:15px!important;line-height:21px!important;}
+.popular-section .article-meta{font-size:13px!important;line-height:19px!important;}
+.popular-section .article-price{font-size:17px!important;line-height:23px!important;}
+.popular-section .article-badge{font-size:11px!important;line-height:16px!important;padding:4px 9px!important;border-radius:6px!important;color:#fff!important;letter-spacing:.01em!important;}
+.popular-section .article-badge.new{background:#527D68!important;}
+.popular-section .article-badge.boosted{background:#F2A24A!important;color:#17251F!important;}
+</style>
+
+<style id="fripz-satoshi-visible-v2">
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
+/* Réglage volontairement plus visible : page Toutes les annonces */
+.popular-section,
+.popular-section button,
+.popular-section input,
+.popular-section select,
+.popular-section textarea,
+.popular-section option { font-family: "Satoshi", "Plus Jakarta Sans", sans-serif !important; }
+.popular-section .popular-title{font-size:36px!important;line-height:42px!important;font-weight:600!important;}
+.popular-section .listings-count{font-size:15px!important;line-height:22px!important;}
+.popular-section .filters-head h3{font-size:17px!important;line-height:24px!important;font-weight:600!important;}
+.popular-section .filter-group-title{font-size:15px!important;line-height:21px!important;font-weight:600!important;}
+.popular-section .filter-cat-row,
+.popular-section .state-check-row,
+.popular-section .size-chip,
+.popular-section .brand-row,
+.popular-section .price-labels,
+.popular-section .filters-reset,
+.popular-section .brand-search,
+.popular-section .sort-select,
+.popular-section .page-btn,
+.popular-section .view-toggle-btn{font-size:15px!important;line-height:21px!important;}
+.popular-section .article-name{font-size:16px!important;line-height:23px!important;font-weight:600!important;letter-spacing:-.01em!important;}
+.popular-section .article-meta{font-size:14px!important;line-height:20px!important;}
+.popular-section .article-price{font-size:18px!important;line-height:25px!important;font-weight:650!important;font-style:normal!important;}
+.nav-search input,.nav-search input::placeholder{font-size:15px!important;line-height:21px!important;}
+.popular-section .article-info{padding:.9rem!important;}
+.popular-section .article-badge{font-family:"Satoshi","Plus Jakarta Sans",sans-serif!important;font-size:12px!important;line-height:17px!important;font-weight:700!important;padding:5px 10px!important;border-radius:7px!important;box-shadow:0 2px 8px rgba(0,0,0,.08)!important;}
+.popular-section .article-badge.new{background:#527D68!important;color:#fff!important;}
+.popular-section .article-badge.boosted{background:#F2A24A!important;color:#17251F!important;}
+</style>
 </head>
 <body>
 
@@ -5092,11 +5149,11 @@ function closePage() {
 
 <script>
 const products = [
-  { id:1, emoji:'<img src="https://images.unsplash.com/photo-1583316174775-bd6dc0e9f298?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Zara', name:'Robe Zara fleurie', meta:'M', price:'28 €', priceNum:28, size:'M', cat:'femme', state:'Neuf avec étiquette', desc:'Robe fleurie légère, jamais portée. Étiquettes d\'origine. Taille M, longueur midi.' },
-  { id:2, emoji:'<img src="https://images.unsplash.com/photo-1589226849736-8d0e0c78e869?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Levi\'s', name:'Jean slim Levi\'s', meta:'38', price:'42 €', priceNum:42, size:null, cat:'homme', state:'Très bon état', desc:'Jean Levi\'s 511 slim fit, bleu classique. Porté quelques fois, excellent état général.' },
-  { id:3, emoji:'<img src="https://images.unsplash.com/photo-1727515546577-f7d82a47b51d?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Mango', name:'Veste cuir Mango', meta:'L', price:'65 €', priceNum:65, size:'L', cat:'femme', state:'Bon état', desc:'Veste en cuir synthétique noire, coupe ajustée. Quelques légères traces d\'usure aux coudes.' },
-  { id:4, emoji:'<img src="https://images.unsplash.com/photo-1615743472612-93b21e520fad?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike blanches', meta:'42', price:'55 €', priceNum:55, size:null, cat:'homme', state:'Très bon état', desc:'Nike Air Force 1, blanches, taille 42. Très bien entretenues, semelles propres. Boîte fournie.' },
-  { id:5, emoji:'<img src="https://images.unsplash.com/photo-1654077813634-9ff6b843caab?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Rouje', name:'Escarpins Rouje rouges', meta:'38', price:'85 €', priceNum:85, size:null, cat:'femme', state:'Neuf avec étiquette', desc:'Escarpins Rouje cuir verni rouge, neufs avec boîte. Reçus en cadeau, mauvaise taille.' },
+  { id:1, created_at:new Date().toISOString(), emoji:'<img src="https://images.unsplash.com/photo-1583316174775-bd6dc0e9f298?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Zara', name:'Robe Zara fleurie', meta:'M', price:'28 €', priceNum:28, size:'M', cat:'femme', state:'Neuf avec étiquette', desc:'Robe fleurie légère, jamais portée. Étiquettes d\'origine. Taille M, longueur midi.' },
+  { id:2, boosted:true, emoji:'<img src="https://images.unsplash.com/photo-1589226849736-8d0e0c78e869?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Levi\'s', name:'Jean slim Levi\'s', meta:'38', price:'42 €', priceNum:42, size:null, cat:'homme', state:'Très bon état', desc:'Jean Levi\'s 511 slim fit, bleu classique. Porté quelques fois, excellent état général.' },
+  { id:3, created_at:new Date().toISOString(), emoji:'<img src="https://images.unsplash.com/photo-1727515546577-f7d82a47b51d?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Mango', name:'Veste cuir Mango', meta:'L', price:'65 €', priceNum:65, size:'L', cat:'femme', state:'Bon état', desc:'Veste en cuir synthétique noire, coupe ajustée. Quelques légères traces d\'usure aux coudes.' },
+  { id:4, boosted:true, emoji:'<img src="https://images.unsplash.com/photo-1615743472612-93b21e520fad?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Nike', name:'Baskets Nike blanches', meta:'42', price:'55 €', priceNum:55, size:null, cat:'homme', state:'Très bon état', desc:'Nike Air Force 1, blanches, taille 42. Très bien entretenues, semelles propres. Boîte fournie.' },
+  { id:5, created_at:new Date().toISOString(), emoji:'<img src="https://images.unsplash.com/photo-1654077813634-9ff6b843caab?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Rouje', name:'Escarpins Rouje rouges', meta:'38', price:'85 €', priceNum:85, size:null, cat:'femme', state:'Neuf avec étiquette', desc:'Escarpins Rouje cuir verni rouge, neufs avec boîte. Reçus en cadeau, mauvaise taille.' },
   { id:6, emoji:'<img src="https://images.unsplash.com/photo-1622290319146-7b63df48a635?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Petit Bateau', name:'Set bodies Petit Bateau 6m', meta:'6 mois', price:'18 €', priceNum:18, size:null, cat:'enfant', state:'Très bon état', desc:'Set de 5 bodies coton, lavés à basse température, couleurs vives. Taille 6 mois.' },
   { id:7, emoji:'<img src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Sézane', name:'Sac Farida Sézane crème', meta:'Taille unique', price:'72 €', priceNum:72, size:null, cat:'accessoire', state:'Très bon état', desc:'Sac Farida Sézane cuir crème, très bon état général.' },
   { id:8, emoji:'<img src="https://images.unsplash.com/photo-1630477577863-4baf945ddb22?w=500&q=75&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover;display:block">', brand:'Longchamp', name:'Gants Longchamp noirs', meta:'S', price:'38 €', priceNum:38, size:'S', cat:'accessoire', state:'Neuf avec étiquette', desc:'Gants Longchamp cuir agneau doublé cachemire, neufs avec boîte cadeau.' },
@@ -6216,7 +6273,7 @@ function renderArticles(items) {
     <div class="article-card" onclick="openModal(${p.id})">
       <div class="article-img">
         ${p.emoji}
-        ${isRecentListing(p) ? '<div class="article-badge new">NOUVEAU</div>' : ''}
+        ${(p.boosted || p.is_boosted || p.boost_active) ? '<div class="article-badge boosted">BOOSTÉ</div>' : (isRecentListing(p) ? '<div class="article-badge new">NOUVEAU</div>' : '')}
 
         <div class="fav-btn ${liked.has(p.id)?'liked':''}" onclick="toggleLike(event,${p.id})">
           <svg viewBox="0 0 24 24" fill="${liked.has(p.id)?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
