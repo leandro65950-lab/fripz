@@ -3549,6 +3549,10 @@
 .fr-review-summary{display:flex;align-items:center;gap:7px;margin:-2px 0 12px;font-size:.78rem;color:#747873}.fr-review-summary strong{font-family:Georgia,'Times New Roman',serif;font-size:1.05rem;color:#171a17}.fr-review-stars{display:inline-flex;gap:1px;white-space:nowrap}.fr-review-stars span{color:#d8d8d1;font-size:.88rem}.fr-review-stars span.on{color:#e7a91c}.fr-review-list{display:flex;flex-direction:column}.fr-review-row{display:grid;grid-template-columns:34px 1fr;gap:9px;padding:11px 0;border-top:1px solid rgba(31,46,37,.08)}.fr-review-avatar{width:34px;height:34px;border-radius:50%;overflow:hidden;background:#e8eee8;display:flex;align-items:center;justify-content:center;font-weight:700;color:#3d5f49}.fr-review-avatar img{width:100%;height:100%;object-fit:cover}.fr-review-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}.fr-review-top strong{font-size:.78rem;color:#20241f}.fr-review-top time{font-size:.65rem;color:#8b8f8a;white-space:nowrap}.fr-review-body>.fr-review-stars span{font-size:.72rem}.fr-review-comment{margin-top:4px;font-size:.72rem;line-height:1.42;color:#3f433f}.fr-all-reviews{width:100%;margin-top:10px;padding:9px 10px;border:1px solid rgba(31,46,37,.10);border-radius:9px;background:#fff;color:#26392d;font-weight:600;cursor:pointer}.fr-all-reviews:hover{background:#f6f7f3}.fr-review-summary-large{margin:4px 0 16px}.fr-review-summary-large strong{font-size:1.35rem}.fr-review-list-all .fr-review-row{grid-template-columns:42px 1fr;padding:16px 0}.fr-review-list-all .fr-review-avatar{width:42px;height:42px}.fr-review-list-all .fr-review-top strong{font-size:.9rem}.fr-review-list-all .fr-review-comment{font-size:.84rem;max-width:760px}.fr-all-reviews-page{min-height:220px}
 </style>
 
+
+<style>
+.fr-review-more{border:0;background:transparent;padding:0;margin-left:3px;color:#5b8a72;font:inherit;font-weight:700;cursor:pointer}.fr-review-more:hover{text-decoration:underline}
+</style>
 </head>
 <body>
 
@@ -8971,20 +8975,26 @@ async function loadSellerReviews(userId){
   }).sort(function(a,b){return new Date(b.created_at||0)-new Date(a.created_at||0);});
   return profileSellerReviews;
 }
-function reviewRowHTML(r){
+function fripzTruncateReview(text, maxChars){
+  text=String(text||'');
+  if(text.length<=maxChars) return {text:text,truncated:false};
+  var cut=text.slice(0,maxChars).replace(/\s+\S*$/,'').trim();
+  return {text:cut+'…',truncated:true};
+}
+function reviewRowHTML(r, compact){
   var av=r.author_avatar ? '<img src="'+fripzEscapeHTML(r.author_avatar)+'" alt="">' : '<span>'+fripzEscapeHTML((r.author_name||'U').charAt(0).toUpperCase())+'</span>';
   return '<div class="fr-review-row">'+
     '<div class="fr-review-avatar">'+av+'</div>'+
     '<div class="fr-review-body"><div class="fr-review-top"><strong>'+fripzEscapeHTML(r.author_name)+'</strong><time>'+fripzEscapeHTML(fripzReviewDate(r.created_at))+'</time></div>'+
-    fripzStars(r.rating)+(r.comment?'<div class="fr-review-comment">'+fripzEscapeHTML(r.comment)+'</div>':'')+'</div></div>';
+    fripzStars(r.rating)+(r.comment?(function(){var v=fripzTruncateReview(r.comment,compact?180:1000);return '<div class="fr-review-comment">'+fripzEscapeHTML(v.text)+(v.truncated&&compact?' <button type="button" class="fr-review-more" onclick="switchProfileTab(\'avis\')">Lire plus</button>':'')+'</div>';})():'')+'</div></div>';
 }
 function recentReviewsCardHTML(){
-  var list=profileSellerReviews.slice(0,5);
+  var list=profileSellerReviews.slice(0,3);
   if(!list.length) return '<div class="pside-card"><div class="pside-title">Avis clients</div><div class="pside-empty">'+emptyStateIconSvg()+'<div>Pas encore d\'avis</div></div></div>';
   var avg=profileSellerReviews.reduce(function(a,r){return a+(Number(r.rating)||0);},0)/profileSellerReviews.length;
   return '<div class="pside-card fr-reviews-card"><div class="pside-title">Avis clients</div>'+
     '<div class="fr-review-summary"><strong>'+avg.toFixed(1).replace('.',',')+'</strong>'+fripzStars(avg)+'<span>('+profileSellerReviews.length+' avis)</span></div>'+
-    '<div class="fr-review-list">'+list.map(reviewRowHTML).join('')+'</div>'+
+    '<div class="fr-review-list">'+list.map(function(r){return reviewRowHTML(r,true);}).join('')+'</div>'+
     '<button class="fr-all-reviews" onclick="switchProfileTab(\'avis\')">Voir tous les avis</button></div>';
 }
 
@@ -8996,7 +9006,7 @@ renderProfileAvis = function(){
     return;
   }
   var avg=profileSellerReviews.reduce(function(a,r){return a+(Number(r.rating)||0);},0)/profileSellerReviews.length;
-  area.innerHTML='<div class="profile-block fr-all-reviews-page"><div class="profile-section-title">Tous les avis</div><div class="fr-review-summary fr-review-summary-large"><strong>'+avg.toFixed(1).replace('.',',')+'</strong>'+fripzStars(avg)+'<span>('+profileSellerReviews.length+' avis)</span></div><div class="fr-review-list fr-review-list-all">'+profileSellerReviews.map(reviewRowHTML).join('')+'</div></div>';
+  area.innerHTML='<div class="profile-block fr-all-reviews-page"><div class="profile-section-title">Tous les avis</div><div class="fr-review-summary fr-review-summary-large"><strong>'+avg.toFixed(1).replace('.',',')+'</strong>'+fripzStars(avg)+'<span>('+profileSellerReviews.length+' avis)</span></div><div class="fr-review-list fr-review-list-all">'+profileSellerReviews.map(function(r){return reviewRowHTML(r,false);}).join('')+'</div></div>';
 };
 
 /* surcharge finale de la colonne droite : À propos + 5 derniers avis + Garanties */
@@ -9042,7 +9052,9 @@ renderProfileSide = function(){
   ];
 
   function stars(n){ return '★'.repeat(n) + '☆'.repeat(5-n); }
-  function card(r){
+  function demoTrim(text,maxChars){ text=String(text||''); if(text.length<=maxChars) return text; var cut=text.slice(0,maxChars).replace(/\s+\S*$/,'').trim(); return cut+'…'; }
+  function card(r, compact){
+    var displayText=demoTrim(r.text, compact?180:1000);
     return '<div class="demo-review-item" style="display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eeeae3">' +
       '<div style="width:34px;height:34px;border-radius:50%;background:#e6eee8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3f604b;flex:0 0 auto">'+r.avatar+'</div>' +
       '<div style="min-width:0;flex:1">' +
@@ -9051,7 +9063,7 @@ renderProfileSide = function(){
           '<span style="font-size:10px;color:#8A8F8B;white-space:nowrap">'+r.date+'</span>' +
         '</div>' +
         '<div style="font-size:11px;color:#ECAF17;letter-spacing:1px;margin:2px 0 5px">'+stars(r.rating)+'</div>' +
-        '<div style="font-size:11px;line-height:1.45;color:#4A4A45">'+r.text+'</div>' +
+        '<div style="font-size:11px;line-height:1.45;color:#4A4A45">'+displayText+(compact && r.text.length>180?' <span style="font-weight:700;color:#5b8a72">Lire plus</span>':'')+'</div>' +
       '</div>' +
     '</div>';
   }
@@ -9060,11 +9072,11 @@ renderProfileSide = function(){
     const cards = Array.from(document.querySelectorAll('.pside-card'));
     const target = cards.find(c => /Avis clients/i.test(c.textContent||''));
     if(!target) return;
-    const recent = demoReviews.slice(0,5);
+    const recent = demoReviews.slice(0,3);
     const avg = (recent.reduce((a,b)=>a+b.rating,0)/recent.length).toFixed(1).replace('.',',');
     target.innerHTML = '<div class="pside-title">Avis clients</div>' +
       '<div style="display:flex;align-items:center;gap:8px;margin:8px 0 4px"><strong style="font-size:18px;color:#17251F">'+avg+'</strong><span style="color:#ECAF17;font-size:13px">★★★★★</span><span style="font-size:10px;color:#7A837E">('+demoReviews.length+' avis)</span></div>' +
-      recent.map(card).join('') +
+      recent.map(r=>card(r,true)).join('') +
       '<button type="button" id="demoSeeAllReviews" style="width:100%;margin-top:10px;height:36px;border:1px solid #E8E6DF;border-radius:10px;background:#fff;font-size:11px;font-weight:600;color:#17251F;cursor:pointer">Voir tous les avis</button>';
     const b=document.getElementById('demoSeeAllReviews');
     if(b) b.onclick=function(){
@@ -9083,7 +9095,7 @@ renderProfileSide = function(){
     const avg=(demoReviews.reduce((a,b)=>a+b.rating,0)/demoReviews.length).toFixed(1).replace('.',',');
     area.innerHTML='<div class="profile-block"><div class="profile-section-title">Tous les avis</div>'+
       '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><strong style="font-size:24px">'+avg+'</strong><span style="color:#ECAF17">★★★★★</span><span style="color:#7A837E;font-size:12px">'+demoReviews.length+' avis</span></div>'+
-      demoReviews.map(card).join('')+'</div>';
+      demoReviews.map(r=>card(r,false)).join('')+'</div>';
   }
 
   const origSwitch = window.switchProfileTab;
