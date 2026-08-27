@@ -2264,6 +2264,48 @@
   .footer-apps .store-badge svg { width: 23px; height: 23px; }
   .footer-apps .store-badge span { font-size: 0.86rem; }
   .footer-apps .store-badge small { font-size: 0.6rem; }
+
+/* === LANGUE HEADER — STYLE MAQUETTE (sans drapeau) === */
+.lang-select{
+  display:flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  padding:0 !important;
+  min-width:auto !important;
+  height:auto !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  font-family:'Plus Jakarta Sans',sans-serif !important;
+  cursor:pointer;
+}
+.lang-select:hover{
+  background:transparent !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+}
+.lang-flag{ display:none !important; }
+.lang-code{
+  font-family:'Plus Jakarta Sans',sans-serif !important;
+  font-size:14px !important;
+  line-height:1 !important;
+  font-weight:700 !important;
+  color:#171A18 !important;
+  letter-spacing:-0.01em !important;
+}
+.lang-select > svg{
+  width:14px !important;
+  height:14px !important;
+  color:#171A18 !important;
+  stroke-width:2 !important;
+}
+.lang-item{
+  font-family:'Plus Jakarta Sans',sans-serif !important;
+  font-size:14px !important;
+  font-weight:600 !important;
+}
+.lang-item .flag{ display:none !important; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -3559,6 +3601,222 @@
 <style>
 .fr-review-more{border:0;background:transparent;padding:0;margin-left:3px;color:#5b8a72;font:inherit;font-weight:700;cursor:pointer}.fr-review-more:hover{text-decoration:underline}
 </style>
+
+<style>
+/* Étape logo Fripz — typographie identique à la maquette */
+.nav-logo-text {
+  font-family: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 34px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.025em !important;
+  color: #355C45 !important;
+}
+.nav-logo { gap: 0 !important; }
+.nav-logo-icon { display: none !important; }
+</style>
+
+<style id="fripz-satoshi-marketplace-typography">
+/* =========================================================
+   FRIPZ — TYPOGRAPHIE PREMIUM / TOUTES LES ANNONCES
+   Satoshi pour l'interface marketplace, logo Fripz en Georgia.
+   ========================================================= */
+
+/* Logo Fripz — réglage exact demandé */
+.nav-logo-text {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  line-height: 28px !important;
+  letter-spacing: -0.5px !important;
+  color: #172019 !important;
+}
+
+/* Base de l'interface "Toutes les annonces" */
+.popular-section,
+.popular-section button,
+.popular-section input,
+.popular-section select,
+.popular-section textarea,
+.popular-section option {
+  font-family: "Satoshi", sans-serif !important;
+}
+
+/* Barre de recherche du header */
+.nav-search input {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+  color: #17251F !important;
+}
+.nav-search input::placeholder {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #7A837E !important;
+  opacity: 1 !important;
+}
+
+/* 1. Titre Toutes les annonces */
+.popular-section .popular-title {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  line-height: 38px !important;
+  letter-spacing: -0.025em !important;
+  color: #17251F !important;
+}
+
+/* 2. Nombre d'annonces */
+.popular-section .listings-count {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+  color: #7A837E !important;
+}
+
+/* 4-5. Filtres */
+.popular-section .filters-head h3,
+.popular-section .filter-group-title,
+.popular-section .filter-cat-row,
+.popular-section .state-check-row,
+.popular-section .size-chip,
+.popular-section .brand-row,
+.popular-section .price-labels {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  line-height: 18px !important;
+}
+.popular-section .filters-head h3,
+.popular-section .filter-group-title,
+.popular-section .filter-cat-row,
+.popular-section .state-check-row {
+  font-weight: 500 !important;
+  color: #17251F !important;
+}
+.popular-section .size-chip,
+.popular-section .brand-row,
+.popular-section .price-labels {
+  font-weight: 500 !important;
+  color: #59645F !important;
+}
+.popular-section .filters-reset {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 18px !important;
+  color: #527D68 !important;
+}
+.popular-section .brand-search {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  color: #17251F !important;
+}
+.popular-section .brand-search::placeholder {
+  color: #7A837E !important;
+  opacity: 1 !important;
+}
+
+/* 6. Tri */
+.popular-section .sort-select {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  color: #59645F !important;
+}
+
+/* 7. Nom du produit */
+.popular-section .article-name {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+  letter-spacing: -0.01em !important;
+  color: #17251F !important;
+  font-style: normal !important;
+}
+
+/* 8 + 10. Marque / état / taille / localisation / infos secondaires */
+.popular-section .article-meta {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  color: #7A837E !important;
+}
+
+/* 9. Prix */
+.popular-section .article-price {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 650 !important;
+  line-height: 22px !important;
+  letter-spacing: -0.015em !important;
+  color: #17251F !important;
+  font-style: normal !important;
+}
+
+/* 12. Badges produits */
+.popular-section .article-badge,
+.popular-section .filter-active-badge {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 16px !important;
+  padding: 4px 8px !important;
+  border-radius: 9999px !important;
+  color: #527D68 !important;
+  background: #EEF5F1 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Navigation/pagination compacte et cohérente */
+.popular-section .page-btn,
+.popular-section .view-toggle-btn {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+/* Titres de sections marketplace (Pour vous, Nouveautés, Tendances, etc.) */
+.section-title,
+.sellers-panel-title,
+.ai-showcase-title,
+.home-section-title {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  line-height: 28px !important;
+  letter-spacing: -0.02em !important;
+  color: #17251F !important;
+}
+
+/* Voir tout */
+.see-all-cats,
+.popular-section .see-all,
+.popular-section [class*="see-all"],
+.popular-section [class*="view-all"] {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #527D68 !important;
+}
+
+/* Cohérence des contrôles de la marketplace */
+.popular-section .filter-cat-row .fc-count {
+  font-family: "Satoshi", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  color: #7A837E !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -3588,7 +3846,7 @@
     </ul>
     <div class="nav-right">
       <div class="lang-select" onclick="toggleLangMenu(event)">
-        <span class="lang-flag"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect width="1" height="2" x="2" fill="#EF4135"/></svg></span><span class="lang-code">FR</span>
+        <span class="lang-code">FR</span>
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         <div class="lang-menu" id="langMenu">
           <div class="lang-item" onclick="setLang('FR',event)"><svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect width="1" height="2" x="2" fill="#EF4135"/></svg> Français</div>
@@ -6302,7 +6560,7 @@ function toggleLangMenu(event) {
 const FLAGS = { FR: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect width="1" height="2" x="2" fill="#EF4135"/></svg>', EN: '<svg class="flag" viewBox="0 0 60 30" preserveAspectRatio="none"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>', ES: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#AA151B"/><rect width="3" height="1" y="0.5" fill="#F1BF00"/></svg>', DE: '<svg class="flag" viewBox="0 0 5 3" preserveAspectRatio="none"><rect width="5" height="3" fill="#FFCE00"/><rect width="5" height="2" fill="#DD0000"/><rect width="5" height="1" fill="#000"/></svg>', IT: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#009246"/><rect width="1" height="2" x="2" fill="#CE2B37"/></svg>' };
 function setLang(code, event) {
   if (event) event.stopPropagation();
-  document.querySelector('.lang-flag').innerHTML = FLAGS[code] || '';
+  const flagEl = document.querySelector('.lang-flag'); if (flagEl) flagEl.innerHTML = '';
   document.querySelector('.lang-code').textContent = code;
   document.getElementById('langMenu').classList.remove('open');
 }
