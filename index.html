@@ -2289,6 +2289,7 @@
 .profile-verified { color: var(--teal); display: inline-flex; }
 .profile-pro-pill { background: var(--teal-light); color: var(--teal-dark); font-size: 0.72rem;
   font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .profile-pro-pill.is-professional { background: #e7efe9; color: #315f49; border-color: #bfd2c5; }
 .profile-handle { color: var(--text-light); font-size: 0.95rem; margin-top: 0.15rem; }
 .profile-bio { color: var(--text-mid); font-size: 0.98rem; margin-top: 0.6rem; max-width: 520px; line-height: 1.5; }
 @media (max-width: 860px){ .profile-bio { margin-left: auto; margin-right: auto; } }
@@ -7230,6 +7231,22 @@ function renderProfilePage() {
   const name = profileIsOwn ? authDisplayName() : (prof.username || 'Utilisateur Fripz');
   document.getElementById('profileTopbarTitle').textContent = profileIsOwn ? 'Mon profil' : name;
   document.getElementById('profileUsernameDisplay').textContent = name;
+
+  // Badge vendeur automatique : le badge Pro n'est jamais choisi manuellement.
+  // Il apparaît uniquement quand le profil possède une entreprise / un statut professionnel.
+  // `is_professional` est la colonne recommandée à passer à true après l'ajout/validation de l'entreprise.
+  // Les autres champs servent de compatibilité si le module entreprise utilise déjà un autre nom de colonne.
+  const proPill = document.getElementById('profileProPill');
+  if (proPill) {
+    const hasProfessionalBusiness = prof.is_professional === true || prof.is_professional === 'true' ||
+      !!prof.company_id || !!prof.company_name || !!prof.business_name || !!prof.nom_entreprise ||
+      !!prof.siren || !!prof.siret;
+    proPill.textContent = hasProfessionalBusiness ? 'Vendeur Pro' : 'Vendeur Fripz';
+    proPill.classList.toggle('is-professional', hasProfessionalBusiness);
+    proPill.title = hasProfessionalBusiness
+      ? 'Compte vendeur professionnel enregistré sur Fripz'
+      : 'Vendeur Fripz';
+  }
   const handle = document.getElementById('profileHandle');
   if (handle) handle.textContent = '@' + String(prof.username || name || 'membre').toLowerCase().replace(/[^a-z0-9_]/g, '');
 
@@ -9148,4 +9165,9 @@ renderProfileSide = function(){
 @media (min-width:1001px){
   .profile-overlay .profile-cover{ height:400px !important; }
 }
+</style>
+<style id="fripz-cover-height-reduced">
+/* Couverture légèrement réduite par rapport à la version précédente */
+.profile-overlay .profile-cover { height: 370px !important; }
+@media (max-width: 640px) { .profile-overlay .profile-cover { height: 230px !important; } }
 </style>
