@@ -1861,7 +1861,7 @@
 
   /* ── SELL MODAL ── */
   .sell-overlay {
-    display: none; position: fixed; inset: 0; z-index: 300;
+    display: none; position: fixed; inset: 0; z-index: 500;
     background: rgba(0,0,0,0.5);
     align-items: center; justify-content: center;
     padding: 1rem;
@@ -6703,7 +6703,7 @@ function renderProfileListings() {
           '<div class="profile-empty-icon">' + emptyStateIconSvg() + '</div>' +
           '<div class="profile-empty-title">Aucune annonce pour l\'instant</div>' +
           '<div class="profile-empty-sub">Tes articles publiés apparaîtront ici. Prêt(e) à vendre ta première pièce ?</div>' +
-          '<button class="profile-btn-primary" onclick="closeProfileOverlay(); openSellModal();">' +
+          '<button class="profile-btn-primary" onclick="openSellModal();">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:-3px;margin-right:5px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/></svg>' +
             'Vendre mon premier article' +
           '</button>' +
@@ -7099,7 +7099,7 @@ function renderVitrine() {
   if (mine.length) {
     out += `<div class="articles-grid">` + mine.slice(0, 8).map(profileCardHTML).join('') + `</div>`;
   } else if (profileIsOwn) {
-    out += `<div class="profile-empty"><div class="profile-empty-icon">${emptyStateIconSvg()}</div><div class="profile-empty-title">Aucune annonce pour l'instant</div><div class="profile-empty-sub">Tes articles publiés apparaîtront ici.</div><button class="profile-btn-primary" onclick="closeProfileOverlay(); openSellModal();">Vendre mon premier article</button></div>`;
+    out += `<div class="profile-empty"><div class="profile-empty-icon">${emptyStateIconSvg()}</div><div class="profile-empty-title">Aucune annonce pour l'instant</div><div class="profile-empty-sub">Tes articles publiés apparaîtront ici.</div><button class="profile-btn-primary" onclick="openSellModal();">Vendre mon premier article</button></div>`;
   } else {
     out += `<div class="profile-empty"><div class="profile-empty-icon">${emptyStateIconSvg()}</div><div class="profile-empty-title">Aucune annonce pour l'instant</div></div>`;
   }
@@ -8748,6 +8748,143 @@ if (supaClient) { supaClient.auth.onAuthStateChange(function (e, s) { if (typeof
 window.addEventListener('load', function () { if (typeof refreshAuth === 'function') refreshAuth(); });
 window.addEventListener('load', loadAnnonces);
 window.addEventListener('load', function () { if (typeof renderFeedGrid === 'function') renderFeedGrid(); });
+</script>
+
+
+<!-- STEP 24 — badges vendeur calculés dans le bloc À propos -->
+<style>
+.profile-overlay .seller-performance-badges{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid #EEECE7;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.profile-overlay .seller-performance-badge{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#33332F;
+  font-family:var(--fz-sans, 'Satoshi', 'Inter', system-ui, sans-serif);
+  font-size:12.5px;
+  font-weight:500;
+  line-height:1.35;
+}
+.profile-overlay .seller-performance-badge svg{
+  width:17px;
+  height:17px;
+  flex:0 0 17px;
+  color:#527D68;
+}
+.profile-overlay .seller-performance-badge strong{
+  font-weight:600;
+  color:#17251F;
+}
+</style>
+<script>
+/*
+  Les badges ne sont jamais attribués "au hasard".
+  Règles :
+  - Réponse rapide : moyenne <= 120 min.
+  - Expédition rapide : moyenne <= 48 h.
+  - On demande idéalement au moins 3 observations si les délais bruts sont disponibles.
+
+  Le code accepte soit des tableaux JSON stockés dans profiles :
+    response_times_minutes, shipping_times_hours
+  soit des agrégats calculés côté backend :
+    avg_response_minutes / response_avg_minutes
+    avg_shipping_hours / shipping_avg_hours
+  avec éventuellement response_count / shipped_orders_count.
+*/
+function fripzNumber(v){
+  if (v === null || v === undefined || v === '') return null;
+  var n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+function fripzMetricArray(v){
+  if (Array.isArray(v)) return v.map(Number).filter(Number.isFinite);
+  if (typeof v === 'string') {
+    try {
+      var a = JSON.parse(v);
+      if (Array.isArray(a)) return a.map(Number).filter(Number.isFinite);
+    } catch(e) {}
+  }
+  return [];
+}
+function fripzAverage(a){
+  if (!a.length) return null;
+  return a.reduce(function(sum,n){ return sum+n; },0) / a.length;
+}
+function sellerPerformanceMetrics(prof){
+  prof = prof || {};
+
+  var responseRaw = fripzMetricArray(
+    prof.response_times_minutes || prof.response_delays_minutes || prof.response_times
+  );
+  var shippingRaw = fripzMetricArray(
+    prof.shipping_times_hours || prof.shipping_delays_hours || prof.shipping_times
+  );
+
+  var responseAvg = responseRaw.length ? fripzAverage(responseRaw) :
+    (fripzNumber(prof.avg_response_minutes) ?? fripzNumber(prof.response_avg_minutes) ?? fripzNumber(prof.response_time_minutes));
+  var shippingAvg = shippingRaw.length ? fripzAverage(shippingRaw) :
+    (fripzNumber(prof.avg_shipping_hours) ?? fripzNumber(prof.shipping_avg_hours) ?? fripzNumber(prof.shipping_time_hours));
+
+  var responseCount = responseRaw.length || fripzNumber(prof.response_count) || fripzNumber(prof.response_samples) || 0;
+  var shippingCount = shippingRaw.length || fripzNumber(prof.shipped_orders_count) || fripzNumber(prof.shipping_count) || fripzNumber(prof.shipping_samples) || 0;
+
+  // Si un agrégat backend est présent sans compteur, on lui fait confiance.
+  var responseHasData = responseAvg !== null && (responseCount >= 3 || responseRaw.length === 0);
+  var shippingHasData = shippingAvg !== null && (shippingCount >= 3 || shippingRaw.length === 0);
+
+  return {
+    responseAvgMinutes: responseAvg,
+    shippingAvgHours: shippingAvg,
+    fastResponse: responseHasData && responseAvg <= 120,
+    fastShipping: shippingHasData && shippingAvg <= 48
+  };
+}
+function sellerPerformanceBadgesHTML(prof){
+  var m = sellerPerformanceMetrics(prof);
+  var rows = [];
+  if (m.fastResponse) {
+    rows.push(
+      '<div class="seller-performance-badge" title="Calculé à partir du délai moyen de réponse du vendeur">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 8h8M8 12h5"/></svg>' +
+      '<span><strong>Réponse en moins de 2h</strong></span></div>'
+    );
+  }
+  if (m.fastShipping) {
+    rows.push(
+      '<div class="seller-performance-badge" title="Calculé à partir du délai moyen entre la commande et l\'expédition">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v11H3z"/><path d="M14 9h4l3 3v5h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>' +
+      '<span><strong>Expédition en moins de 48h</strong></span></div>'
+    );
+  }
+  return rows.length ? '<div class="seller-performance-badges">' + rows.join('') + '</div>' : '';
+}
+
+// Remplace seulement le rendu de la colonne droite pour enrichir le premier bloc "À propos".
+renderProfileSide = function() {
+  var el = document.getElementById('profileSideArea');
+  if (!el) return;
+  var prof = profileViewedProfile || {};
+  var bio = prof.bio || '';
+  var performance = sellerPerformanceBadgesHTML(prof);
+
+  el.innerHTML =
+    '<div class="pside-card"><div class="pside-title">À propos</div>' +
+      (bio ? '<p style="color:#33332F;line-height:1.55;font-size:0.9rem;margin:0;white-space:pre-line">' + bio + '</p>' : '<p style="color:#7A837E;line-height:1.55;font-size:0.9rem;margin:0">Aucune description pour le moment.</p>') +
+      performance +
+    '</div>' +
+    '<div class="pside-card"><div class="pside-title">Avis clients</div><div class="pside-empty">' + emptyStateIconSvg() + '<div>Pas encore d\'avis</div></div></div>' +
+    '<div class="pside-card"><div class="pside-title">Garanties Fripz</div>' +
+      guarRow('Paiement 100% sécurisé') +
+      guarRow('Protection acheteur incluse') +
+      guarRow('Emballage responsable') +
+    '</div>';
+};
 </script>
 </body>
 </html>
