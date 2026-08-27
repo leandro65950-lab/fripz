@@ -3544,6 +3544,11 @@
   }
 }
 </style>
+
+<style id="step26-review-styles">
+.fr-review-summary{display:flex;align-items:center;gap:7px;margin:-2px 0 12px;font-size:.78rem;color:#747873}.fr-review-summary strong{font-family:Georgia,'Times New Roman',serif;font-size:1.05rem;color:#171a17}.fr-review-stars{display:inline-flex;gap:1px;white-space:nowrap}.fr-review-stars span{color:#d8d8d1;font-size:.88rem}.fr-review-stars span.on{color:#e7a91c}.fr-review-list{display:flex;flex-direction:column}.fr-review-row{display:grid;grid-template-columns:34px 1fr;gap:9px;padding:11px 0;border-top:1px solid rgba(31,46,37,.08)}.fr-review-avatar{width:34px;height:34px;border-radius:50%;overflow:hidden;background:#e8eee8;display:flex;align-items:center;justify-content:center;font-weight:700;color:#3d5f49}.fr-review-avatar img{width:100%;height:100%;object-fit:cover}.fr-review-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}.fr-review-top strong{font-size:.78rem;color:#20241f}.fr-review-top time{font-size:.65rem;color:#8b8f8a;white-space:nowrap}.fr-review-body>.fr-review-stars span{font-size:.72rem}.fr-review-comment{margin-top:4px;font-size:.72rem;line-height:1.42;color:#3f433f}.fr-all-reviews{width:100%;margin-top:10px;padding:9px 10px;border:1px solid rgba(31,46,37,.10);border-radius:9px;background:#fff;color:#26392d;font-weight:600;cursor:pointer}.fr-all-reviews:hover{background:#f6f7f3}.fr-review-summary-large{margin:4px 0 16px}.fr-review-summary-large strong{font-size:1.35rem}.fr-review-list-all .fr-review-row{grid-template-columns:42px 1fr;padding:16px 0}.fr-review-list-all .fr-review-avatar{width:42px;height:42px}.fr-review-list-all .fr-review-top strong{font-size:.9rem}.fr-review-list-all .fr-review-comment{font-size:.84rem;max-width:760px}.fr-all-reviews-page{min-height:220px}
+</style>
+
 </head>
 <body>
 
@@ -8894,5 +8899,208 @@ renderProfileSide = function() {
     '</div>';
 };
 </script>
+<script>
+
+/* ===== STEP 26 — Avis vendeur : 5 récents dans la colonne + tous dans l'onglet Avis ===== */
+var profileSellerReviews = [];
+
+function fripzEscapeHTML(v){
+  return String(v == null ? '' : v).replace(/[&<>'\"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c];
+  });
+}
+function fripzReviewDate(v){
+  if(!v) return '';
+  var d=new Date(v), now=new Date();
+  if(isNaN(d.getTime())) return '';
+  var days=Math.max(0,Math.floor((now-d)/86400000));
+  if(days===0) return "Aujourd'hui";
+  if(days===1) return 'Hier';
+  if(days<7) return 'Il y a '+days+' jours';
+  if(days<14) return 'Il y a 1 semaine';
+  if(days<31) return 'Il y a '+Math.floor(days/7)+' semaines';
+  return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+}
+function fripzStars(n){
+  n=Math.max(0,Math.min(5,Number(n)||0));
+  var out='<span class="fr-review-stars" aria-label="'+n+' sur 5">';
+  for(var i=1;i<=5;i++) out += '<span class="'+(i<=Math.round(n)?'on':'')+'">★</span>';
+  return out+'</span>';
+}
+function normalizeSellerReview(r){
+  var author=r.author || r.buyer || r.reviewer || r.profile || {};
+  return {
+    id:r.id,
+    rating:Number(r.rating ?? r.note ?? r.stars ?? 0),
+    comment:r.comment ?? r.content ?? r.message ?? r.texte ?? '',
+    created_at:r.created_at ?? r.date ?? r.published_at ?? '',
+    author_name:r.author_name ?? r.reviewer_name ?? r.buyer_name ?? author.username ?? author.full_name ?? 'Acheteur Fripz',
+    author_avatar:r.author_avatar ?? r.reviewer_avatar ?? r.buyer_avatar ?? author.avatar_url ?? ''
+  };
+}
+async function loadSellerReviews(userId){
+  profileSellerReviews=[];
+  if(!window.supaClient || !userId) return [];
+  // Schéma recommandé : reviews(seller_id, reviewer_id, rating, comment, created_at)
+  // On tente aussi quelques noms de colonnes usuels pour rester compatible avec le projet.
+  var attempts=[
+    function(){return window.supaClient.from('reviews').select('*').eq('seller_id',userId).order('created_at',{ascending:false});},
+    function(){return window.supaClient.from('reviews').select('*').eq('reviewed_user_id',userId).order('created_at',{ascending:false});},
+    function(){return window.supaClient.from('avis').select('*').eq('seller_id',userId).order('created_at',{ascending:false});},
+    function(){return window.supaClient.from('avis').select('*').eq('user_id',userId).order('created_at',{ascending:false});}
+  ];
+  var rows=[];
+  for(var i=0;i<attempts.length;i++){
+    try{ var res=await attempts[i](); if(res && !res.error){ rows=res.data||[]; break; } }catch(e){}
+  }
+  if(!rows.length){ profileSellerReviews=[]; return []; }
+  // Si on a l'id de l'auteur, récupérer nom/avatar depuis profiles.
+  var ids=[];
+  rows.forEach(function(r){ var id=r.reviewer_id||r.buyer_id||r.author_id; if(id && ids.indexOf(id)<0) ids.push(id); });
+  var profMap={};
+  if(ids.length){
+    try{
+      var pr=await window.supaClient.from('profiles').select('id,username,avatar_url').in('id',ids);
+      (pr.data||[]).forEach(function(x){profMap[x.id]=x;});
+    }catch(e){}
+  }
+  profileSellerReviews=rows.map(function(r){
+    var id=r.reviewer_id||r.buyer_id||r.author_id;
+    if(id && profMap[id]) r.reviewer=profMap[id];
+    return normalizeSellerReview(r);
+  }).sort(function(a,b){return new Date(b.created_at||0)-new Date(a.created_at||0);});
+  return profileSellerReviews;
+}
+function reviewRowHTML(r){
+  var av=r.author_avatar ? '<img src="'+fripzEscapeHTML(r.author_avatar)+'" alt="">' : '<span>'+fripzEscapeHTML((r.author_name||'U').charAt(0).toUpperCase())+'</span>';
+  return '<div class="fr-review-row">'+
+    '<div class="fr-review-avatar">'+av+'</div>'+
+    '<div class="fr-review-body"><div class="fr-review-top"><strong>'+fripzEscapeHTML(r.author_name)+'</strong><time>'+fripzEscapeHTML(fripzReviewDate(r.created_at))+'</time></div>'+
+    fripzStars(r.rating)+(r.comment?'<div class="fr-review-comment">'+fripzEscapeHTML(r.comment)+'</div>':'')+'</div></div>';
+}
+function recentReviewsCardHTML(){
+  var list=profileSellerReviews.slice(0,5);
+  if(!list.length) return '<div class="pside-card"><div class="pside-title">Avis clients</div><div class="pside-empty">'+emptyStateIconSvg()+'<div>Pas encore d\'avis</div></div></div>';
+  var avg=profileSellerReviews.reduce(function(a,r){return a+(Number(r.rating)||0);},0)/profileSellerReviews.length;
+  return '<div class="pside-card fr-reviews-card"><div class="pside-title">Avis clients</div>'+
+    '<div class="fr-review-summary"><strong>'+avg.toFixed(1).replace('.',',')+'</strong>'+fripzStars(avg)+'<span>('+profileSellerReviews.length+' avis)</span></div>'+
+    '<div class="fr-review-list">'+list.map(reviewRowHTML).join('')+'</div>'+
+    '<button class="fr-all-reviews" onclick="switchProfileTab(\'avis\')">Voir tous les avis</button></div>';
+}
+
+/* surcharge : l'onglet Avis affiche tous les avis du vendeur */
+renderProfileAvis = function(){
+  var area=document.getElementById('profileMainArea'); if(!area) return;
+  if(!profileSellerReviews.length){
+    area.innerHTML='<div class="pside-card"><div class="pside-title">Tous les avis</div><div class="pside-empty">'+emptyStateIconSvg()+'<div>Pas encore d\'avis.<br>Ils apparaîtront après les premières ventes.</div></div></div>';
+    return;
+  }
+  var avg=profileSellerReviews.reduce(function(a,r){return a+(Number(r.rating)||0);},0)/profileSellerReviews.length;
+  area.innerHTML='<div class="profile-block fr-all-reviews-page"><div class="profile-section-title">Tous les avis</div><div class="fr-review-summary fr-review-summary-large"><strong>'+avg.toFixed(1).replace('.',',')+'</strong>'+fripzStars(avg)+'<span>('+profileSellerReviews.length+' avis)</span></div><div class="fr-review-list fr-review-list-all">'+profileSellerReviews.map(reviewRowHTML).join('')+'</div></div>';
+};
+
+/* surcharge finale de la colonne droite : À propos + 5 derniers avis + Garanties */
+renderProfileSide = function(){
+  var el=document.getElementById('profileSideArea'); if(!el) return;
+  var prof=profileViewedProfile||{};
+  var bio=prof.bio||'';
+  var performance=(typeof sellerPerformanceBadgesHTML==='function')?sellerPerformanceBadgesHTML(prof):'';
+  el.innerHTML='<div class="pside-card"><div class="pside-title">À propos</div>'+
+    (bio?'<p style="color:#33332F;line-height:1.55;font-size:0.9rem;margin:0;white-space:pre-line">'+fripzEscapeHTML(bio)+'</p>':'<p style="color:#7A837E;line-height:1.55;font-size:0.9rem;margin:0">Aucune description pour le moment.</p>')+
+    performance+'</div>'+recentReviewsCardHTML()+
+    '<div class="pside-card"><div class="pside-title">Garanties Fripz</div>'+guarRow('Paiement 100% sécurisé')+guarRow('Protection acheteur incluse')+guarRow('Emballage responsable')+'</div>';
+};
+
+/* Recharger les avis à chaque ouverture d'un profil, sans changer le reste du flux. */
+(function(){
+  var originalView=window.viewSellerProfile;
+  if(typeof originalView==='function'){
+    window.viewSellerProfile=async function(userId){
+      var result=await originalView.apply(this,arguments);
+      await loadSellerReviews(userId||profileViewedUserId);
+      if(document.getElementById('profileOverlay') && document.getElementById('profileOverlay').classList.contains('open')){
+        renderProfileSide();
+        if(profileActiveTab==='avis') renderProfileAvis();
+      }
+      return result;
+    };
+  }
+})();
+</script>
+
+<script>
+/* ===== DEMO AVIS — A SUPPRIMER AVANT MISE EN PRODUCTION ===== */
+(function(){
+  const demoReviews = [
+    {name:'Clara B.', rating:5, text:'Article conforme à la description, envoi rapide et soigné !', date:'Il y a 2 jours', avatar:'CB'},
+    {name:'Thomas R.', rating:5, text:'Parfait, je recommande à 100% !', date:'Il y a 5 jours', avatar:'TR'},
+    {name:'Julie M.', rating:5, text:'Très belle qualité, merci !', date:'Il y a 1 semaine', avatar:'JM'},
+    {name:'Emma L.', rating:4, text:'Très bonne communication et colis bien préparé.', date:'Il y a 2 semaines', avatar:'EL'},
+    {name:'Nicolas D.', rating:5, text:'Vendeur sérieux, article impeccable.', date:'Il y a 3 semaines', avatar:'ND'},
+    {name:'Sophie A.', rating:5, text:'Super expérience, je rachèterai sans hésiter.', date:'Il y a 1 mois', avatar:'SA'},
+    {name:'Lucas P.', rating:4, text:'Conforme aux photos et très bien emballé.', date:'Il y a 1 mois', avatar:'LP'}
+  ];
+
+  function stars(n){ return '★'.repeat(n) + '☆'.repeat(5-n); }
+  function card(r){
+    return '<div class="demo-review-item" style="display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eeeae3">' +
+      '<div style="width:34px;height:34px;border-radius:50%;background:#e6eee8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#3f604b;flex:0 0 auto">'+r.avatar+'</div>' +
+      '<div style="min-width:0;flex:1">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+          '<strong style="font-size:12px;color:#17251F">'+r.name+'</strong>' +
+          '<span style="font-size:10px;color:#8A8F8B;white-space:nowrap">'+r.date+'</span>' +
+        '</div>' +
+        '<div style="font-size:11px;color:#ECAF17;letter-spacing:1px;margin:2px 0 5px">'+stars(r.rating)+'</div>' +
+        '<div style="font-size:11px;line-height:1.45;color:#4A4A45">'+r.text+'</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function fillSidebar(){
+    const cards = Array.from(document.querySelectorAll('.pside-card'));
+    const target = cards.find(c => /Avis clients/i.test(c.textContent||''));
+    if(!target) return;
+    const recent = demoReviews.slice(0,5);
+    const avg = (recent.reduce((a,b)=>a+b.rating,0)/recent.length).toFixed(1).replace('.',',');
+    target.innerHTML = '<div class="pside-title">Avis clients</div>' +
+      '<div style="display:flex;align-items:center;gap:8px;margin:8px 0 4px"><strong style="font-size:18px;color:#17251F">'+avg+'</strong><span style="color:#ECAF17;font-size:13px">★★★★★</span><span style="font-size:10px;color:#7A837E">('+demoReviews.length+' avis)</span></div>' +
+      recent.map(card).join('') +
+      '<button type="button" id="demoSeeAllReviews" style="width:100%;margin-top:10px;height:36px;border:1px solid #E8E6DF;border-radius:10px;background:#fff;font-size:11px;font-weight:600;color:#17251F;cursor:pointer">Voir tous les avis</button>';
+    const b=document.getElementById('demoSeeAllReviews');
+    if(b) b.onclick=function(){
+      const tabs=Array.from(document.querySelectorAll('.profile-tab-btn'));
+      const avis=tabs.find(x => /Avis/i.test(x.textContent||''));
+      if(avis) avis.click();
+      setTimeout(fillMainReviews,50);
+    };
+  }
+
+  function fillMainReviews(){
+    const area=document.getElementById('profileMainArea');
+    if(!area) return;
+    const active=Array.from(document.querySelectorAll('.profile-tab-btn.active')).find(x=>/Avis/i.test(x.textContent||''));
+    if(!active) return;
+    const avg=(demoReviews.reduce((a,b)=>a+b.rating,0)/demoReviews.length).toFixed(1).replace('.',',');
+    area.innerHTML='<div class="profile-block"><div class="profile-section-title">Tous les avis</div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><strong style="font-size:24px">'+avg+'</strong><span style="color:#ECAF17">★★★★★</span><span style="color:#7A837E;font-size:12px">'+demoReviews.length+' avis</span></div>'+
+      demoReviews.map(card).join('')+'</div>';
+  }
+
+  const origSwitch = window.switchProfileTab;
+  if(typeof origSwitch==='function'){
+    window.switchProfileTab=function(tab){
+      const r=origSwitch.apply(this,arguments);
+      setTimeout(function(){ if(tab==='avis') fillMainReviews(); fillSidebar(); },60);
+      return r;
+    };
+  }
+
+  const obs=new MutationObserver(()=>{ fillSidebar(); });
+  obs.observe(document.body,{subtree:true,childList:true});
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(fillSidebar,100));
+  setTimeout(fillSidebar,300);
+})();
+</script>
+
 </body>
 </html>
