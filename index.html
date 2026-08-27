@@ -3874,6 +3874,186 @@
 .popular-section .article-badge.new{background:#527D68!important;color:#fff!important;}
 .popular-section .article-badge.boosted{background:#F2A24A!important;color:#17251F!important;}
 </style>
+
+<style id="fripz-home-premium-polish">
+/* =========================================================
+   FRIPZ — HOME : BADGES + BOUTONS SUIVRE + BANDEAU PREMIUM
+   Modification purement visuelle de la homepage.
+   ========================================================= */
+
+/* Badges visibles dans le feed intelligent */
+.feed-listing-badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  z-index:4;
+  display:inline-flex;
+  align-items:center;
+  min-height:25px;
+  padding:5px 10px;
+  border-radius:8px;
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif;
+  font-size:11px;
+  line-height:15px;
+  font-weight:700;
+  letter-spacing:.025em;
+  box-shadow:0 4px 12px rgba(20,35,27,.10);
+  backdrop-filter:blur(6px);
+}
+.feed-listing-badge.new{
+  background:#527D68;
+  color:#fff;
+}
+.feed-listing-badge.boosted{
+  background:#F3B366;
+  color:#243129;
+}
+
+/* Boutons Suivre — plus premium et cohérents */
+.sellers-panel .follow-btn{
+  border:1px solid rgba(64,96,75,.18) !important;
+  background:linear-gradient(180deg,#547863 0%,#3F604B 100%) !important;
+  color:#fff !important;
+  border-radius:999px !important;
+  min-height:34px;
+  padding:0 16px !important;
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif !important;
+  font-size:12px !important;
+  font-weight:650 !important;
+  letter-spacing:-.01em;
+  box-shadow:0 5px 14px rgba(63,96,75,.18), inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease !important;
+}
+.sellers-panel .follow-btn:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(180deg,#496D58 0%,#355541 100%) !important;
+  box-shadow:0 7px 18px rgba(63,96,75,.24), inset 0 1px 0 rgba(255,255,255,.18);
+}
+.sellers-panel .follow-btn:active{
+  transform:translateY(0);
+  box-shadow:0 3px 8px rgba(63,96,75,.16);
+}
+.seller-featured-header .follow-btn{
+  min-width:84px;
+  justify-content:center;
+}
+.seller-mini-card .follow-btn{
+  width:auto !important;
+  min-width:82px;
+  align-self:center;
+  justify-content:center;
+  margin-top:4px !important;
+}
+
+/* Cartes vendeurs un peu plus premium sans changer la structure */
+.seller-featured-card,
+.seller-mini-card{
+  border-color:rgba(47,66,54,.09) !important;
+  box-shadow:0 7px 22px rgba(27,40,31,.055);
+}
+.seller-mini-card{
+  background:linear-gradient(180deg,#fff 0%,#FCFBF8 100%);
+}
+
+/* Bandeau communauté / frais / boost / dressing */
+.hero-bottom-wrap{
+  margin-top:1.45rem !important;
+  padding-bottom:1.25rem !important;
+}
+.hero-bottom-row{
+  position:relative;
+  overflow:hidden;
+  min-height:76px;
+  gap:0 !important;
+  padding:10px 14px !important;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:19px !important;
+  background:
+    radial-gradient(480px 120px at 18% 0%,rgba(255,255,255,.16),transparent 70%),
+    linear-gradient(110deg,#678D77 0%,#557A65 43%,#3F684F 100%) !important;
+  box-shadow:0 14px 34px rgba(47,83,61,.15), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.hero-bottom-row::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  right:-80px;
+  top:-105px;
+  background:rgba(255,255,255,.055);
+  pointer-events:none;
+}
+.hero-bottom-row .hero-members{
+  position:relative;
+  z-index:1;
+  flex:1.2 1 250px !important;
+  min-height:54px;
+  padding:7px 20px 7px 8px !important;
+  border-right:1px solid rgba(255,255,255,.18) !important;
+}
+.hero-bottom-row .hero-members-txt{
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif;
+  font-size:12px !important;
+  line-height:1.4;
+  color:rgba(255,255,255,.82) !important;
+}
+.hero-bottom-row .hero-members-txt b{
+  color:#fff !important;
+  font-size:13px;
+  font-weight:700;
+}
+.hero-bottom-row .hero-avatars span{
+  width:30px;
+  height:30px;
+  border:2px solid rgba(255,255,255,.95);
+  box-shadow:0 2px 7px rgba(0,0,0,.11);
+}
+.promo-stats{
+  position:relative;
+  z-index:1;
+  flex:3 1 650px !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0 !important;
+  align-items:stretch;
+}
+.promo-stat{
+  min-height:54px;
+  padding:7px 18px !important;
+  gap:10px !important;
+  justify-content:flex-start;
+}
+.promo-stat + .promo-stat{
+  border-left:1px solid rgba(255,255,255,.18) !important;
+}
+.promo-ic{
+  width:34px !important;
+  height:34px !important;
+  background:rgba(255,255,255,.14) !important;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+}
+.promo-ic svg{width:16px !important;height:16px !important;}
+.promo-num{
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif;
+  font-size:18px !important;
+  font-weight:700 !important;
+  letter-spacing:-.025em !important;
+}
+.promo-lbl{
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif;
+  font-size:10.5px !important;
+  line-height:1.3 !important;
+  color:rgba(255,255,255,.78) !important;
+}
+@media(max-width:900px){
+  .promo-stats{grid-template-columns:1fr !important;}
+  .promo-stat + .promo-stat{border-left:0 !important;border-top:1px solid rgba(255,255,255,.15) !important;}
+  .hero-bottom-row .hero-members{border-right:0 !important;border-bottom:1px solid rgba(255,255,255,.15) !important;}
+}
+</style>
+
 </head>
 <body>
 
@@ -6417,6 +6597,9 @@ function renderFeedGrid() {
   area.innerHTML = list.map(function (p) {
     return '<div class="feed-card" onclick="openModal(' + p.id + ')">' +
       '<div class="feed-card-img">' + p.emoji +
+        ((p.boosted || p.is_boosted || p.boost_active || (!p.uuid && p.curated && p.id === 10))
+          ? '<div class="feed-listing-badge boosted">BOOSTÉ</div>'
+          : ((isRecentListing(p) || (!p.uuid && p.curated && (p.id === 9 || p.id === 11))) ? '<div class="feed-listing-badge new">NOUVEAU</div>' : '')) +
         '<div class="fav-btn ' + (liked.has(p.id) ? 'liked' : '') + '" onclick="event.stopPropagation(); toggleLike(event,' + p.id + '); renderFeedGrid();">' +
           '<svg viewBox="0 0 24 24" fill="' + (liked.has(p.id) ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>' +
         '</div>' +
