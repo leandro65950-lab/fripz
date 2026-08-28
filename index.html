@@ -4054,6 +4054,175 @@
 }
 </style>
 
+
+<style id="fripz-final-listing-badges-logo">
+/* Logo Fripz — rendu de la maquette de référence */
+.nav-logo { gap:0 !important; }
+.nav-logo-icon { display:none !important; }
+.nav-logo-text{
+  font-family:Georgia, "Times New Roman", serif !important;
+  font-size:34px !important;
+  font-weight:600 !important;
+  line-height:38px !important;
+  letter-spacing:-0.8px !important;
+  color:#355C45 !important;
+}
+/* Badges directement dans TOUTES LES ANNONCES */
+.popular-section .article-img{ position:relative !important; }
+.popular-section .article-badge{
+  position:absolute !important;
+  top:12px !important;
+  left:12px !important;
+  z-index:20 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:5px !important;
+  min-height:28px !important;
+  padding:5px 11px !important;
+  border-radius:7px !important;
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif !important;
+  font-size:12px !important;
+  line-height:17px !important;
+  font-weight:700 !important;
+  letter-spacing:.015em !important;
+  box-shadow:0 4px 12px rgba(26,37,31,.12) !important;
+  pointer-events:none !important;
+}
+.popular-section .article-badge.new{
+  background:#527D68 !important;
+  color:#fff !important;
+}
+.popular-section .article-badge.boosted{
+  background:#F2A24A !important;
+  color:#17251F !important;
+}
+.popular-section .article-boost-icon{font-size:12px;line-height:1;}
+</style>
+
+<style id="fripz-premium-boost-badge-v2">
+/* Badge BOOSTÉ premium — vert profond, sans emoji */
+.article-badge.boosted,
+.feed-listing-badge.boosted {
+  display:inline-flex !important; align-items:center !important; gap:6px !important;
+  background:linear-gradient(135deg,#2F4F3E 0%,#476B58 100%) !important;
+  color:#fff !important; border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:999px !important; padding:6px 11px !important;
+  font-family:"Satoshi","Plus Jakarta Sans",sans-serif !important;
+  font-size:11px !important; font-weight:700 !important; line-height:16px !important;
+  letter-spacing:.04em !important; text-transform:uppercase !important;
+  box-shadow:0 6px 18px rgba(28,52,40,.22), inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+.article-badge.boosted .boost-icon,
+.feed-listing-badge.boosted .boost-icon { width:12px !important; height:12px !important; flex:0 0 12px; display:block; }
+</style>
+
+<style id="fripz-home-typography-alignment-final">
+/* Logo plus sombre, comme la version précédente */
+.nav-logo-text{color:#172019 !important;}
+/* Titres des deux panneaux : exactement la même typographie */
+.feed-panel-title,.sellers-panel-title{font-family:"Satoshi","Plus Jakarta Sans",sans-serif !important;font-size:24px !important;font-weight:650 !important;line-height:30px !important;letter-spacing:-.025em !important;color:#17251F !important;margin-bottom:5px !important;}
+.feed-panel-sub,.sellers-panel-sub{font-family:"Satoshi","Plus Jakarta Sans",sans-serif !important;font-size:14px !important;font-weight:400 !important;line-height:21px !important;color:#6F7974 !important;}
+/* Alignement demandé : feed à gauche / vendeurs à droite */
+.feed-panel .feed-panel-title,.feed-panel .feed-panel-sub{text-align:left !important;}
+.sellers-panel .sellers-panel-title,.sellers-panel .sellers-panel-sub{text-align:right !important;}
+/* Hero éditorial premium */
+.hero-title{font-family:"Satoshi","Plus Jakarta Sans",sans-serif !important;font-size:58px !important;font-weight:600 !important;line-height:1.02 !important;letter-spacing:-.052em !important;color:#172019 !important;}
+.hero-recommence{font-family:Georgia,"Times New Roman",serif !important;font-weight:500 !important;font-style:italic !important;letter-spacing:-.035em !important;color:#527D68 !important;}
+.hero-title .dot{color:#527D68 !important;}
+@media(max-width:900px){.hero-title{font-size:46px !important}.feed-panel-title,.sellers-panel-title{font-size:22px !important;line-height:28px !important}.sellers-panel .sellers-panel-title,.sellers-panel .sellers-panel-sub{text-align:left !important;}}
+</style>
+
+<style id="fripz-block-position-only-fix">
+/* Déplacer les BLOCS complets, sans toucher à l’alignement interne des textes */
+@media (min-width: 901px){
+  .feed-section-inner.two-col-layout > .feed-panel{
+    transform: translateX(-42px) !important;
+  }
+  .feed-section-inner.two-col-layout > .sellers-panel-placeholder{
+    transform: translateX(42px) !important;
+  }
+  .feed-panel .feed-panel-title,
+  .feed-panel .feed-panel-sub,
+  .sellers-panel .sellers-panel-title,
+  .sellers-panel .sellers-panel-sub{
+    text-align:center !important;
+  }
+}
+</style>
+
+<style id="fripz-green-recommencez-buttons">
+/* Harmonisation : reprendre exactement le vert de « recommencez » (#527D68). */
+.btn-sell-nav,
+.btn-primary,
+.sell-btn-next,
+.sell-cta-btn {
+  background: #527D68 !important;
+  color: #FFFFFF !important;
+  border-color: #527D68 !important;
+}
+.btn-sell-nav:hover,
+.btn-primary:hover,
+.sell-btn-next:hover,
+.sell-cta-btn:hover {
+  background: #456B58 !important;
+  border-color: #456B58 !important;
+}
+/* Bannière principale : même famille de vert, sans modifier sa structure. */
+.hero-bottom-row {
+  background: linear-gradient(120deg, #527D68 0%, #456B58 100%) !important;
+}
+</style>
+
+
+<style id="fripz-premium-deep-cta-override">
+/* CTA premium — vert-noir profond. Le mot « recommencez » conserve son vert sauge. */
+.btn-sell-nav,
+.btn-primary,
+.sell-btn-next,
+.sell-cta-btn,
+.ai-ready-btn {
+  background: #24352C !important;
+  color: #FFFFFF !important;
+  border-color: #24352C !important;
+}
+.btn-sell-nav:hover,
+.btn-primary:hover,
+.sell-btn-next:hover,
+.sell-cta-btn:hover,
+.ai-ready-btn:hover {
+  background: #31483B !important;
+  border-color: #31483B !important;
+}
+/* Bandeau premium dans la même famille, légèrement nuancé pour garder de la profondeur. */
+.hero-bottom-row {
+  background: linear-gradient(120deg, #24352C 0%, #31483B 100%) !important;
+}
+/* Ne pas modifier la couleur éditoriale du mot recommencez. */
+.hero-recommence,
+.hero-title .dot {
+  color: #527D68 !important;
+}
+</style>
+
+
+<style id="fripz-cta-sauge-correctif-definitif">
+/* Correctif définitif : neutralise l'ancien override vert-noir sur les 3 CTA demandés. */
+.btn-sell-nav,
+.btn-primary,
+.ai-ready-btn {
+  background: #527D68 !important;
+  border-color: #527D68 !important;
+  color: #FFFFFF !important;
+}
+.btn-sell-nav:hover,
+.btn-primary:hover,
+.ai-ready-btn:hover {
+  background: #466C5A !important;
+  border-color: #466C5A !important;
+  color: #FFFFFF !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -4125,7 +4294,7 @@
   <div class="cats-textbar-inner">
     <a class="cats-textbar-link" data-cat="femme" onmouseenter="hoverOpenSubcatText('femme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('femme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3.2"/><path d="M12 9.2c-2.3 0-3.6 1.4-4 3.3L6.5 20h11L16 12.5c-.4-1.9-1.7-3.3-4-3.3z"/></svg>Femmes</a>
     <a class="cats-textbar-link" data-cat="homme" onmouseenter="hoverOpenSubcatText('homme', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('homme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5 12 6l4-2.5L20 6l-1.5 4L17 9.5V20H7V9.5L5.5 10 4 6z"/></svg>Hommes</a>
-    <a class="cats-textbar-link" data-cat="enfant" onmouseenter="hoverOpenSubcatText('enfant', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('enfant')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.4"/><path d="M6 21v-3a6 6 0 0 1 12 0v3"/></svg>Enfants</a>
+    <a class="cats-textbar-link" data-cat="enfant" onmouseenter="hoverOpenSubcatText('enfant', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('enfant')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.35 9.2C6.75 9.05 5.7 7.85 5.7 6.45C5.7 4.8 7.02 3.5 8.67 3.5C9.75 3.5 10.55 4.02 12 4.95C13.45 4.02 14.25 3.5 15.33 3.5C16.98 3.5 18.3 4.8 18.3 6.45C18.3 7.85 17.25 9.05 15.65 9.2C15.18 11.08 13.78 12.35 12 12.35C10.22 12.35 8.82 11.08 8.35 9.2Z"/><path d="M9.15 12.25L6.35 14.45C5.8 14.88 5.66 15.63 6.02 16.23L7.25 18.15L8.55 17.48L8.72 20.5H10.72L12 18.35L13.28 20.5H15.28L15.45 17.48L16.75 18.15L17.98 16.23C18.34 15.63 18.2 14.88 17.65 14.45L14.85 12.25"/></svg>Enfants</a>
     <a class="cats-textbar-link" data-cat="maison" onmouseenter="hoverOpenSubcatText('maison', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('maison')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5h4v5"/></svg>Maison &amp; Déco</a>
     <a class="cats-textbar-link" data-cat="electronique" onmouseenter="hoverOpenSubcatText('electronique', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('electronique')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="12" rx="2"/><path d="M8 20h8"/></svg>Tech</a>
     <a class="cats-textbar-link" data-cat="loisirs" onmouseenter="hoverOpenSubcatText('loisirs', this)" onmouseleave="scheduleCloseSubcat()" onclick="goToCat('loisirs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.3 1.6 3.5 1.6 3.5-1.6 3.5-1.6"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>Loisirs</a>
@@ -6230,7 +6399,7 @@ const LISTING_CAT_ICONS = {
   tous: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
   femme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>',
   homme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>',
-  enfant: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 15c.5 1 1.5 1.5 3 1.5s2.5-.5 3-1.5"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+  enfant: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.35 9.2C6.75 9.05 5.7 7.85 5.7 6.45C5.7 4.8 7.02 3.5 8.67 3.5C9.75 3.5 10.55 4.02 12 4.95C13.45 4.02 14.25 3.5 15.33 3.5C16.98 3.5 18.3 4.8 18.3 6.45C18.3 7.85 17.25 9.05 15.65 9.2C15.18 11.08 13.78 12.35 12 12.35C10.22 12.35 8.82 11.08 8.35 9.2Z"/><path d="M9.15 12.25L6.35 14.45C5.8 14.88 5.66 15.63 6.02 16.23L7.25 18.15L8.55 17.48L8.72 20.5H10.72L12 18.35L13.28 20.5H15.28L15.45 17.48L16.75 18.15L17.98 16.23C18.34 15.63 18.2 14.88 17.65 14.45L14.85 12.25"/></svg>',
   maison: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21H3z"/><path d="M9 21v-6h6v6"/></svg>',
   electronique: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
   loisirs: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
@@ -6449,11 +6618,20 @@ function isRecentListing(p) {
 
 function renderArticles(items) {
   const grid = document.getElementById('articlesGrid');
-  grid.innerHTML = items.map(p => `
+  grid.innerHTML = items.map((p, listingIndex) => `
     <div class="article-card" onclick="openModal(${p.id})">
       <div class="article-img">
         ${p.emoji}
-        ${(p.boosted || p.is_boosted || p.boost_active) ? '<div class="article-badge boosted">BOOSTÉ</div>' : (isRecentListing(p) ? '<div class="article-badge new">NOUVEAU</div>' : '')}
+        ${(() => {
+          const realBoost = !!(p.boosted || p.is_boosted || p.boost_active);
+          const realNew = isRecentListing(p);
+          /* Démo visuelle uniquement pour les annonces locales sans statut Supabase. */
+          const demoBoost = !p.uuid && [1,5,9].includes(listingIndex);
+          const demoNew = !p.uuid && [0,2,4,7].includes(listingIndex);
+          if (realBoost || demoBoost) return '<div class="article-badge boosted"><span class="article-boost-icon">⚡</span> BOOSTÉ</div>';
+          if (realNew || demoNew) return '<div class="article-badge new">NOUVEAU</div>';
+          return '';
+        })()}
 
         <div class="fav-btn ${liked.has(p.id)?'liked':''}" onclick="toggleLike(event,${p.id})">
           <svg viewBox="0 0 24 24" fill="${liked.has(p.id)?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
@@ -6598,7 +6776,7 @@ function renderFeedGrid() {
     return '<div class="feed-card" onclick="openModal(' + p.id + ')">' +
       '<div class="feed-card-img">' + p.emoji +
         ((p.boosted || p.is_boosted || p.boost_active || feedIndex === 1)
-          ? '<div class="feed-listing-badge boosted"><span class="boost-icon">⚡</span> BOOSTÉ</div>'
+          ? '<div class="feed-listing-badge boosted"><svg class="boost-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg> BOOSTÉ</div>'
           : ((isRecentListing(p) || feedIndex === 0 || feedIndex === 2) ? '<div class="feed-listing-badge new">NOUVEAU</div>' : '')) +
         '<div class="fav-btn ' + (liked.has(p.id) ? 'liked' : '') + '" onclick="event.stopPropagation(); toggleLike(event,' + p.id + '); renderFeedGrid();">' +
           '<svg viewBox="0 0 24 24" fill="' + (liked.has(p.id) ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>' +
@@ -8086,7 +8264,7 @@ const SELL_COULEURS = [
 const CAT_ICONS = {
   'Femmes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-1 3 3 3-2 2 1 8H6l1-8-2-2 3-3-1-3z"/></svg>',
   'Hommes': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M9 3h6l-2 3 2 2-3 13-3-13 2-2-2-3z"/></svg>',
-  'Enfants': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M8 6c1-2 7-2 8 0"/></svg>',
+  'Enfants': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M8.35 9.2C6.75 9.05 5.7 7.85 5.7 6.45C5.7 4.8 7.02 3.5 8.67 3.5C9.75 3.5 10.55 4.02 12 4.95C13.45 4.02 14.25 3.5 15.33 3.5C16.98 3.5 18.3 4.8 18.3 6.45C18.3 7.85 17.25 9.05 15.65 9.2C15.18 11.08 13.78 12.35 12 12.35C10.22 12.35 8.82 11.08 8.35 9.2Z"/><path d="M9.15 12.25L6.35 14.45C5.8 14.88 5.66 15.63 6.02 16.23L7.25 18.15L8.55 17.48L8.72 20.5H10.72L12 18.35L13.28 20.5H15.28L15.45 17.48L16.75 18.15L17.98 16.23C18.34 15.63 18.2 14.88 17.65 14.45L14.85 12.25"/></svg>',
   'Sport': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><circle cx="12" cy="12" r="8"/><path d="M12 8l3 2-1 4h-4l-1-4 3-2z"/></svg>',
   'Maison': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><path d="M4 11 12 4l8 7M6 10v9h12v-9"/></svg>',
   'Électronique': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;flex-shrink:0"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>',
@@ -9673,4 +9851,23 @@ renderProfileSide = function(){
 /* Couverture légèrement réduite par rapport à la version précédente */
 .profile-overlay .profile-cover { height: 370px !important; }
 @media (max-width: 640px) { .profile-overlay .profile-cover { height: 230px !important; } }
+</style>
+
+<style id="fripz-cta-sauge-final">
+/* CTA principaux — retour au vert sauge de « recommencez. » */
+.nav-signup, .signup-btn, [data-action="signup"],
+.hero-cta-primary, .hero-primary-btn, .start-buying-btn,
+.publish-btn, .publish-listing-btn, .sell-submit-btn,
+button[type="submit"].sell-submit-btn {
+  background: #527D68 !important;
+  border-color: #527D68 !important;
+  color: #FFFFFF !important;
+}
+.nav-signup:hover, .signup-btn:hover, [data-action="signup"]:hover,
+.hero-cta-primary:hover, .hero-primary-btn:hover, .start-buying-btn:hover,
+.publish-btn:hover, .publish-listing-btn:hover, .sell-submit-btn:hover,
+button[type="submit"].sell-submit-btn:hover {
+  background: #466C5A !important;
+  border-color: #466C5A !important;
+}
 </style>
